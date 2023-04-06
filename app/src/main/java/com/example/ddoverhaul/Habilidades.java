@@ -18,12 +18,12 @@ public class Habilidades {
     int velocidad;
     boolean vivo;
     /*Equipo*/
-    String Arma;
-    String Arma_Sec;
-    String Perchera;
-    String Pantalones;
-    String Guantes;
-    String Pies;
-    String Accesorios[];
+    Objeto Arma;
+    Objeto Arma_Sec;
+    Objeto Perchera;
+    Objeto Pantalones;
+    Objeto Guantes;
+    Objeto Pies;
+    Objeto Accesorios;
 
 }
