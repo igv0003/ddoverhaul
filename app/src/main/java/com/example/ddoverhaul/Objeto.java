@@ -2,7 +2,7 @@ package com.example.ddoverhaul;
 
 public class Objeto {
     String nombre;
-    String tipo;
+    String tipo; /* Equipo, Consumible, Otro */
     String descripcion;
     String icono;
     int danio;
