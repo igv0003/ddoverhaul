@@ -1,11 +1,11 @@
 package com.example.ddoverhaul;
 
 public class Objeto {
-    String nombre;
-    String tipo; /* Equipo, Consumible, Otro */
-    String descripcion;
-    String icono;
-    int danio;
-    int armadura;
-    String posicion;
+    private String nombre;
+    private String tipo; /* Equipo, Consumible, Otro */
+    private String descripcion;
+    private String icono;
+    private int danio;
+    private int armadura;
+    private String posicion;
 }
