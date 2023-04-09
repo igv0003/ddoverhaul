@@ -26,6 +26,7 @@ public class Personaje {
     Objeto Pies;
     Objeto Accesorios;
 
+    /*Get Y Set*/
     public void setVida(int vida) {
         this.vida = vida;
     }
