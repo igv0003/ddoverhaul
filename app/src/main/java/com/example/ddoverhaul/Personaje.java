@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class Personaje {
     private int id;
+    private int nivel;
     private String nombre;
     private int vida;
     private int vida_Mx;
@@ -36,6 +37,13 @@ public class Personaje {
     ArrayList<Habilidades> habilidades; /*Habilidades es un arrayList de Habilidades(Objeto)*/
 
     /*Get Y Set*/
+
+    public int getNivel() {
+        return nivel;
+    }
+    public void setNivel(int nivel) {
+        this.nivel = nivel;
+    }
     public void setVida(int vida) {
         this.vida = vida;
     }
