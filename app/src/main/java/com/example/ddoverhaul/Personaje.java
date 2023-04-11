@@ -3,6 +3,7 @@ package com.example.ddoverhaul;
 import java.util.ArrayList;
 
 public class Personaje {
+    int id;
     String nombre;
     private int vida;
     private int vida_Mx;
