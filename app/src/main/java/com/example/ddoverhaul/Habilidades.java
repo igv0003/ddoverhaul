@@ -53,4 +53,15 @@ public class Habilidades {
     public void setIcono(String icono) {
         this.icono = icono;
     }
+
+    public Habilidades(int id, String nombre, int coste, int danio, String problema_estado, int porcentaje, String descripcion, String icono) {
+        this.id = id;
+        this.nombre = nombre;
+        this.coste = coste;
+        this.danio = danio;
+        this.problema_estado = problema_estado;
+        this.porcentaje = porcentaje;
+        this.descripcion = descripcion;
+        this.icono = icono;
+    }
 }
