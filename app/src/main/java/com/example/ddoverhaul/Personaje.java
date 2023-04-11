@@ -28,7 +28,8 @@ public class Personaje {
     Objeto Pies;
     Objeto Accesorios;
 
-    ArrayList<Objeto> inventario; /*Inventario es un arrayList de Objetos*/
+    ArrayList<Objeto> inventario; /*Inventario es un arrayList de Objetos(Objeto)*/
+    ArrayList<Habilidades> habilidades; /*Habilidades es un arrayList de Habilidades(Objeto)*/
 
     /*Get Y Set*/
     public void setVida(int vida) {
