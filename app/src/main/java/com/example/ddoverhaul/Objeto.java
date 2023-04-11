@@ -1,6 +1,7 @@
 package com.example.ddoverhaul;
 
 public class Objeto {
+    private int id;
     private String nombre;
     private String tipo; /* Equipo, Consumible, Otro */
     private String descripcion;
