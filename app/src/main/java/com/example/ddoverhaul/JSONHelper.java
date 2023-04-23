@@ -30,8 +30,13 @@ public class JSONHelper {
         JsonObject jsonObj = null;
         try {
             AssetManager assetManager = context.getAssets();
-            //InputStream inputStream = assetManager.open(jsonFile);
+
             InputStream inputStream = context.openFileInput(jsonFile);
+            if (inputStream != null){
+                inputStream = assetManager.open(jsonFile);
+            }
+
+
             if (inputStream != null) {
                 int size = inputStream.available();
                 byte[] buffer = new byte[size];
