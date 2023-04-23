@@ -8,7 +8,7 @@ public class Habilidades {
     private Estado estado;
     private int probabilidad;
     private String descripcion;
-    private String icono;
+    private String icono; /*Imagen de la Habilidad*/
 
     /*Get Y Set*/
     public String getNombre() {
@@ -29,6 +29,7 @@ public class Habilidades {
     public void setDanio(int danio) {
         this.danio = danio;
     }
+    
     public String getDescripcion() {
         return descripcion;
     }
@@ -41,6 +42,7 @@ public class Habilidades {
     public void setIcono(String icono) {
         this.icono = icono;
     }
+
     public int getId() {
         return id;
     }
@@ -72,12 +74,15 @@ public class Habilidades {
     //Contructor con icono
 
     public Habilidades(int id, String nombre, int coste, int danio, Estado estado, int probabilidad, String descripcion, String icono) {
+
         this.id = id;
         this.nombre = nombre;
         this.coste = coste;
         this.danio = danio;
+
         this.estado = estado;
         this.probabilidad = probabilidad;
+
         this.descripcion = descripcion;
         this.icono = icono;
     }

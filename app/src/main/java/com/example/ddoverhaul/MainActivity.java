@@ -10,5 +10,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        JSONHelper jHelper = new JSONHelper(getBaseContext());
+
+        jHelper.addCharacter(jHelper.getJSON("personajes.json"));
     }
 }

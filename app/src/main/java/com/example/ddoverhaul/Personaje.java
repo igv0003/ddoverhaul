@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 public class Personaje {
     private int id;
+    private int nivel;
     private String nombre;
-    private String descripcion;
     private int vida;
     private int vida_Mx;
     private int mana;
@@ -29,6 +29,7 @@ public class Personaje {
     private Clase clase;
 
     private boolean vivo;
+
     private String icono;
     /*Equipo*/
     private Equipo Arma;
@@ -65,6 +66,18 @@ public class Personaje {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+        
+    /*Get Y Set*/
+
+    public int getNivel() {
+        return nivel;
+    }
+    public void setNivel(int nivel) {
+        this.nivel = nivel;
+    }
+    public void setVida(int vida) {
+        this.vida = vida;
+
     }
 
     public int getVida() {
@@ -193,6 +206,24 @@ public class Personaje {
 
     public void setHabilidades(ArrayList<Habilidades> habilidades) {
         this.habilidades = habilidades;
+    }
+    public int getId() {
+        return id;
+    }
+    public void setId(int id) {
+        this.id = id;
+    }
+    public String getNombre() {
+        return nombre;
+    }
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+    public String getImagen() {
+        return imagen;
+    }
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
     }
 
     public void setClase(String clase) {
