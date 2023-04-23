@@ -5,8 +5,8 @@ public class Habilidades {
     private String nombre;
     private int coste;
     private int danio;
-    private String problema_estado;
-    private int porcentaje;
+    private Estado estado;
+    private int probabilidad;
     private String descripcion;
     private String icono; /*Imagen de la Habilidad*/
 
@@ -29,18 +29,7 @@ public class Habilidades {
     public void setDanio(int danio) {
         this.danio = danio;
     }
-    public String getProblema_estado() {
-        return problema_estado;
-    }
-    public void setProblema_estado(String problema_estado) {
-        this.problema_estado = problema_estado;
-    }
-    public int getPorcentaje() {
-        return porcentaje;
-    }
-    public void setPorcentaje(int porcentaje) {
-        this.porcentaje = porcentaje;
-    }
+    
     public String getDescripcion() {
         return descripcion;
     }
@@ -54,13 +43,46 @@ public class Habilidades {
         this.icono = icono;
     }
 
-    public Habilidades(int id, String nombre, int coste, int danio, String problema_estado, int porcentaje, String descripcion, String icono) {
+    public int getId() {
+        return id;
+    }
+    public void setId(int id) {
+        this.id = id;
+    }
+    public Estado getEstado() {
+        return estado;
+    }
+    public void setEstado(Estado estado) {
+        this.estado = estado;
+    }
+    public int getProbabilidad() {
+        return probabilidad;
+    }
+    public void setProbabilidad(int probabilidad) {
+        this.probabilidad = probabilidad;
+    }
+    //Constructor sin Icono
+    public Habilidades(int id, String nombre, int coste, int danio, Estado estado, int probabilidad, String descripcion) {
         this.id = id;
         this.nombre = nombre;
         this.coste = coste;
         this.danio = danio;
-        this.problema_estado = problema_estado;
-        this.porcentaje = porcentaje;
+        this.estado = estado;
+        this.probabilidad = probabilidad;
+        this.descripcion = descripcion;
+    }
+    //Contructor con icono
+
+    public Habilidades(int id, String nombre, int coste, int danio, Estado estado, int probabilidad, String descripcion, String icono) {
+
+        this.id = id;
+        this.nombre = nombre;
+        this.coste = coste;
+        this.danio = danio;
+
+        this.estado = estado;
+        this.probabilidad = probabilidad;
+
         this.descripcion = descripcion;
         this.icono = icono;
     }

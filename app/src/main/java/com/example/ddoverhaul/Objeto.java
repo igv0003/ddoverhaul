@@ -8,6 +8,12 @@ public class Objeto {
     private String icono;
 
     /*Get Y Set*/
+    public int getId() {
+        return id;
+    }
+    public void setId(int id) {
+        this.id = id;
+    }
     public String getNombre() {
         return nombre;
     }
@@ -32,6 +38,15 @@ public class Objeto {
     public void setIcono(String icono) {
         this.icono = icono;
     }
+
+    //Constructor sin icono
+    public Objeto(int id, String nombre, String tipo, String descripcion) {
+        this.id = id;
+        this.nombre = nombre;
+        this.tipo = tipo;
+        this.descripcion = descripcion;
+    }
+    //Constructor con icono
 
     public Objeto(int id, String nombre, String tipo, String descripcion, String icono) {
         this.id = id;
