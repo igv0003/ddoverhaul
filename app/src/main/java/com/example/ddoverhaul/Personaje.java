@@ -3,6 +3,7 @@ package com.example.ddoverhaul;
 import java.util.ArrayList;
 
 public class Personaje {
+
     private int id;
     private int nivel;
     private String nombre;
@@ -148,6 +149,10 @@ public class Personaje {
     }
 
     /*CONSTRUCTORES*/
+
+    public Personaje() {
+
+    }
 
     public Personaje(int id, String nombre, int vida, int mana, String raza, String clase, int fuerza, int destreza, int constitucion, int inteligencia, int sabiduria, int carsima, int velocidad, boolean vivo) {
         this.id = id;
