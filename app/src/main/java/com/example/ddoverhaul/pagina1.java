@@ -6,24 +6,24 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class MainActivity extends AppCompatActivity {
+public class pagina1 extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_pagina1);
 
-        Button b = findViewById(R.id.second);
-        b.setOnClickListener(new View.OnClickListener() {
+        Button buttonOpenPagina1 = findViewById(R.id.botonv);
+        buttonOpenPagina1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openp();
+                openmain();
             }
         });
     }
 
-    public void openp() {
-        Intent intent = new Intent(MainActivity.this, pagina1.class);
+    public void openmain() {
+        Intent intent = new Intent(pagina1.this, MainActivity.class);
         startActivity(intent);
     }
 }
