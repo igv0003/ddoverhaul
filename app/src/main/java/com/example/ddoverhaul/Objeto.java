@@ -40,4 +40,11 @@ public class Objeto {
         this.descripcion = descripcion;
         this.icono = icono;
     }
+    /*Constructor sin icono*/
+    public Objeto(int id, String nombre, String tipo, String descripcion) {
+        this.id = id;
+        this.nombre = nombre;
+        this.tipo = tipo;
+        this.descripcion = descripcion;
+    }
 }
