@@ -3,8 +3,10 @@ package com.example.ddoverhaul;
 import java.util.ArrayList;
 
 public class Personaje {
-    int id;
-    String nombre;
+
+    private int id;
+    private int nivel;
+    private String nombre;
     private int vida;
     private int vida_Mx;
     private int mana;
@@ -20,19 +22,29 @@ public class Personaje {
     private int carsima;
     private int velocidad;
     private boolean vivo;
+    private String imagen;/*imagen del personaje*/
+
     /*Equipo*/
-    Objeto Arma;
-    Objeto Arma_Sec;
-    Objeto Perchera;
-    Objeto Pantalones;
-    Objeto Guantes;
-    Objeto Pies;
-    Objeto Accesorios;
+    Objeto arma;
+    Objeto arma_sec;
+    Objeto cabeza;
+    Objeto perchera;
+    Objeto pantalones;
+    Objeto guantes;
+    Objeto pies;
+    Objeto[] accesorios = new Objeto[2];
 
     ArrayList<Objeto> inventario; /*Inventario es un gran arrayList de Objetos(Objeto)*/
     ArrayList<Habilidades> habilidades; /*Habilidades es un arrayList de Habilidades(Objeto)*/
 
     /*Get Y Set*/
+
+    public int getNivel() {
+        return nivel;
+    }
+    public void setNivel(int nivel) {
+        this.nivel = nivel;
+    }
     public void setVida(int vida) {
         this.vida = vida;
     }
@@ -117,15 +129,47 @@ public class Personaje {
     public void setVivo(boolean vivo) {
         this.vivo = vivo;
     }
+    public int getId() {
+        return id;
+    }
+    public void setId(int id) {
+        this.id = id;
+    }
+    public String getNombre() {
+        return nombre;
+    }
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+    public String getImagen() {
+        return imagen;
+    }
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
+    }
 
     /*CONSTRUCTORES*/
 
-    public Personaje(String name, int life, int energy, String race){
-        this.nombre = name;
-        this.vida_Mx = life;
-        this.vida = life;
-        this.mana_Mx = energy;
-        this.mana = energy;
-        this.raza = race;
+    public Personaje() {
+
+    }
+
+    public Personaje(int id, String nombre, int vida, int mana, String raza, String clase, int fuerza, int destreza, int constitucion, int inteligencia, int sabiduria, int carsima, int velocidad, boolean vivo) {
+        this.id = id;
+        this.nombre = nombre;
+        this.vida = vida;
+        this.vida_Mx = vida;
+        this.mana = mana;
+        this.mana_Mx = mana;
+        this.raza = raza;
+        Clase = clase;
+        this.fuerza = fuerza;
+        this.destreza = destreza;
+        this.constitucion = constitucion;
+        this.inteligencia = inteligencia;
+        this.sabiduria = sabiduria;
+        this.carsima = carsima;
+        this.velocidad = velocidad;
+        this.vivo = vivo;
     }
 }
