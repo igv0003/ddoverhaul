@@ -12,4 +12,25 @@ public class Consumibles extends Objeto {
         this.cantidad = cantidad;
         this.operacion = operacion;
     }
+
+    public int getValor() {
+        return valor;
+    }
+    public void setValor(int valor) {
+        this.valor = valor;
+    }
+    public int getCantidad() {
+        return cantidad;
+    }
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
+    }
+    public int getOperacion() {
+        return operacion;
+    }
+    public void setOperacion(int operacion) {
+        this.operacion = operacion;
+    }
+
+
 }
