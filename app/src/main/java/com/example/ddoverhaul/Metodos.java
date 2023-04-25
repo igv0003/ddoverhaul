@@ -60,5 +60,23 @@ public class Metodos extends AppCompatActivity {
         anadirHabili(habili);
     }
 
+    /*EQUIPO*/
+    public void anadirEquip(Equipo equip){
+        /*METER OBJETO MEDIANTE JSON*/
+    };
+    /*Metodo con Icono*/
+    public void addEquip(String nombre,String tipo, String descripcion, String icono, int danio, int posicion, int armadura){
+        int getLastId=0;
+        int id = getLastId;/*Metodo que obtiene el ultimo id*/
+        Equipo equip = new Equipo(id, nombre, tipo, descripcion, icono, danio, posicion, armadura);
+        anadirEquip(equip);
+    }
+    /*Metodo sin Icono*/
+    public void addEquip(String nombre,String tipo, String descripcion, int danio, int posicion, int armadura){
+        int getLastId=0;
+        int id = getLastId;/*Metodo que obtiene el ultimo id*/
+        Equipo equip = new Equipo(id, nombre, tipo, descripcion, danio, posicion, armadura);
+        anadirEquip(equip);
+    }
 
 }
