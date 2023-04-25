@@ -12,6 +12,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         JSONHelper jHelper = new JSONHelper(getBaseContext());
 
-        jHelper.addCharacter(jHelper.getJSON("personajes.json"));
+        jHelper.addCharacter(jHelper.getJSON("personaje.json"));
     }
 }
