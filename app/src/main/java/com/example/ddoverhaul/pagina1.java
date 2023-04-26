@@ -17,12 +17,13 @@ public class pagina1 extends AppCompatActivity {
         buttonOpenPagina1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openmain();
+
+                gomain();
             }
         });
     }
 
-    public void openmain() {
+    public void gomain() {
         Intent intent = new Intent(pagina1.this, MainActivity.class);
         startActivity(intent);
     }
