@@ -26,4 +26,5 @@ public class pagina1 extends AppCompatActivity {
         Intent intent = new Intent(pagina1.this, MainActivity.class);
         startActivity(intent);
     }
+
 }

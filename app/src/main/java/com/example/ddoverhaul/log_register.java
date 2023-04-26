@@ -1,29 +1,26 @@
 package com.example.ddoverhaul;
-
-import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import androidx.appcompat.app.AppCompatActivity;
 
-public class MainActivity extends AppCompatActivity {
-
+public class log_register extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_register);
 
-        Button b = findViewById(R.id.login);
-        b.setOnClickListener(new View.OnClickListener() {
+        Button blog = findViewById(R.id.login);
+        blog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openp();
+                login();
             }
         });
     }
-
-    public void openp() {
-        Intent intent = new Intent(MainActivity.this, login.class);
+    public void login() {
+        Intent intent = new Intent(log_register.this, login.class);
         startActivity(intent);
     }
 }

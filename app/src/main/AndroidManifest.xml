@@ -26,6 +26,8 @@
                 android:value="" />
         </activity>
         <activity android:name=".pagina1" />
+        <activity android:name=".login"/>
+        <activity android:name=".log_register"/>
     </application>
 
 </manifest>
