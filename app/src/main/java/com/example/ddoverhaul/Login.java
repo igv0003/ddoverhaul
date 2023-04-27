@@ -2,6 +2,7 @@ package com.example.ddoverhaul;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -48,16 +49,18 @@ public class Login extends AppCompatActivity {
 
     private void signIn(String email, String password) {
         mAuth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, task -> {
+                .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        // Inicio de sesión exitoso
+                        // El inicio de sesión se realizó exitosamente
                         FirebaseUser user = mAuth.getCurrentUser();
-                        // Continúa con la siguiente actividad o actualiza la interfaz de usuario
+                        Log.d("LoginActivity", "Inicio de sesión exitoso: " + user.getEmail());
                         enter();
                     } else {
-                        // Si el inicio de sesión falla, muestra un mensaje al usuario
-                        Toast.makeText(Login.this, "Error al iniciar sesión.", Toast.LENGTH_SHORT).show();
-
+                        // Ocurrió un error durante el inicio de sesión
+                        Exception exception = task.getException();
+                        String errorMessage = exception.getMessage();
+                        Log.e("LoginActivity", "Error al iniciar sesión: " + errorMessage);
+                        Toast.makeText(Login.this, "Error al iniciar sesión: " + errorMessage, Toast.LENGTH_SHORT).show();
                     }
                 });
     }
