@@ -62,4 +62,13 @@ public class Evento {
         this.cantidad = cantidad;
         this.operacion = operacion;
     }
+
+    public Evento(Evento E) {
+        this.id = E.id;
+        this.descripcion = E.descripcion;
+        this.valor = E.valor;
+        this.cantidad = E.cantidad;
+        this.operacion = E.operacion;
+        this.obj = E.obj;
+    }
 }

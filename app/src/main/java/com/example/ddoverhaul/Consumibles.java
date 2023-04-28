@@ -20,6 +20,13 @@ public class Consumibles extends Objeto {
         this.operacion = operacion;
     }
 
+    public Consumibles(Consumibles C) {
+        super(C.getId(), C.getNombre(), C.getTipo(), C.getDescripcion(), C.getIcono());
+        this.valor = valor;
+        this.cantidad = cantidad;
+        this.operacion = operacion;
+    }
+
     public int getValor() {
         return valor;
     }
