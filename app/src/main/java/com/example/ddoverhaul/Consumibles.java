@@ -12,6 +12,13 @@ public class Consumibles extends Objeto {
         this.cantidad = cantidad;
         this.operacion = operacion;
     }
+    /*Constructor sin Icono*/
+    public Consumibles(int id, String nombre, String tipo, String descripcion, int valor, int cantidad, int operacion) {
+        super(id, nombre, tipo, descripcion, null);
+        this.valor = valor;
+        this.cantidad = cantidad;
+        this.operacion = operacion;
+    }
 
     public Consumibles(Consumibles C) {
         super(C.getId(), C.getNombre(), C.getTipo(), C.getDescripcion(), C.getIcono());

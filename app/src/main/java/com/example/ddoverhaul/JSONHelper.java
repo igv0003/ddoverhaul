@@ -1,6 +1,7 @@
 package com.example.ddoverhaul;
 
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -17,6 +18,11 @@ import com.google.gson.JsonObject;
 public class JSONHelper {
     Context context;
     Personaje p = new Personaje();
+    String fileChar = "personaje.json";
+    String rootChar = "characters";
+    String fileObj = "personaje.json";
+    String fileEvent = "personaje.json";
+    String fileSkill = "personaje.json";
 
     public JSONHelper (Context c){
         context = c;
@@ -30,12 +36,15 @@ public class JSONHelper {
         JsonObject jsonObj = null;
         try {
             AssetManager assetManager = context.getAssets();
+            File file = new File(context.getFilesDir(),jsonFile);
+            InputStream inputStream;
+            if (file.exists()){
+                inputStream = context.openFileInput(jsonFile);
 
-            InputStream inputStream = context.openFileInput(jsonFile);
-            if (inputStream != null){
+            } else {
                 inputStream = assetManager.open(jsonFile);
-            }
 
+            }
 
             if (inputStream != null) {
                 int size = inputStream.available();
@@ -55,6 +64,20 @@ public class JSONHelper {
         return jsonObj;
     }
 
+
+    public Personaje getChar(int id){
+
+        JsonArray charArray = getJSON(fileChar).getAsJsonArray(rootChar);
+        for (int i=0 ; i < charArray.size() ; i++){
+
+
+        }
+
+
+        return p;
+    }
+
+
     // Método que añade un personaje nuevo al array de Personajes, recibe el objetoJSON preparado
     public void addCharacter (JsonObject jsonObj){
 
@@ -69,7 +92,8 @@ public class JSONHelper {
         Gson gson = new Gson();
         String newJson = gson.toJson(jsonObj);
         try {
-            OutputStream outputStream = context.openFileOutput("personajes.json", Context.MODE_PRIVATE);
+
+            OutputStream outputStream = context.openFileOutput(fileChar, Context.MODE_PRIVATE);
             outputStream.write(newJson.getBytes());
             outputStream.close();
         } catch (IOException e){
