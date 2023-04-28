@@ -64,4 +64,16 @@ public class Habilidades {
         this.descripcion = descripcion;
         this.icono = icono;
     }
+
+    /*Constructor sin icono*/
+    public Habilidades(int id, String nombre, int coste, int danio, String problema_estado, int porcentaje, String descripcion) {
+        this.id = id;
+        this.nombre = nombre;
+        this.coste = coste;
+        this.danio = danio;
+        this.problema_estado = problema_estado;
+        this.porcentaje = porcentaje;
+        this.descripcion = descripcion;
+        this.icono = null;
+    }
 }

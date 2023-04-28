@@ -34,7 +34,7 @@ public class Personaje {
     Objeto pies;
     Objeto[] accesorios = new Objeto[2];
 
-    ArrayList<Objeto> inventario; /*Inventario es un arrayList de Objetos(Objeto)*/
+    ArrayList<Objeto> inventario; /*Inventario es un gran arrayList de Objetos(Objeto)*/
     ArrayList<Habilidades> habilidades; /*Habilidades es un arrayList de Habilidades(Objeto)*/
 
     /*Get Y Set*/
@@ -154,6 +154,26 @@ public class Personaje {
 
     }
 
+    public Personaje(int id, String nombre, int vida, int mana, String raza, String clase, int fuerza, int destreza, int constitucion, int inteligencia, int sabiduria, int carsima, int velocidad, boolean vivo, String imagen) {
+        this.id = id;
+        this.nombre = nombre;
+        this.vida = vida;
+        this.vida_Mx = vida;
+        this.mana = mana;
+        this.mana_Mx = mana;
+        this.raza = raza;
+        Clase = clase;
+        this.fuerza = fuerza;
+        this.destreza = destreza;
+        this.constitucion = constitucion;
+        this.inteligencia = inteligencia;
+        this.sabiduria = sabiduria;
+        this.carsima = carsima;
+        this.velocidad = velocidad;
+        this.vivo = vivo;
+        this.imagen = imagen;
+    }
+    /*Constructor sin imagen*/
     public Personaje(int id, String nombre, int vida, int mana, String raza, String clase, int fuerza, int destreza, int constitucion, int inteligencia, int sabiduria, int carsima, int velocidad, boolean vivo) {
         this.id = id;
         this.nombre = nombre;

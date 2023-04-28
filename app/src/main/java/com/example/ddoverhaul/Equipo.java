@@ -31,4 +31,11 @@ public class Equipo extends Objeto{
         this.posicion = posicion;
         this.armadura = armadura;
     }
+    /*Constructor sin icono*/
+    public Equipo(int id, String nombre, String tipo, String descripcion, int danio, int posicion, int armadura) {
+        super(id,nombre,tipo,descripcion);
+        this.danio = danio;
+        this.posicion = posicion;
+        this.armadura = armadura;
+    }
 }
