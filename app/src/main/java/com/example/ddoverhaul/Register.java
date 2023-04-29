@@ -45,7 +45,7 @@ public class Register extends AppCompatActivity {
                 public void onClick(View v) {
                     EmailS = Email.getText().toString();
                     NameS = Name.getText().toString();
-                    PasswordS = Name.getText().toString();
+                    PasswordS = Password.getText().toString();
 
                     signUp(EmailS,NameS,PasswordS);
 
