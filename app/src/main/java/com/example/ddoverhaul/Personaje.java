@@ -194,7 +194,7 @@ public class Personaje {
     }
 
     public Personaje(Personaje P) {
-        this.id = id;
+        this.id = P.id;
         this.nombre = P.nombre;
         this.vida = P.vida;
         this.vida_Mx = P.vida;
