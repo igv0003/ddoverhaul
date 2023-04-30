@@ -25,7 +25,8 @@ public class Metodos extends AppCompatActivity {
         int getLastId=0; /*Metodo que obtiene el ultimo id*/
         int id = getLastId;
         O.setId(id);
-        anadirObj(O);
+        Objeto obj = new Objeto(O);
+        anadirObj(obj);
     }
 
     /*EVENTOS*/
@@ -51,7 +52,8 @@ public class Metodos extends AppCompatActivity {
         int getLastId=0; /*Metodo que obtiene el ultimo id*/
         int id = getLastId;
         E.setId(id);
-        anadirEvent(E);
+        Evento event = new Evento(E);
+        anadirEvent(event);
     }
 
     /*HEBILIDADES*/
@@ -77,7 +79,8 @@ public class Metodos extends AppCompatActivity {
         int getLastId=0; /*Metodo que obtiene el ultimo id*/
         int id = getLastId;
         H.setId(id);
-        anadirHabili(H);
+        Habilidades habili = new Habilidades(H);
+        anadirHabili(habili);
     }
 
     /*EQUIPO*/
@@ -103,7 +106,8 @@ public class Metodos extends AppCompatActivity {
         int getLastId=0; /*Metodo que obtiene el ultimo id*/
         int id = getLastId;
         E.setId(id);
-        anadirEquip(E);
+        Equipo equip = new Equipo(E);
+        anadirEquip(equip);
     }
 
     /*CONSUMIBLES*/
@@ -129,7 +133,8 @@ public class Metodos extends AppCompatActivity {
         int getLastId=0; /*Metodo que obtiene el ultimo id*/
         int id = getLastId;
         C.setId(id);
-        anadirCons(C);
+        Consumibles cons = new Consumibles(C);
+        anadirCons(cons);
     }
 
 }

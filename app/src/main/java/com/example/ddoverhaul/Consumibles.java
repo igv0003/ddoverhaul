@@ -22,9 +22,9 @@ public class Consumibles extends Objeto {
 
     public Consumibles(Consumibles C) {
         super(C.getId(), C.getNombre(), C.getTipo(), C.getDescripcion(), C.getIcono());
-        this.valor = valor;
-        this.cantidad = cantidad;
-        this.operacion = operacion;
+        this.valor = C.valor;
+        this.cantidad = C.cantidad;
+        this.operacion = C.operacion;
     }
 
     public int getValor() {
