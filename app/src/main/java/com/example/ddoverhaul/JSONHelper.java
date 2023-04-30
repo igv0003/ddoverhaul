@@ -21,10 +21,9 @@ public class JSONHelper {
     Context context;
     Personaje p = new Personaje();
     String fileChar = "personaje.json";
-    String rootChar = "characters";
-    String fileObj = "personaje.json";
-    String fileEvent = "personaje.json";
-    String fileSkill = "personaje.json";
+    String fileObj = "objeto.json";
+    String fileEvent = "evento.json";
+    String fileSkill = "habilidad.json";
 
     public JSONHelper (Context c){
         context = c;
@@ -60,14 +59,49 @@ public class JSONHelper {
         return json;
     }
 
-
-    public Personaje getChar(int id){
-        return p;
+    // Método que recibe el nombre del fichero y el json a guardar
+    public void saveJsonToFile (String fileName, String json){
+        try {
+            File file = new File(context.getFilesDir(),fileName);
+            FileOutputStream fos = new FileOutputStream(file);
+            fos.write(json.getBytes());
+            fos.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 
+    // ----- MÉTODOS PARA OBJETO PERSONAJE -----
+
+    // Método que devuelve un Personaje recibiendo su id por parámetro, devuelve null si no lo encuentra
+    public Personaje getChar(int id){
+        // Crea un array de Personaje partiendo del json
+        String jsonStr = getJSON(fileChar);
+        Gson gson = new Gson();
+        // Se recoge el array de personajes usando el json
+        Personaje[] characters = gson.fromJson(jsonStr,Personaje[].class);
+
+        // Se recorre el array de Personaje, si el id coincide lo devuelve
+        for (Personaje character : characters) {
+            if (character.getId() == id) {
+                return character;
+            }
+        }
+        return null;
+    }
+
+    // Método que devuelve todos los Personajes
+    public Personaje[] getChars(){
+        // Crea un array de Personaje partiendo del json
+        String jsonStr = getJSON(fileChar);
+        Gson gson = new Gson();
+        // Devuelve el array creado a partir del json
+        return gson.fromJson(jsonStr,Personaje[].class);
+    }
+
     // Método que añade un personaje nuevo al array de Personajes, recibe el personaje a guardar
-    public void addCharacter (){
+    public void addCharacter (Personaje chara){
         String jsonStr = getJSON(fileChar);
         Gson gson = new Gson();
         // Se recoge el array de personajes usando el json
@@ -76,11 +110,12 @@ public class JSONHelper {
         // Se crea un nuevo array que guardará el nuevo personaje
         Personaje[] newCharacters = new Personaje[characters.length +1];
         for (int i = 0; i < characters.length; i++) {
-            newCharacters[i] = characters[i];
+            Personaje p = new Personaje (characters[i]);
+            newCharacters[i] = p;
         }
 
         // Se crea el nuevo personaje a añadir partiendo del personaje recibido
-        Personaje newChar = p;
+        Personaje newChar = new Personaje(chara);
 
         // Se recorren los personajes comprobando que las id concuerdan en orden, la última posicion siempre es null
         boolean exist = false;
@@ -101,12 +136,71 @@ public class JSONHelper {
         newCharacters[characters.length] = newChar;
 
         // Se ordena el array en caso de fallo de ids
-        //newCharacters = sortCharacters(newCharacters);
+        newCharacters = sortCharacters(newCharacters);
 
         // No tocar, código encargado de preparar el String json y llamar al guardado
         Gson prettyGson = new GsonBuilder().setPrettyPrinting().create();
         String prettyJson = prettyGson.toJson(newCharacters);
         saveJsonToFile(fileChar,prettyJson);
+    }
+
+    public void updateCharacter (Personaje chara){
+        String jsonStr = getJSON(fileChar);
+        Gson gson = new Gson();
+        // Se recoge el array de personajes usando el json
+        Personaje[] characters = gson.fromJson(jsonStr,Personaje[].class);
+        // Se recorre el array, cuando el personaje coincida con el recibido, se actualiza en el array
+        for (int i = 0; i < characters.length; i++) {
+            if (characters[i].getId() == chara.getId()){
+                Personaje p = new Personaje (chara);
+                characters[i] = p;
+                i = characters.length;
+            }
+        }
+
+        // No tocar, código encargado de preparar el String json y llamar al guardado
+        Gson prettyGson = new GsonBuilder().setPrettyPrinting().create();
+        String prettyJson = prettyGson.toJson(characters);
+        saveJsonToFile(fileChar,prettyJson);
+
+    }
+
+    // Método que borra un personaje de la lista de caracteres, recibe un id por parámetro
+    public void deleteCharacter(int id) {
+        // Crea un array de Personaje partiendo del json
+        String jsonStr = getJSON(fileChar);
+        Gson gson = new Gson();
+        // Se recoge el array de personajes usando el json
+        Personaje[] characters = gson.fromJson(jsonStr,Personaje[].class);
+        boolean deleted = false;
+        for (int i = 0; i < characters.length; i++) {
+            if (characters[i].getId() == id) {
+                deleted = true;
+                characters[i] = null;
+                i = characters.length;
+            }
+        }
+        if (deleted) {
+            // Se crea el nuevo array sin el personaje a borrar
+            Personaje[] newCharacters = new Personaje[characters.length - 1];
+            // Se recorre el nuevo array, si el personaje no es null, se guarda en el nuevo array
+            int size = 0;
+            for (int i = 0; i < characters.length; i++) {
+                if (characters[i] != null) {
+                    Personaje p = new Personaje(characters[i]);
+                    newCharacters[size] = p;
+                    size++;
+                }
+            }
+
+            // Se ordena el array en caso de fallo de ids
+            newCharacters = sortCharacters(newCharacters);
+
+            // No tocar, código encargado de preparar el String json y llamar al guardado
+            Gson prettyGson = new GsonBuilder().setPrettyPrinting().create();
+            String prettyJson = prettyGson.toJson(newCharacters);
+            saveJsonToFile(fileChar,prettyJson);
+        }
     }
 
     // Método que recibe un array de Personajes y los ordena por id
@@ -119,13 +213,15 @@ public class JSONHelper {
             // Si el personaje tiene la misma id que la posicion actual
             if (characters[i].getId() == i){
                 // Se añade el personaje a la posicion
-                sortChars[i] = characters[i];
+                Personaje p = new Personaje (characters[i]);
+                sortChars[i] = p;
             } else {
                 // Si no tiene la misma id, se buscará al personaje que tenga la misma id que la posicion actual
                 for (int j = 0; j < loops; j++) {
                     // Si el personaje actual tiene la misma id que la posicion actual
                     if (characters[j].getId() == i){
-                        sortChars[i] = characters[j];
+                        Personaje p = new Personaje(characters[j]);
+                        sortChars[i] = p;
                         j = loops;
                     }
                 }
@@ -137,16 +233,6 @@ public class JSONHelper {
     }
 
 
-    // Método que recibe el nombre del fichero y el json a guardar
-    public void saveJsonToFile (String fileName, String json){
-        try {
-            File file = new File(context.getFilesDir(),fileName);
-            FileOutputStream fos = new FileOutputStream(file);
-            fos.write(json.getBytes());
-            fos.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+
 
 }
