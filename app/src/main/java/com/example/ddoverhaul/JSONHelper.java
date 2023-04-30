@@ -28,8 +28,8 @@ public class JSONHelper {
 
     public JSONHelper (Context c){
         context = c;
-        p.setNivel(30);
-        p.setNombre("dummy");
+        p.setNivel(15);
+        p.setNombre("dummy2");
     }
 
     // Método que recibe nombre del archivo json y lo devuelve como string
@@ -68,14 +68,17 @@ public class JSONHelper {
 
     // Método que añade un personaje nuevo al array de Personajes, recibe el personaje a guardar
     public void addCharacter (){
+        String jsonStr = getJSON(fileChar);
         Gson gson = new Gson();
         // Se recoge el array de personajes usando el json
-        Personaje[] characters = gson.fromJson(getJSON(fileChar),Personaje[].class);
+        Personaje[] characters = gson.fromJson(jsonStr,Personaje[].class);
+
         // Se crea un nuevo array que guardará el nuevo personaje
         Personaje[] newCharacters = new Personaje[characters.length +1];
         for (int i = 0; i < characters.length; i++) {
             newCharacters[i] = characters[i];
         }
+
         // Se crea el nuevo personaje a añadir partiendo del personaje recibido
         Personaje newChar = p;
 
@@ -92,7 +95,7 @@ public class JSONHelper {
         }
         // Si las id concuerdan, entonces se le asigna la última id
         if (!exist) {
-            newChar.setId(newCharacters.length);
+            newChar.setId(newCharacters.length-1);
         }
         // Se añade el personaje con la id asignada al array de personajes
         newCharacters[characters.length] = newChar;
