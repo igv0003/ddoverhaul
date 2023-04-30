@@ -21,6 +21,13 @@ public class Metodos extends AppCompatActivity {
         Objeto obj = new Objeto(id,nombre, tipo, descripcion);
         anadirObj(obj);
     }
+    public void addObject(Objeto O){
+        int getLastId=0; /*Metodo que obtiene el ultimo id*/
+        int id = getLastId;
+        O.setId(id);
+        Objeto obj = new Objeto(O);
+        anadirObj(obj);
+    }
 
     /*EVENTOS*/
     public void anadirEvent(Evento evn){
@@ -38,6 +45,14 @@ public class Metodos extends AppCompatActivity {
         int getLastId=0;
         int id = getLastId;/*Metodo que obtiene el ultimo id*/
         Evento event = new Evento(id,  descripcion, valor, cantidad, operacion);
+        anadirEvent(event);
+    }
+
+    public void addEvento(Evento E){
+        int getLastId=0; /*Metodo que obtiene el ultimo id*/
+        int id = getLastId;
+        E.setId(id);
+        Evento event = new Evento(E);
         anadirEvent(event);
     }
 
@@ -60,6 +75,14 @@ public class Metodos extends AppCompatActivity {
         anadirHabili(habili);
     }
 
+    public void addHabili(Habilidades H){
+        int getLastId=0; /*Metodo que obtiene el ultimo id*/
+        int id = getLastId;
+        H.setId(id);
+        Habilidades habili = new Habilidades(H);
+        anadirHabili(habili);
+    }
+
     /*EQUIPO*/
     public void anadirEquip(Equipo equip){
         /*METER OBJETO MEDIANTE JSON*/
@@ -77,6 +100,41 @@ public class Metodos extends AppCompatActivity {
         int id = getLastId;/*Metodo que obtiene el ultimo id*/
         Equipo equip = new Equipo(id, nombre, tipo, descripcion, danio, posicion, armadura);
         anadirEquip(equip);
+    }
+
+    public void addEquip(Equipo E){
+        int getLastId=0; /*Metodo que obtiene el ultimo id*/
+        int id = getLastId;
+        E.setId(id);
+        Equipo equip = new Equipo(E);
+        anadirEquip(equip);
+    }
+
+    /*CONSUMIBLES*/
+    public void anadirCons(Consumibles cons){
+        /*METER CONSUMIBLES MEDIANTE JSON*/
+    };
+    /*Metodo con Icono*/
+    public void addCons(String nombre,String tipo, String descripcion, String icono, int valor, int cantidad, char operacion){
+        int getLastId=0;
+        int id = getLastId;/*Metodo que obtiene el ultimo id*/
+        Consumibles cons = new Consumibles(id, nombre, tipo, descripcion, icono, valor, cantidad, operacion);
+        anadirCons(cons);
+    }
+    /*Metodo sin Icono*/
+    public void addCons(String nombre,String tipo, String descripcion, int valor, int cantidad, char operacion){
+        int getLastId=0;
+        int id = getLastId;/*Metodo que obtiene el ultimo id*/
+        Consumibles cons = new Consumibles(id, nombre, tipo, descripcion, valor, cantidad, operacion);
+        anadirCons(cons);
+    }
+
+    public void addCons(Consumibles C){
+        int getLastId=0; /*Metodo que obtiene el ultimo id*/
+        int id = getLastId;
+        C.setId(id);
+        Consumibles cons = new Consumibles(C);
+        anadirCons(cons);
     }
 
 }

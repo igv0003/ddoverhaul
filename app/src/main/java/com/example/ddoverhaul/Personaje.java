@@ -192,4 +192,23 @@ public class Personaje {
         this.velocidad = velocidad;
         this.vivo = vivo;
     }
+
+    public Personaje(Personaje P) {
+        this.id = P.id;
+        this.nombre = P.nombre;
+        this.vida = P.vida;
+        this.vida_Mx = P.vida;
+        this.mana = P.mana;
+        this.mana_Mx = P.mana;
+        this.raza = P.raza;
+        Clase = P.Clase;
+        this.fuerza = P.fuerza;
+        this.destreza = P.destreza;
+        this.constitucion = P.constitucion;
+        this.inteligencia = P.inteligencia;
+        this.sabiduria = P.sabiduria;
+        this.carsima = P.carsima;
+        this.velocidad = P.velocidad;
+        this.vivo = P.vivo;
+    }
 }
