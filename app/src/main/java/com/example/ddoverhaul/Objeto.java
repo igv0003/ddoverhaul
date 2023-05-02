@@ -32,7 +32,20 @@ public class Objeto {
     public void setIcono(String icono) {
         this.icono = icono;
     }
+    public int getId() {
+        return id;
+    }
+    public void setId(int id) {
+        this.id = id;
+    }
 
+    public Objeto(Objeto O) {
+        this.id = O.id;
+        this.nombre = O.nombre;
+        this.tipo = O.tipo;
+        this.descripcion = O.descripcion;
+        this.icono = O.icono;
+    }
     public Objeto(int id, String nombre, String tipo, String descripcion, String icono) {
         this.id = id;
         this.nombre = nombre;

@@ -33,9 +33,16 @@ public class Equipo extends Objeto{
     }
     /*Constructor sin icono*/
     public Equipo(int id, String nombre, String tipo, String descripcion, int danio, int posicion, int armadura) {
-        super(id,nombre,tipo,descripcion,null);
+        super(id,nombre,tipo,descripcion);
         this.danio = danio;
         this.posicion = posicion;
         this.armadura = armadura;
+    }
+
+    public Equipo(Equipo E) {
+        super(E.getId(), E.getNombre(), E.getTipo(), E.getDescripcion());
+        this.danio = E.danio;
+        this.posicion = E.posicion;
+        this.armadura = E.armadura;
     }
 }

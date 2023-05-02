@@ -11,6 +11,13 @@ public class Habilidades {
     private String icono; /*Imagen de la Habilidad*/
 
     /*Get Y Set*/
+
+    public int getId() {
+        return id;
+    }
+    public void setId(int id) {
+        this.id = id;
+    }
     public String getNombre() {
         return nombre;
     }
@@ -75,5 +82,16 @@ public class Habilidades {
         this.porcentaje = porcentaje;
         this.descripcion = descripcion;
         this.icono = null;
+    }
+
+    public Habilidades(Habilidades H) {
+        this.id = H.id;
+        this.nombre = H.nombre;
+        this.coste = H.coste;
+        this.danio = H.danio;
+        this.problema_estado = H.problema_estado;
+        this.porcentaje = H.porcentaje;
+        this.descripcion = H.descripcion;
+        this.icono = H.icono;
     }
 }
