@@ -52,7 +52,7 @@ public class Login extends AppCompatActivity {
     }
 
     public void enter() {
-        Intent intent = new Intent(Login.this, pagina1.class);
+        Intent intent = new Intent(Login.this, menu_principal.class);
         startActivity(intent);
     }
 
