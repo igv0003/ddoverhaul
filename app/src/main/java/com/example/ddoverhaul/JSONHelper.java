@@ -15,20 +15,22 @@ import android.content.res.AssetManager;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 public class JSONHelper {
     Context context;
     Personaje p = new Personaje();
     String fileChar = "personaje.json";
     String fileObj = "objeto.json";
+    String fileEquip = "equipo.json";
+    String fileCons = "consumible.json";
     String fileEvent = "evento.json";
     String fileSkill = "habilidad.json";
 
     public JSONHelper (Context c){
         context = c;
-        p.setNivel(15);
-        p.setNombre("dummy2");
     }
 
     // Método que recibe nombre del archivo json y lo devuelve como string
@@ -157,12 +159,10 @@ public class JSONHelper {
                 i = characters.length;
             }
         }
-
         // No tocar, código encargado de preparar el String json y llamar al guardado
         Gson prettyGson = new GsonBuilder().setPrettyPrinting().create();
         String prettyJson = prettyGson.toJson(characters);
         saveJsonToFile(fileChar,prettyJson);
-
     }
 
     // Método que borra un personaje de la lista de caracteres, recibe un id por parámetro
@@ -185,9 +185,9 @@ public class JSONHelper {
             Personaje[] newCharacters = new Personaje[characters.length - 1];
             // Se recorre el nuevo array, si el personaje no es null, se guarda en el nuevo array
             int size = 0;
-            for (int i = 0; i < characters.length; i++) {
-                if (characters[i] != null) {
-                    Personaje p = new Personaje(characters[i]);
+            for (Personaje character : characters) {
+                if (character != null) {
+                    Personaje p = new Personaje(character);
                     newCharacters[size] = p;
                     size++;
                 }
@@ -231,6 +231,533 @@ public class JSONHelper {
         // Devuelve el nuevo array con los personajes ordenados por id
         return sortChars;
     }
+
+
+    // ----- MÉTODOS PARA OBJETOS TIPO OTROS -----
+
+    // Método que devuelve un objeto recibiendo su id por parámetros
+    public Objeto getObject(int id) {
+        // Crea un array de Objetos partiendo del json
+        String jsonStr = getJSON(fileObj);
+        Gson gson = new Gson();
+        // Se recoge el array de objetos usando el json
+        Objeto[] objects = gson.fromJson(jsonStr,Objeto[].class);
+
+        // Se recorre el array de objectos, si el id coincide lo devuelve
+        for (Objeto obj : objects) {
+            if (obj.getId() == id) {
+                return obj;
+            }
+        }
+        return null;
+    }
+
+    // Método que devuelve todos los Objetos
+    public Objeto[] getObjects(){
+        // Crea un array de Objetos partiendo del json
+        String jsonStr = getJSON(fileObj);
+        Gson gson = new Gson();
+        // Devuelve el array creado a partir del json
+        return gson.fromJson(jsonStr,Objeto[].class);
+    }
+
+    // Método que añade un objeto nuevo al array de Objetos de tipo Otros
+    public void addObject(Objeto obj) {
+        String jsonStr = getJSON(fileObj);
+        Gson gson = new Gson();
+        // Se recoge el array de objetos usando el json
+        Objeto[] objects = gson.fromJson(jsonStr,Objeto[].class);
+
+        // Se crea un nuevo array que guardará el nuevo objeto
+        Objeto[] newObjects = new Objeto[objects.length +1];
+        for (int i = 0; i < objects.length; i++) {
+            Objeto o = new Objeto (objects[i]);
+            newObjects[i] = o;
+        }
+        // Se crea el nuevo objeto a añadir partiendo del objeto recibido
+        Objeto newObj = new Objeto(obj);
+
+        // Se recorren los objetos comprobando que las id concuerdan en orden, la última posicion siempre es null
+        boolean exist = false;
+        for (int i = 0; i < newObjects.length-1; i++) {
+            // Si una id no concuerda en orden, es que falta un personaje
+            if (newObjects[i].getId() != i) {
+                // Se le añade la id faltante al nuevo personaje
+                newObj.setId(i);
+                i = newObjects.length;
+                exist = true;
+            }
+        }
+        // Si las id concuerdan, entonces se le asigna la última id
+        if (!exist) {
+            newObj.setId(newObjects.length-1);
+        }
+        // Se añade el objeto con la id asignada al array de objetos
+        newObjects[objects.length] = newObj;
+
+        // Se ordena el array en caso de fallo de ids
+        newObjects = sortObjects(newObjects);
+
+        // No tocar, código encargado de preparar el String json y llamar al guardado
+        Gson prettyGson = new GsonBuilder().setPrettyPrinting().create();
+        String prettyJson = prettyGson.toJson(newObjects);
+        saveJsonToFile(fileObj,prettyJson);
+    }
+
+    public void updateObject (Objeto o){
+        String jsonStr = getJSON(fileObj);
+        Gson gson = new Gson();
+        // Se recoge el array de objetos usando el json
+        Objeto[] objects = gson.fromJson(jsonStr,Objeto[].class);
+        // Se recorre el array, cuando el objeto coincida con el recibido, se actualiza en el array
+        for (int i = 0; i < objects.length; i++) {
+            if (objects[i].getId() == o.getId()){
+                Objeto obj = new Objeto (o);
+                objects[i] = obj;
+                i = objects.length;
+            }
+        }
+        // No tocar, código encargado de preparar el String json y llamar al guardado
+        Gson prettyGson = new GsonBuilder().setPrettyPrinting().create();
+        String prettyJson = prettyGson.toJson(objects);
+        saveJsonToFile(fileObj,prettyJson);
+    }
+
+    // Método que borra un objeto de la lista de objetos, recibe un id por parámetro
+    public void deleteObject(int id) {
+        // Crea un array de Objeto partiendo del json
+        String jsonStr = getJSON(fileObj);
+        Gson gson = new Gson();
+        // Se recoge el array de objetos usando el json
+        Objeto[] objects = gson.fromJson(jsonStr,Objeto[].class);
+        boolean deleted = false;
+        for (int i = 0; i < objects.length; i++) {
+            if (objects[i].getId() == id) {
+                deleted = true;
+                objects[i] = null;
+                i = objects.length;
+            }
+        }
+        if (deleted) {
+            // Se crea el nuevo array sin el objeto a borrar
+            Objeto[] newObjects = new Objeto[objects.length - 1];
+            // Se recorre el nuevo array, si el objeto no es null, se guarda en el nuevo array
+            int size = 0;
+            for (Objeto object : objects) {
+                if (object != null) {
+                    Objeto obj = new Objeto(object);
+                    newObjects[size] = obj;
+                    size++;
+                }
+            }
+
+            // Se ordena el array en caso de fallo de ids
+            newObjects = sortObjects(newObjects);
+
+            // No tocar, código encargado de preparar el String json y llamar al guardado
+            Gson prettyGson = new GsonBuilder().setPrettyPrinting().create();
+            String prettyJson = prettyGson.toJson(newObjects);
+            saveJsonToFile(fileObj,prettyJson);
+        }
+    }
+
+    // Método que recibe un array de Objetos y los ordena por id
+    public Objeto[] sortObjects(Objeto[] objects){
+        Objeto[] sortObjects = new Objeto[objects.length];
+        int loops = sortObjects.length;
+
+        // Se recorre el nuevo array, añadiendo en las posiciones los objetos con id ordenada
+        for (int i = 0; i < loops; i++) {
+            // Si el objeto tiene la misma id que la posicion actual
+            if (objects[i].getId() == i){
+                // Se añade el objeto a la posicion
+                Objeto o = new Objeto (objects[i]);
+                sortObjects[i] = o;
+            } else {
+                // Si no tiene la misma id, se buscará al objeto que tenga la misma id que la posicion actual
+                for (int j = 0; j < loops; j++) {
+                    // Si el objeto actual tiene la misma id que la posicion actual
+                    if (objects[j].getId() == i){
+                        Objeto o = new Objeto(objects[j]);
+                        sortObjects[i] = o;
+                        j = loops;
+                    }
+                }
+            }
+        }
+
+        // Devuelve el nuevo array con los objetos ordenados por id
+        return sortObjects;
+    }
+
+
+    // ----- MÉTODOS PARA OBJETOS TIPO EQUIPO -----
+
+    // Método que devuelve un equipo recibiendo su id por parámetros
+    public Equipo getEquip(int id) {
+        // Crea un array de Equipos partiendo del json
+        String jsonStr = getJSON(fileEquip);
+        Gson gson = new Gson();
+        // Se recoge el array de equipos usando el json
+        Equipo[] equips = gson.fromJson(jsonStr,Equipo[].class);
+
+        // Se recorre el array de equipos, si el id coincide lo devuelve
+        for (Equipo e : equips) {
+            if (e.getId() == id) {
+                return e;
+            }
+        }
+        return null;
+    }
+
+    // Método que devuelve todos los Equipos
+    public Equipo[] getEquips(){
+        // Crea un array de Equipos partiendo del json
+        String jsonStr = getJSON(fileEquip);
+        Gson gson = new Gson();
+        // Devuelve el array creado a partir del json
+        return gson.fromJson(jsonStr,Equipo[].class);
+    }
+
+    // Método que añade un equipo nuevo al array de Equipo
+    public void addEquip(Equipo e) {
+        String jsonStr = getJSON(fileEquip);
+        Gson gson = new Gson();
+        // Se recoge el array de equipos usando el json
+        Equipo[] equips = gson.fromJson(jsonStr,Equipo[].class);
+
+        // Se crea un nuevo array que guardará el nuevo equipo
+        Equipo[] newEquips = new Equipo[equips.length +1];
+        for (int i = 0; i < equips.length; i++) {
+            Equipo eq = new Equipo (equips[i]);
+            newEquips[i] = eq;
+        }
+        // Se crea el nuevo equipo a añadir partiendo del equipo recibido
+        Equipo newEquip = new Equipo(e);
+
+        // Se recorren los equipos comprobando que las id concuerdan en orden, la última posicion siempre es null
+        boolean exist = false;
+        for (int i = 0; i < newEquips.length-1; i++) {
+            // Si una id no concuerda en orden, es que falta un equipo
+            if (newEquips[i].getId() != i) {
+                // Se le añade la id faltante al nuevo equipo
+                newEquip.setId(i);
+                i = newEquips.length;
+                exist = true;
+            }
+        }
+        // Si las id concuerdan, entonces se le asigna la última id
+        if (!exist) {
+            newEquip.setId(newEquips.length-1);
+        }
+        // Se añade el equipo con la id asignada al array de equipos
+        newEquips[equips.length] = newEquip;
+
+        // Se ordena el array en caso de fallo de ids
+        newEquips = sortEquips(newEquips);
+
+        // No tocar, código encargado de preparar el String json y llamar al guardado
+        Gson prettyGson = new GsonBuilder().setPrettyPrinting().create();
+        String prettyJson = prettyGson.toJson(newEquips);
+        saveJsonToFile(fileEquip,prettyJson);
+    }
+
+    public void updateEquip (Equipo e){
+        String jsonStr = getJSON(fileEquip);
+        Gson gson = new Gson();
+        // Se recoge el array de equipos usando el json
+        Equipo[] equips = gson.fromJson(jsonStr,Equipo[].class);
+        // Se recorre el array, cuando el equipo coincida con el recibido, se actualiza en el array
+        for (int i = 0; i < equips.length; i++) {
+            if (equips[i].getId() == e.getId()){
+                Equipo eq = new Equipo (e);
+                equips[i] = eq;
+                i = equips.length;
+            }
+        }
+        // No tocar, código encargado de preparar el String json y llamar al guardado
+        Gson prettyGson = new GsonBuilder().setPrettyPrinting().create();
+        String prettyJson = prettyGson.toJson(equips);
+        saveJsonToFile(fileEquip,prettyJson);
+    }
+
+    // Método que borra un equipo de la lista de equipos, recibe un id por parámetro
+    public void deleteEquip(int id) {
+        // Crea un array de Equipo partiendo del json
+        String jsonStr = getJSON(fileEquip);
+        Gson gson = new Gson();
+        // Se recoge el array de equipos usando el json
+        Equipo[] equips = gson.fromJson(jsonStr,Equipo[].class);
+        boolean deleted = false;
+        for (int i = 0; i < equips.length; i++) {
+            if (equips[i].getId() == id) {
+                deleted = true;
+                equips[i] = null;
+                i = equips.length;
+            }
+        }
+        if (deleted) {
+            // Se crea el nuevo array sin el equipo a borrar
+            Equipo[] newEquips = new Equipo[equips.length - 1];
+            // Se recorre el nuevo array, si el equipo no es null, se guarda en el nuevo array
+            int size = 0;
+            for (Equipo equip : equips) {
+                if (equip != null) {
+                    Equipo eq = new Equipo(equip);
+                    newEquips[size] = eq;
+                    size++;
+                }
+            }
+
+            // Se ordena el array en caso de fallo de ids
+            newEquips = sortEquips(newEquips);
+
+            // No tocar, código encargado de preparar el String json y llamar al guardado
+            Gson prettyGson = new GsonBuilder().setPrettyPrinting().create();
+            String prettyJson = prettyGson.toJson(newEquips);
+            saveJsonToFile(fileEquip,prettyJson);
+        }
+    }
+
+    // Método que recibe un array de Equipos y los ordena por id
+    public Equipo[] sortEquips(Equipo[] equips){
+        Equipo[] sortEquips = new Equipo[equips.length];
+        int loops = sortEquips.length;
+        // Se recorre el nuevo array, añadiendo en las posiciones los equipos con id ordenada
+        for (int i = 0; i < loops; i++) {
+            // Si el equipo tiene la misma id que la posicion actual
+            if (equips[i].getId() == i){
+                // Se añade el equipo a la posicion
+                Equipo e = new Equipo(equips[i]);
+                sortEquips[i] = e;
+            } else {
+                // Si no tiene la misma id, se buscará al equipo que tenga la misma id que la posicion actual
+                for (int j = 0; j < loops; j++) {
+                    // Si el equipo actual tiene la misma id que la posicion actual
+                    if (equips[j].getId() == i){
+                        Equipo e = new Equipo(equips[j]);
+                        sortEquips[i] = e;
+                        j = loops;
+                    }
+                }
+            }
+        }
+        // Devuelve el nuevo array con los equipos ordenados por id
+        return sortEquips;
+    }
+
+    // ----- MÉTODOS PARA OBJETOS TIPO CONSUMIBLE -----
+
+    // Método que devuelve un consumible recibiendo su id por parámetros
+    public Consumibles getCons(int id) {
+        // Crea un array de Consumibles partiendo del json
+        String jsonStr = getJSON(fileCons);
+        Gson gson = new Gson();
+        // Se recoge el array de consumibles usando el json
+        Consumibles[] consumibles = gson.fromJson(jsonStr,Consumibles[].class);
+
+        // Se recorre el array de consumibles, si el id coincide lo devuelve
+        for (Consumibles c : consumibles) {
+            if (c.getId() == id) {
+                return c;
+            }
+        }
+        return null;
+    }
+
+    // Método que devuelve todos los Consumibles
+    public Consumibles[] getAllCons(){
+        // Crea un array de Consumibles partiendo del json
+        String jsonStr = getJSON(fileCons);
+        Gson gson = new Gson();
+        // Devuelve el array creado a partir del json
+        return gson.fromJson(jsonStr,Consumibles[].class);
+    }
+
+    // Método que añade un conumible nuevo al array de Consumibles
+    public void addCons(Consumibles c) {
+        String jsonStr = getJSON(fileCons);
+        Gson gson = new Gson();
+        // Se recoge el array de consumibles usando el json
+        Consumibles[] consumibles = gson.fromJson(jsonStr,Consumibles[].class);
+
+        // Se crea un nuevo array que guardará el nuevo consumible
+        Consumibles[] newConsumibles = new Consumibles[consumibles.length +1];
+        for (int i = 0; i < consumibles.length; i++) {
+            Consumibles cc = new Consumibles (consumibles[i]);
+            newConsumibles[i] = cc;
+        }
+        // Se crea el nuevo consumible a añadir partiendo del consumible recibido
+        Consumibles newCons = new Consumibles(c);
+
+        // Se recorren los consumibles comprobando que las id concuerdan en orden, la última posicion siempre es null
+        boolean exist = false;
+        for (int i = 0; i < newConsumibles.length-1; i++) {
+            // Si una id no concuerda en orden, es que falta un consumible
+            if (newConsumibles[i].getId() != i) {
+                // Se le añade la id faltante al nuevo consumible
+                newCons.setId(i);
+                i = newConsumibles.length;
+                exist = true;
+            }
+        }
+        // Si las id concuerdan, entonces se le asigna la última id
+        if (!exist) {
+            newCons.setId(newConsumibles.length-1);
+        }
+        // Se añade el consumible con la id asignada al array de consumibles
+        newConsumibles[consumibles.length] = newCons;
+
+        // Se ordena el array en caso de fallo de ids
+        newConsumibles = sortCons(newConsumibles);
+
+        // No tocar, código encargado de preparar el String json y llamar al guardado
+        Gson prettyGson = new GsonBuilder().setPrettyPrinting().create();
+        String prettyJson = prettyGson.toJson(newConsumibles);
+        saveJsonToFile(fileCons,prettyJson);
+    }
+
+    public void updateCons (Consumibles c){
+        String jsonStr = getJSON(fileCons);
+        Gson gson = new Gson();
+        // Se recoge el array de consumibles usando el json
+        Consumibles[] consumibles = gson.fromJson(jsonStr,Consumibles[].class);
+        // Se recorre el array, cuando el consumible coincida con el recibido, se actualiza en el array
+        for (int i = 0; i < consumibles.length; i++) {
+            if (consumibles[i].getId() == c.getId()){
+                Consumibles cc = new Consumibles (c);
+                consumibles[i] = cc;
+                i = consumibles.length;
+            }
+        }
+        // No tocar, código encargado de preparar el String json y llamar al guardado
+        Gson prettyGson = new GsonBuilder().setPrettyPrinting().create();
+        String prettyJson = prettyGson.toJson(consumibles);
+        saveJsonToFile(fileCons,prettyJson);
+    }
+
+    // Método que borra un consumible de la lista de consumibles, recibe un id por parámetro
+    public void deleteCons(int id) {
+        // Crea un array de Consumibles partiendo del json
+        String jsonStr = getJSON(fileCons);
+        Gson gson = new Gson();
+        // Se recoge el array de equipos usando el json
+        Consumibles[] consumibles = gson.fromJson(jsonStr,Consumibles[].class);
+        boolean deleted = false;
+        for (int i = 0; i < consumibles.length; i++) {
+            if (consumibles[i].getId() == id) {
+                deleted = true;
+                consumibles[i] = null;
+                i = consumibles.length;
+            }
+        }
+        if (deleted) {
+            // Se crea el nuevo array sin el consumible a borrar
+            Consumibles[] newCons = new Consumibles[consumibles.length - 1];
+            // Se recorre el nuevo array, si el consumible no es null, se guarda en el nuevo array
+            int size = 0;
+            for (Consumibles consumible : consumibles) {
+                if (consumible != null) {
+                    Consumibles c = new Consumibles(consumible);
+                    newCons[size] = c;
+                    size++;
+                }
+            }
+
+            // Se ordena el array en caso de fallo de ids
+            newCons = sortCons(newCons);
+
+            // No tocar, código encargado de preparar el String json y llamar al guardado
+            Gson prettyGson = new GsonBuilder().setPrettyPrinting().create();
+            String prettyJson = prettyGson.toJson(newCons);
+            saveJsonToFile(fileCons,prettyJson);
+        }
+    }
+
+    // Método que recibe un array de Consumibles y los ordena por id
+    public Consumibles[] sortCons(Consumibles[] consumibles){
+        Consumibles[] sortCons = new Consumibles[consumibles.length];
+        int loops = sortCons.length;
+        // Se recorre el nuevo array, añadiendo en las posiciones los consumibles con id ordenada
+        for (int i = 0; i < loops; i++) {
+            // Si el consumible tiene la misma id que la posicion actual
+            if (consumibles[i].getId() == i){
+                // Se añade el consumible a la posicion
+                Consumibles c = new Consumibles(consumibles[i]);
+                sortCons[i] = c;
+            } else {
+                // Si no tiene la misma id, se buscará al consumible que tenga la misma id que la posicion actual
+                for (int j = 0; j < loops; j++) {
+                    // Si el consumible actual tiene la misma id que la posicion actual
+                    if (consumibles[j].getId() == i){
+                        Consumibles c = new Consumibles(consumibles[j]);
+                        sortCons[i] = c;
+                        j = loops;
+                    }
+                }
+            }
+        }
+        // Devuelve el nuevo array con los consumibles ordenados por id
+        return sortCons;
+    }
+
+    // ----- MÉTODO QUE DEVUELVE TODOS LOS OBJETOS EN UN ARRAY DE OBJETOS USANDO POLIMORFISMO -----
+    // ----- ¡¡¡¡¡¡¡ATENCIÓN!!!!!!!!
+    // ----- ESTE MÉTODO ES SOLO USADO PARA MOSTRAR EN LISTA, AL QUERER VISUALIZAR EL OBJETO SE OBTENDRA
+    // ----- SU ID Y TIPO DE ESTA LISTA Y SE UTILIZARÁ SU MÉTODO CONCRETO POR LA COMPLEJIDAD
+
+    public Objeto[] getAllObjects(){
+        // Primero se obtiene el array de los 3 tipos de objetos
+        Objeto[] objects = getObjects();
+        Equipo[] equips = getEquips();
+        Consumibles[] consumibles = getAllCons();
+        // Se suma el tamaño de los 3 arrays y se crea el array global que guardará todos los objetos
+        int size = objects.length + equips.length + consumibles.length;
+        Objeto[] allObjects = new Objeto[size];
+
+        // Se recorre el array global, guardando en cada posición el objeto poliformado ordenados por su id
+        for (int i = 0; i < allObjects.length; i++) {
+            // Booleana que indica si el objeto ha sido insertado
+            boolean inserted = false;
+            // Se recorren los objetos, si el id coincide con la vuelta actual se inserta y se avisa
+            for (int j = 0; j < objects.length; j++) {
+                if (objects[j].getId() == i) {
+                    Objeto o = new Objeto(objects[j]);
+                    allObjects[i] = o;
+                    inserted = true;
+                    j = objects.length;
+                }
+            }
+            if (!inserted) {
+                // Se recorren los equipos, si el id coincide con la vuelta actual se inserta y se avisa (ocurre polimorfismo)
+                for (int j = 0; j < equips.length; j++) {
+                    if (equips[j].getId() == i) {
+                        Equipo e = new Equipo(equips[j]);
+                        allObjects[i] = e;
+                        inserted = true;
+                        j = equips.length;
+                    }
+                }
+            }
+            if (!inserted) {
+                // Se recorren los consumibles, si el id coincide con la vuelta actual se inserta y se avisa (ocurre polimorfismo)
+                for (int j = 0; j < consumibles.length; j++) {
+                    if (consumibles[j].getId() == i) {
+                        Consumibles c = new Consumibles(consumibles[j]);
+                        allObjects[i] = c;
+                        j = consumibles.length;
+                    }
+                }
+            }
+
+
+        }
+
+        // Una vez todos los objetos han sido añadidos ordenados por su id, se devuelve el array para su muestra en la lista
+        return allObjects;
+    }
+
+
 
 
 
