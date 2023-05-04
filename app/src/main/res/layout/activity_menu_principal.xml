@@ -15,31 +15,34 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.275"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:onClick="onButtonClick"/>
 
     <Button
-        android:id="@+id/b"
+        android:id="@+id/bperfil"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_marginBottom="36dp"
-        android:text="per_list"
-        android:textSize="20px"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.744"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/bn"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginBottom="36dp"
-        android:text="lista de personajes"
+        android:layout_marginBottom="40dp"
+        android:text="perfil"
         android:textSize="20px"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.956"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:onClick="onButtonClick"/>
+
+    <Button
+        android:id="@+id/bmultijugador"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="40dp"
+        android:text="multi"
+        android:textSize="20px"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.765"
+        app:layout_constraintStart_toStartOf="parent"
+        android:onClick="onButtonClick"/>
 
     <Button
         android:id="@+id/blista_personajes"
@@ -52,10 +55,11 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.042"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:onClick="onButtonClick"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatingActionButton"
+        android:id="@+id/bcentral"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
@@ -64,6 +68,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@android:drawable/ic_input_add" />
+        app:srcCompat="@android:drawable/ic_input_add"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

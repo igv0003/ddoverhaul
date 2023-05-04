@@ -13,7 +13,7 @@ public class lista_objetos extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_objetos);
 
-        Button buttonOpen = findViewById(R.id.botonv);
+        Button buttonOpen = findViewById(R.id.bv);
         buttonOpen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -24,7 +24,7 @@ public class lista_objetos extends AppCompatActivity {
     }
 
     public void gomenu() {
-        Intent intent = new Intent(lista_objetos.this, menu_principal.class);
+        Intent intent = new Intent(lista_objetos.this, Menu_principal.class);
         startActivity(intent);
     }
 }
