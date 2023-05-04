@@ -758,8 +758,156 @@ public class JSONHelper {
     }
 
 
+    // ----- MÉTODOS PARA OBJETO HABILIDADES
 
+    // Método que devuelve una habilidad recibiendo su id por parámetros
+    public Habilidades getSkill(int id) {
+        // Crea un array de Habilidades partiendo del json
+        String jsonStr = getJSON(fileSkill);
+        Gson gson = new Gson();
+        // Se recoge el array de habilidades usando el json
+        Habilidades[] skills = gson.fromJson(jsonStr,Habilidades[].class);
 
+        // Se recorre el array de habilidades, si el id coincide lo devuelve
+        for (Habilidades s : skills) {
+            if (s.getId() == id) {
+                return s;
+            }
+        }
+        return null;
+    }
+
+    // Método que devuelve todas las Habilidades
+    public Habilidades[] getAllSkills(){
+        // Crea un array de Habilidades partiendo del json
+        String jsonStr = getJSON(fileSkill);
+        Gson gson = new Gson();
+        // Devuelve el array creado a partir del json
+        return gson.fromJson(jsonStr,Habilidades[].class);
+    }
+
+    // Método que añade una skill nueva al array de Habilidades
+    public void addSkill(Habilidades s) {
+
+        // Se recoge el array de habilidades usando el json
+        Habilidades[] skills = getAllSkills();
+
+        // Se crea un nuevo array que guardará la nueva skill
+        Habilidades[] newSkills = new Habilidades[skills.length +1];
+        for (int i = 0; i < skills.length; i++) {
+            Habilidades ss = new Habilidades (skills[i]);
+            newSkills[i] = ss;
+        }
+        // Se crea el nuevo consumible a añadir partiendo del consumible recibido
+        Habilidades newSkill = new Habilidades(s);
+
+        // Se recorren las habilidades comprobando que las id concuerdan en orden, la última posicion siempre es null
+        boolean exist = false;
+        for (int i = 0; i < newSkills.length-1; i++) {
+            // Si una id no concuerda en orden, es que falta una skill
+            if (newSkills[i].getId() != i) {
+                // Se le añade la id faltante a la nueva skill
+                newSkill.setId(i);
+                i = newSkills.length;
+                exist = true;
+            }
+        }
+        // Si las id concuerdan, entonces se le asigna la última id
+        if (!exist) {
+            newSkill.setId(newSkills.length-1);
+        }
+        // Se añade la habilidad con la id asignada al array de habilidades
+        newSkills[skills.length] = newSkill;
+
+        // Se ordena el array en caso de fallo de ids
+        newSkills = sortSkills(newSkills);
+
+        // No tocar, código encargado de preparar el String json y llamar al guardado
+        Gson prettyGson = new GsonBuilder().setPrettyPrinting().create();
+        String prettyJson = prettyGson.toJson(newSkills);
+        saveJsonToFile(fileSkill,prettyJson);
+    }
+
+    public void updateSkill (Habilidades s){
+
+        // Se recoge el array de habilidades usando el json
+        Habilidades[] skills = getAllSkills();
+        // Se recorre el array, cuando la habilidad coincida con el recibido, se actualiza en el array
+        for (int i = 0; i < skills.length; i++) {
+            if (skills[i].getId() == s.getId()){
+                Habilidades ss = new Habilidades (s);
+                skills[i] = ss;
+                i = skills.length;
+            }
+        }
+        // No tocar, código encargado de preparar el String json y llamar al guardado
+        Gson prettyGson = new GsonBuilder().setPrettyPrinting().create();
+        String prettyJson = prettyGson.toJson(skills);
+        saveJsonToFile(fileSkill,prettyJson);
+    }
+
+    // Método que borra una habilidad de la lista de habilidades, recibe un id por parámetro
+    public void deleteSkill(int id) {
+
+        // Se recoge el array de equipos usando el json
+        Habilidades[] skills = getAllSkills();
+        boolean deleted = false;
+        for (int i = 0; i < skills.length; i++) {
+            if (skills[i].getId() == id) {
+                deleted = true;
+                skills[i] = null;
+                i = skills.length;
+            }
+        }
+        if (deleted) {
+            // Se crea el nuevo array sin la habilidad a borrar
+            Habilidades[] newSkills = new Habilidades[skills.length - 1];
+            // Se recorre el nuevo array, si la habilidad no es null, se guarda en el nuevo array
+            int size = 0;
+            for (Habilidades skill : skills) {
+                if (skill != null) {
+                    Habilidades s = new Habilidades(skill);
+                    newSkills[size] = skill;
+                    size++;
+                }
+            }
+
+            // Se ordena el array en caso de fallo de ids
+            newSkills = sortSkills(newSkills);
+
+            // No tocar, código encargado de preparar el String json y llamar al guardado
+            Gson prettyGson = new GsonBuilder().setPrettyPrinting().create();
+            String prettyJson = prettyGson.toJson(newSkills);
+            saveJsonToFile(fileSkill,prettyJson);
+        }
+    }
+
+    // Método que recibe un array de Habilidades y los ordena por id
+    public Habilidades[] sortSkills(Habilidades[] skills){
+        Habilidades[] sortSkills = new Habilidades[skills.length];
+        int loops = sortSkills.length;
+        // Se recorre el nuevo array, añadiendo en las posiciones las habilidades con id ordenada
+        for (int i = 0; i < loops; i++) {
+            // Si la habilidad tiene la misma id que la posicion actual
+            if (skills[i].getId() == i){
+                // Se añade la habilidad a la posicion
+                Habilidades s = new Habilidades(skills[i]);
+                sortSkills[i] = s;
+            } else {
+                // Si no tiene la misma id, se buscará la habilidad que tenga la misma id que la posicion actual
+                for (int j = 0; j < loops; j++) {
+                    // Si la habilidad actual tiene la misma id que la posicion actual
+                    if (skills[j].getId() == i){
+                        Habilidades s = new Habilidades(skills[j]);
+                        sortSkills[i] = s;
+                        j = loops;
+                    }
+                }
+            }
+        }
+        // Devuelve el nuevo array con las habilidades ordenados por id
+        return sortSkills;
+    }
 
 
 }
