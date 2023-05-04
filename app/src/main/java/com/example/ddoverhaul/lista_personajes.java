@@ -11,9 +11,9 @@ public class lista_personajes  extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pagina1);
+        setContentView(R.layout.activity_lista_personajes);
 
-        Button buttonOpenPagina1 = findViewById(R.id.botonv);
+        Button buttonOpenPagina1 = findViewById(R.id.bv);
         buttonOpenPagina1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -24,7 +24,7 @@ public class lista_personajes  extends AppCompatActivity {
     }
 
     public void gomenu() {
-        Intent intent = new Intent(lista_personajes.this, menu_principal.class);
+        Intent intent = new Intent(lista_personajes.this, Menu_principal.class);
         startActivity(intent);
     }
 

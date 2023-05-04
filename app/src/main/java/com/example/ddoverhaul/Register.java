@@ -2,6 +2,7 @@ package com.example.ddoverhaul;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -52,16 +53,13 @@ public class Register extends AppCompatActivity {
                 }
             });
         }
-        public void enter() {
-            Intent intent = new Intent(com.example.ddoverhaul.Register.this, pagina1.class);
-            startActivity(intent);
-        }
+
+
 
     private void signUp(String email, String name, String password) {
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
-                        // Registro exitoso
                         FirebaseUser user = mAuth.getCurrentUser();
 
                         // Agregar el nombre al perfil del usuario
@@ -75,7 +73,7 @@ public class Register extends AppCompatActivity {
                                         // Guardar usuario en Firestore
                                         saveUserToFirestore(name, email);
                                         // El nombre se ha agregado correctamente
-                                        enter();
+                                        registro_exitoso();
                                     } else {
                                         // Error al agregar el nombre
                                         Toast.makeText(Register.this, "Error al guardar el nombre.", Toast.LENGTH_SHORT).show();
@@ -83,7 +81,8 @@ public class Register extends AppCompatActivity {
                                 });
                     } else {
                         // Si el registro falla, muestra un mensaje al usuario
-                        Toast.makeText(Register.this, "Error al registrarse.", Toast.LENGTH_SHORT).show();
+                        String errorMessage = task.getException().getMessage(); // Obtiene el mensaje de error específico
+                        Toast.makeText(Register.this, "Error al registrarse: " + errorMessage, Toast.LENGTH_SHORT).show();
                     }
                 });
     }
@@ -98,6 +97,20 @@ public class Register extends AppCompatActivity {
                 .set(user)
                 .addOnSuccessListener(aVoid -> Log.d("TAG", "Usuario guardado en Firestore"))
                 .addOnFailureListener(e -> Log.w("TAG", "Error al guardar usuario en Firestore", e));
+    }
+
+    public void registro_exitoso() {
+
+        Toast.makeText(Register.this, "Registro exitoso.", Toast.LENGTH_SHORT).show();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                // Navegar de vuelta a la pantalla de inicio de sesión/registro después de 4 segundos
+                Intent intent = new Intent(Register.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        }, 2000);
     }
 
 
