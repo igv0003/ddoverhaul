@@ -867,7 +867,7 @@ public class JSONHelper {
             for (Habilidades skill : skills) {
                 if (skill != null) {
                     Habilidades s = new Habilidades(skill);
-                    newSkills[size] = skill;
+                    newSkills[size] = s;
                     size++;
                 }
             }
@@ -909,5 +909,155 @@ public class JSONHelper {
         return sortSkills;
     }
 
+    // ----- MÉTODOS PARA OBJETO EVENTO -----
+
+    // Método que devuelve un evento recibiendo su id por parámetros
+    public Evento getEvent(int id) {
+        // Crea un array de Eventos partiendo del json
+        String jsonStr = getJSON(fileEvent);
+        Gson gson = new Gson();
+        // Se recoge el array de eventos usando el json
+        Evento[] events = gson.fromJson(jsonStr,Evento[].class);
+
+        // Se recorre el array de eventos, si el id coincide lo devuelve
+        for (Evento e : events) {
+            if (e.getId() == id) {
+                return e;
+            }
+        }
+        return null;
+    }
+
+    // Método que devuelve todos los Eventos
+    public Evento[] getEvents(){
+        // Crea un array de Eventos partiendo del json
+        String jsonStr = getJSON(fileEvent);
+        Gson gson = new Gson();
+        // Devuelve el array creado a partir del json
+        return gson.fromJson(jsonStr,Evento[].class);
+    }
+
+    // Método que añade un evento nuevo al array de Eventos
+    public void addEvent(Evento e) {
+
+        // Se recoge el array de eventos usando el json
+        Evento[] events = getEvents();
+
+        // Se crea un nuevo array que guardará la nueva skill
+        Evento[] newEvents = new Evento[events.length +1];
+        for (int i = 0; i < events.length; i++) {
+            Evento ee = new Evento (events[i]);
+            newEvents[i] = ee;
+        }
+        // Se crea el nuevo evento a añadir partiendo del evento recibido
+        Evento newEvent = new Evento(e);
+
+        // Se recorren los eventos comprobando que las id concuerdan en orden, la última posicion siempre es null
+        boolean exist = false;
+        for (int i = 0; i < newEvents.length-1; i++) {
+            // Si una id no concuerda en orden, es que falta un evento
+            if (newEvents[i].getId() != i) {
+                // Se le añade la id faltante al nuevo evento
+                newEvent.setId(i);
+                i = newEvents.length;
+                exist = true;
+            }
+        }
+        // Si las id concuerdan, entonces se le asigna la última id
+        if (!exist) {
+            newEvent.setId(newEvents.length-1);
+        }
+        // Se añade el evento con la id asignada al array de eventos
+        newEvents[events.length] = newEvent;
+
+        // Se ordena el array en caso de fallo de ids
+        newEvents = sortEvents(newEvents);
+
+        // No tocar, código encargado de preparar el String json y llamar al guardado
+        Gson prettyGson = new GsonBuilder().setPrettyPrinting().create();
+        String prettyJson = prettyGson.toJson(newEvents);
+        saveJsonToFile(fileEvent,prettyJson);
+    }
+
+    public void updateEvent (Evento e){
+
+        // Se recoge el array de eventos usando el json
+        Evento[] events = getEvents();
+        // Se recorre el array, cuando el evento coincida con el recibido, se actualiza en el array
+        for (int i = 0; i < events.length; i++) {
+            if (events[i].getId() == e.getId()){
+                Evento ee = new Evento (e);
+                events[i] = ee;
+                i = events.length;
+            }
+        }
+        // No tocar, código encargado de preparar el String json y llamar al guardado
+        Gson prettyGson = new GsonBuilder().setPrettyPrinting().create();
+        String prettyJson = prettyGson.toJson(events);
+        saveJsonToFile(fileEvent,prettyJson);
+    }
+
+    // Método que borra un evento de la lista de eventos, recibe un id por parámetro
+    public void deleteEvent(int id) {
+
+        // Se recoge el array de eventos usando el json
+        Evento[] events = getEvents();
+        boolean deleted = false;
+        for (int i = 0; i < events.length; i++) {
+            if (events[i].getId() == id) {
+                deleted = true;
+                events[i] = null;
+                i = events.length;
+            }
+        }
+        if (deleted) {
+            // Se crea el nuevo array sin el evento a borrar
+            Evento[] newEvents = new Evento[events.length - 1];
+            // Se recorre el nuevo array, si el evento no es null, se guarda en el nuevo array
+            int size = 0;
+            for (Evento event : events) {
+                if (event != null) {
+                    Evento e = new Evento(event);
+                    newEvents[size] = e;
+                    size++;
+                }
+            }
+
+            // Se ordena el array en caso de fallo de ids
+            newEvents = sortEvents(newEvents);
+
+            // No tocar, código encargado de preparar el String json y llamar al guardado
+            Gson prettyGson = new GsonBuilder().setPrettyPrinting().create();
+            String prettyJson = prettyGson.toJson(newEvents);
+            saveJsonToFile(fileEvent,prettyJson);
+        }
+    }
+
+    // Método que recibe un array de Eventos y los ordena por id
+    public Evento[] sortEvents(Evento[] events){
+        Evento[] sortEvents = new Evento[events.length];
+        int loops = sortEvents.length;
+        // Se recorre el nuevo array, añadiendo en las posiciones los eventos con id ordenada
+        for (int i = 0; i < loops; i++) {
+            // Si el evento tiene la misma id que la posicion actual
+            if (events[i].getId() == i){
+                // Se añade el evento a la posicion
+                Evento e = new Evento(events[i]);
+                sortEvents[i] = e;
+            } else {
+                // Si no tiene la misma id, se buscará el evento que tenga la misma id que la posicion actual
+                for (int j = 0; j < loops; j++) {
+                    // Si el evento actual tiene la misma id que la posicion actual
+                    if (events[j].getId() == i){
+                        Evento e = new Evento(events[j]);
+                        sortEvents[i] = e;
+                        j = loops;
+                    }
+                }
+            }
+        }
+        // Devuelve el nuevo array con los eventos ordenados por id
+        return sortEvents;
+    }
 
 }
