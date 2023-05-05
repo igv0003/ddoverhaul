@@ -1,15 +1,13 @@
-plugins {
-    id 'com.android.application'
-}
+
+apply plugin: 'com.android.application'
 
 android {
-    namespace 'com.example.ddoverhaul'
-    compileSdk 33
+    compileSdkVersion 33
 
     defaultConfig {
         applicationId "com.example.ddoverhaul"
-        minSdk 23
-        targetSdk 33
+        minSdkVersion 23
+        targetSdkVersion 33
         versionCode 1
         versionName "1.0"
 
@@ -37,4 +35,16 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+
+    implementation platform('com.google.firebase:firebase-bom:29.2.0')
+
+
+    // Dependencias de Firebase Authentication y Firestore
+    implementation 'com.google.firebase:firebase-auth'
+    implementation 'com.google.firebase:firebase-analytics'
+    implementation 'com.google.firebase:firebase-firestore'
+    implementation 'com.google.firebase:firebase-database'
 }
+
+// Aplica el plugin de Google Services
+apply plugin: 'com.google.gms.google-services'

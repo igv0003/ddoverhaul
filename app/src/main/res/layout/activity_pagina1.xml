@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/textViewpf"
+        android:layout_width="254dp"
+        android:layout_height="161dp"
+        android:text="Pelicula muy buena que introduce al mundo de la magia y es muy interesante"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.636" />
+
+    <Button
+        android:id="@+id/botonv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="volver a lista"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewpf"
+        android:onClick="volveralistapf"/>
+
+    <ImageView
+        android:id="@+id/imageViewpf"
+        android:layout_width="199dp"
+        android:layout_height="234dp"
+        app:layout_constraintBottom_toTopOf="@+id/textViewpf"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.496"
+        app:srcCompat="@drawable/piedrafilosofal"
+        />
+    <TextView
+        android:id="@+id/textViewtitulo"
+        android:layout_width="358dp"
+        android:layout_height="25dp"
+        android:text="Harry Poter y la piedra filosofal"
+        app:layout_constraintBottom_toTopOf="@+id/imageViewpf"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:gravity="center"
+        android:textStyle="bold"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

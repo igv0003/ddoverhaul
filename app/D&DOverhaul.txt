@@ -1,0 +1,141 @@
+﻿TÍTULO DEL ENCABEZADO
+Subtítulo del encabezado
+	
+
+	                        
+                        
+  
+
+
+
+
+
+
+
+
+
+
+
+D&D Overhaul
+Iván González Viñolo
+Daniel Nuñez Luque
+Guillermo Rubio Martín
+Jose Manuel Beltrán
+
+
+
+
+
+
+Curso Superior Desarrollo de Aplicaciones Multiplataforma
+________________
+
+
+Índice
+
+
+D&D Overhaul        1
+1. CONTEXTUALIZACIÓN EMPRESARIAL        4
+1.1. DENOMINACIÓN        4
+1.2. JUSTIFICACIÓN DE LA IDEA DEL PROYECTO        4
+1.3. ESTUDIO DE LA COMPETENCIA        5
+1.4. OPORTUNIDADES DE NEGOCIO        5
+1.5. OBLIGACIONES FISCALES        7
+1.6. FINANCIACIÓN, AYUDAS Y SUBVENCIONES        7
+2. DISEÑO DEL PROYECTO        7
+2.1. INFRAESTRUCTURA E INSTALACIONES NECESARIOS        7
+2.2. RECURSOS MATERIALES Y PERSONALES        7
+2.3. TECNOLOGÍAS Y LENGUAJES A EMPLEAR        8
+3. DESARROLLO DEL PRODUCTO        9
+4. PROCEDIMIENTOS Y CONTROLES DE CALIDAD        9
+5. DOCUMENTACIÓN        10
+6. ANEXOS        10
+7. REFERENCIAS BIBLIOGRÁFICAS        10
+
+
+
+
+________________
+
+
+________________
+
+
+RESÚMEN EJECUTIVO
+En resúmen el proyecto es muy viable. Las funcionalidades que trae ya se encuentran en el mercado y funcionan, pero se encuentran por separado.
+Nuestra aplicación comprende aquellas funcionalidades que nuestro público objetivo utiliza de manera concurrente, pero pierden la concentración en la actividad al tener que depender de varias aplicaciones a la vez para llevar a cabo esta.
+Al unir todas esas funcionalidades en una sola aplicación, estaremos atrayendo a clientes potenciales conociendo que ya utilizan éstas por separado.
+CONTENIDO
+1. CONTEXTUALIZACIÓN EMPRESARIAL
+1.1. DENOMINACIÓN
+D&D Overhaul es una herramienta para aquellos jugadores de rol que reúne todo lo necesario para llevar a cabo sus sesiones de entretenimiento.
+Nuestros clientes suelen utilizar material tangible (papel, bolígrafos, figuras, etc.) para poder jugar, y aunque haya clientes que utilicen aplicaciones, por ejemplo, para guardar personajes, siguen necesitando de dicho material debido a que la aplicación no comprende todo lo necesario.
+Nuestra herramienta se encarga de comprender todo lo necesario dentro de una sola aplicación donde el cliente podrá acceder a la información que previamente ha preparado a una distancia tan corta como la de presionar un par de veces la pantalla.
+1.2. JUSTIFICACIÓN DE LA IDEA DEL PROYECTO
+Este proyecto nace de la necesidad, recibiendo feedback de clientes potenciales descubrimos un espacio de mercado que no estaba siendo bien aprovechado.
+Realizamos varios estudios de mercado de aplicaciones competidoras y vimos una oportunidad de negocio para poder expandirnos en él.
+1.3. ESTUDIO DE LA COMPETENCIA
+ToolboxDev, desarrolladora de “RPG Simple Dice”. Está aplicación es una herramienta que te permite la simulación de tiradas de dados especiales usados en partidas de rol. Permite crear tus propios dados personalizados además de mostrar un historial de tiradas de dados recientes.
+Walter Kammerer, desarrollador de “Fifth Edition Character Sheet”. Esta aplicación permite la creación y guardado de varios personajes junto a varios datos que se consideran importantes para el desarrollo de la actividad. En esencia, realiza la misma funcionalidad principal que nuestro proyecto, pero se detiene ahí.
+Ambas competidoras demuestran ofrecer las mismas funcionalidades que estamos desarrollando pero como ya fue explicado anteriormente, cada funcionalidad viene de la mano de una sola aplicación. Nuestra aplicación se consolidará fuertemente en el mercado gracias a que engloba dichas funcionalidades junto a otras para comprender todos los aspectos necesarios en una partida de rol.
+1.4. OPORTUNIDADES DE NEGOCIO
+Para entender la oportunidad de negocio de la aplicación, se realizaron varios estudios de mercado basándose en las descargas de las dos aplicaciones de ejemplo explicadas en el apartado anterior. Dicho estudio está basado en los primeros seis meses de vida de cada aplicación.  
+Una vez obtenidos estos resultados, se realizó una media de nuestra aplicación lanzándose al mercado, teniendo en cuenta que ofrecemos las mismas características que las dos aplicaciones en una sola, además de otras características principales, asumimos que la media sería lo más fielmente posible a la realidad.  
+Tuvimos en cuenta las descargas mensuales de la aplicación siendo ésta gratuita en modo prueba y pusimos tres meses de espera en que los usuarios la comprase ofreciendo la eliminación de publicidad y desbloqueo de la aplicación total.
+Se estimó que un 10% de los usuarios mensuales compraron la aplicación en los primeros seis meses a 1.99€. El servicio de Google Play se queda un 15% de los beneficios lo que deja el total de las ventas de la aplicación en 13.700€.  
+Para el tema de la publicidad en la aplicación gratuita, se decidió el RPM de AdMob a 2€ cada 1000 visualizaciones. Estimamos 1 visualización diaria por descarga . Calcular esta cifra resta a las descargas mensuales el porcentaje que pagó por la aplicación, dejando un total de 12.700€ de beneficio por publicidad en los primeros seis meses.
+
+
+1.5. OBLIGACIONES FISCALES
+Se debe especificar si el desarrollo del proyecto conlleva la necesidad de
+cumplimiento de obligaciones fiscales, laborales y/o de prevención de riesgos y sus
+condiciones de aplicación.
+
+
+1.6. FINANCIACIÓN, AYUDAS Y SUBVENCIONES
+Habría que identificar las posibles necesidades de financiación para llevar a cabo el
+desarrollo del proyecto, así como la búsqueda de ayudas o subvenciones para la
+incorporación de las nuevas tecnologías de producción o de servicio propuestas.
+
+
+2. DISEÑO DEL PROYECTO
+2.1. INFRAESTRUCTURA E INSTALACIONES NECESARIOS
+El proyecto será desarrollado en una oficina de 14 m2 ubicada en Promálaga, Parque Tecnológico de Andalucía. La oficina viene amueblada con escritorios, sillas, etc que satisfacen las necesidades básicas para el desarrollo de la aplicación. Los servicios que ofrece la oficina cuentan con una sala de reuniones de manera gratuita así como internet básico.
+2.2. RECURSOS MATERIALES Y PERSONALES
+Equipamiento físico:
+* Cuatro ordenadores, uno por trabajador.
+* Cuatro teclados y ratones, uno por trabajador. El trabajador puede traer los periféricos que necesite.
+* Servidor local con un SO sin GUI, utilizando la tecnología RAID 5.
+* Televisor Smart TV para realizar las pruebas de la aplicación y pequeñas reuniones.
+* Router que proporciona conexión a los equipos informáticos conectados. Proporcionado y configurado completamente a nuestras necesidades.
+* Switch para proporcionar conectividad a los distintos dispositivos que lo necesiten a lo largo del desarrollo.
+* Estantería con soporte.
+* Pizarra blanca magnética con rotuladores.
+        Equipamiento lógico:
+* Android Studio: Programa gratuito principal para el desarrollo de la aplicación.
+* Cuenta de desarrollador de Google Play: Servirá para publicar la aplicación, cuesta 25$
+* Cuatro cuentas de trabajadores de google play, a 10,40$ cada una.
+* phpMyAdmin: Gestor de base de datos gratuito para guardar nuestra información y documentos.
+* Licencias de Windows: SO Windows 11 Pro, cuesta 9,90€ por ordenador.
+        Recursos Personales:
+* Para el desarrollo del proyecto se cuenta con cuatro personas como sus empleados principales. Cada uno tendrá un puesto acorde a la realización del desarrollo del proyecto, pudiendo aumentar los puestos conforme a las necesidades de la aplicación.
+2.3. TECNOLOGÍAS Y LENGUAJES A EMPLEAR
+Para el desarrollo de la aplicación utilizaremos unos equipamientos lógicos con el que desarrollaremos el código de la aplicación, conexiones, base de datos y equipos físicos.
+A la hora de desarrollar la aplicación, como principalmente se utiliza en dispositivos móviles, utilizaremos el entorno Android Studio, entorno de desarrollo de aplicaciones móviles que utiliza el lenguaje de Java para el algoritmo y XML o lenguaje de marca extensivo para el diseño, y para la base de datos usaremos la conexión directa entre Android Studio y Firebase de la mano de Google. Nos guiamos según un entorno relacional de Base de Datos MySQL pero adaptado a lo dicho anteriormente.
+Para la comunicación entre el equipo y almacenamiento de actualizaciones del código, además de repositorio donde poder tener al alcance de todos los integrantes utilizaremos GitHub.
+Los equipos que utilizaremos serán varios dispositivos móviles, de tipo android, donde poder correr la aplicación y conectarse entre ellos u ordenadores con emuladores móviles donde también se pueda correr la aplicación y para la conexión entre ellos una red local como por ejemplo un router WiFi.
+Como elemento adicional para un desarrollo previo visual, utilizaremos una página web, Figma.
+3. DESARROLLO DEL PRODUCTO
+4. PROCEDIMIENTOS Y CONTROLES DE CALIDAD
+Para asegurarnos de que nuestro trabajo contemple los requisitos necesarios de calidad tendremos en cuenta cosas como, la jugabilidad y facilidad de nuestro proyecto tanto en el desarrollo de este como en su versión final. 
+Durante la producción de la aplicación haremos nuestros propios test con partidas reales entre el equipo para comprobar la funcionalidad de cada función así como también intentar generar fallos haciendo un uso indebido de la aplicación para cubrir cualquier tipo de usuario al usar la aplicación.
+Una vez que tengamos una buena base lanzaremos un prueba en estado Alpha para las personas más cercanas al equipo que nos puedan aportar un “feedback” constructivo para la mejora de la aplicación. Luego lanzaremos una prueba Beta de cara al público la cual distribuiremos de forma esporádica con un código para la descarga, en plataformas como Twitter, a la comunidad que se generaría dada la publicidad que haríamos al respecto, una comunidad sana la cual nos reportará tanto problemas como nuevas implementaciones a tener en cuenta para que podamos hacer de la aplicación la más óptima y entretenida para todos los públicos. Es así que habrá actualizaciones constantes según los fallos o implementaciones nuevas que se quieran implementar dentro del proyecto en la versión abierta a todo el público.
+
+
+5. DOCUMENTACIÓN
+
+
+6. ANEXOS
+
+
+7. REFERENCIAS BIBLIOGRÁFICAS
