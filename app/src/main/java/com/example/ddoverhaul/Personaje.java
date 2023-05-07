@@ -19,7 +19,7 @@ public class Personaje {
     private int constitucion;
     private int inteligencia;
     private int sabiduria;
-    private int carsima;
+    private int carisma;
     private int velocidad;
     private boolean vivo;
     private String imagen;/*imagen del personaje*/
@@ -111,11 +111,11 @@ public class Personaje {
     public void setSabiduria(int sabiduria) {
         this.sabiduria = sabiduria;
     }
-    public int getCarsima() {
-        return carsima;
+    public int getCarisma() {
+        return carisma;
     }
-    public void setCarsima(int carsima) {
-        this.carsima = carsima;
+    public void setCarisma(int carisma) {
+        this.carisma = carisma;
     }
     public int getVelocidad() {
         return velocidad;
@@ -154,7 +154,7 @@ public class Personaje {
 
     }
 
-    public Personaje(int id, String nombre, int vida, int mana, String raza, String clase, int fuerza, int destreza, int constitucion, int inteligencia, int sabiduria, int carsima, int velocidad, boolean vivo, String imagen) {
+    public Personaje(int id, String nombre, int vida, int mana, String raza, String clase, int fuerza, int destreza, int constitucion, int inteligencia, int sabiduria, int carisma, int velocidad, boolean vivo, String imagen) {
         this.id = id;
         this.nombre = nombre;
         this.vida = vida;
@@ -168,13 +168,13 @@ public class Personaje {
         this.constitucion = constitucion;
         this.inteligencia = inteligencia;
         this.sabiduria = sabiduria;
-        this.carsima = carsima;
+        this.carisma = carisma;
         this.velocidad = velocidad;
         this.vivo = vivo;
         this.imagen = imagen;
     }
     /*Constructor sin imagen*/
-    public Personaje(int id, String nombre, int vida, int mana, String raza, String clase, int fuerza, int destreza, int constitucion, int inteligencia, int sabiduria, int carsima, int velocidad, boolean vivo) {
+    public Personaje(int id, String nombre, int vida, int mana, String raza, String clase, int fuerza, int destreza, int constitucion, int inteligencia, int sabiduria, int carisma, int velocidad, boolean vivo) {
         this.id = id;
         this.nombre = nombre;
         this.vida = vida;
@@ -188,7 +188,7 @@ public class Personaje {
         this.constitucion = constitucion;
         this.inteligencia = inteligencia;
         this.sabiduria = sabiduria;
-        this.carsima = carsima;
+        this.carisma = carisma;
         this.velocidad = velocidad;
         this.vivo = vivo;
     }
@@ -207,7 +207,7 @@ public class Personaje {
         this.constitucion = P.constitucion;
         this.inteligencia = P.inteligencia;
         this.sabiduria = P.sabiduria;
-        this.carsima = P.carsima;
+        this.carisma = P.carisma;
         this.velocidad = P.velocidad;
         this.vivo = P.vivo;
     }
