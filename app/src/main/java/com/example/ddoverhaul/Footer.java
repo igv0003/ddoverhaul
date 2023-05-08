@@ -1,26 +1,41 @@
 package com.example.ddoverhaul;
+import android.content.Context;
+import android.util.AttributeSet;
+import android.view.LayoutInflater;
+import android.widget.Button;
+import android.widget.LinearLayout;
 
+/*
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-public class Footer extends AppCompatActivity {
+public class Footer extends LinearLayout {
+
+
+    public Footer(Context context) {
+        super(context);
+
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.footer_layout);
 
-        Footer h = new Footer();
         Button button = findViewById(R.id.blista_personajes);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                h.onFooterButtonClick(view);
+                onFooterButtonClick(view);
             }
         });
 
@@ -83,5 +98,35 @@ public class Footer extends AppCompatActivity {
             }
         });
         popupMenu.show();
+    }*/
+
+public class Footer extends LinearLayout {
+
+    private Button blistapersonajes;
+    private Button blistaobjetos;
+    private Button bperfil;
+    private Button bmulti;
+
+    public Footer(Context context) {
+        super(context);
+        init(context);
     }
+
+    public Footer(Context context, AttributeSet attrs) {
+        super(context, attrs);
+        init(context);
+    }
+
+    private void init(Context context) {
+        LayoutInflater.from(context).inflate(R.layout.footer_layout, this, true);
+        blistapersonajes = findViewById(R.id.blista_personajes);
+        blistaobjetos = findViewById(R.id.blista_objetos);
+        bmulti = findViewById(R.id.bmultijugador);
+        bperfil = findViewById(R.id.bperfil);
+
+
+    }
+
+
 }
+

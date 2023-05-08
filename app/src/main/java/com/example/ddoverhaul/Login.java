@@ -45,7 +45,7 @@ public class Login extends AppCompatActivity {
     }
 
     public void enter() {
-        Intent intent = new Intent(this, Menu_principal.class);
+        Intent intent = new Intent(Login.this, Menu_principal.class);
         startActivity(intent);
     }
 
@@ -91,10 +91,16 @@ public class Login extends AppCompatActivity {
                                                 enter();
                                             } else {
                                                 // Ocurrió un error durante el inicio de sesión
-                                                Exception exception = authTask.getException();
-                                                String errorMessage = exception.getMessage();
-                                                Log.e("LoginActivity", "Error al iniciar sesión: " + errorMessage);
-                                                Toast.makeText(Login.this, "Error al iniciar sesión: " + errorMessage, Toast.LENGTH_SHORT).show();
+                                                try {
+                                                    Exception exception = authTask.getException();
+                                                    String errorMessage = exception.getMessage();
+                                                    Log.e("LoginActivity", "Error al iniciar sesión: " + errorMessage);
+                                                    Toast.makeText(Login.this, "Error al iniciar sesión: " + errorMessage, Toast.LENGTH_SHORT).show();
+                                                }
+                                                catch (Exception e){
+                                                    Toast.makeText(Login.this, "Error al iniciar sesión: " + e, Toast.LENGTH_SHORT).show();
+                                                }
+
                                             }
                                         });
                             } else {
