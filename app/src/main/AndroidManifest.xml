@@ -33,6 +33,7 @@
         <activity android:name=".Multijugador"/>
         <activity android:name=".objetoList.lista_objetos"/>
         <activity android:name=".personajeList.personajelist"/>
+        <activity android:name=".BaseActivity"/>
     </application>
 
 </manifest>

@@ -15,6 +15,8 @@ import android.widget.PopupMenu;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.ddoverhaul.objetoList.lista_objetos;
+import com.example.ddoverhaul.personajeList.personajelist;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class BaseActivity extends AppCompatActivity {
@@ -46,7 +48,7 @@ public class BaseActivity extends AppCompatActivity {
         blistapersonajes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(BaseActivity.this, lista_personajes.class));
+                startActivity(new Intent(BaseActivity.this, personajelist.class));
             }
         });
 
