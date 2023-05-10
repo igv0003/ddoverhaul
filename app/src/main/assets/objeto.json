@@ -1,0 +1,9 @@
+[
+  {"id": 0, "nombre": "obj1", "tipo": "Otro","icono": "22"},
+  {"id": 1, "nombre": "obj2", "tipo": "Otro","icono": "23"},
+  {"id": 2, "nombre": "obj3", "tipo": "Otro","icono": "24"},
+  {"id": 3, "nombre": "obj4", "tipo": "Otro","icono": "25"},
+  {"id": 4, "nombre": "obj5", "tipo": "Otro","icono": "26"},
+  {"id": 5, "nombre": "obj6", "tipo": "Otro","icono": "27"},
+  {"id": 6, "nombre": "obj7", "tipo": "Otro","icono": "28"}
+]
