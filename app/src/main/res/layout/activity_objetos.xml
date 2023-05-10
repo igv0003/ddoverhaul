@@ -32,7 +32,7 @@
             android:id="@+id/VolverObjeto"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="<-" />
+            android:text="Atrás" />
 
         <TextView
             android:id="@+id/MenuObjeto"
@@ -81,7 +81,7 @@
         android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/HeaderObjeto"
-        app:srcCompat="@drawable/UnknowObj" />
+        app:srcCompat="@drawable/unknownobj" />
 
     <TextView
         android:id="@+id/TV_descripcion_obj"
