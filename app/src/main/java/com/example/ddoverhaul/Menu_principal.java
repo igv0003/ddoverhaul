@@ -7,8 +7,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.PopupMenu;
-import android.app.*;
 
+import com.example.ddoverhaul.objetoList.lista_objetos;
+import com.example.ddoverhaul.personajeList.personajelist;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class Menu_principal extends AppCompatActivity{
@@ -43,7 +44,7 @@ public class Menu_principal extends AppCompatActivity{
     }
 
     public void golista_pers(){
-        Intent intent = new Intent(this, lista_personajes.class);
+        Intent intent = new Intent(this, personajelist.class);
         startActivity(intent);
     }
 

@@ -13,6 +13,7 @@ import com.example.ddoverhaul.R;
 public class PersonajeAdapter extends RecyclerView.Adapter<PersonajeAdapter.PersonajeViewHolder> {
     // Guarda la lista de Personajes
     private Personaje[] characters;
+    private OnClickListener onClickListener;
 
     public PersonajeAdapter(Personaje[] chars) {
         this.characters = chars;
@@ -33,12 +34,32 @@ public class PersonajeAdapter extends RecyclerView.Adapter<PersonajeAdapter.Pers
         holder.levelTextView.setText("Nivel: "+String.valueOf(personaje.getNivel()));
         holder.raceTextView.setText(personaje.getRaza());
         holder.classTextView.setText(personaje.getClase());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (onClickListener != null) {
+                    onClickListener.onClick(position, personaje.getId()+"");
+                }
+            }
+        });
+
+
     }
 
     @Override
     public int getItemCount() {
         return this.characters.length;
     }
+
+    public void setOnClickListener (OnClickListener onClickListener) {
+        this.onClickListener = onClickListener;
+    }
+
+    public interface OnClickListener {
+        void onClick (int position, String id);
+    }
+
 
     public static class PersonajeViewHolder extends RecyclerView.ViewHolder {
         public TextView nameTextView;

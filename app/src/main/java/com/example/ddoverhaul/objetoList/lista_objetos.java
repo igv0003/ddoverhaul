@@ -1,4 +1,4 @@
-package com.example.ddoverhaul.personajeList;
+package com.example.ddoverhaul.objetoList;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -10,21 +10,22 @@ import android.os.Bundle;
 
 import com.example.ddoverhaul.JSONHelper;
 import com.example.ddoverhaul.Login;
-import com.example.ddoverhaul.Personaje;
+import com.example.ddoverhaul.Objeto;
 import com.example.ddoverhaul.R;
+import com.example.ddoverhaul.personajeList.SpacingItemDecoration;
 
-public class personajelist extends AppCompatActivity {
+public class lista_objetos extends AppCompatActivity {
     // Variables necesarias para mostrar la lista
     private RecyclerView recyclerView;
-    private PersonajeAdapter adapter;
+    private ObjetoAdapter adapter;
     private JSONHelper helper;
-    private Personaje[] characters;
+    private Objeto[] objects;
 
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_personajelist);
+        setContentView(R.layout.activity_lista_objetos);
 
         helper = new JSONHelper(getBaseContext());
         // Se prepara el recyclerView para mostrar la lista
@@ -33,25 +34,25 @@ public class personajelist extends AppCompatActivity {
         recyclerView.addItemDecoration(new SpacingItemDecoration(35));
 
         // Se obtiene el array a mostrar en el recyclerView
-        characters = helper.getChars();
-        // Se crea el PersonajeAdapter con el array obtenido
-        adapter = new PersonajeAdapter(characters);
+        objects = helper.getObjects();
+        // Se crea el ObjetoAdapter con el array obtenido
+        adapter = new ObjetoAdapter(objects);
         // Se vincula el recyclerView con el adaptador
         recyclerView.setAdapter(adapter);
 
         // Se añade el evento OnClick, para poder ver un item en concreto. Se le pasa la id para el siguiente Activity
-        adapter.setOnClickListener(new PersonajeAdapter.OnClickListener() {
+        adapter.setOnClickListener(new ObjetoAdapter.OnClickListener() {
             @Override
             public void onClick(int position, String id) {
-                Intent intent = new Intent(personajelist.this, Login.class);
-                intent.putExtra("personaje", id);
+                Intent intent = new Intent(lista_objetos.this, Login.class);
+                intent.putExtra("objeto", id);
                 startActivity(intent);
             }
         });
 
 
+
+
     }
-
-
 
 }
