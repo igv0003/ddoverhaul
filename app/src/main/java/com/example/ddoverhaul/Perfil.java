@@ -11,6 +11,7 @@ import android.widget.PopupMenu;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.ddoverhaul.objetoList.lista_objetos;
+import com.example.ddoverhaul.personajeList.personajelist;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class Perfil  extends AppCompatActivity {
@@ -43,7 +44,7 @@ public class Perfil  extends AppCompatActivity {
     }
 
     public void golista_pers(){
-        Intent intent = new Intent(this, lista_personajes.class);
+        Intent intent = new Intent(this, personajelist.class);
         startActivity(intent);
     }
 

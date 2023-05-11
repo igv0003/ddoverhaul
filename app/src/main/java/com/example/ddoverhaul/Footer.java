@@ -56,7 +56,7 @@ public class Footer extends LinearLayout {
     public void onFooterButtonClick(View view) {
         switch (view.getId()) {
             case R.id.blista_personajes:
-                Intent intent = new Intent(this, lista_personajes.class);
+                Intent intent = new Intent(this, personajelist.class);
                 startActivity(intent);
                 break;
             case R.id.blista_objetos:
