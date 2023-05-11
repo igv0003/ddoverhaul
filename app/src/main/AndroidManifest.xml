@@ -13,6 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Ddoverhaul"
         tools:targetApi="31">
+
         <activity
             android:name=".MainActivity"
             android:exported="true">
@@ -29,10 +30,11 @@
         <activity android:name=".Menu_principal" />
         <activity android:name=".Login" />
         <activity android:name=".Register" />
-        <activity android:name=".Perfil"/>
-        <activity android:name=".Multijugador"/>
-        <activity android:name=".objetoList.lista_objetos"/>
-        <activity android:name=".personajeList.personajelist"/>
+        <activity android:name=".Perfil" />
+        <activity android:name=".Multijugador" />
+        <activity android:name=".objetoList.lista_objetos" />
+        <activity android:name=".personajeList.personajelist" />
+        <activity android:name=".habilidadList.habilidadlist"/>
     </application>
 
 </manifest>

@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.PopupMenu;
 
+import com.example.ddoverhaul.habilidadList.habilidadlist;
 import com.example.ddoverhaul.objetoList.lista_objetos;
 import com.example.ddoverhaul.personajeList.personajelist;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -54,7 +55,7 @@ public class Menu_principal extends AppCompatActivity{
     }
 
     public void gomulti(){
-        Intent intent3 = new Intent(this, Multijugador.class);
+        Intent intent3 = new Intent(this, habilidadlist.class);
         startActivity(intent3);
     }
 
