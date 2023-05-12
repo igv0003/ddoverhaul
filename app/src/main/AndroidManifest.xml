@@ -13,7 +13,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Ddoverhaul"
         tools:targetApi="31">
-
+        <activity
+            android:name=".habilidadList.viewSkill"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
         <activity
             android:name=".MainActivity"
             android:exported="true">
@@ -34,7 +40,7 @@
         <activity android:name=".Multijugador" />
         <activity android:name=".objetoList.lista_objetos" />
         <activity android:name=".personajeList.personajelist" />
-        <activity android:name=".habilidadList.habilidadlist"/>
+        <activity android:name=".habilidadList.habilidadlist" />
     </application>
 
 </manifest>

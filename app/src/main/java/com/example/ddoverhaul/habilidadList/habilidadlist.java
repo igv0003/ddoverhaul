@@ -44,8 +44,9 @@ public class habilidadlist extends AppCompatActivity {
         adapter.setOnClickListener(new HabilidadAdapter.OnClickListener() {
             @Override
             public void onClick(int position, String id) {
-                Intent intent = new Intent(habilidadlist.this, Login.class);
+                Intent intent = new Intent(habilidadlist.this, viewSkill.class);
                 intent.putExtra("habilidad",id);
+                startActivity(intent);
             }
         });
 
