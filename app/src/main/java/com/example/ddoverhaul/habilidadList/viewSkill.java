@@ -2,10 +2,14 @@ package com.example.ddoverhaul.habilidadList;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.ddoverhaul.Habilidades;
 import com.example.ddoverhaul.JSONHelper;
@@ -56,7 +60,7 @@ public class viewSkill extends AppCompatActivity {
         dmgView.setText(skill.getDanio()+"");
         commentView.setText(skill.getDescripcion());
 
-        // Si la habilidad no provoca problema de estado
+        // Si la habilidad no provoca problema de estado desaparece su layout
         if (!skill.getProblema_estado().equals("")) {
             statusView.setText(skill.getProblema_estado());
             percView.setText(skill.getPorcentaje() + "");
@@ -65,5 +69,39 @@ public class viewSkill extends AppCompatActivity {
         }
 
 
+        findViewById(R.id.delete_skill).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                deleteSkill(skill.getId());
+            }
+        });
+
+
     }
+
+    private void deleteSkill(int id) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(viewSkill.this);
+        builder.setTitle("Eliminar habilidad");
+        builder.setMessage("¿Está seguro de que desea eliminar la habilidad?")
+                .setPositiveButton("Sí", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        helper.deleteSkill(skill.getId());
+                        Toast.makeText(getApplicationContext(), "Se eliminó la habilidad",Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(viewSkill.this, habilidadlist.class);
+                        dialog.dismiss();
+                        startActivity(intent);
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(getApplicationContext(), "Se canceló el borrado",Toast.LENGTH_SHORT).show();
+                        dialog.dismiss();
+                    }
+                }).show();
+    }
+
+
+
 }

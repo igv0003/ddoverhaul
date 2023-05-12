@@ -864,9 +864,9 @@ public class JSONHelper {
             Habilidades[] newSkills = new Habilidades[skills.length - 1];
             // Se recorre el nuevo array, si la habilidad no es null, se guarda en el nuevo array
             int size = 0;
-            for (Habilidades skill : skills) {
-                if (skill != null) {
-                    Habilidades s = new Habilidades(skill);
+            for (int i = 0; i < skills.length; i++) {
+                if (skills[i] != null) {
+                    Habilidades s = new Habilidades(skills[i]);
                     newSkills[size] = s;
                     size++;
                 }
@@ -886,25 +886,33 @@ public class JSONHelper {
     public Habilidades[] sortSkills(Habilidades[] skills){
         Habilidades[] sortSkills = new Habilidades[skills.length];
         int loops = sortSkills.length;
-        // Se recorre el nuevo array, añadiendo en las posiciones las habilidades con id ordenada
-        for (int i = 0; i < loops; i++) {
-            // Si la habilidad tiene la misma id que la posicion actual
-            if (skills[i].getId() == i){
-                // Se añade la habilidad a la posicion
-                Habilidades s = new Habilidades(skills[i]);
-                sortSkills[i] = s;
-            } else {
-                // Si no tiene la misma id, se buscará la habilidad que tenga la misma id que la posicion actual
-                for (int j = 0; j < loops; j++) {
-                    // Si la habilidad actual tiene la misma id que la posicion actual
-                    if (skills[j].getId() == i){
-                        Habilidades s = new Habilidades(skills[j]);
-                        sortSkills[i] = s;
-                        j = loops;
-                    }
-                }
+        // Se guarda una habilidad para empezar a ordenar
+        Habilidades skillToSave = new Habilidades();
+        for (int i = 0; i < skills.length; i++) {
+            if (skills[i] != null) {
+                skillToSave = new Habilidades(skills[i]);
+                i = skills.length;
             }
         }
+        int skillSavedPos = 0;
+        // Se recorre el nuevo array añadiendo las skills ordenadas
+        for (int i = 0; i < sortSkills.length; i++) {
+            // En cada vuelta se recorre el array recibido buscando el id más bajo
+            for (int j = 0; j < skills.length; j++) {
+                if (skills[j] != null && skills[j].getId() < skillToSave.getId()) {
+                    skillToSave = new Habilidades(skills[j]);
+                    skillSavedPos = j;
+                }
+            }
+            // Una vez conseguida la id más baja, se guarda en la posicion actual
+            sortSkills[i] = new Habilidades(skillToSave);
+            // Se elimina la habilidad del array recibido para que no se repita
+            skills[skillSavedPos] = null;
+            // Se aumenta la id de la skill guardada para nunca tener la id más baja
+            skillToSave.setId(999);
+
+        }
+
         // Devuelve el nuevo array con las habilidades ordenados por id
         return sortSkills;
     }
