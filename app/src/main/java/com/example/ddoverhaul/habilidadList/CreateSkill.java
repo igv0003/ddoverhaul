@@ -9,11 +9,12 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.ddoverhaul.BaseActivity;
 import com.example.ddoverhaul.Habilidades;
 import com.example.ddoverhaul.JSONHelper;
 import com.example.ddoverhaul.R;
 
-public class CreateSkill extends AppCompatActivity {
+public class CreateSkill extends BaseActivity {
 
     // Variables para la creacion de Habilidad
     private Habilidades skill;

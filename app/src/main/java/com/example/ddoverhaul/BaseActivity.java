@@ -15,6 +15,7 @@ import android.widget.PopupMenu;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.ddoverhaul.habilidadList.CreateSkill;
 import com.example.ddoverhaul.habilidadList.habilidadlist;
 import com.example.ddoverhaul.objetoList.lista_objetos;
 import com.example.ddoverhaul.personajeList.personajelist;
@@ -89,11 +90,12 @@ public class BaseActivity extends AppCompatActivity {
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.menu_option1:
-                        return true;
+                        gocreateperso();
                     case R.id.menu_option2:
-                        return true;
+                        gocreateobjec();
+
                     case R.id.menu_option3:
-                        return true;
+                        gocreateskill();
                     default:
                         return false;
                 }
@@ -105,6 +107,15 @@ public class BaseActivity extends AppCompatActivity {
     public void goprofile() {
         Intent intent4 = new Intent(this, Perfil.class);
         startActivity(intent4);
+    }
+    public void gocreateskill(){
+        startActivity(new Intent(BaseActivity.this, CreateSkill.class));
+    }
+    public void gocreateperso(){
+        //startActivity(new Intent(BaseActivity.this, .class));
+    }
+    public void gocreateobjec(){
+        //startActivity(new Intent(BaseActivity.this, .class));
     }
 }
 
