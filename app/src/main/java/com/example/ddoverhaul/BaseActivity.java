@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 
@@ -23,10 +24,10 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class BaseActivity extends AppCompatActivity {
 
-    private Button blistapersonajes;
-    private Button blistaobjetos;
-    private Button bperfil;
-    private Button bmulti;
+    private ImageButton blistapersonajes;
+    private ImageButton blistaobjetos;
+    private ImageButton bperfil;
+    private ImageButton bmulti;
     private FloatingActionButton bcentral;
 
     @Override
@@ -41,7 +42,7 @@ public class BaseActivity extends AppCompatActivity {
         getLayoutInflater().inflate(layoutResID, activityContainer, true);
         super.setContentView(fullLayout);
 
-    blistapersonajes = findViewById(R.id.blista_personajes);
+        blistapersonajes = findViewById(R.id.blista_personajes);
         blistaobjetos = findViewById(R.id.blista_objetos);
         bmulti = findViewById(R.id.bmultijugador);
         bperfil = findViewById(R.id.bperfil);
