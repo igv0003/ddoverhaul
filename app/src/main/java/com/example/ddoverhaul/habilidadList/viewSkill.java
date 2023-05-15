@@ -70,6 +70,13 @@ public class viewSkill extends BaseActivity {
         }
 
 
+        findViewById(R.id.edit_skill).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                editSkill(skill.getId());
+            }
+        });
+
         findViewById(R.id.delete_skill).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -80,6 +87,12 @@ public class viewSkill extends BaseActivity {
 
     }
 
+    public void editSkill(int id) {
+        Intent intent = new Intent(viewSkill.this, CreateSkill.class);
+        intent.putExtra("habilidad", id);
+        startActivity(intent);
+    }
+
     private void deleteSkill(int id) {
         AlertDialog.Builder builder = new AlertDialog.Builder(viewSkill.this);
         builder.setTitle("Eliminar habilidad");
@@ -87,7 +100,7 @@ public class viewSkill extends BaseActivity {
                 .setPositiveButton("Sí", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        helper.deleteSkill(skill.getId());
+                        helper.deleteSkill(id);
                         Toast.makeText(getApplicationContext(), "Se eliminó la habilidad",Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(viewSkill.this, habilidadlist.class);
                         dialog.dismiss();
