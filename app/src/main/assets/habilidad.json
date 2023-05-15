@@ -1,0 +1,9 @@
+[
+  {"id": 0, "nombre": "skill1", "danio": 22,"coste": 2, "problema_estado": "", "porcentaje" : 5, "descripcion": "Esto es una descripcion bastante bonita si lo digo yo"},
+  {"id": 1, "nombre": "skill2", "danio": 25,"coste": 1, "problema_estado": "Maricon", "porcentaje" : 10, "descripcion": "Dani maricon"},
+  {"id": 2, "nombre": "skill3", "danio": 14,"coste": 4, "problema_estado": "Niño de mierda", "porcentaje" : 20, "descripcion": "Josema niño de mierda"},
+  {"id": 3, "nombre": "skill4", "danio": 2,"coste": 6, "problema_estado": "Variables", "porcentaje" : 30, "descripcion": "Guille arregla las putas variables"},
+  {"id": 4, "nombre": "skill5", "danio": 434,"coste": 5, "problema_estado": "", "porcentaje" : 40, "descripcion": "No se que mas poner"},
+  {"id": 5, "nombre": "skill6", "danio": 1,"coste": 7, "problema_estado": "Pruebame", "porcentaje" : 50, "descripcion": "No te fies si lleva pulserita de españa"},
+  {"id": 6, "nombre": "skill7", "danio": 23,"coste": 3, "problema_estado": "", "porcentaje" : 60, "descripcion": "Medinilla nos merecemos un 10"}
+]

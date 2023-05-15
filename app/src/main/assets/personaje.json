@@ -1,14 +1,13 @@
-{
-  "characters": [
-    {
-      "id": 0,
-      "name": "Jesus",
-      "level": 1
-    },
-    {
-      "id": 1,
-      "name": "Edgar",
-      "level": 3
-    }
-  ]
-}
+[
+  { "id": 0,
+    "nombre": "Jesus",
+    "nivel": 1,
+    "Clase":"Espadachín",
+    "raza": "Elfo"},
+  {"id": 1, "nombre": "Edgar", "nivel": 3, "Clase": "Mago","raza": "Enano"},
+  {"id": 2, "nombre": "Edgar", "nivel": 3, "Clase": "Mago","raza": "Enano"},
+  {"id": 3, "nombre": "Edgar", "nivel": 3, "Clase": "Mago","raza": "Enano"},
+  {"id": 4, "nombre": "Edgar", "nivel": 3, "Clase": "Mago","raza": "Enano"},
+  {"id": 5, "nombre": "Edgar", "nivel": 3, "Clase": "Mago","raza": "Enano"},
+  {"id": 6, "nombre": "Edgar", "nivel": 3, "Clase": "Mago","raza": "Enano"}
+]
