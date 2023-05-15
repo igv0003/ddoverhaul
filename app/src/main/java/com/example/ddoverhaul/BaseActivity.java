@@ -15,6 +15,7 @@ import android.widget.PopupMenu;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.ddoverhaul.habilidadList.habilidadlist;
 import com.example.ddoverhaul.objetoList.lista_objetos;
 import com.example.ddoverhaul.personajeList.personajelist;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -62,7 +63,7 @@ public class BaseActivity extends AppCompatActivity {
         bmulti.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(BaseActivity.this, Multijugador.class));
+                startActivity(new Intent(BaseActivity.this, habilidadlist.class));
             }
         });
 
