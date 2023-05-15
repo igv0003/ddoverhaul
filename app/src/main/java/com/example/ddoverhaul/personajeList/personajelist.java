@@ -8,12 +8,13 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.example.ddoverhaul.BaseActivity;
 import com.example.ddoverhaul.JSONHelper;
 import com.example.ddoverhaul.Login;
 import com.example.ddoverhaul.Personaje;
 import com.example.ddoverhaul.R;
 
-public class personajelist extends AppCompatActivity {
+public class personajelist extends BaseActivity {
     // Variables necesarias para mostrar la lista
     private RecyclerView recyclerView;
     private PersonajeAdapter adapter;

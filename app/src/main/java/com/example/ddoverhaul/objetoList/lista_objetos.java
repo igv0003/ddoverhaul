@@ -8,13 +8,14 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.example.ddoverhaul.BaseActivity;
 import com.example.ddoverhaul.JSONHelper;
 import com.example.ddoverhaul.Login;
 import com.example.ddoverhaul.Objeto;
 import com.example.ddoverhaul.R;
 import com.example.ddoverhaul.personajeList.SpacingItemDecoration;
 
-public class lista_objetos extends AppCompatActivity {
+public class lista_objetos extends BaseActivity {
     // Variables necesarias para mostrar la lista
     private RecyclerView recyclerView;
     private ObjetoAdapter adapter;
