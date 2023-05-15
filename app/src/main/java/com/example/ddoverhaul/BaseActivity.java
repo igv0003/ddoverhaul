@@ -58,14 +58,14 @@ public class BaseActivity extends AppCompatActivity {
         blistaobjetos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(BaseActivity.this, lista_objetos.class));
+                showPopupMenu2(v);
             }
         });
 
         bmulti.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(BaseActivity.this, habilidadlist.class));
+                startActivity(new Intent(BaseActivity.this, Multijugador.class));
             }
         });
 
@@ -82,6 +82,30 @@ public class BaseActivity extends AppCompatActivity {
             }
         });
     }
+
+    private void showPopupMenu2 (View view){
+        PopupMenu popupMenu2 = new PopupMenu(this, view);
+        popupMenu2.inflate(R.menu.menu2);
+
+        popupMenu2.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.lista_hab:
+                        gohablist();
+                        return true ;
+                    case R.id.lista_obj:
+                        goobjlist();
+                        return true ;
+                    default:
+                        return false;
+                }
+            }
+        });
+        popupMenu2.show();
+    }
+
+
     private void showPopupMenu (View view){
         PopupMenu popupMenu = new PopupMenu(this, view);
         popupMenu.inflate(R.menu.floating_menu);
@@ -92,11 +116,13 @@ public class BaseActivity extends AppCompatActivity {
                 switch (item.getItemId()) {
                     case R.id.menu_option1:
                         gocreateperso();
+                        return true ;
                     case R.id.menu_option2:
                         gocreateobjec();
-
+                        return true ;
                     case R.id.menu_option3:
                         gocreateskill();
+                        return true ;
                     default:
                         return false;
                 }
@@ -117,6 +143,14 @@ public class BaseActivity extends AppCompatActivity {
     }
     public void gocreateobjec(){
         //startActivity(new Intent(BaseActivity.this, .class));
+    }
+    public void goobjlist(){
+        startActivity(new Intent(BaseActivity.this, lista_objetos.class));
+        System.out.println("segundoboton");
+    }
+    public void gohablist(){
+        startActivity(new Intent(BaseActivity.this, habilidadlist.class));
+        System.out.println("primer boton");
     }
 }
 
