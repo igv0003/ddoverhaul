@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/consumibleLayout"
         android:layout_width="match_parent"
         android:layout_height="370dp"
@@ -16,9 +16,53 @@
         app:layout_constraintHorizontal_bias="0.461"
         app:layout_constraintStart_toStartOf="parent">
 
-    </LinearLayout>
+        <TextView
+            android:id="@+id/Textdanio"
+            android:layout_width="65dp"
+            android:layout_height="34dp"
+            android:layout_marginStart="44dp"
+            android:layout_marginTop="36dp"
+            android:text="Armadura"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
-    <LinearLayout
+        <EditText
+            android:id="@+id/caja_armadura"
+            android:layout_width="251dp"
+            android:layout_height="46dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:ems="10"
+            android:hint="10"
+            android:inputType="number"
+            app:layout_constraintStart_toEndOf="@+id/Textdanio"
+            app:layout_constraintTop_toBottomOf="@+id/caja_danio" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="65dp"
+            android:layout_height="34dp"
+            android:layout_marginStart="44dp"
+            android:layout_marginTop="24dp"
+            android:text="Daño"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/caja_danio"
+            android:layout_width="251dp"
+            android:layout_height="46dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:ems="10"
+            android:hint="10"
+            android:inputType="number"
+            app:layout_constraintStart_toEndOf="@+id/textView4"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/equipoLayout"
         android:layout_width="match_parent"
         android:layout_height="370dp"
@@ -29,12 +73,7 @@
         app:layout_constraintHorizontal_bias="0.461"
         app:layout_constraintStart_toStartOf="parent">
 
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="65dp"
-            android:layout_height="34dp"
-            android:text="Daño" />
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <Spinner
         android:id="@+id/SpinnerTipo"
