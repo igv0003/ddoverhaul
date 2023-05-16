@@ -9,40 +9,33 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/consumibleLayout"
         android:layout_width="match_parent"
-        android:layout_height="370dp"
+        android:layout_height="330dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="@+id/equipoLayout"
+        app:layout_constraintTop_toBottomOf="@+id/GuardarObj"
+        app:layout_constraintVertical_bias="1.0"
+        tools:layout_editor_absoluteX="-5dp">
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/equipoLayout"
+        android:layout_width="match_parent"
+        android:layout_height="330dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.461"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/CancelarObj"
+        app:layout_constraintVertical_bias="1.0">
 
         <TextView
-            android:id="@+id/Textdanio"
-            android:layout_width="65dp"
-            android:layout_height="34dp"
-            android:layout_marginStart="44dp"
-            android:layout_marginTop="36dp"
-            android:text="Armadura"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView4" />
-
-        <EditText
-            android:id="@+id/caja_armadura"
-            android:layout_width="251dp"
-            android:layout_height="46dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="24dp"
-            android:ems="10"
-            android:hint="10"
-            android:inputType="number"
-            app:layout_constraintStart_toEndOf="@+id/Textdanio"
-            app:layout_constraintTop_toBottomOf="@+id/caja_danio" />
-
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="65dp"
-            android:layout_height="34dp"
-            android:layout_marginStart="44dp"
+            android:id="@+id/textdanio"
+            android:layout_width="82dp"
+            android:layout_height="36dp"
+            android:layout_marginStart="32dp"
             android:layout_marginTop="24dp"
             android:text="Daño"
             app:layout_constraintStart_toStartOf="parent"
@@ -50,28 +43,59 @@
 
         <EditText
             android:id="@+id/caja_danio"
-            android:layout_width="251dp"
-            android:layout_height="46dp"
+            android:layout_width="249dp"
+            android:layout_height="51dp"
             android:layout_marginStart="24dp"
             android:layout_marginTop="24dp"
             android:ems="10"
             android:hint="10"
             android:inputType="number"
-            app:layout_constraintStart_toEndOf="@+id/textView4"
+            app:layout_constraintStart_toEndOf="@+id/textdanio"
             app:layout_constraintTop_toTopOf="parent" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/Textarm"
+            android:layout_width="83dp"
+            android:layout_height="34dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="36dp"
+            android:text="Armadura"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textdanio" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/equipoLayout"
-        android:layout_width="match_parent"
-        android:layout_height="370dp"
-        android:layout_marginBottom="4dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.461"
-        app:layout_constraintStart_toStartOf="parent">
+        <EditText
+            android:id="@+id/caja_armadura"
+            android:layout_width="249dp"
+            android:layout_height="51dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="20dp"
+            android:ems="10"
+            android:hint="10"
+            android:inputType="number"
+            app:layout_constraintStart_toEndOf="@+id/Textarm"
+            app:layout_constraintTop_toBottomOf="@+id/caja_danio" />
+
+        <TextView
+            android:id="@+id/textPos"
+            android:layout_width="83dp"
+            android:layout_height="36dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="38dp"
+            android:text="Posicion"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/Textarm" />
+
+        <Spinner
+            android:id="@+id/SpinnerPosicion"
+            android:layout_width="251dp"
+            android:layout_height="46dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="20dp"
+            android:ems="10"
+            android:hint="10"
+            android:spinnerMode="dropdown"
+            app:layout_constraintStart_toEndOf="@+id/textPos"
+            app:layout_constraintTop_toBottomOf="@+id/caja_armadura" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -79,15 +103,16 @@
         android:id="@+id/SpinnerTipo"
         android:layout_width="370dp"
         android:layout_height="48dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="36dp"
         android:spinnerMode="dropdown"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.609"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/caja_descripcion" />
 
     <TextView
         android:id="@+id/TV_nombre_obj"
-        android:layout_width="60dp"
+        android:layout_width="73dp"
         android:layout_height="23dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="32dp"
@@ -96,21 +121,23 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/CancelarObj"
-        android:layout_width="123dp"
-        android:layout_height="52dp"
-        android:layout_marginEnd="68dp"
-        android:text="CANCELAR"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:id="@+id/GuardarObj"
+        android:layout_width="145dp"
+        android:layout_height="51dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="64dp"
+        android:text="Guardar"
+        app:layout_constraintEnd_toStartOf="@+id/CancelarObj"
         app:layout_constraintTop_toBottomOf="@+id/SpinnerTipo" />
 
     <Button
-        android:id="@+id/GuardarObj"
-        android:layout_width="123dp"
+        android:id="@+id/CancelarObj"
+        android:layout_width="145dp"
         android:layout_height="52dp"
-        android:layout_marginEnd="60dp"
-        android:text="Guardar"
-        app:layout_constraintEnd_toStartOf="@+id/CancelarObj"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="24dp"
+        android:text="CANCELAR"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/SpinnerTipo" />
 
     <ImageView
@@ -125,10 +152,10 @@
 
     <TextView
         android:id="@+id/TV_descripcion_obj"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="12dp"
+        android:layout_width="92dp"
+        android:layout_height="18dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="16dp"
         android:text="Descripcion"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
@@ -157,6 +184,17 @@
         android:inputType="textPersonName"
         app:layout_constraintStart_toEndOf="@+id/imageView"
         app:layout_constraintTop_toBottomOf="@+id/TV_nombre_obj" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="45dp"
+        android:layout_height="17dp"
+        android:layout_marginStart="28dp"
+        android:text="Tipo"
+        app:layout_constraintBottom_toTopOf="@+id/SpinnerTipo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/caja_descripcion"
+        app:layout_constraintVertical_bias="0.578" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
