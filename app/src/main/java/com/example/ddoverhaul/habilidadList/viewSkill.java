@@ -11,11 +11,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.ddoverhaul.BaseActivity;
 import com.example.ddoverhaul.Habilidades;
 import com.example.ddoverhaul.JSONHelper;
 import com.example.ddoverhaul.R;
 
-public class viewSkill extends AppCompatActivity {
+public class viewSkill extends BaseActivity {
 
     // Variables necesarias
     private Habilidades skill;
@@ -69,6 +70,13 @@ public class viewSkill extends AppCompatActivity {
         }
 
 
+        findViewById(R.id.edit_skill).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                editSkill(skill.getId());
+            }
+        });
+
         findViewById(R.id.delete_skill).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -79,6 +87,12 @@ public class viewSkill extends AppCompatActivity {
 
     }
 
+    public void editSkill(int id) {
+        Intent intent = new Intent(viewSkill.this, CreateSkill.class);
+        intent.putExtra("habilidad", id);
+        startActivity(intent);
+    }
+
     private void deleteSkill(int id) {
         AlertDialog.Builder builder = new AlertDialog.Builder(viewSkill.this);
         builder.setTitle("Eliminar habilidad");
@@ -86,7 +100,7 @@ public class viewSkill extends AppCompatActivity {
                 .setPositiveButton("Sí", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        helper.deleteSkill(skill.getId());
+                        helper.deleteSkill(id);
                         Toast.makeText(getApplicationContext(), "Se eliminó la habilidad",Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(viewSkill.this, habilidadlist.class);
                         dialog.dismiss();

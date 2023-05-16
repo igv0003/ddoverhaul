@@ -8,13 +8,14 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.example.ddoverhaul.BaseActivity;
 import com.example.ddoverhaul.Habilidades;
 import com.example.ddoverhaul.JSONHelper;
 import com.example.ddoverhaul.Login;
 import com.example.ddoverhaul.R;
 import com.example.ddoverhaul.personajeList.SpacingItemDecoration;
 
-public class habilidadlist extends AppCompatActivity {
+public class habilidadlist extends BaseActivity {
     // Variables necesarias para mostrar la lista
     private RecyclerView recyclerView;
     private HabilidadAdapter adapter;
