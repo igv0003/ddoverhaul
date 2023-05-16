@@ -17,7 +17,7 @@ import android.widget.Spinner;
 
 public class Main_obj extends BaseActivity {
 
-    private Spinner mySpinner;
+    private Spinner SpinnerTipo, SpinnerEquipoPos;
     private String opcionSeleccionada;
     private View EquipoLayout,ConsumibleLayout;
 
@@ -27,15 +27,18 @@ public class Main_obj extends BaseActivity {
         setContentView(R.layout.activity_objeto);
 
         // Referencia al Spinner
-        mySpinner = findViewById(R.id.SpinnerTipo);
+        SpinnerTipo = findViewById(R.id.SpinnerTipo);
+        SpinnerEquipoPos = findViewById(R.id.SpinnerPosicion);
         EquipoLayout = findViewById(R.id.equipoLayout);
         ConsumibleLayout = findViewById(R.id.consumibleLayout);
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, new String[]{"-", "Equipo", "Consumible"});
-        mySpinner.setAdapter(adapter);
+        ArrayAdapter<String> adapterTipo = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, new String[]{"-", "Equipo", "Consumible"});
+        SpinnerTipo.setAdapter(adapterTipo);
+        ArrayAdapter<String> adapterEquipoPos = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, new String[]{"Cabeza", "Pecho", "Manos", "Piernas", "Pies", "Arma Principal", "Arma Secundaria"});
+        SpinnerEquipoPos.setAdapter(adapterEquipoPos);
 
         // Aquí configuras el escuchador de elementos seleccionados para el Spinner
-        mySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        SpinnerTipo.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 opcionSeleccionada = parent.getItemAtPosition(position).toString();
