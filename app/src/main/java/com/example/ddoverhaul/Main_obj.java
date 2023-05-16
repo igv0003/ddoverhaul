@@ -7,30 +7,42 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 
 
-public class Main_obj extends AppCompatActivity {
+public class Main_obj extends BaseActivity {
 
+    private Spinner mySpinner;
+    private String opcionSeleccionada;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_objeto);
-    }
-    private void mostrarOpcionesDesplegable(){
-        Spinner spinner = new Spinner(this);
+
+        // Referencia al Spinner
+        mySpinner = findViewById(R.id.SpinnerTipo);
+
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, new String[]{"-", "Equipo", "Consumible"});
-        spinner.setAdapter(adapter);
+        mySpinner.setAdapter(adapter);
 
-        new AlertDialog.Builder(this).setTitle("Tipos").setView(spinner).setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+        // Aquí configuras el escuchador de elementos seleccionados para el Spinner
+        mySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
-                String opcionSeleccionada = spinner.getSelectedItem().toString();
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                opcionSeleccionada = parent.getItemAtPosition(position).toString();
+                // Aquí puedes hacer algo con la opción seleccionada
             }
-        }).setNegativeButton("Cancelar",null).show();
-    }
 
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                // Aquí puedes hacer algo si no se selecciona nada
+            }
+        });
+    }
 }
+
+

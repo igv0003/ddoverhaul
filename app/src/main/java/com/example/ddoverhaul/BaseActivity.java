@@ -138,11 +138,12 @@ public class BaseActivity extends AppCompatActivity {
     public void gocreateskill(){
         startActivity(new Intent(BaseActivity.this, CreateSkill.class));
     }
+
     public void gocreateperso(){
         //startActivity(new Intent(BaseActivity.this, .class));
     }
     public void gocreateobjec(){
-        //startActivity(new Intent(BaseActivity.this, .class));
+        startActivity(new Intent(BaseActivity.this, Main_obj.class));
     }
     public void goobjlist(){
         startActivity(new Intent(BaseActivity.this, lista_objetos.class));
