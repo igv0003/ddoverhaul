@@ -163,7 +163,7 @@ public class BaseActivity extends AppCompatActivity {
         //startActivity(new Intent(BaseActivity.this, .class));
     }
     public void gocreateobjec(){
-        //startActivity(new Intent(BaseActivity.this, .class));
+        startActivity(new Intent(BaseActivity.this, Main_obj.class));
     }
     public void goobjlist(){
         startActivity(new Intent(BaseActivity.this, lista_objetos.class));
