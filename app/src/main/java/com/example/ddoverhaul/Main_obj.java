@@ -1,11 +1,13 @@
 package com.example.ddoverhaul;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintSet;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Layout;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -17,6 +19,7 @@ public class Main_obj extends BaseActivity {
 
     private Spinner mySpinner;
     private String opcionSeleccionada;
+    private View EquipoLayout,ConsumibleLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +28,8 @@ public class Main_obj extends BaseActivity {
 
         // Referencia al Spinner
         mySpinner = findViewById(R.id.SpinnerTipo);
+        EquipoLayout = findViewById(R.id.equipoLayout);
+        ConsumibleLayout = findViewById(R.id.consumibleLayout);
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, new String[]{"-", "Equipo", "Consumible"});
         mySpinner.setAdapter(adapter);
@@ -34,7 +39,13 @@ public class Main_obj extends BaseActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 opcionSeleccionada = parent.getItemAtPosition(position).toString();
-                // Aquí puedes hacer algo con la opción seleccionada
+                ConsumibleLayout.setVisibility(View.INVISIBLE);
+                EquipoLayout.setVisibility(View.INVISIBLE);
+                if(opcionSeleccionada.equals("Equipo")){
+                    EquipoLayout.setVisibility(View.VISIBLE);
+                }else if(opcionSeleccionada.equals("Consumible")){
+                    ConsumibleLayout.setVisibility(View.VISIBLE);
+                }else{}
             }
 
             @Override
