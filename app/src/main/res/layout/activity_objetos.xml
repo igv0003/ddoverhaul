@@ -36,7 +36,7 @@
 
         <TextView
             android:id="@+id/MenuObjeto"
-            style="@style/GoldenTextView"
+
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="50"
@@ -81,7 +81,8 @@
         android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/HeaderObjeto"
-        app:srcCompat="@drawable/unknownobj" />
+        app:srcCompat="@drawable/fondo" />
+
 
     <TextView
         android:id="@+id/TV_descripcion_obj"

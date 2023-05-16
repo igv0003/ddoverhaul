@@ -14,6 +14,7 @@
         android:background="@drawable/fondo"
         app:menu="@menu/option_footer"
         app:itemIconSize="50dp"
+        app:itemIconTint="@color/white"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
