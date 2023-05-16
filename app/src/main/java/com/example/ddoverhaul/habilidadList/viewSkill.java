@@ -11,11 +11,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.ddoverhaul.BaseActivity;
 import com.example.ddoverhaul.Habilidades;
 import com.example.ddoverhaul.JSONHelper;
 import com.example.ddoverhaul.R;
 
-public class viewSkill extends AppCompatActivity {
+public class viewSkill extends BaseActivity {
 
     // Variables necesarias
     private Habilidades skill;
