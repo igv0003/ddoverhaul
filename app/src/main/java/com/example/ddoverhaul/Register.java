@@ -6,6 +6,8 @@ import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Toast;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -28,7 +30,20 @@ public class Register extends AppCompatActivity {
     String NameS;
     String PasswordS;
     private FirebaseFirestore db;
+    CheckBox acceptTermsCheckbox ;
+    Button crearb ;
 
+    protected void aceptar() {
+
+        acceptTermsCheckbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
+
+    {
+        @Override
+        public void onCheckedChanged (CompoundButton buttonView,boolean isChecked){
+        crearb.setEnabled(isChecked);
+    }
+    });
+}
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
@@ -38,18 +53,28 @@ public class Register extends AppCompatActivity {
             Email = findViewById(R.id.EmailR);
             Password = findViewById(R.id.PasswordR);
             Name = findViewById(R.id.nameR);
+            crearb = findViewById(R.id.bregister);
+            acceptTermsCheckbox = findViewById(R.id.accept_terms_checkbox);
 
-            Button blog = findViewById(R.id.bregister);
 
-            blog.setOnClickListener(new View.OnClickListener() {
+
+            crearb.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    EmailS = Email.getText().toString();
-                    NameS = Name.getText().toString();
-                    PasswordS = Password.getText().toString();
 
-                    signUp(EmailS,NameS,PasswordS);
+                        aceptar();
+                        EmailS = Email.getText().toString();
+                        NameS = Name.getText().toString();
+                        PasswordS = Password.getText().toString();
 
+                    if (EmailS.equals("")  ||  NameS.equals("") || PasswordS.equals("")) {
+
+                        Toast.makeText(Register.this, "Error al registrarse: " + "No es posible crear la cuenta con alguno de los campos vacios", Toast.LENGTH_SHORT).show();
+
+                    }else{
+                        signUp(EmailS, NameS, PasswordS);
+
+                    }
                 }
             });
         }
@@ -57,34 +82,37 @@ public class Register extends AppCompatActivity {
 
 
     private void signUp(String email, String name, String password) {
-        mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, task -> {
-                    if (task.isSuccessful()) {
-                        FirebaseUser user = mAuth.getCurrentUser();
 
-                        // Agregar el nombre al perfil del usuario
-                        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                                .setDisplayName(name)
-                                .build();
 
-                        user.updateProfile(profileUpdates)
-                                .addOnCompleteListener(updateTask -> {
-                                    if (updateTask.isSuccessful()) {
-                                        // Guardar usuario en Firestore
-                                        saveUserToFirestore(name, email);
-                                        // El nombre se ha agregado correctamente
-                                        registro_exitoso();
-                                    } else {
-                                        // Error al agregar el nombre
-                                        Toast.makeText(Register.this, "Error al guardar el nombre.", Toast.LENGTH_SHORT).show();
-                                    }
-                                });
-                    } else {
-                        // Si el registro falla, muestra un mensaje al usuario
-                        String errorMessage = task.getException().getMessage(); // Obtiene el mensaje de error específico
-                        Toast.makeText(Register.this, "Error al registrarse: " + errorMessage, Toast.LENGTH_SHORT).show();
-                    }
-                });
+            mAuth.createUserWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(this, task -> {
+                        if (task.isSuccessful()) {
+                            FirebaseUser user = mAuth.getCurrentUser();
+
+                            // Agregar el nombre al perfil del usuario
+                            UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                                    .setDisplayName(name)
+                                    .build();
+
+                            user.updateProfile(profileUpdates)
+                                    .addOnCompleteListener(updateTask -> {
+                                        if (updateTask.isSuccessful()) {
+                                            // Guardar usuario en Firestore
+                                            saveUserToFirestore(name, email);
+                                            // El nombre se ha agregado correctamente
+                                            registro_exitoso();
+                                        } else {
+                                            // Error al agregar el nombre
+                                            Toast.makeText(Register.this, "Error al guardar el nombre.", Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+                        } else {
+                            // Si el registro falla, muestra un mensaje al usuario
+                            String errorMessage = task.getException().getMessage(); // Obtiene el mensaje de error específico
+                            Toast.makeText(Register.this, "Error al registrarse: " + errorMessage, Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
     }
 
     private void saveUserToFirestore(String name, String email) {
