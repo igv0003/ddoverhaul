@@ -17,6 +17,71 @@
         tools:layout_editor_absoluteX="-5dp">
 
 
+        <EditText
+            android:id="@+id/caja_valor"
+            android:layout_width="249dp"
+            android:layout_height="51dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="24dp"
+            android:ems="10"
+            android:hint="Positivo o Negativo"
+            android:inputType="number"
+            app:layout_constraintStart_toEndOf="@+id/textValor"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textValor"
+            android:layout_width="82dp"
+            android:layout_height="39dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="24dp"
+            android:text="Valor"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/caja_"
+            android:layout_width="249dp"
+            android:layout_height="51dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="24dp"
+            android:ems="10"
+            android:hint="Positivo o Negativo"
+            android:inputType="number"
+            app:layout_constraintStart_toEndOf="@+id/textCantidad"
+            app:layout_constraintTop_toBottomOf="@+id/caja_valor" />
+
+        <TextView
+            android:id="@+id/textCantidad"
+            android:layout_width="82dp"
+            android:layout_height="39dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="32dp"
+            android:text="Cantidad"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textValor" />
+
+        <EditText
+            android:id="@+id/caja_operacion"
+            android:layout_width="249dp"
+            android:layout_height="51dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="16dp"
+            android:ems="10"
+            android:hint="Caracter: '+' o '-'"
+            android:inputType="text"
+            app:layout_constraintStart_toEndOf="@+id/textoperacion"
+            app:layout_constraintTop_toBottomOf="@+id/caja_" />
+
+        <TextView
+            android:id="@+id/textoperacion"
+            android:layout_width="82dp"
+            android:layout_height="39dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="36dp"
+            android:text="Operacion"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textCantidad" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -24,6 +89,7 @@
         android:layout_width="match_parent"
         android:layout_height="330dp"
         android:orientation="vertical"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -153,9 +219,9 @@
     <TextView
         android:id="@+id/TV_descripcion_obj"
         android:layout_width="92dp"
-        android:layout_height="18dp"
+        android:layout_height="27dp"
         android:layout_marginStart="28dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="6dp"
         android:text="Descripcion"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
@@ -187,8 +253,8 @@
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="45dp"
-        android:layout_height="17dp"
+        android:layout_width="58dp"
+        android:layout_height="27dp"
         android:layout_marginStart="28dp"
         android:text="Tipo"
         app:layout_constraintBottom_toTopOf="@+id/SpinnerTipo"
