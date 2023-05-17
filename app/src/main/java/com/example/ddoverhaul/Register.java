@@ -34,16 +34,20 @@ public class Register extends AppCompatActivity {
     Button crearb ;
 
     protected void aceptar() {
+        acceptTermsCheckbox = findViewById(R.id.accept_terms_checkbox);
+        crearb = findViewById(R.id.bregister);
 
-        acceptTermsCheckbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
+        // Deshabilita el botón al inicio
+        crearb.setEnabled(false);
 
-    {
-        @Override
-        public void onCheckedChanged (CompoundButton buttonView,boolean isChecked){
-        crearb.setEnabled(isChecked);
+        acceptTermsCheckbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged (CompoundButton buttonView, boolean isChecked) {
+                crearb.setEnabled(isChecked);
+            }
+        });
     }
-    });
-}
+
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
@@ -55,14 +59,13 @@ public class Register extends AppCompatActivity {
             Name = findViewById(R.id.nameR);
             crearb = findViewById(R.id.bregister);
             acceptTermsCheckbox = findViewById(R.id.accept_terms_checkbox);
-
-
-
+            aceptar();
             crearb.setOnClickListener(new View.OnClickListener() {
+
                 @Override
                 public void onClick(View v) {
+                    aceptar();
 
-                        aceptar();
                         EmailS = Email.getText().toString();
                         NameS = Name.getText().toString();
                         PasswordS = Password.getText().toString();
