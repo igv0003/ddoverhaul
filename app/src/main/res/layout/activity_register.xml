@@ -49,11 +49,24 @@
         android:id="@+id/bregister"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Button"
+        android:text="Crear"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.711" />
+        app:layout_constraintVertical_bias="0.767" />
+
+    <CheckBox
+        android:id="@+id/accept_terms_checkbox"
+        android:layout_width="350dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="48dp"
+        android:text="Acepto los Términos de Servicio y la Política de Privacidad"
+        app:layout_constraintBottom_toTopOf="@+id/bregister"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
