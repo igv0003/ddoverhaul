@@ -29,6 +29,7 @@ public class BaseActivity extends AppCompatActivity {
     private ImageButton bperfil;
     private ImageButton bmulti;
     private FloatingActionButton bcentral;
+    private ImageButton bajustes;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -47,11 +48,19 @@ public class BaseActivity extends AppCompatActivity {
         bmulti = findViewById(R.id.bmultijugador);
         bperfil = findViewById(R.id.bperfil);
         bcentral = findViewById(R.id.bcentral);
+        bajustes = findViewById(R.id.boton_ajustes);
 
         blistapersonajes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(BaseActivity.this, personajelist.class));
+            }
+        });
+
+        bajustes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                opciones();
             }
         });
 
@@ -75,7 +84,7 @@ public class BaseActivity extends AppCompatActivity {
                 goprofile();
             }
         });
-        bcentral.setOnClickListener(new View.OnClickListener(){
+        bcentral.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 showPopupMenu(view);
@@ -83,7 +92,7 @@ public class BaseActivity extends AppCompatActivity {
         });
     }
 
-    private void showPopupMenu2 (View view){
+    private void showPopupMenu2(View view) {
         PopupMenu popupMenu2 = new PopupMenu(this, view);
         popupMenu2.inflate(R.menu.menu2);
 
@@ -93,10 +102,10 @@ public class BaseActivity extends AppCompatActivity {
                 switch (item.getItemId()) {
                     case R.id.lista_hab:
                         gohablist();
-                        return true ;
+                        return true;
                     case R.id.lista_obj:
                         goobjlist();
-                        return true ;
+                        return true;
                     default:
                         return false;
                 }
@@ -104,6 +113,28 @@ public class BaseActivity extends AppCompatActivity {
         });
         popupMenu2.show();
     }
+
+
+    private void opciones() {
+        setContentView(R.layout.activity_ajustes);
+
+        Button logoutButton = findViewById(R.id.logout_button);
+
+        logoutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                logout();
+            }
+        });
+    }
+
+    private void logout(){
+        startActivity(new Intent(BaseActivity.this, Login.class));
+    }
+
+
+
+
 
 
     private void showPopupMenu (View view){

@@ -16,10 +16,10 @@
         android:gravity="center" />
 
     <ImageButton
-        android:id="@+id/imageButton"
+        android:id="@+id/boton_ajustes"
         android:layout_width="48dp"
         android:layout_height="48dp"
-        android:src="@drawable/tuerca"
+        android:src="@drawable/tuer"
         android:scaleType="fitCenter"
         android:adjustViewBounds="true"
         android:padding="8dp"

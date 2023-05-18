@@ -5,11 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
     <EditText
         android:id="@+id/email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="176dp"
+        android:layout_marginTop="92dp"
         android:ems="10"
         android:hint="Email/Username"
         android:inputType="textEmailAddress"
@@ -19,12 +20,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-
     <Button
         android:id="@+id/blog"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="112dp"
+        android:layout_marginBottom="272dp"
         android:text="LOGIN"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -35,7 +35,7 @@
         android:id="@+id/Password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="216dp"
+        android:layout_marginBottom="196dp"
         android:ems="10"
         android:hint="Password"
         android:inputType="textPassword"
@@ -56,13 +56,23 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
 
+    <Button
+        android:id="@+id/registerbut"
+        android:layout_width="159dp"
+        android:layout_height="47dp"
+        android:layout_marginBottom="144dp"
+        android:text="Register"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <CheckBox
         android:id="@+id/mostrarP"
         android:layout_width="211dp"
         android:layout_height="45dp"
         android:layout_below="@+id/bolvidoC"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="80dp"
+        android:layout_marginBottom="104dp"
         android:text="Mostrar contraseña"
         app:layout_constraintBottom_toTopOf="@+id/blog"
         app:layout_constraintEnd_toEndOf="parent"

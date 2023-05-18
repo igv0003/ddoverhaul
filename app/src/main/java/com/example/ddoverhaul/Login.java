@@ -30,6 +30,7 @@ public class Login extends AppCompatActivity {
     String EmailS;
     String PasswordS;
     CheckBox mc ;
+    Button rgb;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -42,6 +43,7 @@ public class Login extends AppCompatActivity {
         Button blog = findViewById(R.id.blog);
         Button oc = findViewById(R.id.bolvidoC);
         mc = findViewById(R.id.mostrarP);
+        rgb = findViewById(R.id.registerbut);
         mostrarcont();
         oc.setOnClickListener(new View.OnClickListener(){
 
@@ -63,6 +65,12 @@ public class Login extends AppCompatActivity {
                 EmailS = Email.getText().toString();
                 PasswordS = PasswordE.getText().toString();
                 signIn(EmailS,PasswordS);
+            }
+        });
+        rgb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                goRegister();
             }
         });
     }
@@ -111,6 +119,7 @@ public class Login extends AppCompatActivity {
     });
 
     }
+
     private void signIn(String email, String password) {
         if (email.contains("@")) {
             // Inicio de sesión utilizando correo electrónico
@@ -178,6 +187,10 @@ public class Login extends AppCompatActivity {
                         }
                     });
         }
+    }
+
+    private void goRegister(){
+        startActivity(new Intent(Login.this, Register.class));
     }
 
 }
