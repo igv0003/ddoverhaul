@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/crearOBJ"
+        android:title="Lista de Habilidades" />
+    <item
+        android:id="@+id/crearHAB"
+        android:title="Lista de Objetos" />
+    <item
+        android:id="@+id/crearPERS"
+        android:title="Lista de Objetos" />
+
+</menu>

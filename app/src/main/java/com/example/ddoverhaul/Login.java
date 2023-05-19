@@ -31,27 +31,28 @@ public class Login extends AppCompatActivity {
     String PasswordS;
     CheckBox mc ;
     Button rgb;
+    Button blog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_login_register);
         mAuth = FirebaseAuth.getInstance();
 
-        Email = findViewById(R.id.email);
-        PasswordE = findViewById(R.id.Password);
-        Button blog = findViewById(R.id.blog);
-        Button oc = findViewById(R.id.bolvidoC);
+        Email = findViewById(R.id.emailCampo);
+        PasswordE = findViewById(R.id.passwordCampo);
+        blog = findViewById(R.id.loginButton);
+        //Button oc = findViewById(R.id.);
         mc = findViewById(R.id.mostrarP);
-        rgb = findViewById(R.id.registerbut);
+        rgb = findViewById(R.id.registerButton);
         mostrarcont();
-        oc.setOnClickListener(new View.OnClickListener(){
+        /*oc.setOnClickListener(new View.OnClickListener(){
 
             @Override
             public void onClick(View view) {
                 mandarCorreo();
             }
-        });
+        });*/
 
         mc.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,7 +95,7 @@ public class Login extends AppCompatActivity {
         Intent intent = new Intent(Login.this, Menu_principal.class);
         startActivity(intent);
     }
-    public void mandarCorreo(){
+    /*public void mandarCorreo(){
     Button forgotPassword = findViewById(R.id.bolvidoC);
     forgotPassword.setOnClickListener(new View.OnClickListener() {
         @Override
@@ -118,7 +119,7 @@ public class Login extends AppCompatActivity {
         }
     });
 
-    }
+    }*/
 
     private void signIn(String email, String password) {
         if (email.contains("@")) {

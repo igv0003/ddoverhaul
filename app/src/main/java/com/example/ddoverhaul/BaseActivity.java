@@ -13,6 +13,7 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -20,17 +21,11 @@ import com.example.ddoverhaul.habilidadList.CreateSkill;
 import com.example.ddoverhaul.habilidadList.habilidadlist;
 import com.example.ddoverhaul.objetoList.lista_objetos;
 import com.example.ddoverhaul.personajeList.personajelist;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class BaseActivity extends AppCompatActivity {
-
-    private ImageButton blistapersonajes;
-    private ImageButton blistaobjetos;
-    private ImageButton bperfil;
-    private ImageButton bmulti;
-    private FloatingActionButton bcentral;
-    private ImageButton bajustes;
-
+    ImageButton bajustes;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,20 +37,41 @@ public class BaseActivity extends AppCompatActivity {
         FrameLayout activityContainer = fullLayout.findViewById(R.id.activity_content);
         getLayoutInflater().inflate(layoutResID, activityContainer, true);
         super.setContentView(fullLayout);
-
-        blistapersonajes = findViewById(R.id.blista_personajes);
-        blistaobjetos = findViewById(R.id.blista_objetos);
-        bmulti = findViewById(R.id.bmultijugador);
-        bperfil = findViewById(R.id.bperfil);
-        bcentral = findViewById(R.id.bcentral);
-        bajustes = findViewById(R.id.boton_ajustes);
-
-        blistapersonajes.setOnClickListener(new View.OnClickListener() {
+        bajustes = findViewById(R.id.ajustesBoton);
+        bajustes.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                startActivity(new Intent(BaseActivity.this, personajelist.class));
+            public void onClick(View view) {
+                opciones();
             }
         });
+
+        BottomNavigationView bottomNavigationView = findViewById(R.id.footerNavegation);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.personajes:
+                        startActivity(new Intent(BaseActivity.this, personajelist.class));
+                        return true;
+                    case R.id.equipamieto:
+                        showPopupMenu2(bottomNavigationView);
+                        return true;
+                    case R.id.crear:
+                        showPopupMenu(bottomNavigationView );
+                        return true;
+                    case R.id.multijugador:
+                        startActivity(new Intent(BaseActivity.this, Multijugador.class));
+                        return true;
+                    case R.id.perfil:
+                        goprofile();
+                        return true;
+                    default:
+                        return false;
+                }
+            }
+        });
+
+
 
         bajustes.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,32 +80,6 @@ public class BaseActivity extends AppCompatActivity {
             }
         });
 
-        blistaobjetos.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showPopupMenu2(v);
-            }
-        });
-
-        bmulti.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(BaseActivity.this, Multijugador.class));
-            }
-        });
-
-        bperfil.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                goprofile();
-            }
-        });
-        bcentral.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showPopupMenu(view);
-            }
-        });
     }
 
     private void showPopupMenu2(View view) {
@@ -145,13 +135,13 @@ public class BaseActivity extends AppCompatActivity {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getItemId()) {
-                    case R.id.menu_option1:
+                    case R.id.crearPERS:
                         gocreateperso();
                         return true ;
-                    case R.id.menu_option2:
+                    case R.id.crearOBJ:
                         gocreateobjec();
                         return true ;
-                    case R.id.menu_option3:
+                    case R.id.crearHAB:
                         gocreateskill();
                         return true ;
                     default:
