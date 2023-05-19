@@ -76,6 +76,20 @@ public class Login extends AppCompatActivity {
         });
     }
     public void mostrarcont(){
+        /*public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        if (isChecked) {
+            // muestra la contraseña
+            password.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+            password.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, R.drawable.ic_eye_on, 0);
+        } else {
+            // oculta la contraseña
+            password.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+            password.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, R.drawable.ic_eye_off, 0);
+        }
+        // mueve el cursor al final
+        password.setSelection(password.getText().length());
+    }
+});*/
 
         mc.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -83,9 +97,11 @@ public class Login extends AppCompatActivity {
                 if (isChecked) {
                     // Para mostrar la contraseña
                     PasswordE.setTransformationMethod(null);
+                    //PasswordE.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, R.drawable.ojo_abierto, 0);
                 } else {
                     // Para ocultar la contraseña
                     PasswordE.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                    //PasswordE.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, R.drawable.ojo_cerrado, 0);
                 }
             }
         });

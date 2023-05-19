@@ -1,9 +1,7 @@
 package com.example.ddoverhaul;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -159,6 +157,7 @@ public class BaseActivity extends AppCompatActivity {
     public void gocreateskill(){
         startActivity(new Intent(BaseActivity.this, CreateSkill.class));
     }
+
     public void gocreateperso(){
         //startActivity(new Intent(BaseActivity.this, .class));
     }
