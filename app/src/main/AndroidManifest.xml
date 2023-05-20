@@ -22,7 +22,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".Login"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -35,7 +35,6 @@
                 android:value="" />
         </activity>
         <activity android:name=".Menu_principal" />
-        <activity android:name=".Login" />
         <activity android:name=".Register" />
         <activity android:name=".Perfil" />
         <activity android:name=".Multijugador" />
