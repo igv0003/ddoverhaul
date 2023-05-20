@@ -8,6 +8,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
@@ -18,27 +20,39 @@ import com.google.firebase.firestore.QuerySnapshot;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class Login extends AppCompatActivity {
+
+    private TextInputLayout emailCampo;
+
+    private TextInputLayout passwordCampo;
+
     private FirebaseAuth mAuth;
-    EditText Email;
-    EditText PasswordE;
     String EmailS;
     String PasswordS;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_register);
         mAuth = FirebaseAuth.getInstance();
 
-        Email = findViewById(R.id.emailCampo);
-        PasswordE = findViewById(R.id.passwordCampo);
+        emailCampo = findViewById(R.id.emailCampo);
+        passwordCampo = findViewById(R.id.passwordCampo);
         Button blog = findViewById(R.id.loginButton);
+        Button bregister = findViewById(R.id.registerButton);
 
-
+        bregister.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent register = new Intent(Login.this, Register.class );
+                startActivity(register);
+            }
+        });
         blog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EmailS = Email.getText().toString();
-                PasswordS = PasswordE.getText().toString();
+                EmailS = emailCampo.getEditText().getText().toString().trim();
+                PasswordS = passwordCampo.getEditText().getText().toString().trim();
                 signIn(EmailS,PasswordS);
             }
         });

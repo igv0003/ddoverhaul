@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,10 +22,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Register extends AppCompatActivity {
+
+
+    private TextInputLayout Email;
+
+    private TextInputLayout Username;
+
+    private TextInputLayout Password;
     private FirebaseAuth mAuth;
-    EditText Email;
-    EditText Name;
-    EditText Password;
     String EmailS;
     String NameS;
     String PasswordS;
@@ -35,21 +41,20 @@ public class Register extends AppCompatActivity {
             setContentView(R.layout.activity_register);
             db = FirebaseFirestore.getInstance();
             mAuth = FirebaseAuth.getInstance();
-            Email = findViewById(R.id.EmailR);
-            Password = findViewById(R.id.PasswordR);
-            Name = findViewById(R.id.nameR);
+            Email = findViewById(R.id.emailCampoRegister);
+            Username = findViewById(R.id.usernameCampoRegister);
+            Password = findViewById(R.id.passwordCampoRegister);
 
-            Button blog = findViewById(R.id.bregister);
+            Button bregister = findViewById(R.id.registerButtonRegister);
 
-            blog.setOnClickListener(new View.OnClickListener() {
+            bregister.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    EmailS = Email.getText().toString();
-                    NameS = Name.getText().toString();
-                    PasswordS = Password.getText().toString();
+                    EmailS = Email.getEditText().getText().toString().trim();
+                    NameS = Username.getEditText().getText().toString().trim();
+                    PasswordS = Password.getEditText().getText().toString().trim();
 
                     signUp(EmailS,NameS,PasswordS);
-
                 }
             });
         }
@@ -106,7 +111,7 @@ public class Register extends AppCompatActivity {
             @Override
             public void run() {
                 // Navegar de vuelta a la pantalla de inicio de sesión/registro después de 4 segundos
-                Intent intent = new Intent(Register.this, MainActivity.class);
+                Intent intent = new Intent(Register.this, Login.class);
                 startActivity(intent);
                 finish();
             }

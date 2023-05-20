@@ -42,6 +42,7 @@ public class BaseActivity extends AppCompatActivity {
         getLayoutInflater().inflate(layoutResID, activityContainer, true);
         super.setContentView(fullLayout);
 
+        /*
         blistapersonajes = findViewById(R.id.blista_personajes);
         blistaobjetos = findViewById(R.id.blista_objetos);
         bmulti = findViewById(R.id.bmultijugador);
@@ -151,6 +152,9 @@ public class BaseActivity extends AppCompatActivity {
     public void gohablist(){
         startActivity(new Intent(BaseActivity.this, habilidadlist.class));
         System.out.println("primer boton");
+    }
+
+         */
     }
 }
 
