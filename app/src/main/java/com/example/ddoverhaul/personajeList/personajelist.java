@@ -44,7 +44,7 @@ public class personajelist extends BaseActivity {
         adapter.setOnClickListener(new PersonajeAdapter.OnClickListener() {
             @Override
             public void onClick(int position, String id) {
-                Intent intent = new Intent(personajelist.this, Login.class);
+                Intent intent = new Intent(personajelist.this, personaleviewprueba.class);
                 intent.putExtra("personaje", id);
                 startActivity(intent);
             }
