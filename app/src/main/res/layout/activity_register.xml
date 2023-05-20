@@ -27,6 +27,7 @@
         >
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/emailCampoR"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textEmailAddress"
@@ -48,6 +49,7 @@
         >
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/nombrecampo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="text"
@@ -72,12 +74,19 @@
         >
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/passwordCampoR"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPassword"
             />
 
     </com.google.android.material.textfield.TextInputLayout>
+
+    <CheckBox
+        android:id="@+id/accept_terms_checkbox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Aceptar terminos y servicios" />
 
     <Button
         android:id="@+id/registerButtonRegister"

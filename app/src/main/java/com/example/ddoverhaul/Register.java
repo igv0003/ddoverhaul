@@ -10,6 +10,8 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,9 +25,9 @@ import java.util.Map;
 
 public class Register extends AppCompatActivity {
     private FirebaseAuth mAuth;
-    EditText Email;
-    EditText Name;
-    EditText Password;
+    TextInputEditText Email;
+    TextInputEditText Name;
+    TextInputEditText Password;
     String EmailS;
     String NameS;
     String PasswordS;
@@ -35,7 +37,7 @@ public class Register extends AppCompatActivity {
 
     protected void aceptar() {
         acceptTermsCheckbox = findViewById(R.id.accept_terms_checkbox);
-        crearb = findViewById(R.id.bregister);
+        crearb = findViewById(R.id.registerButtonRegister);
 
         // Deshabilita el botón al inicio
         crearb.setEnabled(false);
@@ -54,10 +56,10 @@ public class Register extends AppCompatActivity {
             setContentView(R.layout.activity_register);
             db = FirebaseFirestore.getInstance();
             mAuth = FirebaseAuth.getInstance();
-            Email = findViewById(R.id.EmailR);
-            Password = findViewById(R.id.PasswordR);
-            Name = findViewById(R.id.nameR);
-            crearb = findViewById(R.id.bregister);
+            Email = findViewById(R.id.emailCampoR);
+            Password = findViewById(R.id.passwordCampoR);
+            Name = findViewById(R.id.nombrecampo);
+            crearb = findViewById(R.id.registerButtonRegister);
             acceptTermsCheckbox = findViewById(R.id.accept_terms_checkbox);
             aceptar();
             crearb.setOnClickListener(new View.OnClickListener() {
@@ -137,9 +139,8 @@ public class Register extends AppCompatActivity {
             @Override
             public void run() {
                 // Navegar de vuelta a la pantalla de inicio de sesión/registro después de 4 segundos
-                Intent intent = new Intent(Register.this, MainActivity.class);
+                Intent intent = new Intent(Register.this, Login.class);
                 startActivity(intent);
-                finish();
             }
         }, 1000);
     }

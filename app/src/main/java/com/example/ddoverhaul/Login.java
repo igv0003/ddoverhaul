@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
@@ -25,11 +26,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class Login extends AppCompatActivity {
     private FirebaseAuth mAuth;
-    EditText Email;
-    EditText PasswordE;
+    TextInputEditText Email;
+    TextInputEditText PasswordE;
     String EmailS;
     String PasswordS;
-    CheckBox mc ;
+    //CheckBox mc ;
     Button rgb;
     Button blog;
     @Override
@@ -39,11 +40,11 @@ public class Login extends AppCompatActivity {
         setContentView(R.layout.activity_login_register);
         mAuth = FirebaseAuth.getInstance();
 
-        Email = findViewById(R.id.emailCampo);
-        PasswordE = findViewById(R.id.passwordCampo);
+        Email = findViewById(R.id.emailcampoL);
+        PasswordE = findViewById(R.id.passwordCampoL);
         blog = findViewById(R.id.loginButton);
         //Button oc = findViewById(R.id.);
-        mc = findViewById(R.id.mostrarP);
+        //mc = findViewById(R.id.mostrarP);
         rgb = findViewById(R.id.registerButton);
         mostrarcont();
         /*oc.setOnClickListener(new View.OnClickListener(){
@@ -54,11 +55,11 @@ public class Login extends AppCompatActivity {
             }
         });*/
 
-        mc.setOnClickListener(new View.OnClickListener() {
+        /*mc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 mostrarcont();            }
-        });
+        });*/
 
         blog.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,7 +92,7 @@ public class Login extends AppCompatActivity {
     }
 });*/
 
-        mc.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        /*mc.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
@@ -104,7 +105,7 @@ public class Login extends AppCompatActivity {
                     //PasswordE.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, R.drawable.ojo_cerrado, 0);
                 }
             }
-        });
+        });*/
     }
 
     public void enter() {
