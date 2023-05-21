@@ -1,13 +1,10 @@
 package com.example.ddoverhaul;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -18,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.ddoverhaul.habilidadList.CreateSkill;
 import com.example.ddoverhaul.habilidadList.habilidadlist;
+import com.example.ddoverhaul.objetoList.Main_obj;
 import com.example.ddoverhaul.objetoList.lista_objetos;
 import com.example.ddoverhaul.personajeList.personajelist;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;

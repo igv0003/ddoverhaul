@@ -43,7 +43,7 @@
         <activity android:name=".personajeList.personajelist" />
         <activity android:name=".habilidadList.habilidadlist" />
         <activity android:name=".habilidadList.CreateSkill" />
-        <activity android:name=".Main_obj"/>
+        <activity android:name=".objetoList.Main_obj"/>
     </application>
 
 </manifest>

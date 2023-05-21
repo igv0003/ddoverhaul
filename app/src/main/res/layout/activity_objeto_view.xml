@@ -11,13 +11,12 @@
         android:layout_width="match_parent"
         android:layout_height="330dp"
         android:orientation="vertical"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="@+id/equipoLayout"
-        app:layout_constraintTop_toBottomOf="@+id/GuardarObj"
-        app:layout_constraintVertical_bias="1.0"
         tools:layout_editor_absoluteX="-5dp">
 
 
-        <EditText
+        <TextView
             android:id="@+id/caja_valor"
             android:layout_width="249dp"
             android:layout_height="51dp"
@@ -26,9 +25,9 @@
             android:ems="10"
             android:hint="Positivo o Negativo"
             android:inputType="number"
+            android:textAppearance="?android:attr/textAppearanceLarge"
             app:layout_constraintStart_toEndOf="@+id/textValor"
-            app:layout_constraintTop_toTopOf="parent"
-            android:textAppearance="?android:attr/textAppearanceLarge"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/textValor"
@@ -37,11 +36,11 @@
             android:layout_marginStart="32dp"
             android:layout_marginTop="24dp"
             android:text="Valor"
+            android:textAppearance="?android:attr/textAppearanceLarge"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:textAppearance="?android:attr/textAppearanceLarge"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <EditText
+        <TextView
             android:id="@+id/caja_cantidad"
             android:layout_width="249dp"
             android:layout_height="51dp"
@@ -50,9 +49,9 @@
             android:ems="10"
             android:hint="Positivo o Negativo"
             android:inputType="number"
+            android:textAppearance="?android:attr/textAppearanceLarge"
             app:layout_constraintStart_toEndOf="@+id/textCantidad"
-            app:layout_constraintTop_toBottomOf="@+id/caja_valor"
-            android:textAppearance="?android:attr/textAppearanceLarge"/>
+            app:layout_constraintTop_toBottomOf="@+id/caja_valor" />
 
         <TextView
             android:id="@+id/textCantidad"
@@ -65,7 +64,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textValor" />
 
-        <EditText
+        <TextView
             android:id="@+id/caja_operacion"
             android:layout_width="249dp"
             android:layout_height="51dp"
@@ -88,6 +87,7 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textCantidad" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -99,9 +99,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/CancelarObj"
-        app:layout_constraintVertical_bias="1.0">
+        app:layout_constraintStart_toStartOf="parent">
 
         <TextView
             android:id="@+id/textdanio"
@@ -110,11 +108,11 @@
             android:layout_marginStart="32dp"
             android:layout_marginTop="24dp"
             android:text="Daño"
+            android:textAppearance="?android:attr/textAppearanceLarge"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:textAppearance="?android:attr/textAppearanceLarge"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <EditText
+        <TextView
             android:id="@+id/caja_danio"
             android:layout_width="249dp"
             android:layout_height="51dp"
@@ -123,9 +121,9 @@
             android:ems="10"
             android:hint="10"
             android:inputType="number"
+            android:textAppearance="?android:attr/textAppearanceLarge"
             app:layout_constraintStart_toEndOf="@+id/textdanio"
-            app:layout_constraintTop_toTopOf="parent"
-            android:textAppearance="?android:attr/textAppearanceLarge"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/Textarm"
@@ -138,7 +136,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textdanio" />
 
-        <EditText
+        <TextView
             android:id="@+id/caja_arm"
             android:layout_width="249dp"
             android:layout_height="51dp"
@@ -147,9 +145,9 @@
             android:ems="10"
             android:hint="10"
             android:inputType="number"
+            android:textAppearance="?android:attr/textAppearanceLarge"
             app:layout_constraintStart_toEndOf="@+id/Textarm"
-            app:layout_constraintTop_toBottomOf="@+id/caja_danio"
-            android:textAppearance="?android:attr/textAppearanceLarge"/>
+            app:layout_constraintTop_toBottomOf="@+id/caja_danio" />
 
         <TextView
             android:id="@+id/textPos"
@@ -168,13 +166,14 @@
             android:layout_height="46dp"
             android:layout_marginStart="15dp"
             android:layout_marginTop="20dp"
+            android:clickable="false"
             android:ems="10"
             android:hint="10"
             android:spinnerMode="dropdown"
+            android:textAppearance="?android:attr/textAppearanceLarge"
             app:layout_constraintStart_toEndOf="@+id/textPos"
             app:layout_constraintTop_toBottomOf="@+id/caja_arm"
-            tools:ignore="UnknownId"
-            android:textAppearance="?android:attr/textAppearanceLarge"/>
+            tools:ignore="UnknownId" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -184,6 +183,7 @@
         android:layout_height="48dp"
         android:layout_marginTop="36dp"
         android:spinnerMode="dropdown"
+        android:clickable="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.609"
         app:layout_constraintStart_toStartOf="parent"
@@ -200,26 +200,6 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         app:layout_constraintStart_toEndOf="@+id/ImageObj"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/GuardarObj"
-        android:layout_width="145dp"
-        android:layout_height="51dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="64dp"
-        android:text="Guardar"
-        app:layout_constraintEnd_toStartOf="@+id/CancelarObj"
-        app:layout_constraintTop_toBottomOf="@+id/SpinnerTipo" />
-
-    <Button
-        android:id="@+id/CancelarObj"
-        android:layout_width="145dp"
-        android:layout_height="52dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="24dp"
-        android:text="CANCELAR"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/SpinnerTipo" />
 
     <ImageView
         android:id="@+id/ImageObj"
@@ -242,7 +222,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ImageObj" />
 
-    <EditText
+    <TextView
         android:id="@+id/caja_descripcion"
         android:layout_width="351dp"
         android:layout_height="97dp"
@@ -256,7 +236,7 @@
         app:layout_constraintTop_toBottomOf="@+id/TV_descripcion_obj"
         android:textAppearance="?android:attr/textAppearanceLarge"/>
 
-    <EditText
+    <TextView
         android:id="@+id/caja_objeto"
         android:layout_width="253dp"
         android:layout_height="50dp"
