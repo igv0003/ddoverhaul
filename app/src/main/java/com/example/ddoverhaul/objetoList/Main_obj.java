@@ -1,21 +1,23 @@
-package com.example.ddoverhaul;
+package com.example.ddoverhaul.objetoList;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintSet;
-
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.text.Layout;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.Toast;
+
+import com.example.ddoverhaul.BaseActivity;
+import com.example.ddoverhaul.Consumibles;
+import com.example.ddoverhaul.Equipo;
+import com.example.ddoverhaul.Objeto;
+import com.example.ddoverhaul.R;
 
 
 public class Main_obj extends BaseActivity {
@@ -24,6 +26,16 @@ public class Main_obj extends BaseActivity {
     private String opcionSeleccionada;
     private View EquipoLayout,ConsumibleLayout;
     private ImageView ImagenObj;
+    private EditText editName,editDescription;
+    //Tipo Equipo
+    private EditText editDamage, editArmor;
+    //Tipo Consumible
+    private EditText editValor, editCuantiti, editOperation;
+    private Button guardarBTN = findViewById(R.id.GuardarObj);
+    private Button cancelarBTN = findViewById(R.id.CancelarObj);
+    private Objeto obj;
+    private Equipo equp;
+    private Consumibles cons;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,10 +44,19 @@ public class Main_obj extends BaseActivity {
 
         // Referencia al Spinner
         SpinnerTipo = findViewById(R.id.SpinnerTipo);
-        SpinnerEquipoPos = findViewById(R.id.SpinnerPosicion);
         EquipoLayout = findViewById(R.id.equipoLayout);
         ConsumibleLayout = findViewById(R.id.consumibleLayout);
         ImagenObj = findViewById(R.id.ImageObj);
+
+        //Referenciar EditText
+        editName = findViewById(R.id.caja_objeto);
+        SpinnerEquipoPos = findViewById(R.id.SpinnerPosicion);
+        editDamage = findViewById(R.id.caja_danio);
+        editArmor = findViewById(R.id.caja_arm);
+        editValor = findViewById(R.id.caja_valor);
+        editDescription = findViewById(R.id.caja_descripcion);
+        editCuantiti = findViewById(R.id.caja_cantidad);
+        editOperation = findViewById(R.id.caja_operacion);
 
         ArrayAdapter<String> adapterTipo = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, new String[]{"-", "Equipo", "Consumible"});
         SpinnerTipo.setAdapter(adapterTipo);
@@ -68,6 +89,43 @@ public class Main_obj extends BaseActivity {
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
                 //Si no pone NADA
+            }
+        });
+
+        guardarBTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Boton cuando se haga clic en el botón "Guardar"
+                String nombre = editName.getText().toString();
+                String descrip = editDescription.getText().toString();
+                String Tipo;
+                if (nombre.equals("")) {
+                    Toast.makeText(getApplicationContext(), "El nombre no puede estar vacío",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                int selectedPosition = SpinnerTipo.getSelectedItemPosition();
+                int selectedValue = Integer.parseInt(SpinnerTipo.getItemAtPosition(selectedPosition).toString());
+                switch (selectedValue){
+                    case 0://Posicion primera OBJETO
+                        Tipo = "Otro";
+                        break;
+                    case 1://Posicion segunda EQUIPO
+                        Tipo = "Equipo";
+                        break;
+                    case 2://Posicion tercera CONSUMIBLE
+                        Tipo = "Consumible";
+                        break;
+
+                }
+            }
+        });
+
+        cancelarBTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Boton cuando se haga clic en el botón "Cancelar"
+                Intent intent = new Intent(Main_obj.this, lista_objetos.class);
+                startActivity(intent);
             }
         });
     }
