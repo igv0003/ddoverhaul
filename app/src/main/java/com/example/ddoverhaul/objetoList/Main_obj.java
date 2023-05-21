@@ -14,7 +14,6 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.ddoverhaul.BaseActivity;
-import com.example.ddoverhaul.Consumibles;
 import com.example.ddoverhaul.Equipo;
 import com.example.ddoverhaul.Objeto;
 import com.example.ddoverhaul.R;
@@ -31,11 +30,10 @@ public class Main_obj extends BaseActivity {
     private EditText editDamage, editArmor;
     //Tipo Consumible
     private EditText editValor, editCuantiti, editOperation;
-    private Button guardarBTN = findViewById(R.id.GuardarObj);
-    private Button cancelarBTN = findViewById(R.id.CancelarObj);
+    private Button guardarBTN;
+    private Button cancelarBTN;
     private Objeto obj;
-    private Equipo equp;
-    private Consumibles cons;
+    private Equipo Equp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +46,8 @@ public class Main_obj extends BaseActivity {
         ConsumibleLayout = findViewById(R.id.consumibleLayout);
         ImagenObj = findViewById(R.id.ImageObj);
 
+        guardarBTN = findViewById(R.id.GuardarObj);
+        cancelarBTN = findViewById(R.id.CancelarObj);
         //Referenciar EditText
         editName = findViewById(R.id.caja_objeto);
         SpinnerEquipoPos = findViewById(R.id.SpinnerPosicion);
@@ -98,24 +98,41 @@ public class Main_obj extends BaseActivity {
                 // Boton cuando se haga clic en el botón "Guardar"
                 String nombre = editName.getText().toString();
                 String descrip = editDescription.getText().toString();
-                String Tipo;
+                String Tipo = "Otro";
+                //Equipo
+                int danio = 0;
+                int arm = 0;
+                String posicion = "Cabeza";
+                //Consumible
+                int valor = 0;
+                int cantidad = 0;
+                char operacion = '+';
                 if (nombre.equals("")) {
                     Toast.makeText(getApplicationContext(), "El nombre no puede estar vacío",Toast.LENGTH_SHORT).show();
                     return;
                 }
                 int selectedPosition = SpinnerTipo.getSelectedItemPosition();
-                int selectedValue = Integer.parseInt(SpinnerTipo.getItemAtPosition(selectedPosition).toString());
-                switch (selectedValue){
-                    case 0://Posicion primera OBJETO
-                        Tipo = "Otro";
-                        break;
+                switch (selectedPosition){
                     case 1://Posicion segunda EQUIPO
                         Tipo = "Equipo";
+                        danio = Integer.parseInt(editDamage.getText().toString());
+                        arm = Integer.parseInt(editArmor.getText().toString());
+                        posicion = SpinnerEquipoPos.getSelectedItem().toString();
                         break;
                     case 2://Posicion tercera CONSUMIBLE
                         Tipo = "Consumible";
+                        valor = Integer.parseInt(editValor.getText().toString());
+                        cantidad = Integer.parseInt(editCuantiti.getText().toString());
+                        if (editOperation.getText().toString().length() == 1){
+                            operacion = editOperation.getText().toString().charAt(0);
+                        }else{
+                            Toast.makeText(getApplicationContext(), "Operacion debe ser un caracter operador",Toast.LENGTH_SHORT).show();
+                            return;
+                        }
                         break;
-
+                    default://Posicion segunda OTRO
+                        Tipo = "Otro";
+                        break;
                 }
             }
         });

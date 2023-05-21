@@ -24,7 +24,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="24dp"
             android:ems="10"
-            android:hint="Positivo o Negativo"
+            android:hint="0"
             android:inputType="number"
             app:layout_constraintStart_toEndOf="@+id/textValor"
             app:layout_constraintTop_toTopOf="parent"
@@ -48,7 +48,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="24dp"
             android:ems="10"
-            android:hint="Positivo o Negativo"
+            android:hint="0"
             android:inputType="number"
             app:layout_constraintStart_toEndOf="@+id/textCantidad"
             app:layout_constraintTop_toBottomOf="@+id/caja_valor"
@@ -72,7 +72,7 @@
             android:layout_marginStart="15dp"
             android:layout_marginTop="16dp"
             android:ems="10"
-            android:hint="Caracter: '+' o '-'"
+            android:hint="Un solo caracter"
             android:inputType="text"
             android:textAppearance="?android:attr/textAppearanceLarge"
             app:layout_constraintStart_toEndOf="@+id/textoperacion"
@@ -145,7 +145,7 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="20dp"
             android:ems="10"
-            android:hint="10"
+            android:hint="0"
             android:inputType="number"
             app:layout_constraintStart_toEndOf="@+id/Textarm"
             app:layout_constraintTop_toBottomOf="@+id/caja_danio"
@@ -169,7 +169,7 @@
             android:layout_marginStart="15dp"
             android:layout_marginTop="20dp"
             android:ems="10"
-            android:hint="10"
+            android:hint="0"
             android:spinnerMode="dropdown"
             app:layout_constraintStart_toEndOf="@+id/textPos"
             app:layout_constraintTop_toBottomOf="@+id/caja_arm"
@@ -192,8 +192,8 @@
 
     <TextView
         android:id="@+id/TV_nombre_obj"
-        android:layout_width="92dp"
-        android:layout_height="24dp"
+        android:layout_width="122dp"
+        android:layout_height="30dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="32dp"
         android:text="Nombre"
@@ -233,8 +233,8 @@
 
     <TextView
         android:id="@+id/TV_descripcion_obj"
-        android:layout_width="129dp"
-        android:layout_height="28dp"
+        android:layout_width="154dp"
+        android:layout_height="31dp"
         android:layout_marginStart="28dp"
         android:layout_marginTop="6dp"
         android:text="Descripcion"
@@ -271,15 +271,15 @@
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="58dp"
-        android:layout_height="27dp"
+        android:layout_width="84dp"
+        android:layout_height="31dp"
         android:layout_marginStart="28dp"
         android:text="Tipo"
+        android:textAppearance="?android:attr/textAppearanceLarge"
         app:layout_constraintBottom_toTopOf="@+id/SpinnerTipo"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/caja_descripcion"
-        app:layout_constraintVertical_bias="0.578"
-        android:textAppearance="?android:attr/textAppearanceLarge"/>
+        app:layout_constraintVertical_bias="0.578" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
