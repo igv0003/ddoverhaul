@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -16,7 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.ddoverhaul.habilidadList.CreateSkill;
 import com.example.ddoverhaul.habilidadList.habilidadlist;
-import com.example.ddoverhaul.objetoList.Main_obj;
+import com.example.ddoverhaul.multiplayer.MultiSelector;
 import com.example.ddoverhaul.objetoList.lista_objetos;
 import com.example.ddoverhaul.personajeList.personajelist;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -39,7 +40,7 @@ public class BaseActivity extends AppCompatActivity {
         bajustes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //opciones();
+                opciones();
             }
         });
 
@@ -58,7 +59,7 @@ public class BaseActivity extends AppCompatActivity {
                         showPopupMenu(bottomNavigationView );
                         return true;
                     case R.id.multijugador:
-                        startActivity(new Intent(BaseActivity.this, Multijugador.class));
+                        startActivity(new Intent(BaseActivity.this, MultiSelector.class));
                         return true;
                     case R.id.perfil:
                         goprofile();
@@ -74,7 +75,7 @@ public class BaseActivity extends AppCompatActivity {
         bajustes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //opciones();
+                opciones();
             }
         });
 
@@ -103,7 +104,7 @@ public class BaseActivity extends AppCompatActivity {
     }
 
 
-    /*private void opciones() {
+    private void opciones() {
         setContentView(R.layout.activity_ajustes);
 
         Button logoutButton = findViewById(R.id.logout_button);
@@ -114,7 +115,7 @@ public class BaseActivity extends AppCompatActivity {
                 logout();
             }
         });
-    }*/
+    }
 
     private void logout(){
         startActivity(new Intent(BaseActivity.this, Login.class));
@@ -162,7 +163,7 @@ public class BaseActivity extends AppCompatActivity {
         //startActivity(new Intent(BaseActivity.this, .class));
     }
     public void gocreateobjec(){
-        startActivity(new Intent(BaseActivity.this, Main_obj.class));
+        //startActivity(new Intent(BaseActivity.this, .class));
     }
     public void goobjlist(){
         startActivity(new Intent(BaseActivity.this, lista_objetos.class));
