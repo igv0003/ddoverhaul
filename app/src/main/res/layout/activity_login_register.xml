@@ -15,41 +15,19 @@
 
     <!-- input email -->
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/emailCampoRegister"
+        android:id="@+id/emailCampo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="100dp"
         android:layout_marginTop="80dp"
-        android:hint="Email"
+        android:hint="Email/Username"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         app:startIconDrawable="@drawable/email"
         app:boxStrokeColor="@color/gold"
         >
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/emailCampoR"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textEmailAddress"
-            />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <!-- input Username -->
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/usernameCampoRegister"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="100dp"
-        android:layout_marginTop="30dp"
-        android:hint="Username"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        app:startIconDrawable="@drawable/username"
-        app:boxStrokeColor="@color/gold"
-        >
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/nombrecampo"
+            android:id="@+id/emailcampoL"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="text"
@@ -60,7 +38,7 @@
 
     <!-- input Password -->
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/passwordCampoRegister"
+        android:id="@+id/passwordCampo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="100dp"
@@ -74,7 +52,7 @@
         >
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/passwordCampoR"
+            android:id="@+id/passwordCampoL"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPassword"
@@ -82,17 +60,21 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <CheckBox
-        android:id="@+id/accept_terms_checkbox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Aceptar terminos y servicios" />
 
     <Button
-        android:id="@+id/registerButtonRegister"
+        android:id="@+id/loginButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="50dp"
+        android:text="LOGIN"
+        android:layout_gravity="center"
+        />
+
+    <Button
+        android:id="@+id/registerButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:text="REGISTER"
         android:layout_gravity="center"/>
 

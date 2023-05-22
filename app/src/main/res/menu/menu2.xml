@@ -3,9 +3,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/lista_hab"
-        android:title="Lista de Habilidades" />
+        android:title="Lista de Habilidades"
+        android:icon="@drawable/habilidades"/>
     <item
         android:id="@+id/lista_obj"
-        android:title="Lista de Objetos" />
+        android:title="Lista de Objetos"
+        android:icon="@drawable/objetos"/>
 
 </menu>

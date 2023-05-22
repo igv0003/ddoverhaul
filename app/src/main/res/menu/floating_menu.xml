@@ -2,12 +2,13 @@
 
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/menu_option1"
-        android:title="Crear Personaje" />
-    <item
-        android:id="@+id/menu_option2"
+        android:id="@+id/crearOBJ"
         android:title="Crear Objeto" />
     <item
-        android:id="@+id/menu_option3"
+        android:id="@+id/crearHAB"
         android:title="Crear Habilidad" />
+    <item
+        android:id="@+id/crearPERS"
+        android:title="Crear Personaje" />
+
 </menu>
