@@ -45,7 +45,7 @@ public class Consumibles extends Objeto {
     public void setOperacion(char operacion) {
         this.operacion = operacion;
     }
-
+    public Consumibles(){}
 
     public static class Multijugador {
     }

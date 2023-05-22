@@ -14,6 +14,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.ddoverhaul.BaseActivity;
+import com.example.ddoverhaul.Consumibles;
 import com.example.ddoverhaul.Equipo;
 import com.example.ddoverhaul.Objeto;
 import com.example.ddoverhaul.R;
@@ -33,8 +34,8 @@ public class Main_obj extends BaseActivity {
     private Button guardarBTN;
     private Button cancelarBTN;
     private Objeto obj;
-    private Equipo Equp;
-
+    private Equipo equip;
+    private Consumibles cons;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -118,6 +119,7 @@ public class Main_obj extends BaseActivity {
                         danio = Integer.parseInt(editDamage.getText().toString());
                         arm = Integer.parseInt(editArmor.getText().toString());
                         posicion = SpinnerEquipoPos.getSelectedItem().toString();
+                        equip = new Equipo();
                         break;
                     case 2://Posicion tercera CONSUMIBLE
                         Tipo = "Consumible";
@@ -129,9 +131,11 @@ public class Main_obj extends BaseActivity {
                             Toast.makeText(getApplicationContext(), "Operacion debe ser un caracter operador",Toast.LENGTH_SHORT).show();
                             return;
                         }
+                        cons = new Consumibles();
                         break;
                     default://Posicion segunda OTRO
                         Tipo = "Otro";
+                        obj = new Objeto();
                         break;
                 }
             }
