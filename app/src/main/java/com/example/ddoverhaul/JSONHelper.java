@@ -21,7 +21,6 @@ import com.google.gson.JsonParser;
 
 public class JSONHelper {
     Context context;
-    Personaje p = new Personaje();
     String fileChar = "personaje.json";
     String fileObj = "objeto.json";
     String fileEquip = "equipo.json";
@@ -205,31 +204,37 @@ public class JSONHelper {
 
     // Método que recibe un array de Personajes y los ordena por id
     public Personaje[] sortCharacters(Personaje[] characters){
-        Personaje[] sortChars = new Personaje[characters.length];
-        int loops = sortChars.length;
-
-        // Se recorre el nuevo array, añadiendo en las posiciones los personajes con id ordenada
-        for (int i = 0; i < loops; i++) {
-            // Si el personaje tiene la misma id que la posicion actual
-            if (characters[i].getId() == i){
-                // Se añade el personaje a la posicion
-                Personaje p = new Personaje (characters[i]);
-                sortChars[i] = p;
-            } else {
-                // Si no tiene la misma id, se buscará al personaje que tenga la misma id que la posicion actual
-                for (int j = 0; j < loops; j++) {
-                    // Si el personaje actual tiene la misma id que la posicion actual
-                    if (characters[j].getId() == i){
-                        Personaje p = new Personaje(characters[j]);
-                        sortChars[i] = p;
-                        j = loops;
-                    }
+        Personaje[] sortCharacters = new Personaje[characters.length];
+        int loops = sortCharacters.length;
+        // Se guarda un personaje para empezar a ordenar
+        Personaje charToSave = new Personaje();
+        for (int i = 0; i < characters.length; i++) {
+            if (characters[i] != null) {
+                charToSave = new Personaje(characters[i]);
+                i = characters.length;
+            }
+        }
+        int savedPos = 0;
+        // Se recorre el nuevo array añadiendo los personajes ordenados
+        for (int i = 0; i < sortCharacters.length; i++) {
+            // En cada vuelta se recorre el array recibido buscando el id más bajo
+            for (int j = 0; j < characters.length; j++) {
+                if (characters[j] != null && characters[j].getId() < charToSave.getId()) {
+                    charToSave = new Personaje(characters[j]);
+                    savedPos = j;
                 }
             }
+            // Una vez conseguida la id más baja, se guarda en la posicion actual
+            sortCharacters[i] = new Personaje(charToSave);
+            // Se elimina el personaje del array recibido para que no se repita
+            characters[savedPos] = null;
+            // Se aumenta la id del personaje guardado para nunca tener la id más baja
+            charToSave.setId(999);
+
         }
 
         // Devuelve el nuevo array con los personajes ordenados por id
-        return sortChars;
+        return sortCharacters;
     }
 
 
@@ -365,25 +370,31 @@ public class JSONHelper {
     public Objeto[] sortObjects(Objeto[] objects){
         Objeto[] sortObjects = new Objeto[objects.length];
         int loops = sortObjects.length;
-
-        // Se recorre el nuevo array, añadiendo en las posiciones los objetos con id ordenada
-        for (int i = 0; i < loops; i++) {
-            // Si el objeto tiene la misma id que la posicion actual
-            if (objects[i].getId() == i){
-                // Se añade el objeto a la posicion
-                Objeto o = new Objeto (objects[i]);
-                sortObjects[i] = o;
-            } else {
-                // Si no tiene la misma id, se buscará al objeto que tenga la misma id que la posicion actual
-                for (int j = 0; j < loops; j++) {
-                    // Si el objeto actual tiene la misma id que la posicion actual
-                    if (objects[j].getId() == i){
-                        Objeto o = new Objeto(objects[j]);
-                        sortObjects[i] = o;
-                        j = loops;
-                    }
+        // Se guarda un objeto para empezar a ordenar
+        Objeto objToSave = new Objeto();
+        for (int i = 0; i < objects.length; i++) {
+            if (objects[i] != null) {
+                objToSave = new Objeto(objects[i]);
+                i = objects.length;
+            }
+        }
+        int savedPos = 0;
+        // Se recorre el nuevo array añadiendo los objetos ordenados
+        for (int i = 0; i < sortObjects.length; i++) {
+            // En cada vuelta se recorre el array recibido buscando el id más bajo
+            for (int j = 0; j < objects.length; j++) {
+                if (objects[j] != null && objects[j].getId() < objToSave.getId()) {
+                    objToSave = new Objeto(objects[j]);
+                    savedPos = j;
                 }
             }
+            // Una vez conseguida la id más baja, se guarda en la posicion actual
+            sortObjects[i] = new Objeto(objToSave);
+            // Se elimina el objeto del array recibido para que no se repita
+            objects[savedPos] = null;
+            // Se aumenta la id del objeto guardado para nunca tener la id más baja
+            objToSave.setId(999);
+
         }
 
         // Devuelve el nuevo array con los objetos ordenados por id
@@ -523,25 +534,33 @@ public class JSONHelper {
     public Equipo[] sortEquips(Equipo[] equips){
         Equipo[] sortEquips = new Equipo[equips.length];
         int loops = sortEquips.length;
-        // Se recorre el nuevo array, añadiendo en las posiciones los equipos con id ordenada
-        for (int i = 0; i < loops; i++) {
-            // Si el equipo tiene la misma id que la posicion actual
-            if (equips[i].getId() == i){
-                // Se añade el equipo a la posicion
-                Equipo e = new Equipo(equips[i]);
-                sortEquips[i] = e;
-            } else {
-                // Si no tiene la misma id, se buscará al equipo que tenga la misma id que la posicion actual
-                for (int j = 0; j < loops; j++) {
-                    // Si el equipo actual tiene la misma id que la posicion actual
-                    if (equips[j].getId() == i){
-                        Equipo e = new Equipo(equips[j]);
-                        sortEquips[i] = e;
-                        j = loops;
-                    }
-                }
+        // Se guarda un equipo para empezar a ordenar
+        Equipo equipToSave = new Equipo();
+        for (int i = 0; i < equips.length; i++) {
+            if (equips[i] != null) {
+                equipToSave = new Equipo(equips[i]);
+                i = equips.length;
             }
         }
+        int savedPos = 0;
+        // Se recorre el nuevo array añadiendo los equipos ordenados
+        for (int i = 0; i < sortEquips.length; i++) {
+            // En cada vuelta se recorre el array recibido buscando el id más bajo
+            for (int j = 0; j < equips.length; j++) {
+                if (equips[j] != null && equips[j].getId() < equipToSave.getId()) {
+                    equipToSave = new Equipo(equips[j]);
+                    savedPos = j;
+                }
+            }
+            // Una vez conseguida la id más baja, se guarda en la posicion actual
+            sortEquips[i] = new Equipo(equipToSave);
+            // Se elimina el equipo del array recibido para que no se repita
+            equips[savedPos] = null;
+            // Se aumenta la id del equipo guardado para nunca tener la id más baja
+            equipToSave.setId(999);
+
+        }
+
         // Devuelve el nuevo array con los equipos ordenados por id
         return sortEquips;
     }
@@ -678,25 +697,33 @@ public class JSONHelper {
     public Consumibles[] sortCons(Consumibles[] consumibles){
         Consumibles[] sortCons = new Consumibles[consumibles.length];
         int loops = sortCons.length;
-        // Se recorre el nuevo array, añadiendo en las posiciones los consumibles con id ordenada
-        for (int i = 0; i < loops; i++) {
-            // Si el consumible tiene la misma id que la posicion actual
-            if (consumibles[i].getId() == i){
-                // Se añade el consumible a la posicion
-                Consumibles c = new Consumibles(consumibles[i]);
-                sortCons[i] = c;
-            } else {
-                // Si no tiene la misma id, se buscará al consumible que tenga la misma id que la posicion actual
-                for (int j = 0; j < loops; j++) {
-                    // Si el consumible actual tiene la misma id que la posicion actual
-                    if (consumibles[j].getId() == i){
-                        Consumibles c = new Consumibles(consumibles[j]);
-                        sortCons[i] = c;
-                        j = loops;
-                    }
-                }
+        // Se guarda un consumible para empezar a ordenar
+        Consumibles constToSave = new Consumibles();
+        for (int i = 0; i < consumibles.length; i++) {
+            if (consumibles[i] != null) {
+                constToSave = new Consumibles(consumibles[i]);
+                i = consumibles.length;
             }
         }
+        int consSavedPos = 0;
+        // Se recorre el nuevo array añadiendo los consumibles ordenados
+        for (int i = 0; i < sortCons.length; i++) {
+            // En cada vuelta se recorre el array recibido buscando el id más bajo
+            for (int j = 0; j < consumibles.length; j++) {
+                if (consumibles[j] != null && consumibles[j].getId() < constToSave.getId()) {
+                    constToSave = new Consumibles(consumibles[j]);
+                    consSavedPos = j;
+                }
+            }
+            // Una vez conseguida la id más baja, se guarda en la posicion actual
+            sortCons[i] = new Consumibles(constToSave);
+            // Se elimina el consumible del array recibido para que no se repita
+            consumibles[consSavedPos] = null;
+            // Se aumenta la id del consumible guardado para nunca tener la id más baja
+            constToSave.setId(999);
+
+        }
+
         // Devuelve el nuevo array con los consumibles ordenados por id
         return sortCons;
     }
