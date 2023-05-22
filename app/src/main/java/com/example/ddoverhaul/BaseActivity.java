@@ -166,11 +166,9 @@ public class BaseActivity extends AppCompatActivity {
     }
     public void goobjlist(){
         startActivity(new Intent(BaseActivity.this, lista_objetos.class));
-        System.out.println("segundoboton");
     }
     public void gohablist(){
         startActivity(new Intent(BaseActivity.this, habilidadlist.class));
-        System.out.println("primer boton");
     }
 }
 

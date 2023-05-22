@@ -18,8 +18,8 @@
 
             <ImageView
                 android:id="@+id/imagen"
-                android:layout_width="117dp"
-                android:layout_height="94dp"
+                android:layout_width="114dp"
+                android:layout_height="106dp"
                 android:src="@drawable/username"
                 tools:srcCompat="@tools:sample/avatars" />
 
@@ -38,14 +38,16 @@
                         android:id="@+id/textView2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Nombre" />
+                        android:text="Nombre"
+                        android:textAppearance="?android:attr/textAppearanceLarge"/>
 
                     <TextView
                         android:id="@+id/textView3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
-                        android:text="(nombre)" />
+                        android:text="(nombre)"
+                        android:textAppearance="?android:attr/textAppearanceLarge"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -58,14 +60,16 @@
                         android:id="@+id/textView4"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Nivel" />
+                        android:text="Nivel"
+                        android:textAppearance="?android:attr/textAppearanceLarge"/>
 
                     <TextView
                         android:id="@+id/textView5"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
-                        android:text="(nivel)" />
+                        android:text="(nivel)"
+                        android:textAppearance="?android:attr/textAppearanceLarge"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -78,14 +82,32 @@
                         android:id="@+id/textView6"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Raza" />
+                        android:text="Raza"
+                        android:textAppearance="?android:attr/textAppearanceLarge"/>
 
                     <TextView
                         android:id="@+id/textView7"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
-                        android:text="(raza)" />
+                        android:text="(raza)"
+                        android:textAppearance="?android:attr/textAppearanceLarge"/>
+
+                    <TextView
+                        android:id="@+id/textView8"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Clase"
+                        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+                    <TextView
+                        android:id="@+id/textView9"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:text="(clase)"
+                        android:textAppearance="?android:attr/textAppearanceLarge" />
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -94,18 +116,6 @@
                     android:orientation="horizontal"
                     android:layout_marginTop="10dp">
 
-                    <TextView
-                        android:id="@+id/textView8"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Clase" />
-
-                    <TextView
-                        android:id="@+id/textView9"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:text="(clase)" />
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
@@ -189,28 +199,32 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Fuerza"
-                    android:gravity="center"/>
+                    android:gravity="center"
+                    android:textAppearance="?android:attr/textAppearanceLarge"/>
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Destreza"
-                    android:gravity="center"/>
+                    android:gravity="center"
+                    android:textAppearance="?android:attr/textAppearanceLarge"/>
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Constitución"
-                    android:gravity="center"/>
+                    android:text="Const"
+                    android:gravity="center"
+                    android:textAppearance="?android:attr/textAppearanceLarge"/>
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Inteligencia"
-                    android:gravity="center"/>
+                    android:text="Intel"
+                    android:gravity="center"
+                    android:textAppearance="?android:attr/textAppearanceLarge"/>
             </LinearLayout>
 
             <LinearLayout
@@ -223,28 +237,32 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="(Fuerza)"
-                    android:gravity="center"/>
+                    android:gravity="center"
+                    android:textAppearance="?android:attr/textAppearanceLarge" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="(Destreza)"
-                    android:gravity="center"/>
+                    android:gravity="center"
+                    android:textAppearance="?android:attr/textAppearanceLarge"/>
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="(Constitución)"
-                    android:gravity="center"/>
+                    android:text="(Const)"
+                    android:gravity="center"
+                    android:textAppearance="?android:attr/textAppearanceLarge"/>
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="(Inteligencia)"
-                    android:gravity="center"/>
+                    android:text="(Intel)"
+                    android:gravity="center"
+                    android:textAppearance="?android:attr/textAppearanceLarge"/>
             </LinearLayout>
 
             <LinearLayout
@@ -257,21 +275,24 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Sabiduría"
-                    android:gravity="center"/>
+                    android:gravity="center"
+                    android:textAppearance="?android:attr/textAppearanceLarge"/>
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Carisma"
-                    android:gravity="center"/>
+                    android:gravity="center"
+                    android:textAppearance="?android:attr/textAppearanceLarge"/>
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Velocidad"
-                    android:gravity="center"/>
+                    android:gravity="center"
+                    android:textAppearance="?android:attr/textAppearanceLarge"/>
             </LinearLayout>
 
             <LinearLayout
@@ -284,21 +305,24 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="(Sabiduría)"
-                    android:gravity="center"/>
+                    android:gravity="center"
+                    android:textAppearance="?android:attr/textAppearanceLarge"/>
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="(Carisma)"
-                    android:gravity="center"/>
+                    android:gravity="center"
+                    android:textAppearance="?android:attr/textAppearanceLarge"/>
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="(Velocidad)"
-                    android:gravity="center"/>
+                    android:gravity="center"
+                    android:textAppearance="?android:attr/textAppearanceLarge"/>
             </LinearLayout>
 
         </LinearLayout>
