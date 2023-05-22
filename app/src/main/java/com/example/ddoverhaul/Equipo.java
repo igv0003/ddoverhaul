@@ -45,4 +45,7 @@ public class Equipo extends Objeto{
         this.posicion = E.posicion;
         this.armadura = E.armadura;
     }
+
+    public Equipo(){}
+
 }
