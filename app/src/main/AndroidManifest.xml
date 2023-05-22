@@ -43,6 +43,7 @@
         <activity android:name=".habilidadList.habilidadlist" />
         <activity android:name=".habilidadList.CreateSkill" />
         <activity android:name=".personajeList.personaleviewprueba"/>
+        <activity android:name=".personajeList.viewPersonaje"/>
     </application>
 
 </manifest>
