@@ -103,7 +103,7 @@ public class Main_obj extends BaseActivity {
                 //Equipo
                 int danio = 0;
                 int arm = 0;
-                String posicion = "Cabeza";
+                int posicion = 0;
                 //Consumible
                 int valor = 0;
                 int cantidad = 0;
@@ -118,8 +118,13 @@ public class Main_obj extends BaseActivity {
                         Tipo = "Equipo";
                         danio = Integer.parseInt(editDamage.getText().toString());
                         arm = Integer.parseInt(editArmor.getText().toString());
-                        posicion = SpinnerEquipoPos.getSelectedItem().toString();
+                        posicion = SpinnerEquipoPos.getSelectedItemPosition();
                         equip = new Equipo();
+                        equip.setNombre(nombre);
+                        equip.setDescripcion(descrip);
+                        equip.setDanio(danio);
+                        equip.setArmadura(arm);
+                        equip.setPosicion(posicion);
                         break;
                     case 2://Posicion tercera CONSUMIBLE
                         Tipo = "Consumible";

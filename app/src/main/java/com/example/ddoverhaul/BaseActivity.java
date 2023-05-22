@@ -39,7 +39,7 @@ public class BaseActivity extends AppCompatActivity {
         bajustes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                opciones();
+                //opciones();
             }
         });
 
@@ -74,7 +74,7 @@ public class BaseActivity extends AppCompatActivity {
         bajustes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                opciones();
+                //opciones();
             }
         });
 
@@ -103,7 +103,7 @@ public class BaseActivity extends AppCompatActivity {
     }
 
 
-    private void opciones() {
+    /*private void opciones() {
         setContentView(R.layout.activity_ajustes);
 
         Button logoutButton = findViewById(R.id.logout_button);
@@ -114,7 +114,7 @@ public class BaseActivity extends AppCompatActivity {
                 logout();
             }
         });
-    }
+    }*/
 
     private void logout(){
         startActivity(new Intent(BaseActivity.this, Login.class));
