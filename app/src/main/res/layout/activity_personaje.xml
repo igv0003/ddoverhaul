@@ -119,8 +119,6 @@
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
-
-        <!-- Divider -->
         <View
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
@@ -332,12 +330,226 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="#000000"/>
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Equipo"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/imageView1"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:layout_margin="8dp"
+                    android:src="@drawable/tuerca" />
+
+                <ImageView
+                    android:id="@+id/imageView2"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:src="@drawable/tuerca"
+                    android:layout_margin="8dp" />
+
+                <ImageView
+                    android:id="@+id/imageView3"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:src="@drawable/tuerca"
+                    android:layout_margin="8dp" />
+
+                <ImageView
+                    android:id="@+id/imageView4"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:src="@drawable/tuerca"
+                    android:layout_margin="8dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/imageView5"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:src="@drawable/tuerca"
+                    android:layout_margin="8dp" />
+
+                <ImageView
+                    android:id="@+id/imageView6"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:src="@drawable/tuerca"
+                    android:layout_margin="8dp" />
+
+                <ImageView
+                    android:id="@+id/imageView7"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:src="@drawable/tuerca"
+                    android:layout_margin="8dp" />
+
+                <ImageView
+                    android:id="@+id/imageView8"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:src="@drawable/tuerca"
+                    android:layout_margin="8dp" />
+            </LinearLayout>
         </LinearLayout>
 
+        <View
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#000000"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:text="inventario"
+                    android:textAppearance="?android:attr/textAppearanceLarge" />
+            </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal" >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/imageView11111"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:layout_margin="8dp"
+                android:src="@drawable/tuerca" />
+            <ImageView
+                android:id="@+id/imageView11"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:layout_margin="8dp"
+                android:src="@drawable/tuerca" />
+
+            <ImageView
+                android:id="@+id/imageView111"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:src="@drawable/tuerca"
+                android:layout_margin="8dp" />
+
+            <ImageView
+                android:id="@+id/imageView311"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:src="@drawable/tuerca"
+                android:layout_margin="8dp" />
+
+            <ImageView
+                android:id="@+id/imageView411"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:src="@drawable/tuerca"
+                android:layout_margin="8dp" />
+        </LinearLayout>
+    </LinearLayout>
+        </LinearLayout>
+        <View
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#000000"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="habilidades"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/imageView1111111"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:layout_margin="8dp"
+                    android:src="@drawable/tuerca" />
+
+                <ImageView
+                    android:id="@+id/imageView511"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:src="@drawable/tuerca"
+                    android:layout_margin="8dp" />
+
+                <ImageView
+                    android:id="@+id/imageView611"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:src="@drawable/tuerca"
+                    android:layout_margin="8dp" />
+
+                <ImageView
+                    android:id="@+id/imageView711"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:src="@drawable/tuerca"
+                    android:layout_margin="8dp" />
+
+                <ImageView
+                    android:id="@+id/imageView811"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:src="@drawable/tuerca"
+                    android:layout_margin="8dp" />
+            </LinearLayout>
+        </LinearLayout>
 
     </LinearLayout>
+
+
 </ScrollView>
