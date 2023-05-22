@@ -17,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.ddoverhaul.habilidadList.CreateSkill;
 import com.example.ddoverhaul.habilidadList.habilidadlist;
+import com.example.ddoverhaul.multiplayer.MultiSelector;
 import com.example.ddoverhaul.objetoList.lista_objetos;
 import com.example.ddoverhaul.personajeList.personajelist;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -58,7 +59,7 @@ public class BaseActivity extends AppCompatActivity {
                         showPopupMenu(bottomNavigationView );
                         return true;
                     case R.id.multijugador:
-                        startActivity(new Intent(BaseActivity.this, Multijugador.class));
+                        startActivity(new Intent(BaseActivity.this, MultiSelector.class));
                         return true;
                     case R.id.perfil:
                         goprofile();
