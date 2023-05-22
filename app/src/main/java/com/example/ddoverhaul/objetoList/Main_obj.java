@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.example.ddoverhaul.BaseActivity;
 import com.example.ddoverhaul.Consumibles;
 import com.example.ddoverhaul.Equipo;
+import com.example.ddoverhaul.JSONHelper;
 import com.example.ddoverhaul.Objeto;
 import com.example.ddoverhaul.R;
 
@@ -27,6 +28,7 @@ public class Main_obj extends BaseActivity {
     private View EquipoLayout,ConsumibleLayout;
     private ImageView ImagenObj;
     private EditText editName,editDescription;
+    private JSONHelper helper;
     //Tipo Equipo
     private EditText editDamage, editArmor;
     //Tipo Consumible
@@ -58,6 +60,8 @@ public class Main_obj extends BaseActivity {
         editDescription = findViewById(R.id.caja_descripcion);
         editCuantiti = findViewById(R.id.caja_cantidad);
         editOperation = findViewById(R.id.caja_operacion);
+
+        helper = new JSONHelper(getBaseContext());
 
         ArrayAdapter<String> adapterTipo = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, new String[]{"-", "Equipo", "Consumible"});
         SpinnerTipo.setAdapter(adapterTipo);
@@ -125,22 +129,38 @@ public class Main_obj extends BaseActivity {
                         equip.setDanio(danio);
                         equip.setArmadura(arm);
                         equip.setPosicion(posicion);
+                        equip.setTipo(Tipo);
+                        helper.addEquip(equip);
+                        Toast.makeText(getApplicationContext(), "Se creó el equipo",Toast.LENGTH_SHORT).show();
                         break;
                     case 2://Posicion tercera CONSUMIBLE
                         Tipo = "Consumible";
                         valor = Integer.parseInt(editValor.getText().toString());
                         cantidad = Integer.parseInt(editCuantiti.getText().toString());
-                        if (editOperation.getText().toString().length() == 1){
+                        if (editOperation.getText().toString().length() == 1 && (editOperation.getText().toString().charAt(0) == ('+') || editOperation.getText().toString().charAt(0) == '-' || editOperation.getText().toString().charAt(0) == '*' || editOperation.getText().toString().charAt(0) == '/')){
                             operacion = editOperation.getText().toString().charAt(0);
                         }else{
                             Toast.makeText(getApplicationContext(), "Operacion debe ser un caracter operador",Toast.LENGTH_SHORT).show();
                             return;
                         }
                         cons = new Consumibles();
+                        cons.setNombre(nombre);
+                        cons.setDescripcion(descrip);
+                        cons.setValor(valor);
+                        cons.setCantidad(cantidad);
+                        cons.setOperacion(operacion);
+                        cons.setTipo(Tipo);
+                        helper.addCons(cons);
+                        Toast.makeText(getApplicationContext(), "Se creó el consumible",Toast.LENGTH_SHORT).show();
                         break;
                     default://Posicion segunda OTRO
                         Tipo = "Otro";
                         obj = new Objeto();
+                        obj.setNombre(nombre);
+                        obj.setDescripcion(descrip);
+                        obj.setTipo(Tipo);
+                        helper.addObject(obj);
+                        Toast.makeText(getApplicationContext(), "Se creó el objeto",Toast.LENGTH_SHORT).show();
                         break;
                 }
             }
