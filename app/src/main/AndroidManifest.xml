@@ -49,6 +49,7 @@
         <activity android:name=".multiplayer.MultiSelector" />
         <activity android:name=".multiplayer.Client" />
         <activity android:name=".multiplayer.Master" />
+        <activity android:name=".objetoList.Main_obj"/>
 
         <service
             android:name=".multiplayer.MyFirebaseMessagingService"

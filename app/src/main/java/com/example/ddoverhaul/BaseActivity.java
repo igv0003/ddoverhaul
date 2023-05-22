@@ -18,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.ddoverhaul.habilidadList.CreateSkill;
 import com.example.ddoverhaul.habilidadList.habilidadlist;
 import com.example.ddoverhaul.multiplayer.MultiSelector;
+import com.example.ddoverhaul.objetoList.Main_obj;
 import com.example.ddoverhaul.objetoList.lista_objetos;
 import com.example.ddoverhaul.personajeList.personajelist;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -163,7 +164,8 @@ public class BaseActivity extends AppCompatActivity {
         //startActivity(new Intent(BaseActivity.this, .class));
     }
     public void gocreateobjec(){
-        //startActivity(new Intent(BaseActivity.this, .class));
+        startActivity(new Intent(BaseActivity.this, Main_obj.class));
+        System.out.println("Boton Obj");
     }
     public void goobjlist(){
         startActivity(new Intent(BaseActivity.this, lista_objetos.class));
