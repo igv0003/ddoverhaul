@@ -1,17 +1,29 @@
 package com.example.ddoverhaul.multiplayer;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.Toast;
 
 import com.example.ddoverhaul.BaseActivity;
+import com.example.ddoverhaul.Consumibles;
+import com.example.ddoverhaul.Equipo;
 import com.example.ddoverhaul.Evento;
 import com.example.ddoverhaul.Objeto;
 import com.example.ddoverhaul.Personaje;
 import com.example.ddoverhaul.R;
+import com.example.ddoverhaul.habilidadList.habilidadlist;
+import com.example.ddoverhaul.habilidadList.viewSkill;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -103,7 +115,7 @@ public class Master extends BaseActivity {
                     switch (msg) {
                         case "steal":
                             // Acciones cuando Jug1 roba X objeto a Jug2
-                            String player1 = value.getString("player1");
+                            stealObject(value, msg);
                             break;
                         case "give":
                             // Acciones cuando Jug1 da X objeto a Jug2
@@ -120,9 +132,108 @@ public class Master extends BaseActivity {
         });
     }
 
+    // Recoge los jugadores implicados y la acción a realizar
+    private void stealObject(DocumentSnapshot doc, String msg) {
+        int player1=-1;
+        for (int i = 0; i < clientTokens.length; i++) {
+            if (clientTokens[i].equals(doc.getString("player1"))) {
+                player1 = i;
+                i = clientTokens.length;
+            }
+        }
+        int player2=-1;
+        for (int i = 0; i < clientTokens.length; i++) {
+            if (clientTokens[i].equals(doc.getString("player2"))) {
+                player2 = i;
+                i = clientTokens.length;
+            }
+        }
+        final Objeto[] obj = {new Objeto()};
+        // Obtiene el personaje del cliente
+        DocumentReference objRef = lobbyRef.collection("objects").document("object");
+
+        int finalPlayer1 = player1;
+        int finalPlayer2 = player2;
+        objRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        // Si el objeto existe, comprueba el tipo, lo recupera con su Clase original y lo guarda como Objeto
+                        String type = document.toObject(Objeto.class).getTipo();
+                        if (type.equals("Equipo")) {
+                            Equipo equip = document.toObject(Equipo.class);
+                            obj[0] = equip;
+                        } else if (type.equals("Consumible")) {
+                            Consumibles cons = document.toObject(Consumibles.class);
+                            obj[0] = cons;
+                        } else {
+                            obj[0] = document.toObject(Objeto.class);
+                        }
+
+                        objRef.delete();
+                        requestSteal(finalPlayer1, finalPlayer2, obj[0],msg);
+                    } else {
+                        Log.d("Firestore", "El documento de objeto no existe");
+                    }
+                } else {
+                    Log.d("Firestore", "Error al obtener el documento: " + task.getException());
+                }
+            }
+        });
+
+    }
+
+    // Método que gestiona la petición de robo de un objeto
+    private void requestSteal(int player1, int player2, Objeto obj, String msg) {
+        String message = "";
+        if (msg.equals("steal")) {
+            message = clientChars[player1].getNombre()+" quiere robar el objeto "+obj.getNombre()+" a "+clientChars[player2].getNombre();
+        } else if (msg.equals("give")) {
+            message = clientChars[player1].getNombre()+" quiere dar el objeto "+obj.getNombre()+" a "+clientChars[player2].getNombre();
+        }
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(Master.this);
+        builder.setTitle("Petición de robo");
+        builder.setMessage(message)
+                .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // ACCIONES DE ROBO DE OBJETO O ENTREGA DE OBJETO
+                        if (msg.equals("steal")) {
 
 
+                            sendMessage(clientTokens[player1],"give",obj);
+                            sendMessage(clientTokens[player2],"take",obj);
+                            Toast.makeText(getApplicationContext(), "Se ha realizado el robo de objeto",Toast.LENGTH_SHORT).show();
+                        } else if (msg.equals("give")) {
 
+
+                            sendMessage(clientTokens[player1],"take",obj);
+                            sendMessage(clientTokens[player2],"give",obj);
+                            Toast.makeText(getApplicationContext(), "Se ha realizado la entrega de objeto",Toast.LENGTH_SHORT).show();
+                        }
+                        dialog.dismiss();
+                    }
+                })
+                .setNegativeButton("Denegar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(getApplicationContext(), "Se denegó el robo",Toast.LENGTH_SHORT).show();
+                        sendMessage(clientTokens[player1],"rejected");
+                        dialog.dismiss();
+                    }
+                }).show();
+    }
+
+    private void giveObject(int player, Objeto obj) {
+
+        if (obj.getTipo().equals("Otro") || obj.getTipo().equals("Consumible")) {
+        }
+
+
+    }
 
 
     // MÉTODOS PARA ENVIAR MENSAJES A LOS CLIENTES
@@ -140,14 +251,39 @@ public class Master extends BaseActivity {
         updates.put("clientToken",clientToken);
 
         // Crea una nueva colección con un nuevo documento
-        CollectionReference characterCollection = lobbyRef.collection("objects");
+        CollectionReference characterCollection = lobbyRef.collection(clientToken);
         DocumentReference newObj = characterCollection.document("object");
-        newObj.set(obj).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void unused) {
-                lobbyRef.update(updates);
-            }
-        });
+
+        // Comprueba que tipo de objeto es, lo convierte y lo guarda
+        if (obj instanceof Equipo) {
+            Equipo equip = (Equipo) obj;
+            newObj.set(equip).addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void unused) {
+                    lobbyRef.update(updates);
+                }
+            });
+        } else if (obj instanceof Consumibles) {
+            Consumibles cons = (Consumibles) obj;
+            newObj.set(cons).addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void unused) {
+                    lobbyRef.update(updates);
+                }
+            });
+        } else {
+            newObj.set(obj).addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void unused) {
+                    lobbyRef.update(updates);
+                }
+            });
+        }
+
+
+
+
+
     }
 
     private void sendMessage(String clientToken, Evento event) {
