@@ -56,9 +56,7 @@ public class Master extends BaseActivity {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         this.lobbyCol = db.collection("lobbys");
         this.lobbyRef = lobbyCol.document(lobbyName);
-
-
-
+        setListener();
     }
 
     // Método que obtiene extras
@@ -114,11 +112,8 @@ public class Master extends BaseActivity {
 
                     switch (msg) {
                         case "steal":
-                            // Acciones cuando Jug1 roba X objeto a Jug2
-                            stealObject(value, msg);
-                            break;
                         case "give":
-                            // Acciones cuando Jug1 da X objeto a Jug2
+                            stealObject(value, msg);
                             break;
                         case "left":
                             // Acciones cuando un jugador abandona la sala
@@ -202,16 +197,17 @@ public class Master extends BaseActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         // ACCIONES DE ROBO DE OBJETO O ENTREGA DE OBJETO
                         if (msg.equals("steal")) {
-
-
                             sendMessage(clientTokens[player1],"give",obj);
+                            giveObject(player1,obj);
                             sendMessage(clientTokens[player2],"take",obj);
+                            takeObject(player2,obj);
+                            // Método guardar objeto en lista objetos
                             Toast.makeText(getApplicationContext(), "Se ha realizado el robo de objeto",Toast.LENGTH_SHORT).show();
                         } else if (msg.equals("give")) {
-
-
                             sendMessage(clientTokens[player1],"take",obj);
+                            takeObject(player1,obj);
                             sendMessage(clientTokens[player2],"give",obj);
+                            giveObject(player2,obj);
                             Toast.makeText(getApplicationContext(), "Se ha realizado la entrega de objeto",Toast.LENGTH_SHORT).show();
                         }
                         dialog.dismiss();
@@ -227,12 +223,84 @@ public class Master extends BaseActivity {
                 }).show();
     }
 
+    // Método para dar un objeto
     private void giveObject(int player, Objeto obj) {
-
+        // Comprueba el tipo del objeto
+        // Si es otro o consumible se guarda en inventario
         if (obj.getTipo().equals("Otro") || obj.getTipo().equals("Consumible")) {
+            if (clientChars[player].getInventario().size() < 5) {
+                clientChars[player].addToInventory(obj);
+            }
+        } else {
+            // Si es un equipo, lo convierte a su clase y la añade donde debe con su posicion
+            Equipo equip = (Equipo) obj;
+            switch (equip.getPosicion()) {
+                case 1:
+                    clientChars[player].setCabeza(equip);
+                    break;
+                case 2:
+                    clientChars[player].setPerchera(equip);
+                    break;
+                case 3:
+                    clientChars[player].setGuantes(equip);
+                    break;
+                case 4:
+                    clientChars[player].setPantalones(equip);
+                    break;
+                case 5:
+                    clientChars[player].setPies(equip);
+                    break;
+                case 6:
+                    clientChars[player].setArma(equip);
+                    break;
+                case 7:
+                    clientChars[player].setArma_sec(equip);
+                    break;
+                default:
+                    break;
+            }
         }
 
 
+    }
+
+    // Método para quitar un objeto
+    private void takeObject(int player, Objeto obj) {
+        // Comprueba el tipo del objeto
+        // Si es otro o consumible lo obtiene de inventario
+        if (obj.getTipo().equals("Otro") || obj.getTipo().equals("Consumible")) {
+            if (clientChars[player].getInventario().size() > 0) {
+                clientChars[player].removeFromInventory(obj);
+            }
+        } else {
+            // Si es un equipo, lo convierte a su clase y pone null la posición
+            Equipo equip = (Equipo) obj;
+            switch (equip.getPosicion()) {
+                case 1:
+                    clientChars[player].setCabeza(null);
+                    break;
+                case 2:
+                    clientChars[player].setPerchera(null);
+                    break;
+                case 3:
+                    clientChars[player].setGuantes(null);
+                    break;
+                case 4:
+                    clientChars[player].setPantalones(null);
+                    break;
+                case 5:
+                    clientChars[player].setPies(null);
+                    break;
+                case 6:
+                    clientChars[player].setArma(null);
+                    break;
+                case 7:
+                    clientChars[player].setArma_sec(null);
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 
 

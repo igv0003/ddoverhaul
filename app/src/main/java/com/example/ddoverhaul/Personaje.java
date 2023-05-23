@@ -26,23 +26,51 @@ public class Personaje implements Serializable {
     private String imagen;/*imagen del personaje*/
 
     /*Equipo*/
-    public Objeto arma;
-    public Objeto arma_sec;
-    public Objeto cabeza;
-    public Objeto perchera;
-    public Objeto pantalones;
-    public Objeto guantes;
-    public Objeto pies;
+    private Equipo arma;
+    private Equipo arma_sec;
+    private Equipo cabeza;
+    private Equipo perchera;
+    private Equipo pantalones;
+    private Equipo guantes;
+    private Equipo pies;
 
     ArrayList<Objeto> accesorios;
-    ArrayList<Objeto> inventario; /*Inventario es un gran arrayList de Objetos(Objeto)*/
-    ArrayList<Habilidades> habilidades; /*Habilidades es un arrayList de Habilidades(Objeto)*/
+    private ArrayList<Objeto> inventario; /*Inventario es un gran arrayList de Objetos(Objeto)*/
+    private ArrayList<Habilidades> habilidades; /*Habilidades es un arrayList de Habilidades(Objeto)*/
 
     /*Get Y Set*/
 
-    public void setArma(Objeto obj){
+    public void setArma(Equipo obj){
         this.arma = obj;
     }
+    public void setArma_sec(Equipo obj){this.arma_sec = obj;}
+    public void setCabeza(Equipo obj){
+        this.cabeza = obj;
+    }
+    public void setPerchera(Equipo obj){
+        this.perchera = obj;
+    }
+    public void setPantalones(Equipo obj){
+        this.pantalones = obj;
+    }
+    public void setGuantes(Equipo obj){
+        this.guantes = obj;
+    }
+    public void setPies(Equipo obj){
+        this.pies = obj;
+    }
+
+    public Equipo getArma() { return this.arma; }
+    public Equipo getArma_sec() { return this.arma_sec; }
+    public Equipo getCabeza() { return this.cabeza; }
+    public Equipo getPerchera() { return this.perchera; }
+    public Equipo getPantalones() { return this.pantalones; }
+    public Equipo getGuantes() { return this.guantes; }
+    public Equipo getPies() { return this.pies; }
+
+    public ArrayList<Objeto> getInventario() { return this.inventario; }
+    public void addToInventory(Objeto obj) { this.inventario.add(obj); }
+    public void removeFromInventory(Objeto obj) { this.inventario.remove(obj); }
 
     public int getNivel() {
         return nivel;
@@ -155,9 +183,7 @@ public class Personaje implements Serializable {
 
     /*CONSTRUCTORES*/
 
-    public Personaje() {
-
-    }
+    public Personaje() {}
 
     public Personaje(String nombre, int vida, int mana, String raza, String clase, int fuerza, int destreza, int constitucion, int inteligencia, int sabiduria, int carisma, int velocidad, boolean vivo, String imagen) {
         this.nombre = nombre;
