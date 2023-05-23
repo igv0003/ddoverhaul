@@ -1,8 +1,9 @@
 package com.example.ddoverhaul;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Personaje {
+public class Personaje implements Serializable {
 
     private int id;
     private int nivel;
@@ -25,19 +26,23 @@ public class Personaje {
     private String imagen;/*imagen del personaje*/
 
     /*Equipo*/
-    Objeto arma;
-    Objeto arma_sec;
-    Objeto cabeza;
-    Objeto perchera;
-    Objeto pantalones;
-    Objeto guantes;
-    Objeto pies;
-    Objeto[] accesorios = new Objeto[2];
+    public Objeto arma;
+    public Objeto arma_sec;
+    public Objeto cabeza;
+    public Objeto perchera;
+    public Objeto pantalones;
+    public Objeto guantes;
+    public Objeto pies;
 
+    ArrayList<Objeto> accesorios;
     ArrayList<Objeto> inventario; /*Inventario es un gran arrayList de Objetos(Objeto)*/
     ArrayList<Habilidades> habilidades; /*Habilidades es un arrayList de Habilidades(Objeto)*/
 
     /*Get Y Set*/
+
+    public void setArma(Objeto obj){
+        this.arma = obj;
+    }
 
     public int getNivel() {
         return nivel;
@@ -154,8 +159,7 @@ public class Personaje {
 
     }
 
-    public Personaje(int id, String nombre, int vida, int mana, String raza, String clase, int fuerza, int destreza, int constitucion, int inteligencia, int sabiduria, int carisma, int velocidad, boolean vivo, String imagen) {
-        this.id = id;
+    public Personaje(String nombre, int vida, int mana, String raza, String clase, int fuerza, int destreza, int constitucion, int inteligencia, int sabiduria, int carisma, int velocidad, boolean vivo, String imagen) {
         this.nombre = nombre;
         this.vida = vida;
         this.vida_Mx = vida;

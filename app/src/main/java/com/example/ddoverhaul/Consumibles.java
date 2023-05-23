@@ -47,6 +47,5 @@ public class Consumibles extends Objeto {
     }
 
 
-    public static class Multijugador {
-    }
+    public Consumibles(){}
 }
