@@ -1,10 +1,8 @@
 package com.example.ddoverhaul.multiplayer;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 
-import com.example.ddoverhaul.BaseActivity;
+import com.example.ddoverhaul.navigation.Normal.BaseActivity;
 import com.example.ddoverhaul.R;
 
 public class Client extends BaseActivity {

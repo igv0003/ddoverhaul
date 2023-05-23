@@ -14,11 +14,12 @@ import android.widget.PopupMenu;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
 
-import com.example.ddoverhaul.habilidadList.CreateSkill;
-import com.example.ddoverhaul.habilidadList.habilidadlist;
-import com.example.ddoverhaul.objetoList.lista_objetos;
-import com.example.ddoverhaul.personajeList.personajelist;
+import com.example.ddoverhaul.habilidadList.CreateSkillFragment;
+import com.example.ddoverhaul.habilidadList.HabilidadListFragment;
+import com.example.ddoverhaul.objetoList.ListaObjetosFragment;
+import com.example.ddoverhaul.personajeList.PersonajeListFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class BaseActivity_Multi extends AppCompatActivity {
@@ -41,7 +42,9 @@ public class BaseActivity_Multi extends AppCompatActivity {
                 public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                     switch (item.getItemId()) {
                         case R.id.personajes:
-                            startActivity(new Intent(com.example.ddoverhaul.BaseActivity_Multi.this, personajelist.class));
+                            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                            transaction.replace(R.id.activity_content, new PersonajeListFragment());
+                            transaction.commit();
                             return true;
                         case R.id.equipamieto:
                             //goobjlist();
@@ -50,7 +53,7 @@ public class BaseActivity_Multi extends AppCompatActivity {
 
                             return true;
                         case R.id.multijugador:
-                            startActivity(new Intent(com.example.ddoverhaul.BaseActivity_Multi.this, Multijugador.class));
+                            startActivity(new Intent(com.example.ddoverhaul.BaseActivity_Multi.this, MultijugadorFragment.class));
                             return true;
                         case R.id.perfil:
 

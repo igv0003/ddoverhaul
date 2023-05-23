@@ -8,7 +8,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -19,12 +18,10 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.ddoverhaul.BaseActivity;
+import com.example.ddoverhaul.navigation.Normal.BaseActivity;
 import com.example.ddoverhaul.JSONHelper;
 import com.example.ddoverhaul.Personaje;
 import com.example.ddoverhaul.R;
-import com.example.ddoverhaul.habilidadList.CreateSkill;
-import com.example.ddoverhaul.habilidadList.habilidadlist;
 
 import java.util.ArrayList;
 

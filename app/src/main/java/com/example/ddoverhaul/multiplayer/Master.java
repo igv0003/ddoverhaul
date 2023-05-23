@@ -1,12 +1,11 @@
 package com.example.ddoverhaul.multiplayer;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Build;
 import android.os.Bundle;
 
-import com.example.ddoverhaul.BaseActivity;
+import com.example.ddoverhaul.BaseActivity_Multi;
 import com.example.ddoverhaul.Evento;
 import com.example.ddoverhaul.Objeto;
 import com.example.ddoverhaul.Personaje;
@@ -19,11 +18,10 @@ import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Master extends BaseActivity {
+public class Master extends BaseActivity_Multi {
 
     private CollectionReference lobbyCol;
     private String lobbyName;

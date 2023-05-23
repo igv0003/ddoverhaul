@@ -2,16 +2,15 @@ package com.example.ddoverhaul;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.ddoverhaul.navigation.Normal.BaseActivity;
+import com.example.ddoverhaul.navigation.Normal.Menu_principal;
+import com.example.ddoverhaul.navigation.Normal.Menu_principal;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
@@ -24,8 +23,10 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
-public class Login extends BaseActivity_Multi {
+public class Login extends AppCompatActivity {
     private FirebaseAuth mAuth;
     TextInputEditText Email;
     TextInputEditText PasswordE;
@@ -81,8 +82,10 @@ public class Login extends BaseActivity_Multi {
 
 
     public void enter() {
-        Intent intent = new Intent(Login.this, Menu_principal.class);
-        startActivity(intent);
+        // En algún lugar de tu código donde desees mostrar el fragmento MenuprincipalFragment
+        startActivity(new Intent(Login.this, Menu_principal.class));
+
+
     }
     public void mandarCorreo(){
     forgotPassword.setOnClickListener(new View.OnClickListener() {
