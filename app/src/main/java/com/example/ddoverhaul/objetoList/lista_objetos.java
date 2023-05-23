@@ -35,7 +35,7 @@ public class lista_objetos extends BaseActivity {
         recyclerView.addItemDecoration(new SpacingItemDecoration(35));
 
         // Se obtiene el array a mostrar en el recyclerView
-        objects = helper.getObjects();
+        objects = helper.getAllObjects();
         // Se crea el ObjetoAdapter con el array obtenido
         adapter = new ObjetoAdapter(objects);
         // Se vincula el recyclerView con el adaptador

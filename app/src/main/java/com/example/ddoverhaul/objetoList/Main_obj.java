@@ -4,12 +4,14 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -23,9 +25,10 @@ import com.example.ddoverhaul.R;
 
 public class Main_obj extends BaseActivity {
     private static final int GALLERY_REQUEST_CODE = 1;
-    private Spinner SpinnerTipo, SpinnerEquipoPos;
+    private Spinner SpinnerTipo, SpinnerEquipoPos, SpinnerValor ;
     private String opcionSeleccionada;
     private View EquipoLayout,ConsumibleLayout;
+    private LinearLayout mainObj;
     private ImageView ImagenObj;
     private EditText editName,editDescription;
     private JSONHelper helper;
@@ -47,6 +50,7 @@ public class Main_obj extends BaseActivity {
         SpinnerTipo = findViewById(R.id.SpinnerTipo);
         EquipoLayout = findViewById(R.id.equipoLayout);
         ConsumibleLayout = findViewById(R.id.consumibleLayout);
+        mainObj = findViewById(R.id.activityObj);
         ImagenObj = findViewById(R.id.ImageObj);
 
         guardarBTN = findViewById(R.id.GuardarObj);
@@ -56,7 +60,7 @@ public class Main_obj extends BaseActivity {
         SpinnerEquipoPos = findViewById(R.id.SpinnerPosicion);
         editDamage = findViewById(R.id.caja_danio);
         editArmor = findViewById(R.id.caja_arm);
-        editValor = findViewById(R.id.caja_valor);
+        SpinnerValor = findViewById(R.id.Spinnervalor);
         editDescription = findViewById(R.id.caja_descripcion);
         editCuantiti = findViewById(R.id.caja_cantidad);
         editOperation = findViewById(R.id.caja_operacion);
@@ -67,6 +71,11 @@ public class Main_obj extends BaseActivity {
         SpinnerTipo.setAdapter(adapterTipo);
         ArrayAdapter<String> adapterEquipoPos = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, new String[]{"Cabeza", "Pecho", "Manos", "Piernas", "Pies", "Arma Principal", "Arma Secundaria"});
         SpinnerEquipoPos.setAdapter(adapterEquipoPos);
+        ArrayAdapter<String> adapterValor = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, new String[]{"Vida", "Mana", "Fuerza", "Destreza", "Constitucion", "Inteligencia","Sabiduria","Carisma","Velocidad"});
+        SpinnerValor.setAdapter(adapterValor);
+
+        int indexC = mainObj.indexOfChild(ConsumibleLayout);
+        int indexE = mainObj.indexOfChild(EquipoLayout);
 
         ImagenObj.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,9 +93,13 @@ public class Main_obj extends BaseActivity {
                 opcionSeleccionada = parent.getItemAtPosition(position).toString();
                 ConsumibleLayout.setVisibility(View.INVISIBLE);
                 EquipoLayout.setVisibility(View.INVISIBLE);
+                mainObj.removeView(EquipoLayout);
+                mainObj.removeView(ConsumibleLayout);
                 if(opcionSeleccionada.equals("Equipo")){
+                    mainObj.addView(EquipoLayout, indexC);
                     EquipoLayout.setVisibility(View.VISIBLE);
                 }else if(opcionSeleccionada.equals("Consumible")){
+                    mainObj.addView(ConsumibleLayout, indexC);
                     ConsumibleLayout.setVisibility(View.VISIBLE);
                 }else{}
             }
@@ -135,7 +148,7 @@ public class Main_obj extends BaseActivity {
                         break;
                     case 2://Posicion tercera CONSUMIBLE
                         Tipo = "Consumible";
-                        valor = Integer.parseInt(editValor.getText().toString());
+                        valor = SpinnerValor.getSelectedItemPosition();
                         cantidad = Integer.parseInt(editCuantiti.getText().toString());
                         if (editOperation.getText().toString().length() == 1 && (editOperation.getText().toString().charAt(0) == ('+') || editOperation.getText().toString().charAt(0) == '-' || editOperation.getText().toString().charAt(0) == '*' || editOperation.getText().toString().charAt(0) == '/')){
                             operacion = editOperation.getText().toString().charAt(0);
@@ -146,7 +159,7 @@ public class Main_obj extends BaseActivity {
                         cons = new Consumibles();
                         cons.setNombre(nombre);
                         cons.setDescripcion(descrip);
-                        cons.setValor(valor);
+                        cons.setValor(valor);//0=Vida;1=Mana...8=Velocidad
                         cons.setCantidad(cantidad);
                         cons.setOperacion(operacion);
                         cons.setTipo(Tipo);
@@ -163,6 +176,8 @@ public class Main_obj extends BaseActivity {
                         Toast.makeText(getApplicationContext(), "Se creó el objeto",Toast.LENGTH_SHORT).show();
                         break;
                 }
+                Intent intent = new Intent(Main_obj.this, lista_objetos.class);
+                startActivity(intent);
             }
         });
 
