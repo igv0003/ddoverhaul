@@ -47,5 +47,4 @@ public class Consumibles extends Objeto {
     }
     public Consumibles(){}
 
-    public Consumibles(){}
 }
