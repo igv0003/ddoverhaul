@@ -25,7 +25,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-public class Login extends AppCompatActivity {
+public class Login extends BaseActivity_Multi {
     private FirebaseAuth mAuth;
     TextInputEditText Email;
     TextInputEditText PasswordE;
