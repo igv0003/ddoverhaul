@@ -36,7 +36,7 @@ public class ObjetoAdapter extends RecyclerView.Adapter<ObjetoAdapter.ObjetoView
             @Override
             public void onClick(View v) {
                 if (onClickListener != null) {
-                    onClickListener.onClick(position, object.getId()+"");
+                    onClickListener.onClick(position, object.getId()+"", object.getTipo());
                 }
             }
         });
@@ -51,7 +51,7 @@ public class ObjetoAdapter extends RecyclerView.Adapter<ObjetoAdapter.ObjetoView
     }
 
     public interface OnClickListener {
-        void onClick (int position, String id);
+        void onClick (int position, String id, String type);
     }
 
 
