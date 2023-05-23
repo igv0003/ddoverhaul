@@ -44,9 +44,10 @@ public class lista_objetos extends BaseActivity {
         // Se añade el evento OnClick, para poder ver un item en concreto. Se le pasa la id para el siguiente Activity
         adapter.setOnClickListener(new ObjetoAdapter.OnClickListener() {
             @Override
-            public void onClick(int position, String id) {
+            public void onClick(int position, String id, String type) {
                 Intent intent = new Intent(lista_objetos.this, Login.class);
                 intent.putExtra("objeto", id);
+                intent.putExtra("type", id);
                 startActivity(intent);
             }
         });
