@@ -8,7 +8,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -18,17 +17,13 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.example.ddoverhaul.BaseActivity;
+import com.example.ddoverhaul.navigation.Normal.BaseActivity;
 import com.example.ddoverhaul.JSONHelper;
 import com.example.ddoverhaul.Personaje;
 import com.example.ddoverhaul.R;
-import com.example.ddoverhaul.habilidadList.CreateSkill;
-import com.example.ddoverhaul.habilidadList.habilidadlist;
-
 import java.util.ArrayList;
 
-public class MultiSelector extends BaseActivity {
+public class Multiselector extends BaseActivity {
 
 
 
@@ -171,7 +166,7 @@ public class MultiSelector extends BaseActivity {
             // Si la sala era creada
             if (waitingMaster.getVisibility() == View.VISIBLE) {
                 config.deleteLobby();
-            // Si era una union a una sala
+                // Si era una union a una sala
             } else {
                 config.leftLobby();
             }
@@ -263,7 +258,7 @@ public class MultiSelector extends BaseActivity {
     // Método para comenzar la partida master
     private void startGameMaster() {
 
-        Intent intent = new Intent(MultiSelector.this, Master.class);
+        Intent intent = new Intent(Multiselector.this, Master.class);
 
         intent.putExtra("lobbyName",masterPW.getText().toString());
         intent.putExtra("mainToken",mainToken);
@@ -277,7 +272,7 @@ public class MultiSelector extends BaseActivity {
 
     // Método para comenzar la partida cliente
     private void startGameClient() {
-        Intent intent = new Intent(MultiSelector.this, Client.class);
+        Intent intent = new Intent(Multiselector.this, Client.class);
 
         intent.putExtra("lobbyName",clientPW.getText().toString());
         intent.putExtra("mainToken",mainToken);

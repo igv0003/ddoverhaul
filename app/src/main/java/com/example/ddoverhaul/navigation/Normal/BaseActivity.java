@@ -1,4 +1,4 @@
-package com.example.ddoverhaul;
+package com.example.ddoverhaul.navigation.Normal;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,14 +14,19 @@ import android.widget.PopupMenu;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
 
-import com.example.ddoverhaul.habilidadList.CreateSkill;
-import com.example.ddoverhaul.habilidadList.habilidadlist;
-import com.example.ddoverhaul.multiplayer.MultiSelector;
-import com.example.ddoverhaul.objetoList.lista_objetos;
-import com.example.ddoverhaul.personajeList.personajelist;
+import com.example.ddoverhaul.Login;
+import com.example.ddoverhaul.PerfilFragment;
+import com.example.ddoverhaul.R;
+import com.example.ddoverhaul.habilidadList.CreateSkillFragment;
+import com.example.ddoverhaul.habilidadList.HabilidadListFragment;
+import com.example.ddoverhaul.multiplayer.Multiselector;
+import com.example.ddoverhaul.multiplayer.Multiselector;
+import com.example.ddoverhaul.objetoList.ListaObjetosFragment;
+import com.example.ddoverhaul.personajeList.PersonajeListFragment;
+import com.example.ddoverhaul.personajeList.PersonajeListFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class BaseActivity extends AppCompatActivity {
     ImageButton bajustes;
@@ -50,7 +55,9 @@ public class BaseActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.personajes:
-                        startActivity(new Intent(BaseActivity.this, personajelist.class));
+                        FragmentTransaction transaction1 = getSupportFragmentManager().beginTransaction();
+                        transaction1.replace(R.id.activity_content, new PersonajeListFragment());
+                        transaction1.commit();
                         return true;
                     case R.id.equipamieto:
                         showPopupMenu2(bottomNavigationView);
@@ -59,7 +66,8 @@ public class BaseActivity extends AppCompatActivity {
                         showPopupMenu(bottomNavigationView );
                         return true;
                     case R.id.multijugador:
-                        startActivity(new Intent(BaseActivity.this, MultiSelector.class));
+                         //gomulti();
+                        startActivity(new Intent(BaseActivity.this, Multiselector.class));
                         return true;
                     case R.id.perfil:
                         goprofile();
@@ -152,12 +160,20 @@ public class BaseActivity extends AppCompatActivity {
     }
 
     public void goprofile() {
-        Intent intent4 = new Intent(this, Perfil.class);
-        startActivity(intent4);
+        FragmentTransaction transaction123 = getSupportFragmentManager().beginTransaction();
+        transaction123.replace(R.id.activity_content, new PerfilFragment());
+        transaction123.commit();
     }
     public void gocreateskill(){
-        startActivity(new Intent(BaseActivity.this, CreateSkill.class));
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.activity_content, new CreateSkillFragment());
+        transaction.commit();
     }
+    /*public void gomulti(){
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.activity_content, new MultiSelectorFragment());
+        transaction.commit();
+    }*/
 
     public void gocreateperso(){
         //startActivity(new Intent(BaseActivity.this, .class));
@@ -166,12 +182,14 @@ public class BaseActivity extends AppCompatActivity {
         //startActivity(new Intent(BaseActivity.this, .class));
     }
     public void goobjlist(){
-        startActivity(new Intent(BaseActivity.this, lista_objetos.class));
-        System.out.println("segundoboton");
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.activity_content, new ListaObjetosFragment());
+        transaction.commit();
     }
     public void gohablist(){
-        startActivity(new Intent(BaseActivity.this, habilidadlist.class));
-        System.out.println("primer boton");
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.activity_content, new HabilidadListFragment());
+        transaction.commit();
     }
 }
 

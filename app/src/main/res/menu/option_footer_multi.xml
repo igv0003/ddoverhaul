@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/personajesM"
+        android:title=""
+        android:icon="@drawable/personajes"
+        />
+    <item
+        android:id="@+id/objetosM"
+        android:title=""
+        android:icon="@drawable/equipamiento" />
+    <item
+        android:id="@+id/eventosM"
+        android:title=""
+        android:icon="@drawable/mas"/>
+    <item
+        android:id="@+id/ambienteM"
+        android:title=""
+        android:icon="@drawable/multijugador"/>
+    <item
+        android:id="@+id/ajustesM"
+        android:title=""
+        android:icon="@drawable/tuerca" />
+
+</menu>
