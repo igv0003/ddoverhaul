@@ -65,7 +65,7 @@ public class Main_obj extends BaseActivity {
         editCuantiti = findViewById(R.id.caja_cantidad);
         editOperation = findViewById(R.id.caja_operacion);
 
-        ArrayAdapter<String> adapterTipo = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, new String[]{"-", "Equipo", "Consumible"});
+        ArrayAdapter<String> adapterTipo = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, new String[]{"Otro", "Equipo", "Consumible"});
         SpinnerTipo.setAdapter(adapterTipo);
         ArrayAdapter<String> adapterEquipoPos = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, new String[]{"Cabeza", "Pecho", "Manos", "Piernas", "Pies", "Arma Principal", "Arma Secundaria"});
         SpinnerEquipoPos.setAdapter(adapterEquipoPos);
@@ -73,7 +73,7 @@ public class Main_obj extends BaseActivity {
         SpinnerValor.setAdapter(adapterValor);
 
         String type = getIntent().getStringExtra("type");
-        String idString = getIntent().getStringExtra("id");
+        String idString = getIntent().getStringExtra("objeto");
         int id = -1;
         try{
             id = Integer.parseInt(idString);
@@ -146,7 +146,7 @@ public class Main_obj extends BaseActivity {
                 }else if(opcionSeleccionada.equals("Consumible")){
                     mainObj.addView(ConsumibleLayout, indexC);
                     ConsumibleLayout.setVisibility(View.VISIBLE);
-                }else{}
+                }
             }
 
             @Override
