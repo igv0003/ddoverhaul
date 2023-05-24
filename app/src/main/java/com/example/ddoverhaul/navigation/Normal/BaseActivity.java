@@ -17,13 +17,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.ddoverhaul.Login;
-import com.example.ddoverhaul.MultijugadorFragment;
-import com.example.ddoverhaul.MultijugadorFragment;
 import com.example.ddoverhaul.PerfilFragment;
 import com.example.ddoverhaul.R;
 import com.example.ddoverhaul.habilidadList.CreateSkillFragment;
 import com.example.ddoverhaul.habilidadList.HabilidadListFragment;
-import com.example.ddoverhaul.multiplayer.MultiSelector;
+import com.example.ddoverhaul.multiplayer.Multiselector;
+import com.example.ddoverhaul.multiplayer.Multiselector;
 import com.example.ddoverhaul.objetoList.ListaObjetosFragment;
 import com.example.ddoverhaul.personajeList.PersonajeListFragment;
 import com.example.ddoverhaul.personajeList.PersonajeListFragment;
@@ -67,9 +66,8 @@ public class BaseActivity extends AppCompatActivity {
                         showPopupMenu(bottomNavigationView );
                         return true;
                     case R.id.multijugador:
-                        FragmentTransaction transaction2 = getSupportFragmentManager().beginTransaction();
-                        transaction2.replace(R.id.activity_content, new MultijugadorFragment());
-                        transaction2.commit();
+                         //gomulti();
+                        startActivity(new Intent(BaseActivity.this, Multiselector.class));
                         return true;
                     case R.id.perfil:
                         goprofile();
@@ -171,6 +169,11 @@ public class BaseActivity extends AppCompatActivity {
         transaction.replace(R.id.activity_content, new CreateSkillFragment());
         transaction.commit();
     }
+    /*public void gomulti(){
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.activity_content, new MultiSelectorFragment());
+        transaction.commit();
+    }*/
 
     public void gocreateperso(){
         //startActivity(new Intent(BaseActivity.this, .class));

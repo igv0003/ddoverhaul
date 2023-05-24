@@ -44,21 +44,18 @@
             android:exported="true" />
         <activity android:name=".navigation.Normal.Menu_principal"/>
         <activity android:name=".Register" />
-        <activity android:name=".Perfil" />
         <activity android:name=".MultijugadorFragment"
             tools:ignore="Instantiatable" />
-        <activity android:name=".objetoList.lista_objetos" />
         <activity android:name=".personajeList.PersonajeListFragment"
             tools:ignore="Instantiatable" />
         <activity android:name=".habilidadList.HabilidadListFragment"
             tools:ignore="Instantiatable" />
         <activity android:name=".habilidadList.CreateSkillFragment"
             tools:ignore="Instantiatable" />
-        <activity android:name=".multiplayer.MultiSelector" />
+        <activity android:name=".multiplayer.Multiselector" />
         <activity android:name=".multiplayer.Client" />
         <activity android:name=".multiplayer.Master" />
         <activity android:name=".BaseActivity_Multi"/>
-        <activity android:name=".personajeList.viewPersonaje"/>
 
 
         <service
