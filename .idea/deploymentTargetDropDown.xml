@@ -7,12 +7,13 @@
         <deviceKey>
           <Key>
             <type value="VIRTUAL_DEVICE_PATH" />
-            <value value="C:\Users\jose-\.android\avd\Pixel_6_Pro_API_33.avd" />
+            <value value="C:\Users\jose-\.android\avd\movil.avd" />
           </Key>
         </deviceKey>
       </Target>
     </targetSelectedWithDropDown>
-    <timeTargetWasSelectedWithDropDown value="2023-05-24T15:11:39.018145500Z" />
+    <timeTargetWasSelectedWithDropDown value="2023-05-24T16:20:28.752725900Z" />
+    <multipleDevicesSelectedInDropDown value="true" />
     <runningDeviceTargetsSelectedWithDialog>
       <Target>
         <type value="RUNNING_DEVICE_TARGET" />
@@ -23,15 +24,17 @@
           </Key>
         </deviceKey>
       </Target>
+    </runningDeviceTargetsSelectedWithDialog>
+    <targetsSelectedWithDialog>
       <Target>
-        <type value="RUNNING_DEVICE_TARGET" />
+        <type value="QUICK_BOOT_TARGET" />
         <deviceKey>
           <Key>
             <type value="VIRTUAL_DEVICE_PATH" />
-            <value value="C:\Users\jose-\.android\avd\Pixel_6_Pro_API_33.avd" />
+            <value value="C:\Users\jose-\.android\avd\movil.avd" />
           </Key>
         </deviceKey>
       </Target>
-    </runningDeviceTargetsSelectedWithDialog>
+    </targetsSelectedWithDialog>
   </component>
 </project>
