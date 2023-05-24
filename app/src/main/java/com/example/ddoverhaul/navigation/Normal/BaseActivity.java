@@ -21,8 +21,8 @@ import com.example.ddoverhaul.PerfilFragment;
 import com.example.ddoverhaul.R;
 import com.example.ddoverhaul.habilidadList.CreateSkillFragment;
 import com.example.ddoverhaul.habilidadList.HabilidadListFragment;
-import com.example.ddoverhaul.multiplayer.Multiselector;
-import com.example.ddoverhaul.multiplayer.Multiselector;
+import com.example.ddoverhaul.multiplayer.MultiSelector;
+import com.example.ddoverhaul.multiplayer.MultiSelector;
 import com.example.ddoverhaul.objetoList.ListaObjetosFragment;
 import com.example.ddoverhaul.personajeList.PersonajeListFragment;
 import com.example.ddoverhaul.personajeList.PersonajeListFragment;
@@ -67,7 +67,7 @@ public class BaseActivity extends AppCompatActivity {
                         return true;
                     case R.id.multijugador:
                          //gomulti();
-                        startActivity(new Intent(BaseActivity.this, Multiselector.class));
+                        startActivity(new Intent(BaseActivity.this, MultiSelector.class));
                         return true;
                     case R.id.perfil:
                         goprofile();

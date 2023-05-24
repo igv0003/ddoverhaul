@@ -17,13 +17,15 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.example.ddoverhaul.navigation.Normal.BaseActivity;
 import com.example.ddoverhaul.JSONHelper;
 import com.example.ddoverhaul.Personaje;
 import com.example.ddoverhaul.R;
+
 import java.util.ArrayList;
 
-public class Multiselector extends BaseActivity {
+public class MultiSelector extends BaseActivity {
 
 
 
@@ -258,7 +260,7 @@ public class Multiselector extends BaseActivity {
     // Método para comenzar la partida master
     private void startGameMaster() {
 
-        Intent intent = new Intent(Multiselector.this, Master.class);
+        Intent intent = new Intent(MultiSelector.this, Master.class);
 
         intent.putExtra("lobbyName",masterPW.getText().toString());
         intent.putExtra("mainToken",mainToken);
@@ -272,7 +274,7 @@ public class Multiselector extends BaseActivity {
 
     // Método para comenzar la partida cliente
     private void startGameClient() {
-        Intent intent = new Intent(Multiselector.this, Client.class);
+        Intent intent = new Intent(MultiSelector.this, Client.class);
 
         intent.putExtra("lobbyName",clientPW.getText().toString());
         intent.putExtra("mainToken",mainToken);
