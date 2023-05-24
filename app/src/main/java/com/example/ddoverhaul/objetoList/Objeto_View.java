@@ -56,12 +56,12 @@ public class Objeto_View extends BaseActivity {
         SpinnerEquipoPos.setAdapter(adapterEquipoPos);
         ArrayAdapter<String> adapterValor = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, new String[]{"Vida", "Mana", "Fuerza", "Destreza", "Constitucion", "Inteligencia","Sabiduria","Carisma","Velocidad"});
         SpinnerValor.setAdapter(adapterValor);
-
+        int indexC = mainObj.indexOfChild(ConsumibleLayout);
         String idString = getIntent().getStringExtra("objeto");
         String type = getIntent().getStringExtra("type");
-        int indexC = mainObj.indexOfChild(ConsumibleLayout);
 
-            int id = -1;
+
+        int id = -1;
         try{
             id = Integer.parseInt(idString);
         }
@@ -140,6 +140,27 @@ public class Objeto_View extends BaseActivity {
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
 
+            }
+        });
+
+        findViewById(R.id.CancelarObj).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                deleteObj(Integer.parseInt(idString), type);
+            }
+        });
+
+        findViewById(R.id.GuardarObj).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(type.equals("Equipo")){
+                    equip.getId();
+                }else if(type.equals("Consumible")){
+                    cons.getId();
+                }else{
+                    obj.getId();
+                }
+                editObj(obj.getId(), type);
             }
         });
     }

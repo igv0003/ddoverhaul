@@ -83,18 +83,6 @@ public class Main_obj extends BaseActivity {
         }
         helper = new JSONHelper(getBaseContext());
         switch (type){
-            default://OTROS
-                if (id != -1) {
-                    obj = helper.getObject(id);
-                    // Al existir, se le añaden los valores que tiene para su edición
-                    editName.setText(obj.getNombre());
-                    editDescription.setText(obj.getDescripcion());
-                    SpinnerTipo.setEnabled(false);
-                } else {
-                    obj = new Objeto();
-                    obj.setId(-1);
-                }
-                break;
             case "Equipo"://EQUIPO
                 if (id != -1) {
                     equip = helper.getEquip(id);
@@ -103,7 +91,8 @@ public class Main_obj extends BaseActivity {
                     editDescription.setText(equip.getDescripcion());
                     editDamage.setText(equip.getDanio()+"");
                     editArmor.setText(equip.getArmadura()+"");
-                    SpinnerEquipoPos.setSelection(equip.getPosicion());
+                    EquipoLayout.setVisibility(View.VISIBLE);
+                    SpinnerTipo.setSelection(2);
                     SpinnerTipo.setEnabled(false);
                 } else {
                     equip = new Equipo();
@@ -114,15 +103,33 @@ public class Main_obj extends BaseActivity {
                 if (id != -1) {
                     cons = helper.getCons(id);
                     // Al existir, se le añaden los valores que tiene para su edición
-                    editName.setText(equip.getNombre());
-                    editDescription.setText(equip.getDescripcion());
+                    editName.setText(cons.getNombre());
+                    editDescription.setText(cons.getDescripcion());
                     SpinnerValor.setSelection(cons.getValor());
                     editCuantiti.setText(cons.getCantidad()+"");
-                    editOperation.setText(cons.getOperacion());
+                    editOperation.setText(cons.getOperacion()+"");
+                    ConsumibleLayout.setVisibility(View.VISIBLE);
+                    SpinnerTipo.setSelection(1);
                     SpinnerTipo.setEnabled(false);
                 } else {
                     equip = new Equipo();
                     equip.setId(-1);
+                }
+                break;
+            default://OTROS
+                if (id != -1) {
+                    obj = helper.getObject(id);
+                    // Al existir, se le añaden los valores que tiene para su edición
+                    String nm = obj.getNombre();
+                    editName.setText(obj.getNombre());
+                    editDescription.setText(obj.getDescripcion());
+                    EquipoLayout.setVisibility(View.INVISIBLE);
+                    ConsumibleLayout.setVisibility(View.INVISIBLE);
+                    SpinnerTipo.setSelection(0);
+                    SpinnerTipo.setEnabled(false);
+                } else {
+                    obj = new Objeto();
+                    obj.setId(-1);
                 }
                 break;
         }
