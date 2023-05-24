@@ -1,5 +1,6 @@
 package com.example.ddoverhaul.objetoList;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -16,6 +17,8 @@ import com.example.ddoverhaul.Equipo;
 import com.example.ddoverhaul.JSONHelper;
 import com.example.ddoverhaul.Objeto;
 import com.example.ddoverhaul.R;
+import com.example.ddoverhaul.habilidadList.CreateSkill;
+import com.example.ddoverhaul.habilidadList.viewSkill;
 
 public class Objeto_View extends BaseActivity {
     private JSONHelper helper;
@@ -78,6 +81,7 @@ public class Objeto_View extends BaseActivity {
                     SpinnerTipo.setSelection(0);
                 } else {
                     Toast.makeText(getApplicationContext(), "NO SE HA ENCONTRADO",Toast.LENGTH_SHORT).show();
+                    finish();
                 }
                 break;
             case "Equipo"://EQUIPO
@@ -93,6 +97,7 @@ public class Objeto_View extends BaseActivity {
                     SpinnerTipo.setSelection(2);
                 } else {
                     Toast.makeText(getApplicationContext(), "NO SE HA ENCONTRADO",Toast.LENGTH_SHORT).show();
+                    finish();
                 }
                 break;
             case "Consumible"://CONSUMIBLE
@@ -108,6 +113,7 @@ public class Objeto_View extends BaseActivity {
                     SpinnerTipo.setSelection(1);
                 } else {
                     Toast.makeText(getApplicationContext(), "NO SE HA ENCONTRADO",Toast.LENGTH_SHORT).show();
+                    finish();
                 }
                 break;
         }
@@ -136,5 +142,15 @@ public class Objeto_View extends BaseActivity {
 
             }
         });
+    }
+    public void editObj(int id, String type) {
+        Intent intent = new Intent(Objeto_View.this, Main_obj.class);
+        intent.putExtra("objeto", id);
+        intent.putExtra("type", type);
+        startActivity(intent);
+    }
+
+    public void deleteObj(int id, String type) {
+
     }
 }
