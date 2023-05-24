@@ -1,8 +1,9 @@
 package com.example.ddoverhaul;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Personaje {
+public class Personaje implements Serializable {
 
     private int id;
     private int nivel;
@@ -19,25 +20,57 @@ public class Personaje {
     private int constitucion;
     private int inteligencia;
     private int sabiduria;
-    private int carsima;
+    private int carisma;
     private int velocidad;
     private boolean vivo;
     private String imagen;/*imagen del personaje*/
 
     /*Equipo*/
-    Objeto arma;
-    Objeto arma_sec;
-    Objeto cabeza;
-    Objeto perchera;
-    Objeto pantalones;
-    Objeto guantes;
-    Objeto pies;
-    Objeto[] accesorios = new Objeto[2];
+    private Equipo arma;
+    private Equipo arma_sec;
+    private Equipo cabeza;
+    private Equipo perchera;
+    private Equipo pantalones;
+    private Equipo guantes;
+    private Equipo pies;
 
-    ArrayList<Objeto> inventario; /*Inventario es un gran arrayList de Objetos(Objeto)*/
-    ArrayList<Habilidades> habilidades; /*Habilidades es un arrayList de Habilidades(Objeto)*/
+    ArrayList<Objeto> accesorios;
+    private ArrayList<Objeto> inventario; /*Inventario es un gran arrayList de Objetos(Objeto)*/
+    private ArrayList<Habilidades> habilidades; /*Habilidades es un arrayList de Habilidades(Objeto)*/
 
     /*Get Y Set*/
+
+    public void setArma(Equipo obj){
+        this.arma = obj;
+    }
+    public void setArma_sec(Equipo obj){this.arma_sec = obj;}
+    public void setCabeza(Equipo obj){
+        this.cabeza = obj;
+    }
+    public void setPerchera(Equipo obj){
+        this.perchera = obj;
+    }
+    public void setPantalones(Equipo obj){
+        this.pantalones = obj;
+    }
+    public void setGuantes(Equipo obj){
+        this.guantes = obj;
+    }
+    public void setPies(Equipo obj){
+        this.pies = obj;
+    }
+
+    public Equipo getArma() { return this.arma; }
+    public Equipo getArma_sec() { return this.arma_sec; }
+    public Equipo getCabeza() { return this.cabeza; }
+    public Equipo getPerchera() { return this.perchera; }
+    public Equipo getPantalones() { return this.pantalones; }
+    public Equipo getGuantes() { return this.guantes; }
+    public Equipo getPies() { return this.pies; }
+
+    public ArrayList<Objeto> getInventario() { return this.inventario; }
+    public void addToInventory(Objeto obj) { this.inventario.add(obj); }
+    public void removeFromInventory(Objeto obj) { this.inventario.remove(obj); }
 
     public int getNivel() {
         return nivel;
@@ -111,11 +144,11 @@ public class Personaje {
     public void setSabiduria(int sabiduria) {
         this.sabiduria = sabiduria;
     }
-    public int getCarsima() {
-        return carsima;
+    public int getCarisma() {
+        return carisma;
     }
-    public void setCarsima(int carsima) {
-        this.carsima = carsima;
+    public void setCarisma(int carisma) {
+        this.carisma = carisma;
     }
     public int getVelocidad() {
         return velocidad;
@@ -150,12 +183,9 @@ public class Personaje {
 
     /*CONSTRUCTORES*/
 
-    public Personaje() {
+    public Personaje() {}
 
-    }
-
-    public Personaje(int id, String nombre, int vida, int mana, String raza, String clase, int fuerza, int destreza, int constitucion, int inteligencia, int sabiduria, int carsima, int velocidad, boolean vivo, String imagen) {
-        this.id = id;
+    public Personaje(String nombre, int vida, int mana, String raza, String clase, int fuerza, int destreza, int constitucion, int inteligencia, int sabiduria, int carisma, int velocidad, boolean vivo, String imagen) {
         this.nombre = nombre;
         this.vida = vida;
         this.vida_Mx = vida;
@@ -168,13 +198,13 @@ public class Personaje {
         this.constitucion = constitucion;
         this.inteligencia = inteligencia;
         this.sabiduria = sabiduria;
-        this.carsima = carsima;
+        this.carisma = carisma;
         this.velocidad = velocidad;
         this.vivo = vivo;
         this.imagen = imagen;
     }
     /*Constructor sin imagen*/
-    public Personaje(int id, String nombre, int vida, int mana, String raza, String clase, int fuerza, int destreza, int constitucion, int inteligencia, int sabiduria, int carsima, int velocidad, boolean vivo) {
+    public Personaje(int id, String nombre, int vida, int mana, String raza, String clase, int fuerza, int destreza, int constitucion, int inteligencia, int sabiduria, int carisma, int velocidad, boolean vivo) {
         this.id = id;
         this.nombre = nombre;
         this.vida = vida;
@@ -188,7 +218,7 @@ public class Personaje {
         this.constitucion = constitucion;
         this.inteligencia = inteligencia;
         this.sabiduria = sabiduria;
-        this.carsima = carsima;
+        this.carisma = carisma;
         this.velocidad = velocidad;
         this.vivo = vivo;
     }
@@ -207,7 +237,7 @@ public class Personaje {
         this.constitucion = P.constitucion;
         this.inteligencia = P.inteligencia;
         this.sabiduria = P.sabiduria;
-        this.carsima = P.carsima;
+        this.carisma = P.carisma;
         this.velocidad = P.velocidad;
         this.vivo = P.vivo;
     }

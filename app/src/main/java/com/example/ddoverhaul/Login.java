@@ -5,9 +5,15 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.ddoverhaul.navigation.Normal.BaseActivity;
+import com.example.ddoverhaul.navigation.Normal.Menu_principal;
+import com.example.ddoverhaul.navigation.Normal.Menu_principal;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
@@ -15,23 +21,43 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 public class Login extends AppCompatActivity {
     private FirebaseAuth mAuth;
-    EditText Email;
-    EditText PasswordE;
+    TextInputEditText Email;
+    TextInputEditText PasswordE;
     String EmailS;
     String PasswordS;
+    //CheckBox mc ;
+    Button rgb;
+    Button blog;
+    TextView forgotPassword;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_login_register);
         mAuth = FirebaseAuth.getInstance();
 
-        Email = findViewById(R.id.email);
-        PasswordE = findViewById(R.id.Password);
-        Button blog = findViewById(R.id.blog);
+        Email = findViewById(R.id.emailcampoL);
+        PasswordE = findViewById(R.id.passwordCampoL);
+        blog = findViewById(R.id.loginButton);
+        //Button oc = findViewById(R.id.);
+        //mc = findViewById(R.id.mostrarP);
+        rgb = findViewById(R.id.registerButton);
+        forgotPassword = findViewById(R.id.forgot_password);
+        forgotPassword = findViewById(R.id.forgot_password);
+
+        forgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mandarCorreo();
+            }
+        });
 
 
         blog.setOnClickListener(new View.OnClickListener() {
@@ -42,11 +68,48 @@ public class Login extends AppCompatActivity {
                 signIn(EmailS,PasswordS);
             }
         });
+        rgb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                goRegister();
+            }
+        });
     }
 
+
+
+
+
+
     public void enter() {
-        Intent intent = new Intent(Login.this, Menu_principal.class);
-        startActivity(intent);
+        // En algún lugar de tu código donde desees mostrar el fragmento MenuprincipalFragment
+        startActivity(new Intent(Login.this, Menu_principal.class));
+
+
+    }
+    public void mandarCorreo(){
+    forgotPassword.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            String emailAddress = Email.getText().toString();
+            if (emailAddress.equals("")) {
+                Toast.makeText(Login.this, "Por favor, introduce tu correo electrónico", Toast.LENGTH_SHORT).show();
+            } else {
+                mAuth.sendPasswordResetEmail(emailAddress)
+                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()) {
+                                    Toast.makeText(Login.this, "Correo de restablecimiento enviado.", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(Login.this, "Error al enviar correo de restablecimiento.", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
+            }
+        }
+    });
+
     }
 
     private void signIn(String email, String password) {
@@ -91,10 +154,16 @@ public class Login extends AppCompatActivity {
                                                 enter();
                                             } else {
                                                 // Ocurrió un error durante el inicio de sesión
-                                                Exception exception = authTask.getException();
-                                                String errorMessage = exception.getMessage();
-                                                Log.e("LoginActivity", "Error al iniciar sesión: " + errorMessage);
-                                                Toast.makeText(Login.this, "Error al iniciar sesión: " + errorMessage, Toast.LENGTH_SHORT).show();
+                                                try {
+                                                    Exception exception = authTask.getException();
+                                                    String errorMessage = exception.getMessage();
+                                                    Log.e("LoginActivity", "Error al iniciar sesión: " + errorMessage);
+                                                    Toast.makeText(Login.this, "Error al iniciar sesión: " + errorMessage, Toast.LENGTH_SHORT).show();
+                                                }
+                                                catch (Exception e){
+                                                    Toast.makeText(Login.this, "Error al iniciar sesión: " + e, Toast.LENGTH_SHORT).show();
+                                                }
+
                                             }
                                         });
                             } else {
@@ -110,6 +179,10 @@ public class Login extends AppCompatActivity {
                         }
                     });
         }
+    }
+
+    private void goRegister(){
+        startActivity(new Intent(Login.this, Register.class));
     }
 
 }

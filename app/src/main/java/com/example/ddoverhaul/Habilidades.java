@@ -94,4 +94,8 @@ public class Habilidades {
         this.descripcion = H.descripcion;
         this.icono = H.icono;
     }
+
+    public Habilidades(){}
+
+
 }
