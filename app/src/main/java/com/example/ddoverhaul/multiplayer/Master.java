@@ -116,7 +116,8 @@ public class Master extends BaseActivity {
                             stealObject(value, msg);
                             break;
                         case "left":
-                            // Acciones cuando un jugador abandona la sala
+                            // Un jugador ha abandonado la sala
+                            clientLeft(value);
                             break;
                         default:
                             break;
@@ -303,6 +304,37 @@ public class Master extends BaseActivity {
         }
     }
 
+    // Método cuando un cliente abandona la sala
+    private void clientLeft(DocumentSnapshot doc) {
+        String clientToken = doc.getString("clientToken");
+        // Se busca la posición del cliente
+        int clientPos = -1;
+        for (int i = 0; i< clientTokens.length; i++) {
+            if (clientTokens[i].equals(clientToken)) {
+                clientPos = i;
+                i = clientTokens.length;
+            }
+        }
+        // Se reduce el tamaño de los array eliminando los huecos nulos
+        if (clientPos != -1) {
+            clientTokens[clientPos] = null;
+            clientChars[clientPos] = null;
+
+            String[] tempClients = new String[clientTokens.length-1];
+            Personaje[] tempChars = new Personaje[clientChars.length-1];
+            int tempPos = 0;
+            for (int i = 0; i < clientTokens.length; i++) {
+                if (clientTokens != null) {
+                    tempClients[tempPos] = clientTokens[i];
+                    tempChars[tempPos] = clientChars[i];
+                    tempPos++;
+                }
+            }
+            clientTokens = tempClients;
+            clientChars = tempChars;
+            sendMessage("all","clientLeft");
+        }
+    }
 
     // MÉTODOS PARA ENVIAR MENSAJES A LOS CLIENTES
     private void sendMessage(String clientToken, String msg) {
