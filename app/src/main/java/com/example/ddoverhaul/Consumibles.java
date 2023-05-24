@@ -26,6 +26,7 @@ public class Consumibles extends Objeto {
         this.cantidad = C.cantidad;
         this.operacion = C.operacion;
     }
+    public Consumibles(){}
 
     public int getValor() {
         return valor;
@@ -45,6 +46,7 @@ public class Consumibles extends Objeto {
     public void setOperacion(char operacion) {
         this.operacion = operacion;
     }
-    public Consumibles(){}
+
+
 
 }

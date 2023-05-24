@@ -60,4 +60,5 @@ public class Objeto {
         this.tipo = tipo;
         this.descripcion = descripcion;
     }
+    public Objeto(){}
 }
