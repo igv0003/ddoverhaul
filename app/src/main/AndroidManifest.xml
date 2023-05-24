@@ -52,7 +52,7 @@
             tools:ignore="Instantiatable" />
         <activity android:name=".habilidadList.CreateSkillFragment"
             tools:ignore="Instantiatable" />
-        <activity android:name=".multiplayer.Multiselector" />
+        <activity android:name=".multiplayer.MultiSelector" />
         <activity android:name=".multiplayer.Client" />
         <activity android:name=".multiplayer.Master" />
         <activity android:name=".BaseActivity_Multi"/>
