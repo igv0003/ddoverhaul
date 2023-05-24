@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:padding="16dp">
+        android:padding="14dp">
 
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:tools="http://schemas.android.com/tools"
@@ -20,11 +20,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:visibility="visible">
+            android:visibility="visible"
+            android:padding="14dp">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:padding="12dp">
 
             <ImageView
                 android:id="@+id/ImageObj"
@@ -32,14 +34,14 @@
                 android:layout_height="81dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="25dp"
-                android:layout_marginEnd="20dp"
+                android:layout_marginEnd="10dp"
                 android:src="@drawable/tuer" />
             <Button
                 android:id="@+id/GuardarObj"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="17pt"
-                android:layout_marginEnd="25dp"
+                android:layout_marginTop="35dp"
+                android:layout_marginEnd="10dp"
                 android:text="Editar"
                 android:textAppearance="?android:attr/textAppearanceLarge"/>
 
@@ -47,8 +49,7 @@
                 android:id="@+id/CancelarObj"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="17pt"
-                android:layout_marginEnd="5dp"
+                android:layout_marginTop="35dp"
                 android:text="Eliminar"
                 android:textAppearance="?android:attr/textAppearanceLarge"/>
 
@@ -56,19 +57,16 @@
 
             <TextView
                 android:id="@+id/TV_nombre_obj"
-                android:layout_width="122dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="12dp"
                 android:text="Nombre"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
 
             <TextView
                 android:id="@+id/caja_objeto"
-                android:layout_width="253dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="8dp"
                 android:ems="10"
                 android:hint="Objeto"
                 android:inputType="textPersonName"
@@ -76,39 +74,32 @@
 
             <TextView
                 android:id="@+id/TV_descripcion_obj"
-                android:layout_width="154dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="6dp"
                 android:text="Descripcion"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
 
             <TextView
                 android:id="@+id/caja_descripcion"
-                android:layout_width="351dp"
-                android:layout_height="100dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="4dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:ems="10"
                 android:gravity="start|top"
-                android:hint="Descripcion"
+                android:hint="No hay descripcion"
                 android:inputType="textMultiLine"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
 
             <TextView
                 android:id="@+id/textView2"
-                android:layout_width="84dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
                 android:text="Tipo"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
 
             <Spinner
                 android:id="@+id/SpinnerTipo"
                 android:layout_width="370dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginBottom="20dp"
+                android:layout_height="50dp"
                 android:spinnerMode="dropdown"
                 android:enabled="false"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
@@ -120,19 +111,19 @@
             android:layout_width="match_parent"
             android:layout_height="322dp"
             android:orientation="vertical"
-            android:padding="16dp">
+            android:padding="14dp">
 
             <TextView
                 android:id="@+id/textCantidad"
-                android:layout_width="103dp"
-                android:layout_height="37dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="Cantidad"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
 
             <TextView
                 android:id="@+id/caja_cantidad"
                 android:layout_width="match_parent"
-                android:layout_height="51dp"
+                android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="0"
                 android:inputType="number"
@@ -140,31 +131,31 @@
 
             <TextView
                 android:id="@+id/textoperacion"
-                android:layout_width="111dp"
-                android:layout_height="39dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="Operacion"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
 
             <EditText
                 android:id="@+id/caja_operacion"
                 android:layout_width="match_parent"
-                android:layout_height="51dp"
+                android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="Un solo caracter"
+                android:hint="No tiene caracter"
                 android:inputType="text"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
 
             <TextView
                 android:id="@+id/textValor"
-                android:layout_width="82dp"
-                android:layout_height="39dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="Valor"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
 
             <Spinner
                 android:id="@+id/Spinnervalor"
                 android:layout_width="match_parent"
-                android:layout_height="51dp"
+                android:layout_height="50dp"
                 android:ems="10"
                 android:hint="0"
                 android:inputType="number"
@@ -184,30 +175,30 @@
 
             <TextView
                 android:id="@+id/textdanio"
-                android:layout_width="82dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Daño"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
 
             <TextView
                 android:id="@+id/caja_danio"
-                android:layout_width="249dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="10"
+                android:hint="0"
                 android:inputType="number"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
 
             <TextView
                 android:id="@+id/Textarm"
-                android:layout_width="105dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Armadura"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
 
             <TextView
                 android:id="@+id/caja_arm"
-                android:layout_width="249dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="0"
@@ -216,7 +207,7 @@
 
             <TextView
                 android:id="@+id/textPos"
-                android:layout_width="112dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Posicion"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
@@ -224,8 +215,7 @@
             <Spinner
                 android:id="@+id/SpinnerPosicion"
                 android:layout_width="370dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="28dp"
+                android:layout_height="50dp"
                 android:spinnerMode="dropdown"
                 android:enabled="false"
                 android:textAppearance="?android:attr/textAppearanceLarge" />

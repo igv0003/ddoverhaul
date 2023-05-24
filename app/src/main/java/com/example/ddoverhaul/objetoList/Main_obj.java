@@ -18,14 +18,14 @@ import android.widget.Toast;
 import com.example.ddoverhaul.BaseActivity;
 import com.example.ddoverhaul.Consumibles;
 import com.example.ddoverhaul.Equipo;
+import com.example.ddoverhaul.Habilidades;
 import com.example.ddoverhaul.JSONHelper;
 import com.example.ddoverhaul.Objeto;
 import com.example.ddoverhaul.R;
 
 
 public class Main_obj extends BaseActivity {
-    private static final int GALLERY_REQUEST_CODE = 1;
-    private Spinner SpinnerTipo, SpinnerEquipoPos, SpinnerValor ;
+    private Spinner SpinnerTipo, SpinnerEquipoPos, SpinnerValor;
     private String opcionSeleccionada;
     private View EquipoLayout,ConsumibleLayout;
     private LinearLayout mainObj;
@@ -35,7 +35,7 @@ public class Main_obj extends BaseActivity {
     //Tipo Equipo
     private EditText editDamage, editArmor;
     //Tipo Consumible
-    private EditText editValor, editCuantiti, editOperation;
+    private EditText editCuantiti, editOperation;
     private Button guardarBTN;
     private Button cancelarBTN;
     private Objeto obj;
@@ -65,8 +65,6 @@ public class Main_obj extends BaseActivity {
         editCuantiti = findViewById(R.id.caja_cantidad);
         editOperation = findViewById(R.id.caja_operacion);
 
-        helper = new JSONHelper(getBaseContext());
-
         ArrayAdapter<String> adapterTipo = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, new String[]{"-", "Equipo", "Consumible"});
         SpinnerTipo.setAdapter(adapterTipo);
         ArrayAdapter<String> adapterEquipoPos = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, new String[]{"Cabeza", "Pecho", "Manos", "Piernas", "Pies", "Arma Principal", "Arma Secundaria"});
@@ -74,16 +72,63 @@ public class Main_obj extends BaseActivity {
         ArrayAdapter<String> adapterValor = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, new String[]{"Vida", "Mana", "Fuerza", "Destreza", "Constitucion", "Inteligencia","Sabiduria","Carisma","Velocidad"});
         SpinnerValor.setAdapter(adapterValor);
 
-        int indexC = mainObj.indexOfChild(ConsumibleLayout);
-        int indexE = mainObj.indexOfChild(EquipoLayout);
+        String type = getIntent().getStringExtra("type");
+        String idString = getIntent().getStringExtra("id");
+        int id = -1;
+        try{
+            id = Integer.parseInt(idString);
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+        helper = new JSONHelper(getBaseContext());
+        switch (type){
+            default://OTROS
+                if (id != -1) {
+                    obj = helper.getObject(id);
+                    // Al existir, se le añaden los valores que tiene para su edición
+                    editName.setText(obj.getNombre());
+                    editDescription.setText(obj.getDescripcion());
+                    SpinnerTipo.setEnabled(false);
+                } else {
+                    obj = new Objeto();
+                    obj.setId(-1);
+                }
+                break;
+            case "Equipo"://EQUIPO
+                if (id != -1) {
+                    equip = helper.getEquip(id);
+                    // Al existir, se le añaden los valores que tiene para su edición
+                    editName.setText(equip.getNombre());
+                    editDescription.setText(equip.getDescripcion());
+                    editDamage.setText(equip.getDanio()+"");
+                    editArmor.setText(equip.getArmadura()+"");
+                    SpinnerEquipoPos.setSelection(equip.getPosicion());
+                    SpinnerTipo.setEnabled(false);
+                } else {
+                    equip = new Equipo();
+                    equip.setId(-1);
+                }
+                break;
+            case "Consumible"://CONSUMIBLE
+                if (id != -1) {
+                    cons = helper.getCons(id);
+                    // Al existir, se le añaden los valores que tiene para su edición
+                    editName.setText(equip.getNombre());
+                    editDescription.setText(equip.getDescripcion());
+                    SpinnerValor.setSelection(cons.getValor());
+                    editCuantiti.setText(cons.getCantidad()+"");
+                    editOperation.setText(cons.getOperacion());
+                    SpinnerTipo.setEnabled(false);
+                } else {
+                    equip = new Equipo();
+                    equip.setId(-1);
+                }
+                break;
+        }
 
-        ImagenObj.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                startActivityForResult(intent, GALLERY_REQUEST_CODE);
-            }
-        });
+        int indexC = mainObj.indexOfChild(ConsumibleLayout);
+
 
 
         // Aquí configuras el escuchador de elementos seleccionados para el Spinner
@@ -143,8 +188,13 @@ public class Main_obj extends BaseActivity {
                         equip.setArmadura(arm);
                         equip.setPosicion(posicion);
                         equip.setTipo(Tipo);
-                        helper.addEquip(equip);
-                        Toast.makeText(getApplicationContext(), "Se creó el equipo",Toast.LENGTH_SHORT).show();
+                        if (equip.getId() != -1){
+                            helper.updateEquip(equip);
+                            Toast.makeText(getApplicationContext(), "Se edito el equipo",Toast.LENGTH_SHORT).show();
+                        }else{
+                            helper.addEquip(equip);
+                            Toast.makeText(getApplicationContext(), "Se creó el equipo",Toast.LENGTH_SHORT).show();
+                        }
                         break;
                     case 2://Posicion tercera CONSUMIBLE
                         Tipo = "Consumible";
@@ -152,6 +202,9 @@ public class Main_obj extends BaseActivity {
                         cantidad = Integer.parseInt(editCuantiti.getText().toString());
                         if (editOperation.getText().toString().length() == 1 && (editOperation.getText().toString().charAt(0) == ('+') || editOperation.getText().toString().charAt(0) == '-' || editOperation.getText().toString().charAt(0) == '*' || editOperation.getText().toString().charAt(0) == '/')){
                             operacion = editOperation.getText().toString().charAt(0);
+                        }else if(editOperation.getText().toString().equals("")){
+                            Toast.makeText(getApplicationContext(), "No puedes dejar vacio operacion",Toast.LENGTH_SHORT).show();
+                            return;
                         }else{
                             Toast.makeText(getApplicationContext(), "Operacion debe ser un caracter operador",Toast.LENGTH_SHORT).show();
                             return;
@@ -163,8 +216,13 @@ public class Main_obj extends BaseActivity {
                         cons.setCantidad(cantidad);
                         cons.setOperacion(operacion);
                         cons.setTipo(Tipo);
-                        helper.addCons(cons);
-                        Toast.makeText(getApplicationContext(), "Se creó el consumible",Toast.LENGTH_SHORT).show();
+                        if (cons.getId() != -1){
+                            helper.updateCons(cons);
+                            Toast.makeText(getApplicationContext(), "Se editó el consumble",Toast.LENGTH_SHORT).show();
+                        }else{
+                            helper.addCons(cons);
+                            Toast.makeText(getApplicationContext(), "Se creó el consumible",Toast.LENGTH_SHORT).show();
+                        }
                         break;
                     default://Posicion segunda OTRO
                         Tipo = "Otro";
@@ -172,8 +230,13 @@ public class Main_obj extends BaseActivity {
                         obj.setNombre(nombre);
                         obj.setDescripcion(descrip);
                         obj.setTipo(Tipo);
-                        helper.addObject(obj);
-                        Toast.makeText(getApplicationContext(), "Se creó el objeto",Toast.LENGTH_SHORT).show();
+                        if (obj.getId() != -1){
+                            helper.updateObject(obj);
+                            Toast.makeText(getApplicationContext(), "Se editó el objeto",Toast.LENGTH_SHORT).show();
+                        }else{
+                            helper.addObject(obj);
+                            Toast.makeText(getApplicationContext(), "Se creó el objeto",Toast.LENGTH_SHORT).show();
+                        }
                         break;
                 }
                 Intent intent = new Intent(Main_obj.this, lista_objetos.class);
@@ -189,16 +252,6 @@ public class Main_obj extends BaseActivity {
                 startActivity(intent);
             }
         });
-    }
-    @Override //CUANDO SELECCIONE UNA IMAGEN DE LA GALERIA
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == GALLERY_REQUEST_CODE && resultCode == RESULT_OK) {
-            Uri imageUri = data.getData();
-
-            ImagenObj.setImageURI(imageUri);
-        }
     }
 }
 
