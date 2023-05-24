@@ -45,7 +45,7 @@ public class lista_objetos extends BaseActivity {
         adapter.setOnClickListener(new ObjetoAdapter.OnClickListener() {
             @Override
             public void onClick(int position, String id, String type) {
-                Intent intent = new Intent(lista_objetos.this, Login.class);
+                Intent intent = new Intent(lista_objetos.this, Objeto_View.class);
                 intent.putExtra("objeto", id);
                 intent.putExtra("type", id);
                 startActivity(intent);
