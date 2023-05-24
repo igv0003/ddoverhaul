@@ -14,10 +14,14 @@ import android.widget.PopupMenu;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.ddoverhaul.habilidadList.CreateSkillFragment;
 import com.example.ddoverhaul.habilidadList.HabilidadListFragment;
+import com.example.ddoverhaul.multiplayer.MASTER.PersonajeListFragmentMaster;
+import com.example.ddoverhaul.navigation.Normal.Menu_principal;
 import com.example.ddoverhaul.objetoList.ListaObjetosFragment;
 import com.example.ddoverhaul.personajeList.PersonajeListFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -41,21 +45,25 @@ public class BaseActivity_Multi extends AppCompatActivity {
                 @Override
                 public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                     switch (item.getItemId()) {
-                        case R.id.personajes:
-                            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                            transaction.replace(R.id.activity_content, new PersonajeListFragment());
+                        case R.id.personajesM:
+                            FragmentManager fragmentManager = getSupportFragmentManager();
+                            FragmentTransaction transaction = fragmentManager.beginTransaction();
+                            transaction.replace(R.id.activity_content_multi, new PersonajeListFragmentMaster());
                             transaction.commit();
                             return true;
-                        case R.id.equipamieto:
-                            //goobjlist();
+                        case R.id.objetosM:
+                             FragmentManager fragmentManager1 = getSupportFragmentManager();
+                             FragmentTransaction transaction2 = fragmentManager1.beginTransaction();
+                             transaction2.replace(R.id.activity_content_multi, new ListaObjetosFragment());
+                             transaction2.commit();
                             return true;
-                        case R.id.crear:
+                        case R.id.eventosM:
 
                             return true;
-                        case R.id.multijugador:
+                        case R.id.ambienteM:
                             startActivity(new Intent(com.example.ddoverhaul.BaseActivity_Multi.this, MultijugadorFragment.class));
                             return true;
-                        case R.id.perfil:
+                        case R.id.ajustesM:
 
                             return true;
                         default:
