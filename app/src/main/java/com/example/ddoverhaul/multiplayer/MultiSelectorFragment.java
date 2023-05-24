@@ -265,17 +265,20 @@ public class MultiSelectorFragment extends Fragment {
 
     // Método para comenzar la partida master
     private void startGameMaster() {
-        Intent intent = new Intent(getActivity(), Master.class);
+        if (getActivity() != null) {
+            Intent intent = new Intent(requireActivity(), Master.class);
 
-        intent.putExtra("lobbyName", masterPW.getText().toString());
-        intent.putExtra("mainToken", mainToken);
-        intent.putExtra("clientTokens", clientTokens);
-        intent.putExtra("clientChars", clientChars);
+            intent.putExtra("lobbyName", masterPW.getText().toString());
+            intent.putExtra("mainToken", mainToken);
+            intent.putExtra("clientTokens", clientTokens);
+            intent.putExtra("clientChars", clientChars);
 
-        Toast.makeText(getActivity(), "Comienza la partida", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "Comienza la partida", Toast.LENGTH_SHORT).show();
 
-        startActivity(intent);
+            startActivity(intent);
+        }
     }
+
 
 
     // Método para comenzar la partida cliente
@@ -359,6 +362,12 @@ public class MultiSelectorFragment extends Fragment {
 
     // Método que añade el cliente a la sala
     private void addClient(String client, Personaje character) {
+        // Verificar si la matriz clientTokens es null
+        if (clientTokens == null) {
+            // Inicializar la matriz con la longitud requerida
+            clientTokens = new String[4];
+        }
+
         // Recorre la lista de tokens de los clientes
         for (int i = 0; i < clientTokens.length; i++) {
             // Si hay un hueco en el espacio de la sala, añade el cliente
@@ -368,21 +377,21 @@ public class MultiSelectorFragment extends Fragment {
                 i = clientTokens.length;
             }
         }
-
-
     }
+
 
     // Método que elimina un cliente de la sala
     private void deleteClient(String client) {
         for (int i = 0; i < clientTokens.length; i++) {
-            // Si el token del cliente que desea irse coincide con uno de los clientes de la sala
-            if (clientTokens[i].equals(client)) {
+            // Verificar si el token del cliente es null antes de compararlo
+            if (clientTokens[i] != null && clientTokens[i].equals(client)) {
                 clientTokens[i] = null;
                 clientChars[i] = null;
                 i = clientTokens.length;
             }
         }
     }
+
 
     /*@Override
     public void onBackPressed() {
