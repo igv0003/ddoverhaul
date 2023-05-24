@@ -2,6 +2,7 @@ package com.example.ddoverhaul.multiplayer;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -44,10 +45,13 @@ public class Master extends BaseActivity_Multi {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_master);
+        setContentView(R.layout.activity_container_multi);
+        super.prepareStubs();
 
         // Se crea debido al MultiSelector, tiene Extras
-        obtainExtras();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            obtainExtras();
+        }
         // Se obtiene el documento que hace referencia al lobby
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         this.lobbyCol = db.collection("lobbys");
@@ -56,6 +60,7 @@ public class Master extends BaseActivity_Multi {
     }
 
     // Método que obtiene extras
+    @RequiresApi(api = Build.VERSION_CODES.TIRAMISU)
     private void obtainExtras() {
         lobbyName = getIntent().getStringExtra("lobbyName");
         mainToken = getIntent().getStringExtra("mainToken");
@@ -74,23 +79,19 @@ public class Master extends BaseActivity_Multi {
                 pos++;
             }
         }
-        // Se obtiene y se limpia la lista de personajes null
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            Personaje[] chars = getIntent().getParcelableArrayExtra("clientChars",Personaje.class);
+        clientChars = new Personaje[clientTokens.length];
+        // Se obtiene la lista de personajes sin null
 
-            length = 0;
-            for (int i = 0; i < chars.length; i++) {
-                if (chars[i] != null) length++;
-            }
-            clientChars = new Personaje[length];
-            pos = 0;
-            for (int i = 0; i < chars.length; i++) {
-                if (chars[i] != null) {
-                    clientChars[pos] = chars[i];
-                    pos++;
-                }
+        length = 0;
+        for (int i = 0; i < 4; i++) {
+            String player = "player"+(i+1);
+            Personaje character = getIntent().getSerializableExtra(player,Personaje.class);
+            if (character != null) {
+                clientChars[length] = character;
+                length++;
             }
         }
+
     }
 
     // Método que prepara el setListener
