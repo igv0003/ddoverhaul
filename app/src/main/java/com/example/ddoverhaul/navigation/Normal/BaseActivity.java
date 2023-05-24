@@ -23,6 +23,7 @@ import com.example.ddoverhaul.habilidadList.CreateSkillFragment;
 import com.example.ddoverhaul.habilidadList.HabilidadListFragment;
 import com.example.ddoverhaul.multiplayer.MultiSelector;
 import com.example.ddoverhaul.multiplayer.MultiSelector;
+import com.example.ddoverhaul.multiplayer.MultiSelectorFragment;
 import com.example.ddoverhaul.objetoList.ListaObjetosFragment;
 import com.example.ddoverhaul.personajeList.PersonajeListFragment;
 import com.example.ddoverhaul.personajeList.PersonajeListFragment;
@@ -66,8 +67,8 @@ public class BaseActivity extends AppCompatActivity {
                         showPopupMenu(bottomNavigationView );
                         return true;
                     case R.id.multijugador:
-                         //gomulti();
-                        startActivity(new Intent(BaseActivity.this, MultiSelector.class));
+                         gomulti();
+                        //startActivity(new Intent(BaseActivity.this, MultiSelector.class));
                         return true;
                     case R.id.perfil:
                         goprofile();
@@ -169,11 +170,11 @@ public class BaseActivity extends AppCompatActivity {
         transaction.replace(R.id.activity_content, new CreateSkillFragment());
         transaction.commit();
     }
-    /*public void gomulti(){
+    public void gomulti(){
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.activity_content, new MultiSelectorFragment());
         transaction.commit();
-    }*/
+    }
 
     public void gocreateperso(){
         //startActivity(new Intent(BaseActivity.this, .class));
