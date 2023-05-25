@@ -38,7 +38,7 @@ public class ListaObjetosFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
         recyclerView.addItemDecoration(new SpacingItemDecoration(35));
 
-        objects = helper.getObjects();
+        objects = helper.getAllObjects();
         adapter = new ObjetoAdapter(objects);
         recyclerView.setAdapter(adapter);
         adapter.setOnClickListener(new ObjetoAdapter.OnClickListener() {

@@ -115,7 +115,7 @@ public class ObjetoViewFragment extends Fragment {
                     editDescription.setText(cons.getDescripcion());
                     spinnerValor.setSelection(cons.getValor());
                     editCuantiti.setText(String.valueOf(cons.getCantidad()));
-                    editOperation.setText(cons.getOperacion());
+                    editOperation.setText(cons.getOperacion()+"");
                     consumibleLayout.setVisibility(View.VISIBLE);
                     spinnerTipo.setSelection(2);
                 } else {
