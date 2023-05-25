@@ -2,15 +2,15 @@ package com.example.ddoverhaul;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.ddoverhaul.navigation.Normal.BaseActivity;
+import com.example.ddoverhaul.navigation.Normal.Menu_principal;
+import com.example.ddoverhaul.navigation.Normal.Menu_principal;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
@@ -23,6 +23,8 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 public class Login extends AppCompatActivity {
     private FirebaseAuth mAuth;
@@ -33,6 +35,7 @@ public class Login extends AppCompatActivity {
     //CheckBox mc ;
     Button rgb;
     Button blog;
+    TextView forgotPassword;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -46,20 +49,16 @@ public class Login extends AppCompatActivity {
         //Button oc = findViewById(R.id.);
         //mc = findViewById(R.id.mostrarP);
         rgb = findViewById(R.id.registerButton);
-        mostrarcont();
-        /*oc.setOnClickListener(new View.OnClickListener(){
+        forgotPassword = findViewById(R.id.forgot_password);
+        forgotPassword = findViewById(R.id.forgot_password);
 
+        forgotPassword.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View v) {
                 mandarCorreo();
             }
-        });*/
+        });
 
-        /*mc.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mostrarcont();            }
-        });*/
 
         blog.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,44 +75,19 @@ public class Login extends AppCompatActivity {
             }
         });
     }
-    public void mostrarcont(){
-        /*public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-        if (isChecked) {
-            // muestra la contraseña
-            password.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
-            password.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, R.drawable.ic_eye_on, 0);
-        } else {
-            // oculta la contraseña
-            password.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-            password.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, R.drawable.ic_eye_off, 0);
-        }
-        // mueve el cursor al final
-        password.setSelection(password.getText().length());
-    }
-});*/
 
-        /*mc.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    // Para mostrar la contraseña
-                    PasswordE.setTransformationMethod(null);
-                    //PasswordE.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, R.drawable.ojo_abierto, 0);
-                } else {
-                    // Para ocultar la contraseña
-                    PasswordE.setTransformationMethod(PasswordTransformationMethod.getInstance());
-                    //PasswordE.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, R.drawable.ojo_cerrado, 0);
-                }
-            }
-        });*/
-    }
+
+
+
+
 
     public void enter() {
-        Intent intent = new Intent(Login.this, Menu_principal.class);
-        startActivity(intent);
+        // En algún lugar de tu código donde desees mostrar el fragmento MenuprincipalFragment
+        startActivity(new Intent(Login.this, Menu_principal.class));
+
+
     }
-    /*public void mandarCorreo(){
-    Button forgotPassword = findViewById(R.id.bolvidoC);
+    public void mandarCorreo(){
     forgotPassword.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -136,7 +110,7 @@ public class Login extends AppCompatActivity {
         }
     });
 
-    }*/
+    }
 
     private void signIn(String email, String password) {
         if (email.contains("@")) {

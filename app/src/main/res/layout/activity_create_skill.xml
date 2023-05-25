@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".habilidadList.CreateSkill"
+    tools:context=".habilidadList.CreateSkillFragment"
     android:orientation="vertical">
 
     <LinearLayout
@@ -211,6 +211,7 @@
             android:gravity="center_horizontal">
 
             <Button
+                android:id="@+id/botonguardar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="30dp"
@@ -218,6 +219,7 @@
                 android:text="Guardar" />
 
             <Button
+                android:id="@+id/botoncancelar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:onClick="Cancel"

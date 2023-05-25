@@ -1,6 +1,7 @@
 package com.example.ddoverhaul.multiplayer;
 
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+import androidx.fragment.app.Fragment;
 
 import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
@@ -8,7 +9,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -18,15 +21,14 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.ddoverhaul.navigation.Normal.BaseActivity;
 import com.example.ddoverhaul.JSONHelper;
 import com.example.ddoverhaul.Personaje;
 import com.example.ddoverhaul.R;
+import com.google.firebase.firestore.CollectionReference;
 
 import java.util.ArrayList;
 
-public class MultiSelector extends BaseActivity {
-
+public class MultiSelectorFragment extends Fragment {
 
 
     private String mainToken; // Token del dispositivo, sea cliente o master
@@ -69,22 +71,20 @@ public class MultiSelector extends BaseActivity {
 
     @SuppressLint("MissingInflatedId")
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_multi_selector);
-
-        // Se recogen los layouts
-        this.layoutMultiplayer = findViewById(R.id.layout_multiplayer);
-        this.waitingMaster = findViewById(R.id.waiting_master);
-        this.waitingClient = findViewById(R.id.waiting_client);
-        this.selectMaster = findViewById(R.id.layoutSelectMaster);
-        this.selectClient = findViewById(R.id.layoutSelectClient);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Define el layout para este fragmento
+        View view = inflater.inflate(R.layout.activity_multi_selector, container, false);
+        this.layoutMultiplayer = view.findViewById(R.id.layout_multiplayer);
+        this.waitingMaster = view.findViewById(R.id.waiting_master);
+        this.waitingClient = view.findViewById(R.id.waiting_client);
+        this.selectMaster = view.findViewById(R.id.layoutSelectMaster);
+        this.selectClient = view.findViewById(R.id.layoutSelectClient);
 
         // layoutMultiplayer
-        this.master = findViewById(R.id.master_button);
-        this.client = findViewById(R.id.client_button);
+        this.master = view.findViewById(R.id.master_button);
+        this.client = view.findViewById(R.id.client_button);
 
-        // Al pulsar en el botón master
         this.master.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -97,8 +97,8 @@ public class MultiSelector extends BaseActivity {
                 selectMaster.setVisibility(View.VISIBLE);
 
                 // Inicializa masterPw y el botón para crear la sala
-                masterPW = findViewById(R.id.master_pw);
-                selectMasterButton = findViewById(R.id.selectMaster_button);
+                masterPW = view.findViewById(R.id.master_pw);
+                selectMasterButton = view.findViewById(R.id.selectMaster_button);
 
                 // Al pulsar el boton de crear sala y que haya datos en masterPw
                 selectMasterButton.setOnClickListener(new View.OnClickListener() {
@@ -123,15 +123,17 @@ public class MultiSelector extends BaseActivity {
             public void onClick(View v) {
                 // Esconde el layout de selectMaster y elimina config
                 selectMaster.setVisibility(View.GONE);
-                if (config != null) { config = null ;}
+                if (config != null) {
+                    config = null;
+                }
 
                 // Muestra selectClient
                 selectClient.setVisibility(View.VISIBLE);
 
                 // Inizializa clientPW, el botón de unirse a sala y spinner de personajes
-                clientPW = findViewById(R.id.client_pw);
+                clientPW = view.findViewById(R.id.client_pw);
                 createSpinner();
-                selectClientButton = findViewById(R.id.selectClient_button);
+                selectClientButton = view.findViewById(R.id.selectClient_button);
 
                 // Al pulsar el boton de unirse a sala y que haya datos en masterPw y el spinner
                 selectClientButton.setOnClickListener(new View.OnClickListener() {
@@ -149,19 +151,18 @@ public class MultiSelector extends BaseActivity {
 
             }
         });
-
-
-        // Se registra el receptor
         IntentFilter intentFilter = new IntentFilter("com.example.NOTIFICATION_DATA");
-        LocalBroadcastManager.getInstance(this).registerReceiver(notificationDataReceiver, intentFilter);
+        LocalBroadcastManager.getInstance(getActivity()).registerReceiver(notificationDataReceiver, intentFilter);
+        return view;
     }
 
     @Override
-    protected void onDestroy() {
+    public void onDestroyView() {
+        super.onDestroyView();
         super.onDestroy();
 
         // Desregistrar el receptor
-        LocalBroadcastManager.getInstance(this).unregisterReceiver(notificationDataReceiver);
+        LocalBroadcastManager.getInstance(getActivity()).unregisterReceiver(notificationDataReceiver);
 
         // Si existia master o cliente
         if (this.config != null) {
@@ -175,9 +176,9 @@ public class MultiSelector extends BaseActivity {
 
             config = null;
         }
+
     }
 
-    // Método que prepara un Broadcast en caso de recibir notificaciones
     private BroadcastReceiver notificationDataReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -187,9 +188,9 @@ public class MultiSelector extends BaseActivity {
             if (msg.equals("join")) {
                 String clientToken = intent.getStringExtra("clientToken");
                 Personaje character = (Personaje) intent.getSerializableExtra("character");
-                addClient(clientToken,character);
-                size = intent.getIntExtra("size",-1);
-                sizeLobby.setText(size+"/4");
+                addClient(clientToken, character);
+                size = intent.getIntExtra("size", -1);
+                sizeLobby.setText(size + "/4");
 
             } else if (msg.equals("hostToken")) {
                 // Si he recibido un hostToken significa que quiero unirme a una sala como cliente
@@ -199,14 +200,14 @@ public class MultiSelector extends BaseActivity {
                 String clientToken = intent.getStringExtra("clientToken");
                 deleteClient(clientToken);
                 size--;
-                sizeLobby.setText(size+"/4");
+                sizeLobby.setText(size + "/4");
                 config.lobbyDown(size);
             } else if (msg.equals("lobbyDelete")) {
                 // El master ha borrado la sala
                 waitingClient.setVisibility(View.GONE);
                 selectClient.setVisibility(View.GONE);
                 layoutMultiplayer.setVisibility(View.VISIBLE);
-                Toast.makeText(getApplicationContext(), "El master ha borrado la sala: "+clientPW.getText().toString(),Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "El master ha borrado la sala: " + clientPW.getText().toString(), Toast.LENGTH_SHORT).show();
             } else if (msg.equals("startGame")) {
                 // El master ha empezado la sala
                 clientChars = (Personaje[]) intent.getSerializableExtra("characters");
@@ -216,14 +217,14 @@ public class MultiSelector extends BaseActivity {
     };
 
     // Método que prepara la sala para jugar
-    private void createLobby(String password){
+    private void createLobby(String password) {
         // Se inicializa la lista de clientes y personajes
         clientTokens = new String[4];
         clientChars = new Personaje[4];
 
         int pwd = Integer.parseInt(password);
         // Se crea el archivo de config
-        this.config = new MultiConfig(pwd, getBaseContext());
+        this.config = new MultiConfig(pwd, getActivity());
         // Se obtiene el token del disposivo y se procede a crear la sala
         this.mainToken = config.getMainToken();
         this.config.createLobby();
@@ -232,9 +233,13 @@ public class MultiSelector extends BaseActivity {
     // Método que muestra waitingMaster
     private void showWaitingMaster() {
         // Inicializa las variables del layout
-        sizeLobby = findViewById(R.id.showSize);
-        startGame = findViewById(R.id.startGame_button);
-        cancelLobby = findViewById(R.id.cancelLobby_button);
+        sizeLobby = getView().findViewById(R.id.showSize);
+        startGame = getView().findViewById(R.id.startGame_button);
+        cancelLobby = getView().findViewById(R.id.cancelLobby_button);
+        waitingMaster = getView().findViewById(R.id.waiting_master);
+        layoutMultiplayer = getView().findViewById(R.id.layout_multiplayer);
+        selectMaster = getView().findViewById(R.id.layoutSelectMaster);
+
         waitingMaster.setVisibility(View.VISIBLE);
 
         cancelLobby.setOnClickListener(new View.OnClickListener() {
@@ -257,42 +262,44 @@ public class MultiSelector extends BaseActivity {
         });
     }
 
+
     // Método para comenzar la partida master
     private void startGameMaster() {
+        if (getActivity() != null) {
+            Intent intent = new Intent(requireActivity(), Master.class);
 
-        Intent intent = new Intent(MultiSelector.this, Master.class);
+            intent.putExtra("lobbyName", masterPW.getText().toString());
+            intent.putExtra("mainToken", mainToken);
+            intent.putExtra("clientTokens", clientTokens);
+            intent.putExtra("clientChars", clientChars);
 
-        intent.putExtra("lobbyName",masterPW.getText().toString());
-        intent.putExtra("mainToken",mainToken);
-        intent.putExtra("clientTokens",clientTokens);
-        intent.putExtra("player1",clientChars[0]);
-        intent.putExtra("player2",clientChars[1]);
-        intent.putExtra("player3",clientChars[2]);
-        intent.putExtra("player4",clientChars[3]);
+            Toast.makeText(getActivity(), "Comienza la partida", Toast.LENGTH_SHORT).show();
 
-        Toast.makeText(getApplicationContext(), "Comienza la partida",Toast.LENGTH_SHORT).show();
-
-        startActivity(intent);
+            startActivity(intent);
+        }
     }
+
+
 
     // Método para comenzar la partida cliente
     private void startGameClient() {
-        Intent intent = new Intent(MultiSelector.this, Client.class);
+        Intent intent = new Intent(getActivity(), Client.class);
 
-        intent.putExtra("lobbyName",clientPW.getText().toString());
-        intent.putExtra("mainToken",mainToken);
-        intent.putExtra("clientChars",clientChars);
-        intent.putExtra("mainChar",character);
+        intent.putExtra("lobbyName", clientPW.getText().toString());
+        intent.putExtra("mainToken", mainToken);
+        intent.putExtra("clientChars", clientChars);
+        intent.putExtra("mainChar", character);
 
-        Toast.makeText(getApplicationContext(), "Comienza la partida",Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), "Comienza la partida", Toast.LENGTH_SHORT).show();
 
         startActivity(intent);
     }
+
 
 
     private void showWaitingClient() {
         // Inicializa las variables del layout
-        cancelJoin = findViewById(R.id.cancelJoin_button);
+        cancelJoin = getView().findViewById(R.id.cancelJoin_button);
         waitingClient.setVisibility(View.VISIBLE);
 
         cancelJoin.setOnClickListener(new View.OnClickListener() {
@@ -308,12 +315,13 @@ public class MultiSelector extends BaseActivity {
     }
 
 
+
     // Método que inizializa el spinner con la lista de personajes
     private void createSpinner() {
-        spinnerChars = findViewById(R.id.spinner_characters);
+        spinnerChars = getView().findViewById(R.id.spinner_characters);
 
         // Arraylist de personajes
-        JSONHelper helper = new JSONHelper(getBaseContext());
+        JSONHelper helper = new JSONHelper(getContext());
         Personaje[] chars = helper.getChars();
         // Añade el array normal de Personajes a un Arraylist para el spinner
         charlist = new ArrayList<>();
@@ -324,7 +332,7 @@ public class MultiSelector extends BaseActivity {
         for (Personaje p: charlist) {
             charString.add("Nombre: "+p.getNombre()+", Nivel: "+p.getNivel()+", Clase: "+p.getClase());
         }
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, charString);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, charString);
         spinnerChars.setAdapter(adapter);
 
 
@@ -342,18 +350,24 @@ public class MultiSelector extends BaseActivity {
                 spinnerChars.setSelected(false);
             }
         });
-
     }
 
     private void findLobby(String password) {
         int pwd = Integer.parseInt(password);
-        this.config = new MultiConfig(pwd, getBaseContext());
+        this.config = new MultiConfig(pwd, getContext());
         this.mainToken = this.config.getMainToken();
         this.config.foundLobby(this.character);
     }
 
+
     // Método que añade el cliente a la sala
     private void addClient(String client, Personaje character) {
+        // Verificar si la matriz clientTokens es null
+        if (clientTokens == null) {
+            // Inicializar la matriz con la longitud requerida
+            clientTokens = new String[4];
+        }
+
         // Recorre la lista de tokens de los clientes
         for (int i = 0; i < clientTokens.length; i++) {
             // Si hay un hueco en el espacio de la sala, añade el cliente
@@ -363,15 +377,14 @@ public class MultiSelector extends BaseActivity {
                 i = clientTokens.length;
             }
         }
-
-
     }
+
 
     // Método que elimina un cliente de la sala
     private void deleteClient(String client) {
         for (int i = 0; i < clientTokens.length; i++) {
-            // Si el token del cliente que desea irse coincide con uno de los clientes de la sala
-            if (clientTokens[i].equals(client)) {
+            // Verificar si el token del cliente es null antes de compararlo
+            if (clientTokens[i] != null && clientTokens[i].equals(client)) {
                 clientTokens[i] = null;
                 clientChars[i] = null;
                 i = clientTokens.length;
@@ -379,10 +392,11 @@ public class MultiSelector extends BaseActivity {
         }
     }
 
-    @Override
+
+    /*@Override
     public void onBackPressed() {
         finish();
-    }
+    }*/
 
 
 }

@@ -1,20 +1,24 @@
 package com.example.ddoverhaul.personajeList;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
-import com.example.ddoverhaul.BaseActivity;
+import androidx.fragment.app.Fragment;
+
 import com.example.ddoverhaul.JSONHelper;
-import com.example.ddoverhaul.Login;
 import com.example.ddoverhaul.Personaje;
 import com.example.ddoverhaul.R;
+import com.example.ddoverhaul.habilidadList.ViewSkillFragment;
 
-public class personajelist extends BaseActivity {
+public class PersonajeListFragment extends Fragment {
     // Variables necesarias para mostrar la lista
     private RecyclerView recyclerView;
     private PersonajeAdapter adapter;
@@ -23,14 +27,14 @@ public class personajelist extends BaseActivity {
 
     @SuppressLint("MissingInflatedId")
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_personajelist);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.activity_personajelist, container, false);
 
-        helper = new JSONHelper(getBaseContext());
+        helper = new JSONHelper(getContext());
+
         // Se prepara el recyclerView para mostrar la lista
-        recyclerView = findViewById(R.id.recyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView = view.findViewById(R.id.recyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.addItemDecoration(new SpacingItemDecoration(35));
 
         // Se obtiene el array a mostrar en el recyclerView
@@ -44,15 +48,20 @@ public class personajelist extends BaseActivity {
         adapter.setOnClickListener(new PersonajeAdapter.OnClickListener() {
             @Override
             public void onClick(int position, String id) {
-                Intent intent = new Intent(personajelist.this, Login.class);
-                intent.putExtra("personaje", id);
-                startActivity(intent);
+                ViewPersonajeFragment fragment = new ViewPersonajeFragment();
+                Bundle bundle = new Bundle();
+                bundle.putInt("personaje", Integer.parseInt(id));
+                fragment.setArguments(bundle);
+
+                getFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.activity_content, fragment)
+                        .addToBackStack(null)
+                        .commit();
             }
         });
 
 
+        return view;
     }
-
-
-
 }

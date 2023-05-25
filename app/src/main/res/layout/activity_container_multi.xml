@@ -5,29 +5,22 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <include
-        android:id="@+id/header"
-        layout="@layout/header_layout"
-        android:layout_width="match_parent"
-        android:layout_height="155dp"
-        android:layout_margin="0dp" />
-
     <FrameLayout
-        android:id="@+id/activity_content"
+        android:id="@+id/activity_content_multi"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"/>
 
     <com.google.android.material.divider.MaterialDivider
-        android:id="@+id/divider"
+        android:id="@+id/dividerM"
         android:layout_width="match_parent"
         android:layout_height="3dp"
         app:dividerColor="@color/gold"
         />
-    
+
     <include
-        android:id="@+id/footer"
-        layout="@layout/footer_layout"
+        android:id="@+id/footer_multi"
+        layout="@layout/footer_layout_multi"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         />
