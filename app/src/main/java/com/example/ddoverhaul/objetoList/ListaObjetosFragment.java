@@ -16,6 +16,7 @@ import com.example.ddoverhaul.JSONHelper;
 import com.example.ddoverhaul.Login;
 import com.example.ddoverhaul.Objeto;
 import com.example.ddoverhaul.R;
+import com.example.ddoverhaul.habilidadList.CreateSkillFragment;
 import com.example.ddoverhaul.objetoList.ObjetoAdapter;
 import com.example.ddoverhaul.personajeList.SpacingItemDecoration;
 
@@ -40,13 +41,20 @@ public class ListaObjetosFragment extends Fragment {
         objects = helper.getObjects();
         adapter = new ObjetoAdapter(objects);
         recyclerView.setAdapter(adapter);
-
         adapter.setOnClickListener(new ObjetoAdapter.OnClickListener() {
             @Override
-            public void onClick(int position, String id) {
-                Intent intent = new Intent(requireContext(), Login.class);
-                intent.putExtra("objeto", id);
-                startActivity(intent);
+            public void onClick(int position, String id, String type) {
+                ObjetoViewFragment fragment = new ObjetoViewFragment();
+                Bundle bundle = new Bundle();
+                bundle.putString("objeto", id);
+                bundle.putString("type",type);
+                fragment.setArguments(bundle);
+
+                getFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.activity_content, fragment)
+                        .addToBackStack(null)
+                        .commit();
             }
         });
 
