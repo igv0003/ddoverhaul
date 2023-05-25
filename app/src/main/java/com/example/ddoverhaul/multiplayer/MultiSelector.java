@@ -265,7 +265,10 @@ public class MultiSelector extends BaseActivity {
         intent.putExtra("lobbyName",masterPW.getText().toString());
         intent.putExtra("mainToken",mainToken);
         intent.putExtra("clientTokens",clientTokens);
-        intent.putExtra("clientChars",clientChars);
+        intent.putExtra("player1",clientChars[0]);
+        intent.putExtra("player2",clientChars[1]);
+        intent.putExtra("player3",clientChars[2]);
+        intent.putExtra("player4",clientChars[3]);
 
         Toast.makeText(getApplicationContext(), "Comienza la partida",Toast.LENGTH_SHORT).show();
 
