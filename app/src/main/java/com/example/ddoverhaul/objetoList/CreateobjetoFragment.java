@@ -104,8 +104,9 @@ public class CreateobjetoFragment extends Fragment {
                         editDescription.setText(equip.getDescripcion());
                         editDamage.setText(String.valueOf(equip.getDanio()));
                         editArmor.setText(String.valueOf(equip.getArmadura()));
+                        SpinnerEquipoPos.setSelection(equip.getPosicion());
                         EquipoLayout.setVisibility(View.VISIBLE);
-                        SpinnerTipo.setSelection(2);
+                        SpinnerTipo.setSelection(1);
                         SpinnerTipo.setEnabled(false);
                     } else {
                         equip = new Equipo();
@@ -122,7 +123,7 @@ public class CreateobjetoFragment extends Fragment {
                         editCuantiti.setText(String.valueOf(cons.getCantidad()));
                         editOperation.setText(String.valueOf(cons.getOperacion()));
                         ConsumibleLayout.setVisibility(View.VISIBLE);
-                        SpinnerTipo.setSelection(1);
+                        SpinnerTipo.setSelection(2);
                         SpinnerTipo.setEnabled(false);
                     } else {
                         equip = new Equipo();
@@ -183,7 +184,11 @@ public class CreateobjetoFragment extends Fragment {
             public void onClick(View v) {
                 // Boton cuando se haga clic en el botón "Guardar"
                 String nombre = editName.getText().toString();
-                String descrip = editDescription.getText().toString();
+                if (nombre.equals("")){
+                    Toast.makeText(requireContext(), "No puedes dejar vacio nombre", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                String descrip = editDescription.getText().toString();//puedes dejar vacio
                 String Tipo = "Otro";
                 // Equipo
                 int danio = 0;
@@ -219,8 +224,12 @@ public class CreateobjetoFragment extends Fragment {
                                 equip = new Equipo();
                                 equip.setId(-1);
                             }
-                            danio = Integer.parseInt(editDamage.getText().toString());
-                            arm = Integer.parseInt(editArmor.getText().toString());
+                            if(!editDamage.getText().toString().equals("")){
+                                danio = Integer.parseInt(editDamage.getText().toString());
+                            }
+                            if(!editArmor.getText().toString().equals("")) {
+                                arm = Integer.parseInt(editArmor.getText().toString());
+                            }
                             posicion = SpinnerEquipoPos.getSelectedItemPosition();
                             equip.setNombre(nombre);
                             equip.setDescripcion(descrip);
@@ -243,8 +252,15 @@ public class CreateobjetoFragment extends Fragment {
                                 cons.setId(-1);
                             }
                             valor = SpinnerValor.getSelectedItemPosition();
-                            cantidad = Integer.parseInt(editCuantiti.getText().toString());
-                            operacion = editOperation.getText().toString().charAt(0);
+                            if(!editCuantiti.getText().toString().equals("")) {
+                                cantidad = Integer.parseInt(editCuantiti.getText().toString());
+                            }
+                            if(editOperation.getText().toString().equals("") || !(editOperation.getText().toString().equals("+") || editOperation.getText().toString().equals("-") || editOperation.getText().toString().equals("*") || editOperation.getText().toString().equals("x") || editOperation.getText().toString().equals("/"))){
+                                Toast.makeText(requireContext(), "operacion debe ser: +, -, * ó /", Toast.LENGTH_SHORT).show();
+                                return;
+                            }else{
+                                operacion = editOperation.getText().toString().charAt(0);
+                            }
                             cons.setNombre(nombre);
                             cons.setDescripcion(descrip);
                             cons.setValor(valor);//0=Vida;1=Mana...8=Velocidad

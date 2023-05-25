@@ -1,5 +1,7 @@
 package com.example.ddoverhaul.objetoList;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -22,6 +24,7 @@ import com.example.ddoverhaul.Equipo;
 import com.example.ddoverhaul.JSONHelper;
 import com.example.ddoverhaul.Objeto;
 import com.example.ddoverhaul.R;
+import com.example.ddoverhaul.habilidadList.HabilidadListFragment;
 
 public class ObjetoViewFragment extends Fragment {
     private JSONHelper helper;
@@ -190,7 +193,40 @@ public class ObjetoViewFragment extends Fragment {
     }
 
     public void deleteObj(int id, String type) {
-            // Implementa el código para eliminar el objeto con el ID y el tipo especificados.
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle("Eliminar objeto");
+        builder.setMessage("¿Está seguro de que desea eliminar el objeto?")
+                .setPositiveButton("Sí", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        switch(type){
+                            default://obejeto
+                                helper.deleteObject(id);
+                                break;
+                            case "Equipo":
+                                helper.deleteEquip(id);
+                                break;
+                            case "Consumible":
+                                helper.deleteCons(id);
+                                break;
+                        }
+                        Toast.makeText(getContext(), "Se eliminó el objeto",Toast.LENGTH_SHORT).show();
+                        ListaObjetosFragment fragment = new ListaObjetosFragment();
+                        getFragmentManager()
+                                .beginTransaction()
+                                .replace(R.id.activity_content, fragment)
+                                .addToBackStack(null)
+                                .commit();
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(getContext(), "Se canceló el borrado",Toast.LENGTH_SHORT).show();
+                        dialog.dismiss();
+                    }
+                }).show();
     }
+
 }
 
