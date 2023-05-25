@@ -80,9 +80,13 @@ public class CreateobjetoFragment extends Fragment {
 
         helper = new JSONHelper(requireContext());
 
-
-        String idString = requireActivity().getIntent().getStringExtra("objeto");
-        String type = requireActivity().getIntent().getStringExtra("type");
+        String idString = null;
+        String type = null;
+        Bundle args = getArguments();
+        if (args != null) {
+            idString = args.getString("objeto" );
+            type = args.getString("type" );
+        }
         int id = -1;
         try {
             id = Integer.parseInt(idString);
@@ -90,21 +94,7 @@ public class CreateobjetoFragment extends Fragment {
             e.printStackTrace();
         }
 
-        if(type == null){
-            int tipin = SpinnerTipo.getSelectedItemPosition();
-            switch (tipin){
-                default:
-                    type = "Otro";
-                    break;
-                case 1:
-                    type = "Equipo";
-                    break;
-                case 2:
-                    type = "Consumible";
-                    break;
-            }
-            id = -1;
-        }
+        if(type != null) {
             switch (type) {
                 case "Equipo": // EQUIPO
                     if (id != -1) {
@@ -158,6 +148,7 @@ public class CreateobjetoFragment extends Fragment {
                 default:
                     break;
             }
+        }
 
 
 
@@ -208,6 +199,7 @@ public class CreateobjetoFragment extends Fragment {
                             Tipo = "Otro";
                             if(obj == null){
                                 obj = new Objeto();
+                                obj.setId(-1);
                             }
                             obj.setTipo(Tipo);
                             obj.setNombre(nombre);
@@ -225,6 +217,7 @@ public class CreateobjetoFragment extends Fragment {
                             Tipo = "Equipo";
                             if(equip == null){
                                 equip = new Equipo();
+                                equip.setId(-1);
                             }
                             danio = Integer.parseInt(editDamage.getText().toString());
                             arm = Integer.parseInt(editArmor.getText().toString());
@@ -247,8 +240,8 @@ public class CreateobjetoFragment extends Fragment {
                             Tipo = "Consumible";
                             if(cons == null){
                                 cons = new Consumibles();
+                                cons.setId(-1);
                             }
-
                             valor = SpinnerValor.getSelectedItemPosition();
                             cantidad = Integer.parseInt(editCuantiti.getText().toString());
                             operacion = editOperation.getText().toString().charAt(0);

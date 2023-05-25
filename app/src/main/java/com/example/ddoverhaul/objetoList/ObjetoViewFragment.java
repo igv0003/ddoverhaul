@@ -178,7 +178,8 @@ public class ObjetoViewFragment extends Fragment {
     public void editObj(int id, String type) {
         CreateobjetoFragment fragment = new CreateobjetoFragment();
         Bundle bundle = new Bundle();
-        bundle.putInt("objeto", id);
+        bundle.putString("objeto", id+"");
+        bundle.putString("type", type);
         fragment.setArguments(bundle);
 
         getFragmentManager()
