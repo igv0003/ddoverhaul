@@ -72,8 +72,8 @@ public class Main_obj extends BaseActivity {
         ArrayAdapter<String> adapterValor = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, new String[]{"Vida", "Mana", "Fuerza", "Destreza", "Constitucion", "Inteligencia","Sabiduria","Carisma","Velocidad"});
         SpinnerValor.setAdapter(adapterValor);
 
-        String type = getIntent().getStringExtra("type");
         String idString = getIntent().getStringExtra("objeto");
+        String type = getIntent().getStringExtra("type");
         int id = -1;
         try{
             id = Integer.parseInt(idString);
@@ -82,56 +82,57 @@ public class Main_obj extends BaseActivity {
             e.printStackTrace();
         }
         helper = new JSONHelper(getBaseContext());
-        switch (type){
-            case "Equipo"://EQUIPO
-                if (id != -1) {
-                    equip = helper.getEquip(id);
-                    // Al existir, se le añaden los valores que tiene para su edición
-                    editName.setText(equip.getNombre());
-                    editDescription.setText(equip.getDescripcion());
-                    editDamage.setText(equip.getDanio()+"");
-                    editArmor.setText(equip.getArmadura()+"");
-                    EquipoLayout.setVisibility(View.VISIBLE);
-                    SpinnerTipo.setSelection(2);
-                    SpinnerTipo.setEnabled(false);
-                } else {
-                    equip = new Equipo();
-                    equip.setId(-1);
-                }
-                break;
-            case "Consumible"://CONSUMIBLE
-                if (id != -1) {
-                    cons = helper.getCons(id);
-                    // Al existir, se le añaden los valores que tiene para su edición
-                    editName.setText(cons.getNombre());
-                    editDescription.setText(cons.getDescripcion());
-                    SpinnerValor.setSelection(cons.getValor());
-                    editCuantiti.setText(cons.getCantidad()+"");
-                    editOperation.setText(cons.getOperacion()+"");
-                    ConsumibleLayout.setVisibility(View.VISIBLE);
-                    SpinnerTipo.setSelection(1);
-                    SpinnerTipo.setEnabled(false);
-                } else {
-                    equip = new Equipo();
-                    equip.setId(-1);
-                }
-                break;
-            default://OTROS
-                if (id != -1) {
-                    obj = helper.getObject(id);
-                    // Al existir, se le añaden los valores que tiene para su edición
-                    String nm = obj.getNombre();
-                    editName.setText(obj.getNombre());
-                    editDescription.setText(obj.getDescripcion());
-                    EquipoLayout.setVisibility(View.INVISIBLE);
-                    ConsumibleLayout.setVisibility(View.INVISIBLE);
-                    SpinnerTipo.setSelection(0);
-                    SpinnerTipo.setEnabled(false);
-                } else {
-                    obj = new Objeto();
-                    obj.setId(-1);
-                }
-                break;
+        if(type != null){
+            switch (type){
+                case "Equipo"://EQUIPO
+                    if (id != -1) {
+                        equip = helper.getEquip(id);
+                        // Al existir, se le añaden los valores que tiene para su edición
+                        editName.setText(equip.getNombre());
+                        editDescription.setText(equip.getDescripcion());
+                        editDamage.setText(equip.getDanio()+"");
+                        editArmor.setText(equip.getArmadura()+"");
+                        EquipoLayout.setVisibility(View.VISIBLE);
+                        SpinnerTipo.setSelection(2);
+                    } else {
+                        equip = new Equipo();
+                        equip.setId(-1);
+                    }
+                    break;
+                case "Consumible"://CONSUMIBLE
+                    if (id != -1) {
+                        cons = helper.getCons(id);
+                        // Al existir, se le añaden los valores que tiene para su edición
+                        editName.setText(cons.getNombre());
+                        editDescription.setText(cons.getDescripcion());
+                        SpinnerValor.setSelection(cons.getValor());
+                        editCuantiti.setText(cons.getCantidad()+"");
+                        editOperation.setText(cons.getOperacion()+"");
+                        ConsumibleLayout.setVisibility(View.VISIBLE);
+                        SpinnerTipo.setSelection(1);
+                    } else {
+                        equip = new Equipo();
+                        equip.setId(-1);
+                    }
+                    break;
+                case "Otro"://OTROS
+                    if (id != -1) {
+                        obj = helper.getObject(id);
+                        // Al existir, se le añaden los valores que tiene para su edición
+                        String nm = obj.getNombre();
+                        editName.setText(obj.getNombre());
+                        editDescription.setText(obj.getDescripcion());
+                        EquipoLayout.setVisibility(View.INVISIBLE);
+                        ConsumibleLayout.setVisibility(View.INVISIBLE);
+                        SpinnerTipo.setSelection(0);
+                    } else {
+                        obj = new Objeto();
+                        obj.setId(-1);
+                    }
+                default:
+                    break;
+            }
+            SpinnerTipo.setEnabled(false);
         }
 
         int indexC = mainObj.indexOfChild(ConsumibleLayout);
@@ -188,7 +189,6 @@ public class Main_obj extends BaseActivity {
                         danio = Integer.parseInt(editDamage.getText().toString());
                         arm = Integer.parseInt(editArmor.getText().toString());
                         posicion = SpinnerEquipoPos.getSelectedItemPosition();
-                        equip = new Equipo();
                         equip.setNombre(nombre);
                         equip.setDescripcion(descrip);
                         equip.setDanio(danio);
@@ -216,7 +216,6 @@ public class Main_obj extends BaseActivity {
                             Toast.makeText(getApplicationContext(), "Operacion debe ser un caracter operador",Toast.LENGTH_SHORT).show();
                             return;
                         }
-                        cons = new Consumibles();
                         cons.setNombre(nombre);
                         cons.setDescripcion(descrip);
                         cons.setValor(valor);//0=Vida;1=Mana...8=Velocidad
@@ -233,7 +232,6 @@ public class Main_obj extends BaseActivity {
                         break;
                     default://Posicion segunda OTRO
                         Tipo = "Otro";
-                        obj = new Objeto();
                         obj.setNombre(nombre);
                         obj.setDescripcion(descrip);
                         obj.setTipo(Tipo);

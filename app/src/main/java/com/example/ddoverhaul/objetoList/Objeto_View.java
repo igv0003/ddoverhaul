@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
@@ -29,6 +30,7 @@ public class Objeto_View extends BaseActivity {
     private String opcionSeleccionada;
     private Equipo equip;
     private Consumibles cons;
+    private Button editbuton;
 
     private LinearLayout mainObj;
     @Override
@@ -36,6 +38,7 @@ public class Objeto_View extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_objeto_view);
 
+        editbuton = findViewById(R.id.GuardarObj);
         editName = findViewById(R.id.caja_objeto);
         SpinnerEquipoPos = findViewById(R.id.SpinnerPosicion);
         editDamage = findViewById(R.id.caja_danio);
@@ -94,7 +97,7 @@ public class Objeto_View extends BaseActivity {
                     editArmor.setText(equip.getArmadura()+"");
                     SpinnerEquipoPos.setSelection(equip.getPosicion());
                     EquipoLayout.setVisibility(View.VISIBLE);
-                    SpinnerTipo.setSelection(2);
+                    SpinnerTipo.setSelection(1);
                 } else {
                     Toast.makeText(getApplicationContext(), "NO SE HA ENCONTRADO",Toast.LENGTH_SHORT).show();
                     finish();
@@ -110,13 +113,14 @@ public class Objeto_View extends BaseActivity {
                     editCuantiti.setText(cons.getCantidad()+"");
                     editOperation.setText(cons.getOperacion()+"");
                     ConsumibleLayout.setVisibility(View.VISIBLE);
-                    SpinnerTipo.setSelection(1);
+                    SpinnerTipo.setSelection(2);
                 } else {
                     Toast.makeText(getApplicationContext(), "NO SE HA ENCONTRADO",Toast.LENGTH_SHORT).show();
                     finish();
                 }
                 break;
         }
+        final int idF = id;
         SpinnerTipo.setEnabled(false);
         SpinnerValor.setEnabled(false);
         SpinnerEquipoPos.setEnabled(false);
@@ -150,24 +154,23 @@ public class Objeto_View extends BaseActivity {
             }
         });
 
-        findViewById(R.id.GuardarObj).setOnClickListener(new View.OnClickListener() {
+        editbuton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(type.equals("Equipo")){
-                    equip.getId();
+                    editObj(idF, type);
                 }else if(type.equals("Consumible")){
-                    cons.getId();
+                    editObj(idF, type);
                 }else{
-                    obj.getId();
+                    editObj(idF, type);
                 }
-                editObj(obj.getId(), type);
             }
         });
     }
     public void editObj(int id, String type) {
         Intent intent = new Intent(Objeto_View.this, Main_obj.class);
-        intent.putExtra("objeto", id);
         intent.putExtra("type", type);
+        intent.putExtra("objeto", id+"");
         startActivity(intent);
     }
 
