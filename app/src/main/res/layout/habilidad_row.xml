@@ -11,7 +11,7 @@
         android:layout_height="match_parent"
         android:adjustViewBounds="true"
         android:contentDescription="Descripción del contenido de la imagen"
-        android:layout_marginVertical="15dp"
+        android:layout_marginVertical="25dp"
         android:layout_marginLeft="35dp"
         android:scaleType="fitXY"
         android:src="@drawable/questionmark" />

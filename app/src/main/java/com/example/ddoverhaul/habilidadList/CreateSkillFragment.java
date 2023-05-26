@@ -70,7 +70,7 @@ public class CreateSkillFragment extends Fragment implements IconsAdapter.OnIcon
         iconView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mostrarVentanaIconos(view);
+                showIcons(view);
             }
         });
 
@@ -111,7 +111,7 @@ public class CreateSkillFragment extends Fragment implements IconsAdapter.OnIcon
     }
 
     //
-    public void mostrarVentanaIconos(View view) {
+    public void showIcons(View view) {
         AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
         builder.setTitle("Selecciona un icono");
 
