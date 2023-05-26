@@ -8,8 +8,6 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.ddoverhaul.habilidadList.OnIconClickListener;
-
 public class IconsAdapter extends RecyclerView.Adapter<IconsAdapter.IconViewHolder> {
 
     private int[] iconos;

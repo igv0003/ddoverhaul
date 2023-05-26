@@ -39,7 +39,7 @@ public class ListaObjetosFragment extends Fragment {
         recyclerView.addItemDecoration(new SpacingItemDecoration(35));
 
         objects = helper.getObjects();
-        adapter = new ObjetoAdapter(objects);
+        adapter = new ObjetoAdapter(objects, getContext());
         recyclerView.setAdapter(adapter);
         adapter.setOnClickListener(new ObjetoAdapter.OnClickListener() {
             @Override

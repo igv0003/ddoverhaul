@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -33,7 +34,7 @@ public class ObjetoViewFragment extends Fragment {
     private Equipo equip;
     private Consumibles cons;
     private Button editButton;
-
+    private ImageView iconView;
     private LinearLayout mainObj;
 
     @Nullable
@@ -55,6 +56,7 @@ public class ObjetoViewFragment extends Fragment {
         equipoLayout = rootView.findViewById(R.id.equipoLayout);
         consumibleLayout = rootView.findViewById(R.id.consumibleLayout);
         mainObj = rootView.findViewById(R.id.activityObj);
+        iconView = rootView.findViewById(R.id.ImageObj);
 
         ArrayAdapter<String> adapterTipo = new ArrayAdapter<>(requireContext(), android.R.layout.simple_spinner_item, new String[]{"Otro", "Equipo", "Consumible"});
         spinnerTipo.setAdapter(adapterTipo);
@@ -83,6 +85,8 @@ public class ObjetoViewFragment extends Fragment {
                     // Al existir, se le añaden los valores que tiene para su edición
                     editName.setText(obj.getNombre());
                     editDescription.setText(obj.getDescripcion());
+                    int idIcon = getResources().getIdentifier(obj.getIcono(),"drawable", getActivity().getPackageName());
+                    iconView.setImageResource(idIcon);
                     equipoLayout.setVisibility(View.INVISIBLE);
                     consumibleLayout.setVisibility(View.INVISIBLE);
                     spinnerTipo.setSelection(0);
@@ -100,6 +104,8 @@ public class ObjetoViewFragment extends Fragment {
                     editDamage.setText(String.valueOf(equip.getDanio()));
                     editArmor.setText(String.valueOf(equip.getArmadura()));
                     spinnerEquipoPos.setSelection(equip.getPosicion());
+                    int idIcon = getResources().getIdentifier(equip.getIcono(),"drawable", getActivity().getPackageName());
+                    iconView.setImageResource(idIcon);
                     equipoLayout.setVisibility(View.VISIBLE);
                     spinnerTipo.setSelection(1);
                 } else {
@@ -115,6 +121,8 @@ public class ObjetoViewFragment extends Fragment {
                     editDescription.setText(cons.getDescripcion());
                     spinnerValor.setSelection(cons.getValor());
                     editCuantiti.setText(String.valueOf(cons.getCantidad()));
+                    int idIcon = getResources().getIdentifier(cons.getIcono(),"drawable", getActivity().getPackageName());
+                    iconView.setImageResource(idIcon);
                     editOperation.setText(cons.getOperacion());
                     consumibleLayout.setVisibility(View.VISIBLE);
                     spinnerTipo.setSelection(2);
@@ -124,6 +132,7 @@ public class ObjetoViewFragment extends Fragment {
                 }
                 break;
         }
+
         final int idF = id;
         spinnerTipo.setEnabled(false);
         spinnerValor.setEnabled(false);
