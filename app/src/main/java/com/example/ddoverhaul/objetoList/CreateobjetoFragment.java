@@ -280,6 +280,9 @@ public class CreateobjetoFragment extends Fragment implements IconsAdapter.OnIco
                 if (nombre.equals("")){
                     Toast.makeText(requireContext(), "No puedes dejar vacio nombre", Toast.LENGTH_SHORT).show();
                     return;
+                }else if(nombre.length() > 36){
+                    Toast.makeText(requireContext(), "El nombre es demasiado largo", Toast.LENGTH_SHORT).show();
+                    return;
                 }
                 String descrip = editDescription.getText().toString();//puedes dejar vacio
                 String Tipo = "Otro";
