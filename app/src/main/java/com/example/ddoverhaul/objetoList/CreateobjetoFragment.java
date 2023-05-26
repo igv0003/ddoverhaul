@@ -167,7 +167,6 @@ public class CreateobjetoFragment extends Fragment implements IconsAdapter.OnIco
                     break;
                 case 1:
                     type = "Equipo";
-                    finalIcons = null;
                     break;
                 case 2:
                     type = "Consumible";
