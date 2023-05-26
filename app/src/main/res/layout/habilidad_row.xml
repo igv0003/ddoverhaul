@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal">
+    android:layout_height="130dp"
+    android:orientation="horizontal"
+    android:background="@drawable/items">
 
     <ImageView
         android:id="@+id/imageView_skill"
@@ -10,6 +11,8 @@
         android:layout_height="match_parent"
         android:adjustViewBounds="true"
         android:contentDescription="Descripción del contenido de la imagen"
+        android:layout_marginVertical="15dp"
+        android:layout_marginLeft="35dp"
         android:scaleType="fitXY"
         android:src="@drawable/questionmark" />
 
@@ -46,7 +49,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_weight="0.6"
             android:orientation="vertical"
             android:gravity="center_vertical">
 
