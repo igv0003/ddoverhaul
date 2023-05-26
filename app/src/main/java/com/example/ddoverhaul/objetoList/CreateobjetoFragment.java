@@ -78,7 +78,7 @@ public class CreateobjetoFragment extends Fragment implements IconsAdapter.OnIco
         ConsumibleLayout = rootView.findViewById(R.id.consumibleLayout);
         mainObj = rootView.findViewById(R.id.activityObj);
         ImagenObj = rootView.findViewById(R.id.ImageObj);
-
+        editIcon = "questionmark";
         guardarBTN = rootView.findViewById(R.id.GuardarObj);
         cancelarBTN = rootView.findViewById(R.id.CancelarObj);
         //Referenciar EditText
