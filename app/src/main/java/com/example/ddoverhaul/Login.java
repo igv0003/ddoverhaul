@@ -1,6 +1,7 @@
 package com.example.ddoverhaul;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -85,11 +86,17 @@ public class Login extends AppCompatActivity {
 
 
     public void enter() {
-        // En algún lugar de tu código donde desees mostrar el fragmento MenuprincipalFragment
+        SharedPreferences shared = getSharedPreferences("LoginUsuario",MODE_PRIVATE);
+        SharedPreferences.Editor editor = shared.edit();
+        editor.putString("correo", this.EmailS);
+        editor.putString("constraseña",this.PasswordS);
+        editor.apply();
+
         startActivity(new Intent(Login.this, Menu_principal.class));
 
 
     }
+
     public void mandarCorreo(){
     forgotPassword.setOnClickListener(new View.OnClickListener() {
         @Override
@@ -123,7 +130,10 @@ public class Login extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             // El inicio de sesión se realizó exitosamente
                             FirebaseUser user = mAuth.getCurrentUser();
+                            EmailS = user.getEmail();
+                            PasswordS = password;
                             Log.d("LoginActivity", "Inicio de sesión exitoso: " + user.getEmail());
+
                             enter();
                         } else {
                             // Ocurrió un error durante el inicio de sesión
@@ -151,8 +161,9 @@ public class Login extends AppCompatActivity {
                                 mAuth.signInWithEmailAndPassword(userEmail, password)
                                         .addOnCompleteListener(authTask -> {
                                             if (authTask.isSuccessful()) {
-
                                                 FirebaseUser currentUser = mAuth.getCurrentUser();
+                                                EmailS = currentUser.getEmail();
+                                                PasswordS = password;
                                                 Log.d("LoginActivity", "Inicio de sesión exitoso: " + currentUser.getEmail());
                                                 enter();
                                             } else {
