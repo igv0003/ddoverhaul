@@ -1,6 +1,5 @@
 package com.example.ddoverhaul.objetoList;
 
-import android.app.AlertDialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -140,6 +139,7 @@ public class CreateobjetoFragment extends Fragment implements IconsAdapter.OnIco
 
         helper = new JSONHelper(requireContext());
 
+
         ImagenObj.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -150,8 +150,13 @@ public class CreateobjetoFragment extends Fragment implements IconsAdapter.OnIco
         });
 
 
-        String idString = requireActivity().getIntent().getStringExtra("objeto");
-        String type = requireActivity().getIntent().getStringExtra("type");
+        String idString = null;
+        String type = null;
+        Bundle args = getArguments();
+        if (args != null) {
+            idString = args.getString("objeto" );
+            type = args.getString("type" );
+        }
         int id = -1;
         try {
             id = Integer.parseInt(idString);
@@ -159,21 +164,9 @@ public class CreateobjetoFragment extends Fragment implements IconsAdapter.OnIco
             e.printStackTrace();
         }
 
-        if(type == null){
-            int tipin = SpinnerTipo.getSelectedItemPosition();
-            switch (tipin){
-                default:
-                    type = "Otro";
-                    break;
-                case 1:
-                    type = "Equipo";
-                    break;
-                case 2:
-                    type = "Consumible";
-                    break;
-            }
-            id = -1;
-        }
+
+
+        if(type != null) {
             switch (type) {
                 case "Equipo": // EQUIPO
                     if (id != -1) {
@@ -183,11 +176,12 @@ public class CreateobjetoFragment extends Fragment implements IconsAdapter.OnIco
                         editDescription.setText(equip.getDescripcion());
                         editDamage.setText(String.valueOf(equip.getDanio()));
                         editArmor.setText(String.valueOf(equip.getArmadura()));
-                        int idIcon = getResources().getIdentifier(equip.getIcono(),"drawable", getActivity().getPackageName());
+                        SpinnerEquipoPos.setSelection(equip.getPosicion());
+                        int idIcon = getResources().getIdentifier(equip.getIcono(), "drawable", getActivity().getPackageName());
                         ImagenObj.setImageResource(idIcon);
                         editIcon = equip.getIcono();
                         EquipoLayout.setVisibility(View.VISIBLE);
-                        SpinnerTipo.setSelection(2);
+                        SpinnerTipo.setSelection(1);
                         SpinnerTipo.setEnabled(false);
                     } else {
                         equip = new Equipo();
@@ -205,11 +199,11 @@ public class CreateobjetoFragment extends Fragment implements IconsAdapter.OnIco
                         SpinnerValor.setSelection(cons.getValor());
                         editCuantiti.setText(String.valueOf(cons.getCantidad()));
                         editOperation.setText(String.valueOf(cons.getOperacion()));
-                        int idIcon = getResources().getIdentifier(cons.getIcono(),"drawable", getActivity().getPackageName());
+                        int idIcon = getResources().getIdentifier(cons.getIcono(), "drawable", getActivity().getPackageName());
                         ImagenObj.setImageResource(idIcon);
                         editIcon = cons.getIcono();
                         ConsumibleLayout.setVisibility(View.VISIBLE);
-                        SpinnerTipo.setSelection(1);
+                        SpinnerTipo.setSelection(2);
                         SpinnerTipo.setEnabled(false);
                     } else {
                         equip = new Equipo();
@@ -227,7 +221,7 @@ public class CreateobjetoFragment extends Fragment implements IconsAdapter.OnIco
                         editDescription.setText(obj.getDescripcion());
                         EquipoLayout.setVisibility(View.INVISIBLE);
                         ConsumibleLayout.setVisibility(View.INVISIBLE);
-                        int idIcon = getResources().getIdentifier(obj.getIcono(),"drawable", getActivity().getPackageName());
+                        int idIcon = getResources().getIdentifier(obj.getIcono(), "drawable", getActivity().getPackageName());
                         ImagenObj.setImageResource(idIcon);
                         editIcon = obj.getIcono();
                         SpinnerTipo.setSelection(0);
@@ -242,7 +236,7 @@ public class CreateobjetoFragment extends Fragment implements IconsAdapter.OnIco
                 default:
                     break;
             }
-
+        }
 
 
         int indexC = mainObj.indexOfChild(ConsumibleLayout);
@@ -282,7 +276,11 @@ public class CreateobjetoFragment extends Fragment implements IconsAdapter.OnIco
             public void onClick(View v) {
                 // Boton cuando se haga clic en el botón "Guardar"
                 String nombre = editName.getText().toString();
-                String descrip = editDescription.getText().toString();
+                if (nombre.equals("")){
+                    Toast.makeText(requireContext(), "No puedes dejar vacio nombre", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                String descrip = editDescription.getText().toString();//puedes dejar vacio
                 String Tipo = "Otro";
                 // Equipo
                 int danio = 0;
@@ -298,6 +296,7 @@ public class CreateobjetoFragment extends Fragment implements IconsAdapter.OnIco
                             Tipo = "Otro";
                             if(obj == null){
                                 obj = new Objeto();
+                                obj.setId(-1);
                             }
                             obj.setTipo(Tipo);
                             obj.setNombre(nombre);
@@ -316,9 +315,14 @@ public class CreateobjetoFragment extends Fragment implements IconsAdapter.OnIco
                             Tipo = "Equipo";
                             if(equip == null){
                                 equip = new Equipo();
+                                equip.setId(-1);
                             }
-                            danio = Integer.parseInt(editDamage.getText().toString());
-                            arm = Integer.parseInt(editArmor.getText().toString());
+                            if(!editDamage.getText().toString().equals("")){
+                                danio = Integer.parseInt(editDamage.getText().toString());
+                            }
+                            if(!editArmor.getText().toString().equals("")) {
+                                arm = Integer.parseInt(editArmor.getText().toString());
+                            }
                             posicion = SpinnerEquipoPos.getSelectedItemPosition();
                             equip.setNombre(nombre);
                             equip.setDescripcion(descrip);
@@ -339,11 +343,18 @@ public class CreateobjetoFragment extends Fragment implements IconsAdapter.OnIco
                             Tipo = "Consumible";
                             if(cons == null){
                                 cons = new Consumibles();
+                                cons.setId(-1);
                             }
-
                             valor = SpinnerValor.getSelectedItemPosition();
-                            cantidad = Integer.parseInt(editCuantiti.getText().toString());
-                            operacion = editOperation.getText().toString().charAt(0);
+                            if(!editCuantiti.getText().toString().equals("")) {
+                                cantidad = Integer.parseInt(editCuantiti.getText().toString());
+                            }
+                            if(editOperation.getText().toString().equals("") || !(editOperation.getText().toString().equals("+") || editOperation.getText().toString().equals("-") || editOperation.getText().toString().equals("*") || editOperation.getText().toString().equals("x") || editOperation.getText().toString().equals("/"))){
+                                Toast.makeText(requireContext(), "operacion debe ser: +, -, * ó /", Toast.LENGTH_SHORT).show();
+                                return;
+                            }else{
+                                operacion = editOperation.getText().toString().charAt(0);
+                            }
                             cons.setNombre(nombre);
                             cons.setDescripcion(descrip);
                             cons.setValor(valor);//0=Vida;1=Mana...8=Velocidad

@@ -1,5 +1,7 @@
 package com.example.ddoverhaul.objetoList;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -23,6 +25,7 @@ import com.example.ddoverhaul.Equipo;
 import com.example.ddoverhaul.JSONHelper;
 import com.example.ddoverhaul.Objeto;
 import com.example.ddoverhaul.R;
+import com.example.ddoverhaul.habilidadList.HabilidadListFragment;
 
 public class ObjetoViewFragment extends Fragment {
     private JSONHelper helper;
@@ -121,9 +124,9 @@ public class ObjetoViewFragment extends Fragment {
                     editDescription.setText(cons.getDescripcion());
                     spinnerValor.setSelection(cons.getValor());
                     editCuantiti.setText(String.valueOf(cons.getCantidad()));
+                    editOperation.setText(cons.getOperacion()+"");
                     int idIcon = getResources().getIdentifier(cons.getIcono(),"drawable", getActivity().getPackageName());
                     iconView.setImageResource(idIcon);
-                    editOperation.setText(cons.getOperacion());
                     consumibleLayout.setVisibility(View.VISIBLE);
                     spinnerTipo.setSelection(2);
                 } else {
@@ -132,7 +135,6 @@ public class ObjetoViewFragment extends Fragment {
                 }
                 break;
         }
-
         final int idF = id;
         spinnerTipo.setEnabled(false);
         spinnerValor.setEnabled(false);
@@ -187,7 +189,8 @@ public class ObjetoViewFragment extends Fragment {
     public void editObj(int id, String type) {
         CreateobjetoFragment fragment = new CreateobjetoFragment();
         Bundle bundle = new Bundle();
-        bundle.putInt("objeto", id);
+        bundle.putString("objeto", id+"");
+        bundle.putString("type", type);
         fragment.setArguments(bundle);
 
         getFragmentManager()
@@ -198,7 +201,40 @@ public class ObjetoViewFragment extends Fragment {
     }
 
     public void deleteObj(int id, String type) {
-            // Implementa el código para eliminar el objeto con el ID y el tipo especificados.
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle("Eliminar objeto");
+        builder.setMessage("¿Está seguro de que desea eliminar el objeto?")
+                .setPositiveButton("Sí", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        switch(type){
+                            default://obejeto
+                                helper.deleteObject(id);
+                                break;
+                            case "Equipo":
+                                helper.deleteEquip(id);
+                                break;
+                            case "Consumible":
+                                helper.deleteCons(id);
+                                break;
+                        }
+                        Toast.makeText(getContext(), "Se eliminó el objeto",Toast.LENGTH_SHORT).show();
+                        ListaObjetosFragment fragment = new ListaObjetosFragment();
+                        getFragmentManager()
+                                .beginTransaction()
+                                .replace(R.id.activity_content, fragment)
+                                .addToBackStack(null)
+                                .commit();
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(getContext(), "Se canceló el borrado",Toast.LENGTH_SHORT).show();
+                        dialog.dismiss();
+                    }
+                }).show();
     }
+
 }
 
