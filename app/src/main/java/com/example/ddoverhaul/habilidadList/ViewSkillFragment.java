@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,6 +30,7 @@ public class ViewSkillFragment extends Fragment {
     TextView percView;
     TextView commentView;
     LinearLayout probLayout;
+    ImageView imageIcon;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -42,6 +44,7 @@ public class ViewSkillFragment extends Fragment {
         percView = view.findViewById(R.id.perc_skill);
         commentView = view.findViewById(R.id.comment_skill);
         probLayout = view.findViewById(R.id.probstatus_layout);
+        imageIcon = view.findViewById(R.id.icon_skill);
         helper = new JSONHelper(getContext());
 
 
@@ -65,6 +68,8 @@ public class ViewSkillFragment extends Fragment {
         costView.setText(skill.getCoste()+"");
         dmgView.setText(skill.getDanio()+"");
         commentView.setText(skill.getDescripcion());
+        int idIcon = getResources().getIdentifier(skill.getIcono(),"drawable", getActivity().getPackageName());
+        imageIcon.setImageResource(idIcon);
 
         // Si la habilidad no provoca problema de estado desaparece su layout
         if (!skill.getProblema_estado().equals("")) {

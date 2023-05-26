@@ -11,7 +11,7 @@
         android:adjustViewBounds="true"
         android:contentDescription="Descripción del contenido de la imagen"
         android:scaleType="fitXY"
-        android:src="@android:drawable/ic_menu_gallery" />
+        android:src="@drawable/questionmark" />
 
     <LinearLayout
         android:layout_width="match_parent"

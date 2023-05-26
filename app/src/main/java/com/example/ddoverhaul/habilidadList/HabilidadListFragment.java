@@ -37,7 +37,7 @@ public class HabilidadListFragment extends Fragment {
         // Se obtiene el array a mostrar en el recyclerView
         skills = helper.getAllSkills();
         // Se crea el HabilidadAdapter con el array obtenido
-        adapter = new HabilidadAdapter(skills);
+        adapter = new HabilidadAdapter(skills, getContext());
         // Se vincula el recyclerView con el adaptador
         recyclerView.setAdapter(adapter);
 
