@@ -45,7 +45,7 @@ public class Master extends BaseActivity_Multi {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_container_multi);
+        setContentView(R.layout.activity_master);
 
         // Se crea debido al MultiSelector, tiene Extras
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {

@@ -34,17 +34,17 @@ public class Metodos extends AppCompatActivity {
         /*METER OBJETO MEDIANTE JSON*/
     };
     /*Metodo con objeto*/
-    public void addEvento(String descripcion, int valor, int cantidad, char operacion, Objeto obj){
+    public void addEvento(String nombre, String descripcion, int valor, int cantidad, char operacion, Objeto obj){
         int getLastId=0;
         int id = getLastId;/*Metodo que obtiene el ultimo id*/
-        Evento event = new Evento(id,  descripcion, valor, cantidad, operacion, obj);
+        Evento event = new Evento(id,nombre , descripcion, valor, cantidad, operacion, obj);
         anadirEvent(event);
     }
     /*Metodo sin Objeto*/
-    public void addEvento(String descripcion, int valor, int cantidad, char operacion){
+    public void addEvento(String nombre,String descripcion, int valor, int cantidad, char operacion){
         int getLastId=0;
         int id = getLastId;/*Metodo que obtiene el ultimo id*/
-        Evento event = new Evento(id,  descripcion, valor, cantidad, operacion);
+        Evento event = new Evento(id, nombre,  descripcion, valor, cantidad, operacion);
         anadirEvent(event);
     }
 
