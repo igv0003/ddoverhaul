@@ -64,6 +64,9 @@ public class Login extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 EmailS = Email.getText().toString();
+                if(PasswordE.getText().toString().equals("")){
+                    return;
+                }
                 PasswordS = PasswordE.getText().toString();
                 signIn(EmailS,PasswordS);
             }
