@@ -116,7 +116,7 @@ public class CreateSkillFragment extends Fragment implements IconsAdapter.OnIcon
         builder.setTitle("Selecciona un icono");
 
         // Guarda los iconos a mostrar
-        final int[] iconos = {R.drawable.tuerca, R.drawable.personajes, R.drawable.objetos, R.drawable.questionmark};
+        final int[] iconos = {R.drawable.basic, R.drawable.earth, R.drawable.electric, R.drawable.fire,R.drawable.heal, R.drawable.ice, R.drawable.poison, R.drawable.water};
 
         // Adaptador personalizado para el RecyclerView
         adapter = new IconsAdapter(iconos,this);
