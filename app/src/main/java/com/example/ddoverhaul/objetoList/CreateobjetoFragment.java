@@ -78,7 +78,7 @@ public class CreateobjetoFragment extends Fragment implements IconsAdapter.OnIco
         ConsumibleLayout = rootView.findViewById(R.id.consumibleLayout);
         mainObj = rootView.findViewById(R.id.activityObj);
         ImagenObj = rootView.findViewById(R.id.ImageObj);
-
+        editIcon = "questionmark";
         guardarBTN = rootView.findViewById(R.id.GuardarObj);
         cancelarBTN = rootView.findViewById(R.id.CancelarObj);
         //Referenciar EditText
@@ -279,6 +279,9 @@ public class CreateobjetoFragment extends Fragment implements IconsAdapter.OnIco
                 String nombre = editName.getText().toString();
                 if (nombre.equals("")){
                     Toast.makeText(requireContext(), "No puedes dejar vacio nombre", Toast.LENGTH_SHORT).show();
+                    return;
+                }else if(nombre.length() > 36){
+                    Toast.makeText(requireContext(), "El nombre es demasiado largo", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 String descrip = editDescription.getText().toString();//puedes dejar vacio
