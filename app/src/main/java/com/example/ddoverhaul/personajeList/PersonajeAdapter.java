@@ -1,8 +1,10 @@
 package com.example.ddoverhaul.personajeList;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,9 +16,11 @@ public class PersonajeAdapter extends RecyclerView.Adapter<PersonajeAdapter.Pers
     // Guarda la lista de Personajes
     private Personaje[] characters;
     private OnClickListener onClickListener;
+    private Context context;
 
-    public PersonajeAdapter(Personaje[] chars) {
+    public PersonajeAdapter(Personaje[] chars, Context context) {
         this.characters = chars;
+        this.context = context;
     }
 
     @NonNull
@@ -34,6 +38,9 @@ public class PersonajeAdapter extends RecyclerView.Adapter<PersonajeAdapter.Pers
         holder.levelTextView.setText("Nivel: "+String.valueOf(personaje.getNivel()));
         holder.raceTextView.setText(personaje.getRaza());
         holder.classTextView.setText(personaje.getClase());
+
+        int idIcon = this.context.getResources().getIdentifier(personaje.getImagen(),"drawable", context.getPackageName());
+        holder.iconImageView.setImageResource(idIcon);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,6 +73,7 @@ public class PersonajeAdapter extends RecyclerView.Adapter<PersonajeAdapter.Pers
         public TextView levelTextView;
         public TextView raceTextView;
         public TextView classTextView;
+        public ImageView iconImageView;
 
         public PersonajeViewHolder(View view) {
             super(view);
@@ -73,6 +81,7 @@ public class PersonajeAdapter extends RecyclerView.Adapter<PersonajeAdapter.Pers
             levelTextView = view.findViewById(R.id.textView_levelPJ);
             raceTextView = view.findViewById(R.id.textView_racePJ);
             classTextView = view.findViewById(R.id.textView_classPJ);
+            iconImageView = view.findViewById(R.id.imageView_pj);
         }
     }
 }

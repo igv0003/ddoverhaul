@@ -40,7 +40,7 @@ public class PersonajeListFragment extends Fragment {
         // Se obtiene el array a mostrar en el recyclerView
         characters = helper.getChars();
         // Se crea el PersonajeAdapter con el array obtenido
-        adapter = new PersonajeAdapter(characters);
+        adapter = new PersonajeAdapter(characters, getContext());
         // Se vincula el recyclerView con el adaptador
         recyclerView.setAdapter(adapter);
 
