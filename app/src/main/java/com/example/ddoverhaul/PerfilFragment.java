@@ -31,12 +31,16 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.color.utilities.Contrast;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.Map;
 
 public class PerfilFragment extends Fragment {
     private String nombreS;
@@ -67,6 +71,19 @@ public class PerfilFragment extends Fragment {
             public void onClick(View v) {
                 showChangePasswordDialog();
 
+            }
+        });
+        cambiarcorreo.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mostrarDialogoCambiarCorreo();
+
+            }
+        });
+        cambiarusuario.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mostrarDialogoCambiarusuario();
             }
         });
 
@@ -106,28 +123,145 @@ public class PerfilFragment extends Fragment {
 
 
     public String  ponernombre(){
-        String correo = ponercorreo();
-        DocumentReference docRef = db.document("User_Email/" + correo);
-        docRef.get().addOnCompleteListener(task -> {
-            if (task.isSuccessful()) {
-                DocumentSnapshot documentSnapshot = task.getResult();
-                if (documentSnapshot.exists()) {
-                    nombreS = documentSnapshot.getString("name");
-                    // Actualizar la interfaz de usuario con el nombre obtenido
-                } else {
-                    Log.d("YourFragment", "No se encontró el correo en la base de datos");
-                }
-            } else {
-                Log.d("YourFragment", "Error en la consulta: " + task.getException().getMessage());
-            }
-        });
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        this.nombreS = user.getDisplayName();
         return this.nombreS;
     }
+    private void mostrarDialogoCambiarCorreo() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
+        builder.setTitle("Cambiar correo");
+
+        // Inflar el diseño del diálogo
+        View view = LayoutInflater.from(requireContext()).inflate(R.layout.cambiarcorreo, null);
+        builder.setView(view);
+
+        // Obtener referencias a las vistas del diálogo
+        EditText CorreoActual = view.findViewById(R.id.CorreoActual);
+        EditText NuevoCorreo = view.findViewById(R.id.NuevoCorreo);
+
+        builder.setPositiveButton("Guardar", (dialog, which) -> {
+            String correoActual = CorreoActual.getText().toString();
+            String nuevoCorreo = NuevoCorreo.getText().toString();
+
+            cambiarCorreo(correoActual, nuevoCorreo);
+        });
+
+        builder.setNegativeButton("Cancelar", (dialog, which) -> dialog.dismiss());
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+        private void cambiarCorreo(String correoActual, String nuevoCorreo) {
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
+            DocumentReference docRef = db.collection("User_Email").document(correoActual);
+            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+            docRef.update("email", nuevoCorreo)
+                    .addOnSuccessListener(aVoid -> {
+                        docRef.get()
+                                .addOnSuccessListener(documentSnapshot -> {
+                                    if (documentSnapshot.exists()) {
+                                        Map<String, Object> datos = documentSnapshot.getData();
+                                        DocumentReference docRefNuevo = db.collection("User_Email").document(nuevoCorreo);
+                                        docRefNuevo.set(datos)
+                                                .addOnSuccessListener(aVoid1 -> {
+                                                    docRef.delete()
+                                                            .addOnSuccessListener(aVoid2 -> {
+                                                                user.updateEmail(nuevoCorreo);
+                                                                Log.d("cambiarcorreo", "Correo actualizado correctamente");
+
+                                                            })
+                                                            .addOnFailureListener(e -> {
+                                                                Log.d("cambiarcorreo", "Error al eliminar el documento anterior: " + e.getMessage());
+                                                            });
+                                                })
+                                                .addOnFailureListener(e -> {
+                                                    Log.d("YourFragment", "Error al crear el nuevo documento: " + e.getMessage());
+                                                });
+                                    } else {
+                                        Log.d("YourFragment", "El documento no existe");
+                                    }
+                                })
+                                .addOnFailureListener(e -> {
+                                    Log.d("YourFragment", "Error al obtener el documento: " + e.getMessage());
+                                });
+                    })
+                    .addOnFailureListener(e -> {
+                        Log.d("YourFragment", "Error al actualizar el correo: " + e.getMessage());
+                    });
+        }
+
+
     public String ponercorreo(){
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         this.correoS = user.getEmail();
         return this.correoS;
     }
+
+    private void mostrarDialogoCambiarusuario() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
+        builder.setTitle("Cambiar correo");
+
+        View view = LayoutInflater.from(requireContext()).inflate(R.layout.cambiarnombreusuario, null);
+        builder.setView(view);
+
+        EditText usuarioac = view.findViewById(R.id.UsuarioActual);
+        EditText usuarioNU = view.findViewById(R.id.NuevoUsuario);
+
+        builder.setPositiveButton("Guardar", (dialog, which) -> {
+            String usuarioAC = usuarioac.getText().toString();
+            String usuarioNUEVO = usuarioNU.getText().toString();
+            cambiarUsuario(usuarioAC,usuarioNUEVO);
+        });
+
+        builder.setNegativeButton("Cancelar", (dialog, which) -> dialog.dismiss());
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+    private void cambiarUsuario(String usuarioActual, String nuevoUsuario) {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        CollectionReference userRef = db.collection("User_Email");
+
+        Query query = userRef.whereEqualTo("name", usuarioActual);
+
+        query.get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                QuerySnapshot querySnapshot = task.getResult();
+                if (!querySnapshot.isEmpty()) {
+                    DocumentSnapshot documentSnapshot = querySnapshot.getDocuments().get(0);
+                    String documentId = documentSnapshot.getId();
+
+                    DocumentReference documentReference = userRef.document(documentId);
+
+                    documentReference.update("name", nuevoUsuario)
+                            .addOnSuccessListener(aVoid -> {
+                                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                                UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                                        .setDisplayName(nuevoUsuario).build();
+                                user.updateProfile(profileUpdates)
+                                        .addOnCompleteListener(task1-> {
+                                            if (task1.isSuccessful()) {
+                                                Log.d("YourFragment", "Nombre de usuario actualizado correctamente");
+                                            } else {
+                                                Log.d("YourFragment", "Error al actualizar el nombre de usuario: " + task.getException().getMessage());
+                                            }
+                                        });
+                                Log.d("YourFragment", "Usuario actualizado correctamente");
+                            })
+                            .addOnFailureListener(e -> {
+                                Log.d("YourFragment", "Error al actualizar el usuario: " + e.getMessage());
+                            });
+                } else {
+                    Log.d("YourFragment", "No se encontró el usuario en la base de datos");
+                }
+            } else {
+                Log.d("YourFragment", "Error en la consulta: " + task.getException().getMessage());
+            }
+        });
+    }
+
+
+
     public void cambiarcontrasena(String nuevacon){
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                 if (user != null) {
