@@ -7,9 +7,11 @@ import androidx.annotation.RequiresApi;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.ddoverhaul.BaseActivity_Multi;
@@ -33,7 +35,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Master extends BaseActivity_Multi {
-
+    ImageView imageView;
     private CollectionReference lobbyCol;
     private String lobbyName;
     private DocumentReference lobbyRef;
@@ -46,6 +48,10 @@ public class Master extends BaseActivity_Multi {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_master);
+
+        imageView = findViewById(R.id.engranajeImg);
+        AnimationDrawable animationDrawable = (AnimationDrawable) imageView.getBackground();
+        animationDrawable.start();
 
         // Se crea debido al MultiSelector, tiene Extras
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
