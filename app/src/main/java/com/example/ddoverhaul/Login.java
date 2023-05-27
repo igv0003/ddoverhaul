@@ -85,11 +85,10 @@ public class Login extends AppCompatActivity {
 
 
 
-    public void enter() {
-        SharedPreferences shared = getSharedPreferences("LoginUsuario",MODE_PRIVATE);
+    public void enter(String contra) {
+        SharedPreferences shared = getSharedPreferences("Cntra",MODE_PRIVATE);
         SharedPreferences.Editor editor = shared.edit();
-        editor.putString("correo", this.EmailS);
-        editor.putString("constraseña",this.PasswordS);
+        editor.putString("contra",contra);
         editor.apply();
 
         startActivity(new Intent(Login.this, Menu_principal.class));
@@ -133,8 +132,7 @@ public class Login extends AppCompatActivity {
                             EmailS = user.getEmail();
                             PasswordS = password;
                             Log.d("LoginActivity", "Inicio de sesión exitoso: " + user.getEmail());
-
-                            enter();
+                            enter(PasswordS);
                         } else {
                             // Ocurrió un error durante el inicio de sesión
                             Exception exception = task.getException();
@@ -165,7 +163,7 @@ public class Login extends AppCompatActivity {
                                                 EmailS = currentUser.getEmail();
                                                 PasswordS = password;
                                                 Log.d("LoginActivity", "Inicio de sesión exitoso: " + currentUser.getEmail());
-                                                enter();
+                                                enter(PasswordS);
                                             } else {
                                                 // Ocurrió un error durante el inicio de sesión
                                                 try {

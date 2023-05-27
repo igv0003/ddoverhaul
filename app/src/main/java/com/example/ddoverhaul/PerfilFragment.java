@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -24,14 +25,18 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.ddoverhaul.navigation.Normal.BaseActivity;
+import com.example.ddoverhaul.navigation.Normal.Menu_principal;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.color.utilities.Contrast;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -50,8 +55,10 @@ public class PerfilFragment extends Fragment {
     private String contraNSC;
     private EditText contraN;
     private EditText contraNconfirm;
-    private Context context;
+    private Context contextogeneral;
     private FirebaseFirestore db;
+    private String contraAC;
+    private  String contraacS;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -86,32 +93,56 @@ public class PerfilFragment extends Fragment {
                 mostrarDialogoCambiarusuario();
             }
         });
+        cerrarsesion.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                logout();
+            }
+        });
+        EliminarCuenta.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mostrarDialogoConfirmacion();
+            }
+        });
 
 
         return view;
+    }
+
+    public String getContraAC(){
+        SharedPreferences shared = requireContext().getSharedPreferences("Cntra", Context.MODE_PRIVATE);
+        this.contraacS = shared.getString("contra", "");
+        return  this.contraacS;
     }
 
     private void showChangePasswordDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setTitle("Cambiar Contraseña");
 
-        // Inflar el diseño del diálogo personalizado
         View view = LayoutInflater.from(getContext()).inflate(R.layout.cambio_cntrs, null);
         builder.setView(view);
             builder.setPositiveButton("Cambiar", (dialog, which) -> {
+                EditText contraACE =view.findViewById(R.id.contrasenaactual);
+                contraAC = contraACE.getText().toString();
                 contraN = view.findViewById(R.id.contrasenueva);
                 contraNconfirm = view.findViewById(R.id.confirmcontra);
                 contraNS = contraN.getText().toString();
                 contraNSC = contraNconfirm.getText().toString();
                 String newPassword = contraNS;
-                if (contraNSC.equals(contraNS)) {
-                    if (!TextUtils.isEmpty(newPassword)) {
-                        cambiarcontrasena(newPassword);
+                contextogeneral = getContext();
+                if (contraAC.equals(getContraAC())){
+                    if (contraNSC.equals(contraNS)) {
+                        if (!TextUtils.isEmpty(newPassword)) {
+                            cambiarcontrasena(newPassword);
+                        } else {
+                            Toast.makeText(getContext(), "Ingrese una nueva contraseña", Toast.LENGTH_SHORT).show();
+                        }
                     } else {
-                        Toast.makeText(getContext(), "Ingrese una nueva contraseña", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "Las contraseñas no coinciden", Toast.LENGTH_SHORT).show();
                     }
                 }else {
-                    Toast.makeText(getContext(), "Las contraseñas no coinciden", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "La contraseña actual no es correcta", Toast.LENGTH_SHORT).show();
                 }
             });
             builder.setNegativeButton("Cancelar", (dialog, which) -> {
@@ -121,17 +152,22 @@ public class PerfilFragment extends Fragment {
             dialog.show();
         }
 
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        this.contextogeneral = context;
+    }
 
     public String  ponernombre(){
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         this.nombreS = user.getDisplayName();
         return this.nombreS;
     }
+
     private void mostrarDialogoCambiarCorreo() {
         AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
         builder.setTitle("Cambiar correo");
 
-        // Inflar el diseño del diálogo
         View view = LayoutInflater.from(requireContext()).inflate(R.layout.cambiarcorreo, null);
         builder.setView(view);
 
@@ -151,10 +187,12 @@ public class PerfilFragment extends Fragment {
         AlertDialog dialog = builder.create();
         dialog.show();
     }
-        private void cambiarCorreo(String correoActual, String nuevoCorreo) {
-            FirebaseFirestore db = FirebaseFirestore.getInstance();
-            DocumentReference docRef = db.collection("User_Email").document(correoActual);
-            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+    private void cambiarCorreo(String correoActual, String nuevoCorreo) {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        DocumentReference docRef = db.collection("User_Email").document(correoActual);
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (nuevoCorreo.contains("@")) {
             docRef.update("email", nuevoCorreo)
                     .addOnSuccessListener(aVoid -> {
                         docRef.get()
@@ -167,29 +205,36 @@ public class PerfilFragment extends Fragment {
                                                     docRef.delete()
                                                             .addOnSuccessListener(aVoid2 -> {
                                                                 user.updateEmail(nuevoCorreo);
-                                                                Log.d("cambiarcorreo", "Correo actualizado correctamente");
-
+                                                                Toast.makeText(getContext(), "Correo actualizado correctamente", Toast.LENGTH_SHORT).show();
+                                                                new Handler().postDelayed(new Runnable() {
+                                                                    @Override
+                                                                    public void run() {
+                                                                        logout();
+                                                                    }
+                                                                }, 1000);
                                                             })
                                                             .addOnFailureListener(e -> {
-                                                                Log.d("cambiarcorreo", "Error al eliminar el documento anterior: " + e.getMessage());
+                                                                Toast.makeText(getContext(), "Error al eliminar el documento anterior: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                                                             });
                                                 })
                                                 .addOnFailureListener(e -> {
-                                                    Log.d("YourFragment", "Error al crear el nuevo documento: " + e.getMessage());
+                                                    Toast.makeText(getContext(), "Error al crear el nuevo documento: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                                                 });
                                     } else {
-                                        Log.d("YourFragment", "El documento no existe");
+                                        Toast.makeText(getContext(), "El Email no existe", Toast.LENGTH_SHORT).show();
                                     }
                                 })
                                 .addOnFailureListener(e -> {
-                                    Log.d("YourFragment", "Error al obtener el documento: " + e.getMessage());
+                                    Toast.makeText(getContext(), "Error al obtener el Email: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                                 });
                     })
                     .addOnFailureListener(e -> {
-                        Log.d("YourFragment", "Error al actualizar el correo: " + e.getMessage());
+                        Toast.makeText(getContext(),"Error al actualizar el correo: " + e.getMessage() , Toast.LENGTH_SHORT).show();
                     });
+        } else {
+            Toast.makeText(getContext(), "Email no valido", Toast.LENGTH_SHORT).show();
         }
-
+    }
 
     public String ponercorreo(){
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -218,6 +263,7 @@ public class PerfilFragment extends Fragment {
         AlertDialog dialog = builder.create();
         dialog.show();
     }
+
     private void cambiarUsuario(String usuarioActual, String nuevoUsuario) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         CollectionReference userRef = db.collection("User_Email");
@@ -241,26 +287,30 @@ public class PerfilFragment extends Fragment {
                                 user.updateProfile(profileUpdates)
                                         .addOnCompleteListener(task1-> {
                                             if (task1.isSuccessful()) {
-                                                Log.d("YourFragment", "Nombre de usuario actualizado correctamente");
+                                                Toast.makeText(getContext(), "Nombre de usuario actualizado correctamente", Toast.LENGTH_SHORT).show();
+                                                new Handler().postDelayed(new Runnable() {
+                                                    @Override
+                                                    public void run() {
+                                                        logout();
+                                                    }
+                                                }, 1000);
                                             } else {
-                                                Log.d("YourFragment", "Error al actualizar el nombre de usuario: " + task.getException().getMessage());
+                                                Toast.makeText(getContext(), "Error al actualizar el nombre de usuario: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                                             }
                                         });
-                                Log.d("YourFragment", "Usuario actualizado correctamente");
+                                Toast.makeText(getContext(), "Usuario de perfil actualizado correctamente", Toast.LENGTH_SHORT).show();
                             })
                             .addOnFailureListener(e -> {
-                                Log.d("YourFragment", "Error al actualizar el usuario: " + e.getMessage());
+                                Toast.makeText(getContext(), "Error al actualizar el usuario: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                             });
                 } else {
-                    Log.d("YourFragment", "No se encontró el usuario en la base de datos");
+                    Toast.makeText(getContext(), "No se encontró el usuario en la base de datos", Toast.LENGTH_SHORT).show();
                 }
             } else {
-                Log.d("YourFragment", "Error en la consulta: " + task.getException().getMessage());
+                Toast.makeText(getContext(), "Error en la consulta: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
-
-
 
     public void cambiarcontrasena(String nuevacon){
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -268,16 +318,69 @@ public class PerfilFragment extends Fragment {
             user.updatePassword(nuevacon)
                     .addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
-                            Log.d(TAG, "Contraseña actualizada exitosamente");
-
+                            new Handler().postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(getContext(), "Contraseña actualizada correctamente", Toast.LENGTH_SHORT).show();
+                                    logout();
+                                }
+                            }, 1000);
                         } else {
-                            Log.w(TAG, "Error al actualizar la contraseña", task.getException());
+                            Toast.makeText(getContext(), "Error al actualizar la contraseña", Toast.LENGTH_SHORT).show();
                         }
                     });
         } else {
-            Log.w(TAG, "Usuario no autenticado");
+            Toast.makeText(getContext(), "Usuario no autenticado", Toast.LENGTH_SHORT).show();
         }
     }
 
+    private void logout() {
+            FirebaseAuth mAuth = FirebaseAuth.getInstance();;
+            mAuth.signOut();
+            Intent intent = new Intent(getActivity(), Login.class);
+            startActivity(intent);
+        }
+
+    private void mostrarDialogoConfirmacion() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
+        builder.setTitle("Eliminar cuenta");
+        builder.setMessage("¿Estás seguro de que quieres eliminar tu cuenta?");
+
+        builder.setPositiveButton("Sí", (dialog, which) -> {
+            eliminarCuenta();
+        });
+
+        builder.setNegativeButton("No", (dialog, which) -> {
+            dialog.dismiss();
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+    private void eliminarCuenta() {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        String userId = user.getUid();
+        DatabaseReference databaseRef = FirebaseDatabase.getInstance().getReference("Usuarios").child(userId);
+        databaseRef.removeValue()
+                .addOnSuccessListener(aVoid -> {
+                    user.delete()
+                            .addOnSuccessListener(aVoid1 -> {
+                                logout();
+                            })
+                            .addOnFailureListener(e -> {
+                                Toast.makeText(getContext(), "Error al eliminar el usuario: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                            });
+                })
+                .addOnFailureListener(e -> {
+                    Toast.makeText(getContext(), "Error al eliminar los datos del usuario: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                });
+    }
+
+
+
 }
+
+
+
 
