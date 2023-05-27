@@ -46,4 +46,10 @@ public class Equipo extends Objeto{
         this.armadura = E.armadura;
     }
     public Equipo(){}
+
+    public boolean equals(Equipo E) {
+
+
+        return false;
+    }
 }

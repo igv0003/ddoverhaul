@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="130dp"
+    android:orientation="horizontal"
+    android:background="@drawable/items">
 
     <ImageView
         android:id="@+id/imageView_pj"
@@ -9,6 +11,9 @@
         android:layout_height="match_parent"
         android:adjustViewBounds="true"
         android:contentDescription="Descripción del contenido de la imagen"
+        android:layout_marginVertical="25dp"
+        android:layout_marginLeft="45dp"
+        android:layout_marginRight="15dp"
         android:scaleType="fitXY"
         android:src="@android:drawable/ic_menu_gallery" />
 

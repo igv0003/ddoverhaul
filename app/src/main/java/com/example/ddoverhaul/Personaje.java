@@ -34,7 +34,7 @@ public class Personaje implements Serializable {
     private Equipo guantes;
     private Equipo pies;
 
-    ArrayList<Objeto> accesorios;
+    private ArrayList<Objeto> accesorios;
     private ArrayList<Objeto> inventario; /*Inventario es un gran arrayList de Objetos(Objeto)*/
     private ArrayList<Habilidades> habilidades; /*Habilidades es un arrayList de Habilidades(Objeto)*/
 
@@ -71,6 +71,17 @@ public class Personaje implements Serializable {
     public ArrayList<Objeto> getInventario() { return this.inventario; }
     public void addToInventory(Objeto obj) { this.inventario.add(obj); }
     public void removeFromInventory(Objeto obj) { this.inventario.remove(obj); }
+    public void addNewInventario(ArrayList<Objeto> inv) {this.inventario = inv;}
+
+    public ArrayList<Objeto> getAccesorios() {return this.accesorios; }
+    public void addToAccesories (Objeto obj) { this.inventario.add(obj); }
+    public void removeFromAccesories (Objeto obj) { this.inventario.remove(obj); }
+    public void addNewAccesories(ArrayList<Objeto> accs) {this.accesorios = accs; }
+
+    public ArrayList<Habilidades> getHabilidades() {return this.habilidades; }
+    public void addToHabilidades (Habilidades skill) { this.habilidades.add(skill); }
+    public void removeFromHabilidades (Habilidades skill) { this.inventario.remove(skill); }
+    public void addNewHabilidades(ArrayList<Habilidades> skills) {this.habilidades = skills; }
 
     public int getNivel() {
         return nivel;
@@ -241,4 +252,5 @@ public class Personaje implements Serializable {
         this.velocidad = P.velocidad;
         this.vivo = P.vivo;
     }
+
 }
