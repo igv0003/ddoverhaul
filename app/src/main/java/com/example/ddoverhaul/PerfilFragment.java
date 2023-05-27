@@ -32,7 +32,11 @@ import com.google.android.material.color.utilities.Contrast;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 public class PerfilFragment extends Fragment {
     private String nombreS;
@@ -42,6 +46,8 @@ public class PerfilFragment extends Fragment {
     private String contraNSC;
     private EditText contraN;
     private EditText contraNconfirm;
+    private Context context;
+    private FirebaseFirestore db;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -53,8 +59,9 @@ public class PerfilFragment extends Fragment {
         TextView cambiarusuario = view.findViewById(R.id.CambiarUsuario);
         TextView EliminarCuenta = view.findViewById(R.id.Eliminarcuenta);
         TextView cerrarsesion = view.findViewById(R.id.CerraSesion);
-
-
+        db = FirebaseFirestore.getInstance();
+        nombre.setText(ponernombre());
+        correo.setText(ponercorreo());
         cambiarcontr.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -91,7 +98,6 @@ public class PerfilFragment extends Fragment {
                 }
             });
             builder.setNegativeButton("Cancelar", (dialog, which) -> {
-                // Acción a realizar al hacer clic en el botón Cancelar (opcional)
             });
 
             AlertDialog dialog = builder.create();
@@ -100,42 +106,41 @@ public class PerfilFragment extends Fragment {
 
 
     public String  ponernombre(){
-        SharedPreferences shared = requireContext().getSharedPreferences("LoginUsuario", Context.MODE_PRIVATE);
-        String correo = shared.getString("correo", "");
-        String contraseña = shared.getString("contraseña", "");
-
-        PerfilFragment perfilFragment = new PerfilFragment();
-        perfilFragment.setSharedPreferences(shared);
-
-
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        CollectionReference userRef = db.collection("User_Email");
-
-       this.nombreS = userRef.whereEqualTo("name", )
-                .get();
+        String correo = ponercorreo();
+        DocumentReference docRef = db.document("User_Email/" + correo);
+        docRef.get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                DocumentSnapshot documentSnapshot = task.getResult();
+                if (documentSnapshot.exists()) {
+                    nombreS = documentSnapshot.getString("name");
+                    // Actualizar la interfaz de usuario con el nombre obtenido
+                } else {
+                    Log.d("YourFragment", "No se encontró el correo en la base de datos");
+                }
+            } else {
+                Log.d("YourFragment", "Error en la consulta: " + task.getException().getMessage());
+            }
+        });
         return this.nombreS;
     }
     public String ponercorreo(){
-        SharedPreferences sharedPreferences = context.getSharedPreferences("MyAppPreferences", MODE_PRIVATE);
-        this.correoS = sharedPreferences.getString("correo", "");
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        this.correoS = user.getEmail();
         return this.correoS;
     }
     public void cambiarcontrasena(String nuevacon){
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user != null) {
+                if (user != null) {
             user.updatePassword(nuevacon)
                     .addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
-                            // La contraseña se cambió exitosamente
                             Log.d(TAG, "Contraseña actualizada exitosamente");
-                            // Aquí puedes realizar acciones adicionales después de cambiar la contraseña
+
                         } else {
-                            // Hubo un error al cambiar la contraseña
                             Log.w(TAG, "Error al actualizar la contraseña", task.getException());
                         }
                     });
         } else {
-            // El usuario no está autenticado
             Log.w(TAG, "Usuario no autenticado");
         }
     }
