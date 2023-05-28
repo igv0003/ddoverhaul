@@ -1,0 +1,21 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <EditText
+        android:id="@+id/CorreoActual"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Correo actual"
+        android:inputType="textEmailAddress" />
+
+    <EditText
+        android:id="@+id/NuevoCorreo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nuevo correo"
+        android:inputType="textEmailAddress" />
+
+</LinearLayout>

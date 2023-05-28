@@ -94,7 +94,6 @@ public class Register extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             FirebaseUser user = mAuth.getCurrentUser();
 
-                            // Agregar el nombre al perfil del usuario
                             UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
                                     .setDisplayName(name)
                                     .build();
@@ -102,9 +101,7 @@ public class Register extends AppCompatActivity {
                             user.updateProfile(profileUpdates)
                                     .addOnCompleteListener(updateTask -> {
                                         if (updateTask.isSuccessful()) {
-                                            // Guardar usuario en Firestore
                                             saveUserToFirestore(name, email);
-                                            // El nombre se ha agregado correctamente
                                             registro_exitoso();
                                         } else {
                                             // Error al agregar el nombre
@@ -113,7 +110,7 @@ public class Register extends AppCompatActivity {
                                     });
                         } else {
                             // Si el registro falla, muestra un mensaje al usuario
-                            String errorMessage = task.getException().getMessage(); // Obtiene el mensaje de error específico
+                            String errorMessage = task.getException().getMessage();
                             Toast.makeText(Register.this, "Error al registrarse: " + errorMessage, Toast.LENGTH_SHORT).show();
                         }
                     });
@@ -138,7 +135,6 @@ public class Register extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                // Navegar de vuelta a la pantalla de inicio de sesión/registro después de 4 segundos
                 Intent intent = new Intent(Register.this, Login.class);
                 startActivity(intent);
             }
