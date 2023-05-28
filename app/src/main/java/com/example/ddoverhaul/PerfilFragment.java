@@ -44,6 +44,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.WriteBatch;
 
 import java.util.Map;
 
@@ -244,7 +245,7 @@ public class PerfilFragment extends Fragment {
 
     private void mostrarDialogoCambiarusuario() {
         AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
-        builder.setTitle("Cambiar correo");
+        builder.setTitle("Cambiar Nombre usuario");
 
         View view = LayoutInflater.from(requireContext()).inflate(R.layout.cambiarnombreusuario, null);
         builder.setView(view);
@@ -291,6 +292,7 @@ public class PerfilFragment extends Fragment {
                                                 new Handler().postDelayed(new Runnable() {
                                                     @Override
                                                     public void run() {
+
                                                         logout();
                                                     }
                                                 }, 1000);
@@ -360,22 +362,55 @@ public class PerfilFragment extends Fragment {
 
     private void eliminarCuenta() {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        String userId = user.getUid();
-        DatabaseReference databaseRef = FirebaseDatabase.getInstance().getReference("Usuarios").child(userId);
-        databaseRef.removeValue()
-                .addOnSuccessListener(aVoid -> {
-                    user.delete()
-                            .addOnSuccessListener(aVoid1 -> {
+        if (user != null) {
+            user.delete()
+                    .addOnSuccessListener(aVoid -> {
+                        eliminar_delaBBDD();
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(getContext(), "Cuenta eliminada correctamente", Toast.LENGTH_SHORT).show();
                                 logout();
+                            }
+                        }, 1000);
+                    })
+                    .addOnFailureListener(e -> {
+                        // Error al eliminar la cuenta de usuario
+                        Toast.makeText(getContext(), "Error al eliminar la cuenta de usuario: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    });
+        }
+    }
+
+    public void eliminar_delaBBDD(){
+
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        CollectionReference collectionRef = db.collection("User_Email"+this.correoS);
+
+        collectionRef.get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    WriteBatch batch = db.batch();
+
+                    for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+                        batch.delete(documentSnapshot.getReference());
+                    }
+
+                    batch.commit()
+                            .addOnSuccessListener(aVoid -> {
                             })
                             .addOnFailureListener(e -> {
-                                Toast.makeText(getContext(), "Error al eliminar el usuario: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                // Error al eliminar la colección
+                                Toast.makeText(getContext(), "Error al eliminar la colección: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                             });
                 })
                 .addOnFailureListener(e -> {
-                    Toast.makeText(getContext(), "Error al eliminar los datos del usuario: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    // Error al obtener los documentos de la colección
+                    Toast.makeText(getContext(), "Error al obtener los documentos de la colección: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                 });
     }
+
+
+
+
 
 
 
