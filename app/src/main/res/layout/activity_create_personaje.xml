@@ -64,7 +64,7 @@
                         android:textAppearance="?android:attr/textAppearanceLarge"/>
 
                     <EditText
-                        android:id="@+id/nivelEdit"
+                        android:id="@+id/NivelEdit"
                         android:layout_width="180dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
@@ -140,10 +140,12 @@
                     android:textAppearance="?android:attr/textAppearanceLarge" />
 
                 <EditText
-                    android:id="@+id/vidaEdit"
+                    android:id="@+id/VidaEdit"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceLarge" />
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:maxLength="4"
+                    android:inputType="number"/>
 
                 <TextView
                     android:id="@+id/ManaText"
@@ -157,7 +159,9 @@
                     android:id="@+id/ManaEdit"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceLarge" />
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:maxLength="4"
+                    android:inputType="number"/>
 
         </LinearLayout>
         <View
@@ -227,7 +231,9 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:textAppearance="?android:attr/textAppearanceLarge" />
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:maxLength="3"
+                    android:inputType="number"/>
 
                 <EditText
                     android:id="@+id/DestrzaEdit"
@@ -236,7 +242,9 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:textAppearance="?android:attr/textAppearanceLarge"/>
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:maxLength="3"
+                    android:inputType="number"/>
 
                 <EditText
                     android:id="@+id/ConstEdit"
@@ -245,7 +253,9 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:textAppearance="?android:attr/textAppearanceLarge"/>
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:maxLength="3"
+                    android:inputType="number"/>
 
                 <EditText
                     android:id="@+id/IntelEdit"
@@ -254,7 +264,9 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:textAppearance="?android:attr/textAppearanceLarge"/>
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:maxLength="3"
+                    android:inputType="number"/>
             </LinearLayout>
 
             <LinearLayout
@@ -302,7 +314,9 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:textAppearance="?android:attr/textAppearanceLarge"/>
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:maxLength="3"
+                    android:inputType="number"/>
 
                 <EditText
                     android:id="@+id/CarisEdit"
@@ -311,7 +325,9 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:textAppearance="?android:attr/textAppearanceLarge"/>
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:maxLength="3"
+                    android:inputType="number"/>
 
                 <EditText
                     android:id="@+id/VelocidadEdit"
@@ -320,7 +336,9 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:textAppearance="?android:attr/textAppearanceLarge"/>
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:maxLength="3"
+                    android:inputType="number"/>
             </LinearLayout>
         </LinearLayout>
 
@@ -595,7 +613,12 @@
                     android:layout_margin="8dp" />
             </LinearLayout>
         </LinearLayout>
-
+        <View
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#000000"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

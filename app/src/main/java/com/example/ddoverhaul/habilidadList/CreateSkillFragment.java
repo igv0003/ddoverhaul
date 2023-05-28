@@ -43,6 +43,7 @@ public class CreateSkillFragment extends Fragment {
         editPerc = view.findViewById(R.id.edit_perc_skill);
         editDescription = view.findViewById(R.id.edit_comment_skill);
         helper = new JSONHelper(getContext());
+
         view.findViewById(R.id.botoncancelar).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
