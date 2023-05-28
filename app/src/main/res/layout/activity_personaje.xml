@@ -38,7 +38,7 @@
                         android:id="@+id/Nombre"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Nombre"
+                        android:text="Nombre:"
                         android:textAppearance="?android:attr/textAppearanceLarge"/>
 
                     <TextView
@@ -60,7 +60,7 @@
                         android:id="@+id/Nivel"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Nivel"
+                        android:text="Nivel:"
                         android:textAppearance="?android:attr/textAppearanceLarge"/>
 
                     <TextView
@@ -82,7 +82,7 @@
                         android:id="@+id/Raza"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Raza"
+                        android:text="Raza:"
                         android:textAppearance="?android:attr/textAppearanceLarge"/>
 
                     <TextView
@@ -97,7 +97,7 @@
                         android:id="@+id/Clase"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Clase"
+                        android:text="Clase:"
                         android:textAppearance="?android:attr/textAppearanceLarge" />
 
                     <TextView
@@ -236,7 +236,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="(Fuerza)"
+                    android:text="0"
                     android:gravity="center"
                     android:textAppearance="?android:attr/textAppearanceLarge" />
 
@@ -246,7 +246,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="(Destreza)"
+                    android:text="0"
                     android:gravity="center"
                     android:textAppearance="?android:attr/textAppearanceLarge"/>
 
@@ -256,7 +256,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="(Const)"
+                    android:text="0"
                     android:gravity="center"
                     android:textAppearance="?android:attr/textAppearanceLarge"/>
 
@@ -266,7 +266,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="(Intel)"
+                    android:text="0"
                     android:gravity="center"
                     android:textAppearance="?android:attr/textAppearanceLarge"/>
             </LinearLayout>
@@ -312,7 +312,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="(Sabiduría)"
+                    android:text="0"
                     android:gravity="center"
                     android:textAppearance="?android:attr/textAppearanceLarge"/>
 
@@ -322,7 +322,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="(Carisma)"
+                    android:text="0"
                     android:gravity="center"
                     android:textAppearance="?android:attr/textAppearanceLarge"/>
 
@@ -332,7 +332,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="(Velocidad)"
+                    android:text="0"
                     android:gravity="center"
                     android:textAppearance="?android:attr/textAppearanceLarge"/>
             </LinearLayout>
@@ -364,28 +364,28 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:id="@+id/Equipo1"
+                    android:id="@+id/view_Helmet"
                     android:layout_width="64dp"
                     android:layout_height="64dp"
                     android:layout_margin="8dp"
                     android:src="@drawable/tuerca" />
 
                 <ImageView
-                    android:id="@+id/Equipo2"
+                    android:id="@+id/view_Armor"
                     android:layout_width="64dp"
                     android:layout_height="64dp"
                     android:src="@drawable/tuerca"
                     android:layout_margin="8dp" />
 
                 <ImageView
-                    android:id="@+id/Equipo3"
+                    android:id="@+id/view_Pants"
                     android:layout_width="64dp"
                     android:layout_height="64dp"
                     android:src="@drawable/tuerca"
                     android:layout_margin="8dp" />
 
                 <ImageView
-                    android:id="@+id/Equipo4"
+                    android:id="@+id/view_Foots"
                     android:layout_width="64dp"
                     android:layout_height="64dp"
                     android:src="@drawable/tuerca"
@@ -399,32 +399,27 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:id="@+id/Equipo5"
+                    android:id="@+id/view_PrimaryWeapon"
                     android:layout_width="64dp"
                     android:layout_height="64dp"
                     android:src="@drawable/tuerca"
                     android:layout_margin="8dp" />
 
                 <ImageView
-                    android:id="@+id/Equipo6"
+                    android:id="@+id/view_Gloves"
                     android:layout_width="64dp"
                     android:layout_height="64dp"
                     android:src="@drawable/tuerca"
                     android:layout_margin="8dp" />
 
                 <ImageView
-                    android:id="@+id/Equipo7"
+                    android:id="@+id/view_SecondaryWeapon"
                     android:layout_width="64dp"
                     android:layout_height="64dp"
                     android:src="@drawable/tuerca"
                     android:layout_margin="8dp" />
 
-                <ImageView
-                    android:id="@+id/Equipo8"
-                    android:layout_width="64dp"
-                    android:layout_height="64dp"
-                    android:src="@drawable/tuerca"
-                    android:layout_margin="8dp" />
+
             </LinearLayout>
         </LinearLayout>
 
@@ -458,14 +453,14 @@
                 android:gravity="center">
 
                 <ImageView
-                    android:id="@+id/Accesorios1"
+                    android:id="@+id/view_Accesory1"
                     android:layout_width="64dp"
                     android:layout_height="64dp"
                     android:layout_marginRight="75dp"
                     android:src="@drawable/tuerca" />
 
                 <ImageView
-                    android:id="@+id/Accesorios2"
+                    android:id="@+id/view_Accesory2"
                     android:layout_width="64dp"
                     android:layout_height="64dp"
                     android:layout_margin="8dp"
@@ -509,34 +504,34 @@
             android:orientation="horizontal">
 
             <ImageView
-                android:id="@+id/inventario1"
+                android:id="@+id/view_Inventory1"
                 android:layout_width="64dp"
                 android:layout_height="64dp"
                 android:layout_margin="8dp"
                 android:src="@drawable/tuerca" />
             <ImageView
-                android:id="@+id/inventario2"
+                android:id="@+id/view_Inventory2"
                 android:layout_width="64dp"
                 android:layout_height="64dp"
                 android:layout_margin="8dp"
                 android:src="@drawable/tuerca" />
 
             <ImageView
-                android:id="@+id/inventario3"
+                android:id="@+id/view_Inventory3"
                 android:layout_width="64dp"
                 android:layout_height="64dp"
                 android:src="@drawable/tuerca"
                 android:layout_margin="8dp" />
 
             <ImageView
-                android:id="@+id/inventario4"
+                android:id="@+id/view_Inventory4"
                 android:layout_width="64dp"
                 android:layout_height="64dp"
                 android:src="@drawable/tuerca"
                 android:layout_margin="8dp" />
 
             <ImageView
-                android:id="@+id/inventario5"
+                android:id="@+id/view_Inventory5"
                 android:layout_width="64dp"
                 android:layout_height="64dp"
                 android:src="@drawable/tuerca"
@@ -573,35 +568,35 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:id="@+id/habilidad1"
+                    android:id="@+id/view_Skill1"
                     android:layout_width="64dp"
                     android:layout_height="64dp"
                     android:layout_margin="8dp"
                     android:src="@drawable/tuerca" />
 
                 <ImageView
-                    android:id="@+id/habilidad2"
+                    android:id="@+id/view_Skill2"
                     android:layout_width="64dp"
                     android:layout_height="64dp"
                     android:src="@drawable/tuerca"
                     android:layout_margin="8dp" />
 
                 <ImageView
-                    android:id="@+id/habilidad3"
+                    android:id="@+id/view_Skill3"
                     android:layout_width="64dp"
                     android:layout_height="64dp"
                     android:src="@drawable/tuerca"
                     android:layout_margin="8dp" />
 
                 <ImageView
-                    android:id="@+id/habilidad4"
+                    android:id="@+id/view_Skill4"
                     android:layout_width="64dp"
                     android:layout_height="64dp"
                     android:src="@drawable/tuerca"
                     android:layout_margin="8dp" />
 
                 <ImageView
-                    android:id="@+id/habilidad5"
+                    android:id="@+id/view_Skill5"
                     android:layout_width="64dp"
                     android:layout_height="64dp"
                     android:src="@drawable/tuerca"
