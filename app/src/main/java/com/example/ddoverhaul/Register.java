@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,6 +20,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -38,8 +41,6 @@ public class Register extends AppCompatActivity {
     protected void aceptar() {
         acceptTermsCheckbox = findViewById(R.id.accept_terms_checkbox);
         crearb = findViewById(R.id.registerButtonRegister);
-
-        // Deshabilita el botón al inicio
         crearb.setEnabled(false);
 
         acceptTermsCheckbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -87,35 +88,53 @@ public class Register extends AppCompatActivity {
 
 
     private void signUp(String email, String name, String password) {
+        // Realizar consulta para verificar si el nombre de usuario ya existe
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        CollectionReference usersCollection = db.collection("User_Email");
+        Query query = usersCollection.whereEqualTo("name", name);
 
+        query.get().addOnCompleteListener(queryTask -> {
+            if (queryTask.isSuccessful()) {
+                QuerySnapshot querySnapshot = queryTask.getResult();
+                if (querySnapshot != null && !querySnapshot.isEmpty()) {
+                    // El nombre de usuario ya existe
+                    Toast.makeText(Register.this, "El nombre de usuario ya está en uso.", Toast.LENGTH_SHORT).show();
+                    acceptTermsCheckbox.setChecked(false);
+                } else {
+                    mAuth.createUserWithEmailAndPassword(email, password)
+                            .addOnCompleteListener(this, task -> {
+                                if (task.isSuccessful()) {
+                                    FirebaseUser user = mAuth.getCurrentUser();
+                                    UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                                            .setDisplayName(name)
+                                            .build();
 
-            mAuth.createUserWithEmailAndPassword(email, password)
-                    .addOnCompleteListener(this, task -> {
-                        if (task.isSuccessful()) {
-                            FirebaseUser user = mAuth.getCurrentUser();
+                                    user.updateProfile(profileUpdates)
+                                            .addOnCompleteListener(updateTask -> {
+                                                if (updateTask.isSuccessful()) {
+                                                    saveUserToFirestore(name, email);
+                                                    registro_exitoso();
+                                                } else {
+                                                    // Error al agregar el nombre
+                                                    Toast.makeText(Register.this, "Error al guardar el nombre.", Toast.LENGTH_SHORT).show();
+                                                }
+                                            });
+                                } else {
+                                    String errorMessage = task.getException().getMessage();
+                                    acceptTermsCheckbox.setChecked(false);
+                                    Toast.makeText(Register.this, "Error al registrarse: " + errorMessage, Toast.LENGTH_SHORT).show();
 
-                            UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                                    .setDisplayName(name)
-                                    .build();
-
-                            user.updateProfile(profileUpdates)
-                                    .addOnCompleteListener(updateTask -> {
-                                        if (updateTask.isSuccessful()) {
-                                            saveUserToFirestore(name, email);
-                                            registro_exitoso();
-                                        } else {
-                                            // Error al agregar el nombre
-                                            Toast.makeText(Register.this, "Error al guardar el nombre.", Toast.LENGTH_SHORT).show();
-                                        }
-                                    });
-                        } else {
-                            // Si el registro falla, muestra un mensaje al usuario
-                            String errorMessage = task.getException().getMessage();
-                            Toast.makeText(Register.this, "Error al registrarse: " + errorMessage, Toast.LENGTH_SHORT).show();
-                        }
-                    });
-
+                                }
+                            });
+                }
+            } else {
+                // Error al realizar la consulta
+                Toast.makeText(Register.this, "Error al verificar el nombre de usuario.", Toast.LENGTH_SHORT).show();
+                acceptTermsCheckbox.setChecked(false);
+            }
+        });
     }
+
 
     private void saveUserToFirestore(String name, String email) {
         Map<String, Object> user = new HashMap<>();

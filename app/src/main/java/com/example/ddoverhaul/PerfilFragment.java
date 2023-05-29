@@ -78,7 +78,6 @@ public class PerfilFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 showChangePasswordDialog();
-
             }
         });
         cambiarcorreo.setOnClickListener(new OnClickListener() {
@@ -193,49 +192,69 @@ public class PerfilFragment extends Fragment {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         DocumentReference docRef = db.collection("User_Email").document(correoActual);
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
         if (nuevoCorreo.contains("@")) {
-            docRef.update("email", nuevoCorreo)
-                    .addOnSuccessListener(aVoid -> {
-                        docRef.get()
-                                .addOnSuccessListener(documentSnapshot -> {
-                                    if (documentSnapshot.exists()) {
-                                        Map<String, Object> datos = documentSnapshot.getData();
-                                        DocumentReference docRefNuevo = db.collection("User_Email").document(nuevoCorreo);
-                                        docRefNuevo.set(datos)
-                                                .addOnSuccessListener(aVoid1 -> {
-                                                    docRef.delete()
-                                                            .addOnSuccessListener(aVoid2 -> {
-                                                                user.updateEmail(nuevoCorreo);
-                                                                Toast.makeText(getContext(), "Correo actualizado correctamente", Toast.LENGTH_SHORT).show();
-                                                                new Handler().postDelayed(new Runnable() {
-                                                                    @Override
-                                                                    public void run() {
-                                                                        logout();
-                                                                    }
-                                                                }, 1000);
-                                                            })
-                                                            .addOnFailureListener(e -> {
-                                                                Toast.makeText(getContext(), "Error al eliminar el documento anterior: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                                                            });
-                                                })
-                                                .addOnFailureListener(e -> {
-                                                    Toast.makeText(getContext(), "Error al crear el nuevo documento: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                                                });
-                                    } else {
-                                        Toast.makeText(getContext(), "El Email no existe", Toast.LENGTH_SHORT).show();
-                                    }
-                                })
-                                .addOnFailureListener(e -> {
-                                    Toast.makeText(getContext(), "Error al obtener el Email: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                                });
-                    })
-                    .addOnFailureListener(e -> {
-                        Toast.makeText(getContext(),"Error al actualizar el correo: " + e.getMessage() , Toast.LENGTH_SHORT).show();
+            // Realizar consulta para verificar si el nuevo correo ya existe
+            db.collection("User_Email")
+                    .whereEqualTo("email", nuevoCorreo)
+                    .get()
+                    .addOnCompleteListener(task -> {
+                        if (task.isSuccessful()) {
+                            QuerySnapshot querySnapshot = task.getResult();
+                            if (querySnapshot != null && !querySnapshot.isEmpty()) {
+                                // El nuevo correo ya existe
+                                Toast.makeText(getContext(), "El correo ya está en uso.", Toast.LENGTH_SHORT).show();
+                            } else {
+                                // El nuevo correo no existe, proceder con la actualización
+                                docRef.update("email", nuevoCorreo)
+                                        .addOnSuccessListener(aVoid -> {
+                                            docRef.get()
+                                                    .addOnSuccessListener(documentSnapshot -> {
+                                                        if (documentSnapshot.exists()) {
+                                                            Map<String, Object> datos = documentSnapshot.getData();
+                                                            DocumentReference docRefNuevo = db.collection("User_Email").document(nuevoCorreo);
+                                                            docRefNuevo.set(datos)
+                                                                    .addOnSuccessListener(aVoid1 -> {
+                                                                        docRef.delete()
+                                                                                .addOnSuccessListener(aVoid2 -> {
+                                                                                    user.updateEmail(nuevoCorreo)
+                                                                                            .addOnSuccessListener(aVoid3 -> {
+                                                                                                Toast.makeText(getContext(), "Correo actualizado correctamente", Toast.LENGTH_SHORT).show();
+                                                                                                new Handler().postDelayed(() -> logout(), 1000);
+                                                                                            })
+                                                                                            .addOnFailureListener(e -> {
+                                                                                                Toast.makeText(getContext(), "Error al actualizar el correo: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                                                                            });
+                                                                                })
+                                                                                .addOnFailureListener(e -> {
+                                                                                    Toast.makeText(getContext(), "Error al eliminar el documento anterior: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                                                                });
+                                                                    })
+                                                                    .addOnFailureListener(e -> {
+                                                                        Toast.makeText(getContext(), "Error al crear el nuevo documento: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                                                    });
+                                                        } else {
+                                                            Toast.makeText(getContext(), "El Email no existe", Toast.LENGTH_SHORT).show();
+                                                        }
+                                                    })
+                                                    .addOnFailureListener(e -> {
+                                                        Toast.makeText(getContext(), "Error al obtener el Email: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                                    });
+                                        })
+                                        .addOnFailureListener(e -> {
+                                            Toast.makeText(getContext(), "Error al actualizar el correo: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                        });
+                            }
+                        } else {
+                            // Error al realizar la consulta
+                            Toast.makeText(getContext(), "Error al verificar el correo.", Toast.LENGTH_SHORT).show();
+                        }
                     });
         } else {
-            Toast.makeText(getContext(), "Email no valido", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "Correo no válido", Toast.LENGTH_SHORT).show();
         }
     }
+
 
     public String ponercorreo(){
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -269,50 +288,58 @@ public class PerfilFragment extends Fragment {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         CollectionReference userRef = db.collection("User_Email");
 
-        Query query = userRef.whereEqualTo("name", usuarioActual);
+        Query query = userRef.whereEqualTo("name", nuevoUsuario);
 
         query.get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 QuerySnapshot querySnapshot = task.getResult();
-                if (!querySnapshot.isEmpty()) {
-                    DocumentSnapshot documentSnapshot = querySnapshot.getDocuments().get(0);
-                    String documentId = documentSnapshot.getId();
+                if (querySnapshot.isEmpty()) {
+                    Query usuarioActualQuery = userRef.whereEqualTo("name", usuarioActual);
 
-                    DocumentReference documentReference = userRef.document(documentId);
+                    usuarioActualQuery.get().addOnCompleteListener(task2 -> {
+                        if (task2.isSuccessful()) {
+                            QuerySnapshot usuarioActualQuerySnapshot = task2.getResult();
+                            if (!usuarioActualQuerySnapshot.isEmpty()) {
+                                DocumentSnapshot documentSnapshot = usuarioActualQuerySnapshot.getDocuments().get(0);
+                                String documentId = documentSnapshot.getId();
 
-                    documentReference.update("name", nuevoUsuario)
-                            .addOnSuccessListener(aVoid -> {
-                                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                                UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                                        .setDisplayName(nuevoUsuario).build();
-                                user.updateProfile(profileUpdates)
-                                        .addOnCompleteListener(task1-> {
-                                            if (task1.isSuccessful()) {
-                                                Toast.makeText(getContext(), "Nombre de usuario actualizado correctamente", Toast.LENGTH_SHORT).show();
-                                                new Handler().postDelayed(new Runnable() {
-                                                    @Override
-                                                    public void run() {
+                                DocumentReference documentReference = userRef.document(documentId);
 
-                                                        logout();
-                                                    }
-                                                }, 1000);
-                                            } else {
-                                                Toast.makeText(getContext(), "Error al actualizar el nombre de usuario: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                                            }
+                                documentReference.update("name", nuevoUsuario)
+                                        .addOnSuccessListener(aVoid -> {
+                                            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                                            UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                                                    .setDisplayName(nuevoUsuario).build();
+                                            user.updateProfile(profileUpdates)
+                                                    .addOnCompleteListener(task1-> {
+                                                        if (task1.isSuccessful()) {
+                                                            Toast.makeText(getContext(), "Nombre de usuario actualizado correctamente", Toast.LENGTH_SHORT).show();
+                                                            new Handler().postDelayed(() -> logout(), 1000);
+                                                        } else {
+                                                            Toast.makeText(getContext(), "Error al actualizar el nombre de usuario: " + task1.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                                        }
+                                                    });
+                                            Toast.makeText(getContext(), "Usuario de perfil actualizado correctamente", Toast.LENGTH_SHORT).show();
+                                        })
+                                        .addOnFailureListener(e -> {
+                                            Toast.makeText(getContext(), "Error al actualizar el usuario: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                                         });
-                                Toast.makeText(getContext(), "Usuario de perfil actualizado correctamente", Toast.LENGTH_SHORT).show();
-                            })
-                            .addOnFailureListener(e -> {
-                                Toast.makeText(getContext(), "Error al actualizar el usuario: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                            });
+                            } else {
+                                Toast.makeText(getContext(), "No se encontró el usuario en la base de datos", Toast.LENGTH_SHORT).show();
+                            }
+                        } else {
+                            Toast.makeText(getContext(), "Error en la consulta de usuario actual: " + task2.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
                 } else {
-                    Toast.makeText(getContext(), "No se encontró el usuario en la base de datos", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "El nombre de usuario ya está en uso", Toast.LENGTH_SHORT).show();
                 }
             } else {
-                Toast.makeText(getContext(), "Error en la consulta: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Error en la consulta de nombre de usuario: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
+
 
     public void cambiarcontrasena(String nuevacon){
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
