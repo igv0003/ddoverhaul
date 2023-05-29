@@ -35,7 +35,7 @@ public class PersonajeAdapter extends RecyclerView.Adapter<PersonajeAdapter.Pers
     public void onBindViewHolder(@NonNull PersonajeViewHolder holder, int position) {
         Personaje personaje = this.characters[position];
         holder.nameTextView.setText(personaje.getNombre());
-        holder.levelTextView.setText("Nivel: "+String.valueOf(personaje.getNivel()));
+        holder.levelTextView.setText("Lv."+String.valueOf(personaje.getNivel()));
         holder.raceTextView.setText(personaje.getRaza());
         holder.classTextView.setText(personaje.getClase());
 
