@@ -96,6 +96,9 @@ public class MultiSelectorFragment extends Fragment {
                 // Muestra selectMaster
                 selectMaster.setVisibility(View.VISIBLE);
 
+                master.setVisibility(View.GONE);
+                client.setVisibility(View.VISIBLE);
+
                 // Inicializa masterPw y el botón para crear la sala
                 masterPW = view.findViewById(R.id.master_pw);
                 selectMasterButton = view.findViewById(R.id.selectMaster_button);
@@ -129,6 +132,9 @@ public class MultiSelectorFragment extends Fragment {
 
                 // Muestra selectClient
                 selectClient.setVisibility(View.VISIBLE);
+
+                master.setVisibility(View.VISIBLE);
+                client.setVisibility(View.GONE);
 
                 // Inizializa clientPW, el botón de unirse a sala y spinner de personajes
                 clientPW = view.findViewById(R.id.client_pw);
