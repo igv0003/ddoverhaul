@@ -36,7 +36,7 @@ public class ObjetoViewFragment extends Fragment {
     private String opcionSeleccionada;
     private Equipo equip;
     private Consumibles cons;
-    private Button editButton;
+    private ImageView editButton;
     private ImageView iconView;
     private LinearLayout mainObj;
 
@@ -45,7 +45,7 @@ public class ObjetoViewFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.activity_objeto_view, container, false);
 
-        editButton = rootView.findViewById(R.id.GuardarObj);
+        editButton = rootView.findViewById(R.id.editObj);
         editName = rootView.findViewById(R.id.caja_objeto);
         spinnerEquipoPos = rootView.findViewById(R.id.SpinnerPosicion);
         editDamage = rootView.findViewById(R.id.caja_danio);
@@ -163,7 +163,7 @@ public class ObjetoViewFragment extends Fragment {
             }
         });
 
-        rootView.findViewById(R.id.CancelarObj).setOnClickListener(new View.OnClickListener() {
+        rootView.findViewById(R.id.deleteObj).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 deleteObj(Integer.parseInt(idString), type);
