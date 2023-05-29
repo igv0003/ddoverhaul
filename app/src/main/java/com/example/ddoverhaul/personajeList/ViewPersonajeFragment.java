@@ -50,19 +50,19 @@ public class ViewPersonajeFragment extends Fragment {
         View view = inflater.inflate(R.layout.activity_personaje, container, false);
 
         fotopersonaje = view.findViewById(R.id.imagenPersonaje);
-        nombre = view.findViewById(R.id.NombreTV);
+        nombre = view.findViewById(R.id.NombreText);
         raza = view.findViewById(R.id.RazaTV);
-        clase = view.findViewById(R.id.ClaseTV);
-        nivel = view.findViewById(R.id.nivelTV);
-        vida = view.findViewById(R.id.vidaTV);
+        clase = view.findViewById(R.id.ClaseText);
+        nivel = view.findViewById(R.id.NivelTV);
+        vida = view.findViewById(R.id.VidaTV);
         mana = view.findViewById(R.id.ManaTV);
         fuerza = view.findViewById(R.id.FuerzaTV);
         destreza = view.findViewById(R.id.DestrzaTV);
         constitucion = view.findViewById(R.id.ConstTV);
         inteligencia = view.findViewById(R.id.IntelTV);
-        sabiduria = view.findViewById(R.id.SabTV);
-        carisma = view.findViewById(R.id.CarisTV);
-        velocidad = view.findViewById(R.id.velTV);
+        sabiduria = view.findViewById(R.id.SabiduriaTV);
+        carisma = view.findViewById(R.id.CarismaTV);
+        velocidad = view.findViewById(R.id.VelocidadTV);
 
         helper = new JSONHelper(getContext());
 

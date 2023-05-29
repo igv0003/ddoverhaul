@@ -113,7 +113,7 @@ public class CreatePersonajeFrangment extends Fragment {
         String name = editName.getText().toString();
         String nivel = editNivel.getText().toString();
         String vida = editVida.getText().toString();
-        String mana = editName.getText().toString();
+        String mana = editMana.getText().toString();
         String raza = editRaza.getText().toString();
         String clase = editClase.getText().toString();
         String fuerza = editFuerza.getText().toString();
