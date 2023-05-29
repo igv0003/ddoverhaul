@@ -18,6 +18,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.view.View.OnClickListener;
 import android.widget.Toast;
@@ -26,6 +28,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.ddoverhaul.navigation.Normal.BaseActivity;
 import com.example.ddoverhaul.navigation.Normal.Menu_principal;
@@ -48,7 +52,7 @@ import com.google.firebase.firestore.WriteBatch;
 
 import java.util.Map;
 
-public class PerfilFragment extends Fragment {
+public class PerfilFragment extends Fragment implements IconsAdapter.OnIconClickListener{
     private String nombreS;
     private String correoS;
     private AlertDialog alert;
@@ -60,6 +64,10 @@ public class PerfilFragment extends Fragment {
     private FirebaseFirestore db;
     private String contraAC;
     private  String contraacS;
+    private ImageView fotoperfil;
+    private String icon;
+    private IconsAdapter adapter;
+    private int FOTOS [] = {R.drawable.elfo,R.drawable.luchador,R.drawable.mago,R.drawable.ojodragon,R.drawable.goblin,R.drawable.alien,R.drawable.furry};
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -68,9 +76,10 @@ public class PerfilFragment extends Fragment {
         TextView correo = view.findViewById(R.id.CorreoP);
         TextView cambiarcontr = view.findViewById(R.id.CambiarContrasena);
         TextView cambiarcorreo = view.findViewById(R.id.CambiarCorreo);
-        TextView cambiarusuario = view.findViewById(R.id.CambiarUsuario);
+        ImageButton Cambiarusuario = view.findViewById(R.id.CambiarUsuario);
         TextView EliminarCuenta = view.findViewById(R.id.Eliminarcuenta);
         TextView cerrarsesion = view.findViewById(R.id.CerraSesion);
+        fotoperfil = view.findViewById(R.id.fotoPerfil);
         db = FirebaseFirestore.getInstance();
         nombre.setText(ponernombre());
         correo.setText(ponercorreo());
@@ -87,7 +96,7 @@ public class PerfilFragment extends Fragment {
 
             }
         });
-        cambiarusuario.setOnClickListener(new OnClickListener() {
+        Cambiarusuario.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
                 mostrarDialogoCambiarusuario();
@@ -105,9 +114,59 @@ public class PerfilFragment extends Fragment {
                 mostrarDialogoConfirmacion();
             }
         });
-
-
+        fotoperfil.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showIcons(view);
+            }
+        });
+        geticon();
         return view;
+    }
+
+    public void guardaricono(int numero){
+        SharedPreferences shared = requireContext().getSharedPreferences("Icono", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = shared.edit();
+        icon = getResources().getResourceEntryName(numero);
+        editor.putString("icon",icon);
+        editor.apply();
+    }
+
+    public void geticon(){
+        SharedPreferences shared = requireContext().getSharedPreferences("Icono", Context.MODE_PRIVATE);
+        icon = shared.getString("icon", "");
+
+        if(!icon.equals("")) {
+            int idicon = getResources().getIdentifier(icon,"drawable",getActivity().getPackageName());
+            fotoperfil.setImageResource(idicon);
+        }else{
+            fotoperfil.setImageResource(R.drawable.username);
+        }
+        }
+
+        @Override
+    public void onIconClick(int iconid){
+        fotoperfil.setImageResource(iconid);
+        guardaricono(iconid);
+        if(alert!=null){
+            alert.dismiss();
+        }
+
+    }
+    public void showIcons(View view) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
+        builder.setTitle("Selecciona un icono");
+
+        // Adaptador personalizado para el RecyclerView
+        adapter = new IconsAdapter(FOTOS,this);
+
+        // Configuración del RecyclerView
+        RecyclerView recyclerView = new RecyclerView(requireContext());
+        recyclerView.setLayoutManager(new GridLayoutManager(requireContext(),4));
+        recyclerView.setAdapter(adapter);
+
+        builder.setView(recyclerView);
+        alert = builder.show();
     }
 
     public String getContraAC(){
@@ -285,6 +344,10 @@ public class PerfilFragment extends Fragment {
     }
 
     private void cambiarUsuario(String usuarioActual, String nuevoUsuario) {
+        if (nuevoUsuario.equals("")) {
+            Toast.makeText(getContext(), "El nuevo nombre de usuario está vacío", Toast.LENGTH_SHORT).show();
+            return;
+        }
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         CollectionReference userRef = db.collection("User_Email");
 
