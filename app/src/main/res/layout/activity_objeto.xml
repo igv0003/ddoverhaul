@@ -183,7 +183,7 @@
                 android:layout_width="249dp"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="10"
+                android:hint="0"
                 android:inputType="number"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
 
