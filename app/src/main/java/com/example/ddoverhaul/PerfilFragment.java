@@ -363,9 +363,9 @@ public class PerfilFragment extends Fragment {
     private void eliminarCuenta() {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
+            eliminar_delaBBDD();
             user.delete()
                     .addOnSuccessListener(aVoid -> {
-                        eliminar_delaBBDD();
                         new Handler().postDelayed(new Runnable() {
                             @Override
                             public void run() {
@@ -375,37 +375,26 @@ public class PerfilFragment extends Fragment {
                         }, 1000);
                     })
                     .addOnFailureListener(e -> {
-                        // Error al eliminar la cuenta de usuario
                         Toast.makeText(getContext(), "Error al eliminar la cuenta de usuario: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                     });
         }
     }
 
     public void eliminar_delaBBDD(){
-
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        CollectionReference collectionRef = db.collection("User_Email"+this.correoS);
-
-        collectionRef.get()
-                .addOnSuccessListener(queryDocumentSnapshots -> {
-                    WriteBatch batch = db.batch();
-
-                    for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
-                        batch.delete(documentSnapshot.getReference());
+        CollectionReference collectionRef = db.collection("User_Email");
+        DocumentReference docref = collectionRef.document(this.correoS);
+        docref.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                docref.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        Toast.makeText(getContext(), "Cuenta eliminada correctamente de la BBDD", Toast.LENGTH_SHORT).show();
                     }
-
-                    batch.commit()
-                            .addOnSuccessListener(aVoid -> {
-                            })
-                            .addOnFailureListener(e -> {
-                                // Error al eliminar la colección
-                                Toast.makeText(getContext(), "Error al eliminar la colección: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                            });
-                })
-                .addOnFailureListener(e -> {
-                    // Error al obtener los documentos de la colección
-                    Toast.makeText(getContext(), "Error al obtener los documentos de la colección: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                 });
+            }
+        });
     }
 
 
