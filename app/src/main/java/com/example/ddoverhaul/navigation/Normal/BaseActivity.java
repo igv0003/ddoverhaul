@@ -24,6 +24,7 @@ import com.example.ddoverhaul.habilidadList.HabilidadListFragment;
 import com.example.ddoverhaul.multiplayer.MultiSelector;
 import com.example.ddoverhaul.multiplayer.MultiSelector;
 import com.example.ddoverhaul.multiplayer.MultiSelectorFragment;
+import com.example.ddoverhaul.objetoList.CreateobjetoFragment;
 import com.example.ddoverhaul.objetoList.ListaObjetosFragment;
 import com.example.ddoverhaul.personajeList.CreatePersonajeFrangment;
 import com.example.ddoverhaul.personajeList.PersonajeListFragment;
@@ -183,7 +184,9 @@ public class BaseActivity extends AppCompatActivity {
         transaction.commit();
     }
     public void gocreateobjec(){
-        //startActivity(new Intent(BaseActivity.this, .class));
+        FragmentTransaction transaction123 = getSupportFragmentManager().beginTransaction();
+        transaction123.replace(R.id.activity_content, new CreateobjetoFragment());
+        transaction123.commit();
     }
     public void goobjlist(){
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();

@@ -1,6 +1,7 @@
 package com.example.ddoverhaul;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -64,6 +65,9 @@ public class Login extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 EmailS = Email.getText().toString();
+                if(PasswordE.getText().toString().equals("")){
+                    return;
+                }
                 PasswordS = PasswordE.getText().toString();
                 signIn(EmailS,PasswordS);
             }
@@ -81,12 +85,17 @@ public class Login extends AppCompatActivity {
 
 
 
-    public void enter() {
-        // En algún lugar de tu código donde desees mostrar el fragmento MenuprincipalFragment
+    public void enter(String contra) {
+        SharedPreferences shared = getSharedPreferences("Cntra",MODE_PRIVATE);
+        SharedPreferences.Editor editor = shared.edit();
+        editor.putString("contra",contra);
+        editor.apply();
+
         startActivity(new Intent(Login.this, Menu_principal.class));
 
 
     }
+
     public void mandarCorreo(){
     forgotPassword.setOnClickListener(new View.OnClickListener() {
         @Override
@@ -120,8 +129,10 @@ public class Login extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             // El inicio de sesión se realizó exitosamente
                             FirebaseUser user = mAuth.getCurrentUser();
+                            EmailS = user.getEmail();
+                            PasswordS = password;
                             Log.d("LoginActivity", "Inicio de sesión exitoso: " + user.getEmail());
-                            enter();
+                            enter(PasswordS);
                         } else {
                             // Ocurrió un error durante el inicio de sesión
                             Exception exception = task.getException();
@@ -148,10 +159,11 @@ public class Login extends AppCompatActivity {
                                 mAuth.signInWithEmailAndPassword(userEmail, password)
                                         .addOnCompleteListener(authTask -> {
                                             if (authTask.isSuccessful()) {
-
                                                 FirebaseUser currentUser = mAuth.getCurrentUser();
+                                                EmailS = currentUser.getEmail();
+                                                PasswordS = password;
                                                 Log.d("LoginActivity", "Inicio de sesión exitoso: " + currentUser.getEmail());
-                                                enter();
+                                                enter(PasswordS);
                                             } else {
                                                 // Ocurrió un error durante el inicio de sesión
                                                 try {

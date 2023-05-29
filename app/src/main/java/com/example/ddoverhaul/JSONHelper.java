@@ -742,42 +742,19 @@ public class JSONHelper {
         int size = objects.length + equips.length + consumibles.length;
         Objeto[] allObjects = new Objeto[size];
 
-        // Se recorre el array global, guardando en cada posición el objeto poliformado ordenados por su id
-        for (int i = 0; i < allObjects.length; i++) {
-            // Booleana que indica si el objeto ha sido insertado
-            boolean inserted = false;
-            // Se recorren los objetos, si el id coincide con la vuelta actual se inserta y se avisa
-            for (int j = 0; j < objects.length; j++) {
-                if (objects[j].getId() == i) {
-                    Objeto o = new Objeto(objects[j]);
-                    allObjects[i] = o;
-                    inserted = true;
-                    j = objects.length;
-                }
-            }
-            if (!inserted) {
-                // Se recorren los equipos, si el id coincide con la vuelta actual se inserta y se avisa (ocurre polimorfismo)
-                for (int j = 0; j < equips.length; j++) {
-                    if (equips[j].getId() == i) {
-                        Equipo e = new Equipo(equips[j]);
-                        allObjects[i] = e;
-                        inserted = true;
-                        j = equips.length;
-                    }
-                }
-            }
-            if (!inserted) {
-                // Se recorren los consumibles, si el id coincide con la vuelta actual se inserta y se avisa (ocurre polimorfismo)
-                for (int j = 0; j < consumibles.length; j++) {
-                    if (consumibles[j].getId() == i) {
-                        Consumibles c = new Consumibles(consumibles[j]);
-                        allObjects[i] = c;
-                        j = consumibles.length;
-                    }
-                }
-            }
-
-
+        // Se recorre el array de objetos añadiendolos al array global
+        int length = 0;
+        for (int i = 0; i < objects.length; i++) {
+            allObjects[length] = objects[i];
+            length++;
+        }
+        for (int i = 0; i < equips.length; i++) {
+            allObjects[length] = equips[i];
+            length++;
+        }
+        for (int i = 0; i < consumibles.length; i++) {
+            allObjects[length] = consumibles[i];
+            length++;
         }
 
         // Una vez todos los objetos han sido añadidos ordenados por su id, se devuelve el array para su muestra en la lista

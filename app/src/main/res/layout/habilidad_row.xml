@@ -1,17 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal">
+    android:layout_height="130dp"
+    android:orientation="horizontal"
+    android:background="@drawable/items">
 
     <ImageView
         android:id="@+id/imageView_skill"
-        android:layout_width="96dp"
-        android:layout_height="match_parent"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:adjustViewBounds="true"
         android:contentDescription="Descripción del contenido de la imagen"
+        android:layout_marginVertical="25dp"
+        android:layout_marginLeft="45dp"
+        android:layout_marginRight="15dp"
         android:scaleType="fitXY"
-        android:src="@android:drawable/ic_menu_gallery" />
+        android:src="@drawable/questionmark" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -30,7 +34,6 @@
                 android:id="@+id/textView_nameSkill"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:layout_marginBottom="10dp"
                 android:text="Nombre"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
 
@@ -38,17 +41,9 @@
                 android:id="@+id/textView_costSkill"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginVertical="5dp"
                 android:text="Coste"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center_vertical">
 
             <TextView
                 android:id="@+id/textView_dmgSkill"
@@ -57,10 +52,7 @@
                 android:text="Daño"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
 
-
-
         </LinearLayout>
-
 
     </LinearLayout>
 

@@ -35,7 +35,7 @@ public class Personaje implements Serializable {
     private Equipo guantes;
     private Equipo pies;
 
-    ArrayList<Objeto> accesorios;
+    private ArrayList<Objeto> accesorios;
     private ArrayList<Objeto> inventario; /*Inventario es un gran arrayList de Objetos(Objeto)*/
     private ArrayList<Habilidades> habilidades; /*Habilidades es un arrayList de Habilidades(Objeto)*/
 
@@ -72,6 +72,17 @@ public class Personaje implements Serializable {
     public ArrayList<Objeto> getInventario() { return this.inventario; }
     public void addToInventory(Objeto obj) { this.inventario.add(obj); }
     public void removeFromInventory(Objeto obj) { this.inventario.remove(obj); }
+    public void addNewInventario(ArrayList<Objeto> inv) {this.inventario = inv;}
+
+    public ArrayList<Objeto> getAccesorios() {return this.accesorios; }
+    public void addToAccesories (Objeto obj) { this.inventario.add(obj); }
+    public void removeFromAccesories (Objeto obj) { this.inventario.remove(obj); }
+    public void addNewAccesories(ArrayList<Objeto> accs) {this.accesorios = accs; }
+
+    public ArrayList<Habilidades> getHabilidades() {return this.habilidades; }
+    public void addToHabilidades (Habilidades skill) { this.habilidades.add(skill); }
+    public void removeFromHabilidades (Habilidades skill) { this.inventario.remove(skill); }
+    public void addNewHabilidades(ArrayList<Habilidades> skills) {this.habilidades = skills; }
 
     public int getNivel() {
         return nivel;
@@ -184,7 +195,39 @@ public class Personaje implements Serializable {
 
     /*CONSTRUCTORES*/
 
-    public Personaje() {}
+    public Personaje() {
+        this.nombre = "";
+        this.nivel = 0;
+        this.vida = 0;
+        this.vida_Mx = 0;
+        this.mana = 0;
+        this.mana_Mx = 0;
+        this.raza = "";
+        this.Clase = "";
+        // estadisticas
+        this.fuerza = 0;
+        this.constitucion = 0;
+        this.inteligencia = 0;
+        this.sabiduria = 0;
+        this.carisma = 0;
+        this.velocidad = 0;
+        this.vivo = true;
+        this.imagen = "questionmark";
+
+        // equipamiento
+        this.cabeza = null;
+        this.perchera = null;
+        this.pantalones = null;
+        this.pies = null;
+        this.guantes = null;
+        this.arma = null;
+        this.arma_sec = null;
+
+        this.accesorios = new ArrayList<>();
+        this.inventario = new ArrayList<>();
+        this.habilidades = new ArrayList<>();
+
+    }
 
     public Personaje(String nombre, int vida, int mana, String raza, String clase, int fuerza, int destreza, int constitucion, int inteligencia, int sabiduria, int carisma, int velocidad, boolean vivo, String imagen) {
         this.nombre = nombre;
@@ -228,11 +271,12 @@ public class Personaje implements Serializable {
         this.id = P.id;
         this.nombre = P.nombre;
         this.vida = P.vida;
-        this.vida_Mx = P.vida;
+        this.vida_Mx = P.vida_Mx;
         this.mana = P.mana;
-        this.mana_Mx = P.mana;
+        this.mana_Mx = P.mana_Mx;
         this.raza = P.raza;
-        Clase = P.Clase;
+        this.Clase = P.Clase;
+        this.nivel = P.nivel;
         this.fuerza = P.fuerza;
         this.destreza = P.destreza;
         this.constitucion = P.constitucion;
@@ -241,5 +285,22 @@ public class Personaje implements Serializable {
         this.carisma = P.carisma;
         this.velocidad = P.velocidad;
         this.vivo = P.vivo;
+        this.imagen = P.imagen;
+
+        // equipo
+        this.cabeza = P.cabeza;
+        this.perchera = P.perchera;
+        this.pantalones = P.pantalones;
+        this.guantes = P.guantes;
+        this.pies = P.pies;
+        this.arma = P.arma;
+        this.arma_sec = P.arma_sec;
+
+        // lo demas
+        this.habilidades = P.habilidades;
+        this.inventario = P.inventario;
+        this.accesorios = P.accesorios;
+
     }
+
 }

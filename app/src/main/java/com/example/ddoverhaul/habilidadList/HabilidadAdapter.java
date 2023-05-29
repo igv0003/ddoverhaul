@@ -1,8 +1,10 @@
 package com.example.ddoverhaul.habilidadList;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -15,8 +17,12 @@ public class HabilidadAdapter extends RecyclerView.Adapter<HabilidadAdapter.Habi
     // Guarda la lista de Habilidades
     private Habilidades[] skills;
     OnClickListener onClickListener;
+    Context context;
 
-    public HabilidadAdapter (Habilidades[] skills) { this.skills = skills;}
+    public HabilidadAdapter (Habilidades[] skills, Context context) {
+        this.skills = skills;
+        this.context = context;
+    }
 
     @NonNull
     @Override
@@ -32,6 +38,8 @@ public class HabilidadAdapter extends RecyclerView.Adapter<HabilidadAdapter.Habi
         holder.nameTextView.setText(skill.getNombre());
         holder.costTextView.setText("Coste: "+skill.getCoste()+"");
         holder.dmgTextView.setText("Daño: "+skill.getDanio()+"");
+        int idIcon = this.context.getResources().getIdentifier(skill.getIcono(),"drawable", context.getPackageName());
+        holder.iconImageView.setImageResource(idIcon);
 
         holder.itemView.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -62,6 +70,7 @@ public class HabilidadAdapter extends RecyclerView.Adapter<HabilidadAdapter.Habi
         public TextView nameTextView;
         public TextView costTextView;
         public TextView dmgTextView;
+        public ImageView iconImageView;
 
 
         public HabilidadViewHolder(View v) {
@@ -69,6 +78,7 @@ public class HabilidadAdapter extends RecyclerView.Adapter<HabilidadAdapter.Habi
             nameTextView = v.findViewById(R.id.textView_nameSkill);
             costTextView = v.findViewById(R.id.textView_costSkill);
             dmgTextView = v.findViewById(R.id.textView_dmgSkill);
+            iconImageView = v.findViewById(R.id.imageView_skill);
         }
 
 

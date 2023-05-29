@@ -113,7 +113,6 @@ public class MultiSelector extends BaseActivity {
                         }
                     }
                 });
-
             }
         });
 

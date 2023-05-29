@@ -2,7 +2,7 @@ package com.example.ddoverhaul;
 
 public class Evento {
     private int id;
-    private String descripcion;
+    private String descripcion,nombre;
     private int valor;
     private int cantidad;
     private char operacion;
@@ -11,6 +11,15 @@ public class Evento {
     public int getId() {
         return id;
     }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
     public void setId(int id) {
         this.id = id;
     }
@@ -46,8 +55,9 @@ public class Evento {
     }
 
     /*Metodo que recibe id y Objeto*/
-    public Evento(int id, String descripcion, int valor, int cantidad, char operacion, Objeto obj) {
+    public Evento(int id,String name, String descripcion, int valor, int cantidad, char operacion, Objeto obj) {
         this.id = id;
+        this.nombre = name;
         this.descripcion = descripcion;
         this.valor = valor;
         this.cantidad = cantidad;
@@ -55,8 +65,9 @@ public class Evento {
         this.obj = obj;
     }
     /*Metodo que no recibe Objeto*/
-    public Evento(int id, String descripcion, int valor, int cantidad, char operacion) {
+    public Evento(int id,String name, String descripcion, int valor, int cantidad, char operacion) {
         this.id = id;
+        this.nombre = name;
         this.descripcion = descripcion;
         this.valor = valor;
         this.cantidad = cantidad;
@@ -65,6 +76,7 @@ public class Evento {
 
     public Evento(Evento E) {
         this.id = E.id;
+        this.nombre = E.nombre;
         this.descripcion = E.descripcion;
         this.valor = E.valor;
         this.cantidad = E.cantidad;

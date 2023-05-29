@@ -1,22 +1,28 @@
 package com.example.ddoverhaul.habilidadList;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.ddoverhaul.Habilidades;
+import com.example.ddoverhaul.IconsAdapter;
 import com.example.ddoverhaul.JSONHelper;
 import com.example.ddoverhaul.R;
 
-public class CreateSkillFragment extends Fragment {
+public class CreateSkillFragment extends Fragment implements IconsAdapter.OnIconClickListener {
 
     // Variables para la creación de habilidades
     private Habilidades skill;
@@ -29,6 +35,10 @@ public class CreateSkillFragment extends Fragment {
     private EditText editPerc;
     private EditText editDescription;
     private Button Cancel;
+    private ImageView iconView;
+    private String editIcon;
+    private AlertDialog alert;
+    private IconsAdapter adapter;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -42,6 +52,7 @@ public class CreateSkillFragment extends Fragment {
         editStatus = view.findViewById(R.id.edit_status_skill);
         editPerc = view.findViewById(R.id.edit_perc_skill);
         editDescription = view.findViewById(R.id.edit_comment_skill);
+        iconView = view.findViewById(R.id.icon_skill);
         helper = new JSONHelper(getContext());
 
         view.findViewById(R.id.botoncancelar).setOnClickListener(new View.OnClickListener() {
@@ -54,6 +65,13 @@ public class CreateSkillFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Save(view);
+            }
+        });
+
+        iconView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showIcons(view);
             }
         });
 
@@ -76,12 +94,54 @@ public class CreateSkillFragment extends Fragment {
             editStatus.setText(skill.getProblema_estado());
             editPerc.setText(skill.getPorcentaje() + "");
             editDescription.setText(skill.getDescripcion());
+
+            int idIcon = getResources().getIdentifier(skill.getIcono(),"drawable", getActivity().getPackageName());
+            iconView.setImageResource(idIcon);
+            editIcon = skill.getIcono();
         } else {
             skill = new Habilidades();
+            editIcon = "questionmark";
+            iconView.setImageResource(R.drawable.questionmark);
             skill.setId(-1);
         }
 
+
+
+
         return view;
+    }
+
+    //
+    public void showIcons(View view) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
+        builder.setTitle("Selecciona un icono");
+
+        // Guarda los iconos a mostrar
+        final int[] iconos = {R.drawable.basic, R.drawable.earth, R.drawable.electric, R.drawable.fire,R.drawable.heal, R.drawable.ice, R.drawable.poison, R.drawable.water};
+
+        // Adaptador personalizado para el RecyclerView
+        adapter = new IconsAdapter(iconos,this);
+
+        // Configura el RecyclerView
+        RecyclerView recyclerView = new RecyclerView(requireContext());
+        recyclerView.setLayoutManager(new GridLayoutManager(requireContext(), 3)); // 3 es el número de columnas que deseas
+        recyclerView.setAdapter(adapter);
+
+        // Configura el diálogo para mostrar el RecyclerView
+        builder.setView(recyclerView);
+
+        // Muestra el diálogo
+        alert = builder.show();
+    }
+
+    @Override
+    public void onIconClick(int iconID) {
+        iconView.setImageResource(iconID);
+        editIcon = getResources().getResourceEntryName(iconID);
+        if (alert != null) {
+            alert.dismiss();
+        }
+
     }
 
     // Método que recoge los valores introducidos y guarda la habilidad en el JSON
@@ -104,6 +164,7 @@ public class CreateSkillFragment extends Fragment {
         skill.setCoste(Integer.parseInt(cost));
         skill.setDanio(Integer.parseInt(dmg));
         skill.setDescripcion(editDescription.getText().toString());
+        skill.setIcono(editIcon);
 
         // Si la habilidad no provoca un estado se deja vacío
         if (!editStatus.getText().toString().equals("")) {

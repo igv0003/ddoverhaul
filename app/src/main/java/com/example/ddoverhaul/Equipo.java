@@ -40,12 +40,16 @@ public class Equipo extends Objeto{
     }
 
     public Equipo(Equipo E) {
-        super(E.getId(), E.getNombre(), E.getTipo(), E.getDescripcion());
+        super(E.getId(), E.getNombre(), E.getTipo(), E.getDescripcion(), E.getIcono());
         this.danio = E.danio;
         this.posicion = E.posicion;
         this.armadura = E.armadura;
     }
-
     public Equipo(){}
 
+    public boolean equals(Equipo E) {
+
+
+        return false;
+    }
 }
