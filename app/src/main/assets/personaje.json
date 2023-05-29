@@ -7,5 +7,104 @@
   {"id": 3, "nombre": "Edgar", "nivel": 3, "Clase": "Mago","raza": "Enano","imagen": "questionmark"},
   {"id": 4, "nombre": "Edgar", "nivel": 3, "Clase": "Mago","raza": "Enano","imagen": "questionmark"},
   {"id": 5, "nombre": "Edgar", "nivel": 3, "Clase": "Mago","raza": "Enano","imagen": "questionmark"},
-  {"id": 6, "nombre": "Edgar", "nivel": 3, "Clase": "Mago","raza": "Enano","imagen": "questionmark"}
+  {"id": 6, "nombre": "Edgar", "nivel": 3, "Clase": "Mago","raza": "Enano","imagen": "questionmark"},
+  {
+    "Clase": "Paladin",
+    "accesorios": [],
+    "arma": {
+      "armadura": 5,
+      "danio": 200,
+      "posicion": 5,
+      "descripcion": "Forjada por antiguos enanos",
+      "icono": "weapon1",
+      "id": 0,
+      "nombre": "Espada de la Guerra",
+      "tipo": "Equipo"
+    },
+    "carisma": 20,
+    "constitucion": 32,
+    "destreza": 20,
+    "fuerza": 30,
+    "habilidades": [
+      {
+        "coste": 10,
+        "danio": 5,
+        "descripcion": "Mitiga un 15% de daño",
+        "icono": "earth",
+        "id": 1,
+        "nombre": "Protección",
+        "porcentaje": 0,
+        "problema_estado": ""
+      },
+      {
+        "coste": 25,
+        "danio": 30,
+        "descripcion": "Lanza una llamarada con la posibilidad de quemar al enemigo",
+        "icono": "fire",
+        "id": 3,
+        "nombre": "Llamarada",
+        "porcentaje": 30,
+        "problema_estado": "Quemado"
+      },
+      {
+        "coste": 10,
+        "danio": 0,
+        "descripcion": "Cura 60 puntos a la vida",
+        "icono": "heal",
+        "id": 4,
+        "nombre": "Curación",
+        "porcentaje": 100,
+        "problema_estado": "Rejuvenecido"
+      }
+    ],
+    "id": 7,
+    "imagen": "knight",
+    "inteligencia": 25,
+    "inventario": [
+      {
+        "descripcion": "Un libro que posee gran conocimiento",
+        "icono": "book",
+        "id": 0,
+        "nombre": "Libro antiguo",
+        "tipo": "Otro"
+      },
+      {
+        "descripcion": "Alberga un gran tesoro",
+        "icono": "chest",
+        "id": 2,
+        "nombre": "Cofre de Davey Jones",
+        "tipo": "Otro"
+      }
+    ],
+    "mana": 130,
+    "mana_Mx": 130,
+    "nivel": 20,
+    "nombre": "Sir Nathaniel",
+    "perchera": {
+      "armadura": 25,
+      "danio": 0,
+      "posicion": 3,
+      "descripcion": "Pantalones de buena calidad",
+      "icono": "pants1",
+      "id": 1,
+      "nombre": "Pantalones Recios",
+      "tipo": "Equipo"
+    },
+    "pies": {
+      "armadura": 30,
+      "danio": 0,
+      "posicion": 4,
+      "descripcion": "Botas que cuentan con una protección",
+      "icono": "foot2",
+      "id": 2,
+      "nombre": "Botas Primigenias",
+      "tipo": "Equipo"
+    },
+    "raza": "Humano",
+    "sabiduria": 15,
+    "velocidad": 12,
+    "vida": 250,
+    "vida_Mx": 250,
+    "vivo": true
+  }
 ]

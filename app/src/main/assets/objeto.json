@@ -1,6 +1,23 @@
 [
-  {"id": 0, "nombre": "obj1", "tipo": "Otro","icono": "questionmark"},
-  {"id": 1, "nombre": "obj2", "tipo": "Otro","icono": "questionmark"},
-  {"id": 2, "nombre": "obj3", "tipo": "Otro","icono": "questionmark"},
-  {"id": 3, "nombre": "obj4", "tipo": "Otro","icono": "questionmark"}
+  {
+    "descripcion": "Un libro que posee gran conocimiento",
+    "icono": "book",
+    "id": 0,
+    "nombre": "Libro antiguo",
+    "tipo": "Otro"
+  },
+  {
+    "descripcion": "Alberga un gran tesoro",
+    "icono": "chest",
+    "id": 2,
+    "nombre": "Cofre de Davey Jones",
+    "tipo": "Otro"
+  },
+  {
+    "descripcion": "Una contraseña de la mazmorra",
+    "icono": "key",
+    "id": 3,
+    "nombre": "Contraseña",
+    "tipo": "Otro"
+  }
 ]
