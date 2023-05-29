@@ -54,6 +54,7 @@ public class CreateSkillFragment extends Fragment implements IconsAdapter.OnIcon
         editDescription = view.findViewById(R.id.edit_comment_skill);
         iconView = view.findViewById(R.id.icon_skill);
         helper = new JSONHelper(getContext());
+
         view.findViewById(R.id.botoncancelar).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

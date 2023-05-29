@@ -26,6 +26,7 @@ import com.example.ddoverhaul.multiplayer.MultiSelector;
 import com.example.ddoverhaul.multiplayer.MultiSelectorFragment;
 import com.example.ddoverhaul.objetoList.CreateobjetoFragment;
 import com.example.ddoverhaul.objetoList.ListaObjetosFragment;
+import com.example.ddoverhaul.personajeList.CreatePersonajeFrangment;
 import com.example.ddoverhaul.personajeList.PersonajeListFragment;
 import com.example.ddoverhaul.personajeList.PersonajeListFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -178,7 +179,9 @@ public class BaseActivity extends AppCompatActivity {
     }
 
     public void gocreateperso(){
-        //startActivity(new Intent(BaseActivity.this, .class));
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.activity_content, new CreatePersonajeFrangment());
+        transaction.commit();
     }
     public void gocreateobjec(){
         FragmentTransaction transaction123 = getSupportFragmentManager().beginTransaction();
