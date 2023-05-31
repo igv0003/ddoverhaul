@@ -22,7 +22,7 @@
         android:layout_marginTop="80dp"
         android:hint="Email"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        app:startIconDrawable="@drawable/email"
+        app:startIconDrawable="@drawable/icon_email"
         app:boxStrokeColor="@color/gold"
         >
 
@@ -44,7 +44,7 @@
         android:layout_marginTop="30dp"
         android:hint="Username"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        app:startIconDrawable="@drawable/username"
+        app:startIconDrawable="@drawable/icon_username"
         app:boxStrokeColor="@color/gold"
         >
 
@@ -68,7 +68,7 @@
         android:hint="Password"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         app:endIconMode="password_toggle"
-        app:startIconDrawable="@drawable/lock"
+        app:startIconDrawable="@drawable/icon_lock"
         app:boxStrokeColor="@color/gold"
 
         >

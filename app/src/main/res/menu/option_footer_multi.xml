@@ -3,23 +3,23 @@
     <item
         android:id="@+id/personajesM"
         android:title=""
-        android:icon="@drawable/personajes"
+        android:icon="@drawable/icon_characters"
         />
     <item
         android:id="@+id/objetosM"
         android:title=""
-        android:icon="@drawable/equipamiento" />
+        android:icon="@drawable/icon_equip" />
     <item
         android:id="@+id/eventosM"
         android:title=""
-        android:icon="@drawable/mas"/>
+        android:icon="@drawable/icon_mas"/>
     <item
         android:id="@+id/ambienteM"
         android:title=""
-        android:icon="@drawable/multijugador"/>
+        android:icon="@drawable/icon_multi"/>
     <item
         android:id="@+id/ajustesM"
         android:title=""
-        android:icon="@drawable/tuerca" />
+        android:icon="@drawable/icon_tuerca" />
 
 </menu>

@@ -35,7 +35,7 @@
                     android:adjustViewBounds="true"
                     android:contentDescription="Descripción del contenido de la imagen"
                     android:scaleType="fitXY"
-                    android:src="@drawable/questionmark" />
+                    android:src="@drawable/icon_questionmark" />
 
                 <TextView
                     android:id="@+id/name_skill"
@@ -62,13 +62,13 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="2dp"
                     android:layout_weight="1"
-                    android:background="@drawable/pencil"/>
+                    android:background="@drawable/icon_editpencil"/>
                 <ImageButton
                     android:id="@+id/delete_skill"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="2dp"
-                    android:background="@drawable/delete"
+                    android:background="@drawable/icon_delete"
                     android:layout_weight="1"/>
 
             </LinearLayout>

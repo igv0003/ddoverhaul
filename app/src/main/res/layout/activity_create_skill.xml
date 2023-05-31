@@ -30,7 +30,7 @@
                     android:adjustViewBounds="true"
                     android:contentDescription="Descripción del contenido de la imagen"
                     android:scaleType="fitXY"
-                    android:src="@drawable/questionmark" />
+                    android:src="@drawable/icon_questionmark" />
 
             <EditText
                 android:id="@+id/edit_name_skill"

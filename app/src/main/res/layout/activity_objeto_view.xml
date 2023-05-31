@@ -33,7 +33,7 @@
                 android:layout_height="81dp"
                 android:layout_marginTop="25dp"
                 android:layout_marginEnd="80dp"
-                android:src="@drawable/questionmark" />
+                android:src="@drawable/icon_questionmark" />
 
             <ImageButton
                 android:id="@+id/editObj"
@@ -41,14 +41,14 @@
                 android:layout_height="60dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="25dp"
-                android:background="@drawable/pencil"/>
+                android:background="@drawable/icon_editpencil"/>
             <ImageButton
                 android:id="@+id/deleteObj"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="10dp"
-                android:background="@drawable/delete" />
+                android:background="@drawable/icon_delete" />
 
         </LinearLayout>
 

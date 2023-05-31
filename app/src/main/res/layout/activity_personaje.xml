@@ -20,7 +20,7 @@
                 android:id="@+id/imagenPersonaje"
                 android:layout_width="114dp"
                 android:layout_height="106dp"
-                android:src="@drawable/username"
+                android:src="@drawable/icon_username"
                 tools:srcCompat="@tools:sample/avatars" />
 
             <LinearLayout
@@ -45,6 +45,8 @@
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:layout_marginTop="22dp"/>
             </LinearLayout>
+
+
         </LinearLayout>
 
         <LinearLayout
@@ -323,27 +325,27 @@
                     android:layout_width="64dp"
                     android:layout_height="64dp"
                     android:layout_margin="8dp"
-                        android:src="@drawable/questionmark" />
+                        android:src="@drawable/icon_questionmark" />
 
                 <ImageView
                     android:id="@+id/view_Armor"
                     android:layout_width="64dp"
                     android:layout_height="64dp"
-                    android:src="@drawable/questionmark"
+                    android:src="@drawable/icon_questionmark"
                     android:layout_margin="8dp" />
 
                 <ImageView
                     android:id="@+id/view_Pants"
                     android:layout_width="64dp"
                     android:layout_height="64dp"
-                    android:src="@drawable/questionmark"
+                    android:src="@drawable/icon_questionmark"
                     android:layout_margin="8dp" />
 
                 <ImageView
                     android:id="@+id/view_Foots"
                     android:layout_width="64dp"
                     android:layout_height="64dp"
-                    android:src="@drawable/questionmark"
+                    android:src="@drawable/icon_questionmark"
                     android:layout_margin="8dp" />
             </LinearLayout>
 
@@ -357,21 +359,21 @@
                     android:id="@+id/view_PrimaryWeapon"
                     android:layout_width="64dp"
                     android:layout_height="64dp"
-                    android:src="@drawable/questionmark"
+                    android:src="@drawable/icon_questionmark"
                     android:layout_margin="8dp" />
 
                 <ImageView
                     android:id="@+id/view_Gloves"
                     android:layout_width="64dp"
                     android:layout_height="64dp"
-                    android:src="@drawable/questionmark"
+                    android:src="@drawable/icon_questionmark"
                     android:layout_margin="8dp" />
 
                 <ImageView
                     android:id="@+id/view_SecondaryWeapon"
                     android:layout_width="64dp"
                     android:layout_height="64dp"
-                    android:src="@drawable/questionmark"
+                    android:src="@drawable/icon_questionmark"
                     android:layout_margin="8dp" />
 
 
@@ -412,14 +414,14 @@
                     android:layout_width="64dp"
                     android:layout_height="64dp"
                     android:layout_marginRight="75dp"
-                    android:src="@drawable/questionmark" />
+                    android:src="@drawable/icon_questionmark" />
 
                 <ImageView
                     android:id="@+id/view_Accesory2"
                     android:layout_width="64dp"
                     android:layout_height="64dp"
                     android:layout_margin="8dp"
-                    android:src="@drawable/questionmark"
+                    android:src="@drawable/icon_questionmark"
                     android:layout_marginBottom="10dp"/>
             </LinearLayout>
         </LinearLayout>
@@ -463,33 +465,33 @@
                 android:layout_width="64dp"
                 android:layout_height="64dp"
                 android:layout_margin="8dp"
-                android:src="@drawable/questionmark" />
+                android:src="@drawable/icon_questionmark" />
             <ImageView
                 android:id="@+id/view_Inventory2"
                 android:layout_width="64dp"
                 android:layout_height="64dp"
                 android:layout_margin="8dp"
-                android:src="@drawable/questionmark" />
+                android:src="@drawable/icon_questionmark" />
 
             <ImageView
                 android:id="@+id/view_Inventory3"
                 android:layout_width="64dp"
                 android:layout_height="64dp"
-                android:src="@drawable/questionmark"
+                android:src="@drawable/icon_questionmark"
                 android:layout_margin="8dp" />
 
             <ImageView
                 android:id="@+id/view_Inventory4"
                 android:layout_width="64dp"
                 android:layout_height="64dp"
-                android:src="@drawable/questionmark"
+                android:src="@drawable/icon_questionmark"
                 android:layout_margin="8dp" />
 
             <ImageView
                 android:id="@+id/view_Inventory5"
                 android:layout_width="64dp"
                 android:layout_height="64dp"
-                android:src="@drawable/questionmark"
+                android:src="@drawable/icon_questionmark"
                 android:layout_margin="8dp" />
         </LinearLayout>
     </LinearLayout>
@@ -527,37 +529,64 @@
                     android:layout_width="64dp"
                     android:layout_height="64dp"
                     android:layout_margin="8dp"
-                    android:src="@drawable/questionmark" />
+                    android:src="@drawable/icon_questionmark" />
 
                 <ImageView
                     android:id="@+id/view_Skill2"
                     android:layout_width="64dp"
                     android:layout_height="64dp"
-                    android:src="@drawable/questionmark"
+                    android:src="@drawable/icon_questionmark"
                     android:layout_margin="8dp" />
 
                 <ImageView
                     android:id="@+id/view_Skill3"
                     android:layout_width="64dp"
                     android:layout_height="64dp"
-                    android:src="@drawable/questionmark"
+                    android:src="@drawable/icon_questionmark"
                     android:layout_margin="8dp" />
 
                 <ImageView
                     android:id="@+id/view_Skill4"
                     android:layout_width="64dp"
                     android:layout_height="64dp"
-                    android:src="@drawable/questionmark"
+                    android:src="@drawable/icon_questionmark"
                     android:layout_margin="8dp" />
 
                 <ImageView
                     android:id="@+id/view_Skill5"
                     android:layout_width="64dp"
                     android:layout_height="64dp"
-                    android:src="@drawable/questionmark"
+                    android:src="@drawable/icon_questionmark"
                     android:layout_margin="8dp" />
             </LinearLayout>
         </LinearLayout>
+        <View
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#000000"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:padding="30dp"
+            >
+            <ImageButton
+                android:id="@+id/edit_personaje"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="2dp"
+                android:background="@drawable/icon_editpencil"/>
+            <ImageButton
+                android:id="@+id/delete_pesonaje"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="2dp"
+                android:background="@drawable/icon_delete"
+                android:layout_marginStart="40dp"/>
+        </LinearLayout>
+
 
     </LinearLayout>
 

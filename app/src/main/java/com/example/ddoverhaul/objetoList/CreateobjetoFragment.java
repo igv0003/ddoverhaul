@@ -17,7 +17,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -28,10 +27,6 @@ import com.example.ddoverhaul.IconsAdapter;
 import com.example.ddoverhaul.JSONHelper;
 import com.example.ddoverhaul.Objeto;
 import com.example.ddoverhaul.R;
-import com.example.ddoverhaul.habilidadList.HabilidadListFragment;
-import com.example.ddoverhaul.habilidadList.ViewSkillFragment;
-import com.example.ddoverhaul.multiplayer.MultiSelectorFragment;
-import com.example.ddoverhaul.personajeList.PersonajeListFragment;
 
 public class CreateobjetoFragment extends Fragment implements IconsAdapter.OnIconClickListener {
     private Spinner SpinnerTipo, SpinnerEquipoPos, SpinnerValor;
@@ -55,14 +50,14 @@ public class CreateobjetoFragment extends Fragment implements IconsAdapter.OnIco
     private AlertDialog alert;
     private IconsAdapter adapter;
     private int finalIcons[];
-    private int iconOthers[] = {R.drawable.book, R.drawable.chest, R.drawable.key};
-    private int iconCons[] = {R.drawable.pocion1,R.drawable.pocion2, R.drawable.pocion3, R.drawable.feather};
-    private int iconHead[] = {R.drawable.helmet, R.drawable.hat};
-    private int iconArmor[] = {R.drawable.armor1,R.drawable.armor2};
-    private int iconGloves[]= {R.drawable.gloves1,R.drawable.gloves2};
-    private int iconPants[] = {R.drawable.pants1, R.drawable.pants2};
-    private int iconFoots[] = {R.drawable.foot2, R.drawable.foot1};
-    private int iconWeapons[] = {R.drawable.weapon1, R.drawable.weapon2, R.drawable.weapon3};
+    private int iconOthers[] = {R.drawable.icon_book, R.drawable.icon_chest, R.drawable.icon_key};
+    private int iconCons[] = {R.drawable.icon_pocion1,R.drawable.icon_pocion2, R.drawable.icon_pocion3, R.drawable.icon_feather};
+    private int iconHead[] = {R.drawable.icon_helmet, R.drawable.icon_hat};
+    private int iconArmor[] = {R.drawable.icon_armor1,R.drawable.icon_armor2};
+    private int iconGloves[]= {R.drawable.icon_gloves1,R.drawable.icon_gloves2};
+    private int iconPants[] = {R.drawable.icon_pants1, R.drawable.icon_pants2};
+    private int iconFoots[] = {R.drawable.icon_foot2, R.drawable.icon_foot1};
+    private int iconWeapons[] = {R.drawable.icon_weapon1, R.drawable.icon_weapon2, R.drawable.icon_weapon3};
 
 
 
@@ -102,28 +97,28 @@ public class CreateobjetoFragment extends Fragment implements IconsAdapter.OnIco
                 switch (adapterEquipoPos.getItem(position)) {
                     case "Cabeza":
                         finalIcons = iconHead;
-                        ImagenObj.setImageResource(R.drawable.questionmark);
+                        ImagenObj.setImageResource(R.drawable.icon_questionmark);
                         break;
                     case "Pecho":
                         finalIcons = iconArmor;
-                        ImagenObj.setImageResource(R.drawable.questionmark);
+                        ImagenObj.setImageResource(R.drawable.icon_questionmark);
                         break;
                     case "Manos":
                         finalIcons = iconGloves;
-                        ImagenObj.setImageResource(R.drawable.questionmark);
+                        ImagenObj.setImageResource(R.drawable.icon_questionmark);
                         break;
                     case "Piernas":
                         finalIcons = iconPants;
-                        ImagenObj.setImageResource(R.drawable.questionmark);
+                        ImagenObj.setImageResource(R.drawable.icon_questionmark);
                         break;
                     case "Pies":
                         finalIcons = iconFoots;
-                        ImagenObj.setImageResource(R.drawable.questionmark);
+                        ImagenObj.setImageResource(R.drawable.icon_questionmark);
                         break;
                     case "Arma Principal":
                     case "Arma Secundaria":
                         finalIcons = iconWeapons;
-                        ImagenObj.setImageResource(R.drawable.questionmark);
+                        ImagenObj.setImageResource(R.drawable.icon_questionmark);
                         break;
                     default:
                         break;
@@ -187,7 +182,7 @@ public class CreateobjetoFragment extends Fragment implements IconsAdapter.OnIco
                     } else {
                         equip = new Equipo();
                         editIcon = "questionmark";
-                        ImagenObj.setImageResource(R.drawable.questionmark);
+                        ImagenObj.setImageResource(R.drawable.icon_questionmark);
                         equip.setId(-1);
                     }
                     break;
@@ -209,7 +204,7 @@ public class CreateobjetoFragment extends Fragment implements IconsAdapter.OnIco
                     } else {
                         equip = new Equipo();
                         editIcon = "questionmark";
-                        ImagenObj.setImageResource(R.drawable.questionmark);
+                        ImagenObj.setImageResource(R.drawable.icon_questionmark);
                         equip.setId(-1);
                     }
                     break;
@@ -230,7 +225,7 @@ public class CreateobjetoFragment extends Fragment implements IconsAdapter.OnIco
                     } else {
                         obj = new Objeto();
                         editIcon = "questionmark";
-                        ImagenObj.setImageResource(R.drawable.questionmark);
+                        ImagenObj.setImageResource(R.drawable.icon_questionmark);
                         obj.setId(-1);
                     }
                     break;
@@ -252,17 +247,17 @@ public class CreateobjetoFragment extends Fragment implements IconsAdapter.OnIco
                 mainObj.removeView(EquipoLayout);
                 mainObj.removeView(ConsumibleLayout);
                 finalIcons = iconOthers;
-                ImagenObj.setImageResource(R.drawable.questionmark);
+                ImagenObj.setImageResource(R.drawable.icon_questionmark);
                 if (opcionSeleccionada.equals("Equipo")) {
                     mainObj.addView(EquipoLayout, indexC);
                     EquipoLayout.setVisibility(View.VISIBLE);
                     finalIcons = null;
-                    ImagenObj.setImageResource(R.drawable.questionmark);
+                    ImagenObj.setImageResource(R.drawable.icon_questionmark);
                 } else if (opcionSeleccionada.equals("Consumible")) {
                     mainObj.addView(ConsumibleLayout, indexC);
                     ConsumibleLayout.setVisibility(View.VISIBLE);
                     finalIcons = iconCons;
-                    ImagenObj.setImageResource(R.drawable.questionmark);
+                    ImagenObj.setImageResource(R.drawable.icon_questionmark);
                 }
             }
 

@@ -21,7 +21,7 @@
                 android:id="@+id/imagenPersonaje"
                 android:layout_width="114dp"
                 android:layout_height="106dp"
-                android:src="@drawable/username"
+                android:src="@drawable/icon_username"
                 tools:srcCompat="@tools:sample/avatars" />
 
             <LinearLayout
@@ -380,27 +380,27 @@
                     android:layout_width="64dp"
                     android:layout_height="64dp"
                     android:layout_margin="8dp"
-                    android:src="@drawable/tuerca" />
+                    android:src="@drawable/icon_questionmark" />
 
                 <ImageView
                     android:id="@+id/Equipo2"
                     android:layout_width="64dp"
                     android:layout_height="64dp"
-                    android:src="@drawable/tuerca"
+                    android:src="@drawable/icon_questionmark"
                     android:layout_margin="8dp" />
 
                 <ImageView
                     android:id="@+id/Equipo3"
                     android:layout_width="64dp"
                     android:layout_height="64dp"
-                    android:src="@drawable/tuerca"
+                    android:src="@drawable/icon_questionmark"
                     android:layout_margin="8dp" />
 
                 <ImageView
                     android:id="@+id/Equipo4"
                     android:layout_width="64dp"
                     android:layout_height="64dp"
-                    android:src="@drawable/tuerca"
+                    android:src="@drawable/icon_questionmark"
                     android:layout_margin="8dp" />
             </LinearLayout>
 
@@ -414,21 +414,21 @@
                     android:id="@+id/Equipo5"
                     android:layout_width="64dp"
                     android:layout_height="64dp"
-                    android:src="@drawable/tuerca"
+                    android:src="@drawable/icon_questionmark"
                     android:layout_margin="8dp" />
 
                 <ImageView
                     android:id="@+id/Equipo6"
                     android:layout_width="64dp"
                     android:layout_height="64dp"
-                    android:src="@drawable/tuerca"
+                    android:src="@drawable/icon_questionmark"
                     android:layout_margin="8dp" />
 
                 <ImageView
                     android:id="@+id/Equipo7"
                     android:layout_width="64dp"
                     android:layout_height="64dp"
-                    android:src="@drawable/tuerca"
+                    android:src="@drawable/icon_questionmark"
                     android:layout_margin="8dp" />
             </LinearLayout>
         </LinearLayout>
@@ -468,14 +468,14 @@
                     android:layout_width="64dp"
                     android:layout_height="64dp"
                     android:layout_marginRight="75dp"
-                    android:src="@drawable/tuerca" />
+                    android:src="@drawable/icon_questionmark" />
 
                 <ImageView
                     android:id="@+id/Accesorios2"
                     android:layout_width="64dp"
                     android:layout_height="64dp"
                     android:layout_margin="8dp"
-                    android:src="@drawable/tuerca"
+                    android:src="@drawable/icon_questionmark"
                     android:layout_marginBottom="10dp"/>
             </LinearLayout>
         </LinearLayout>
@@ -519,33 +519,33 @@
                         android:layout_width="64dp"
                         android:layout_height="64dp"
                         android:layout_margin="8dp"
-                        android:src="@drawable/tuerca" />
+                        android:src="@drawable/icon_questionmark" />
                     <ImageView
                         android:id="@+id/inventario2"
                         android:layout_width="64dp"
                         android:layout_height="64dp"
                         android:layout_margin="8dp"
-                        android:src="@drawable/tuerca" />
+                        android:src="@drawable/icon_questionmark" />
 
                     <ImageView
                         android:id="@+id/inventario3"
                         android:layout_width="64dp"
                         android:layout_height="64dp"
-                        android:src="@drawable/tuerca"
+                        android:src="@drawable/icon_questionmark"
                         android:layout_margin="8dp" />
 
                     <ImageView
                         android:id="@+id/inventario4"
                         android:layout_width="64dp"
                         android:layout_height="64dp"
-                        android:src="@drawable/tuerca"
+                        android:src="@drawable/icon_questionmark"
                         android:layout_margin="8dp" />
 
                     <ImageView
                         android:id="@+id/inventario5"
                         android:layout_width="64dp"
                         android:layout_height="64dp"
-                        android:src="@drawable/tuerca"
+                        android:src="@drawable/icon_questionmark"
                         android:layout_margin="8dp" />
                 </LinearLayout>
             </LinearLayout>
@@ -583,34 +583,34 @@
                     android:layout_width="64dp"
                     android:layout_height="64dp"
                     android:layout_margin="8dp"
-                    android:src="@drawable/tuerca" />
+                    android:src="@drawable/icon_questionmark" />
 
                 <ImageView
                     android:id="@+id/habilidad2"
                     android:layout_width="64dp"
                     android:layout_height="64dp"
-                    android:src="@drawable/tuerca"
+                    android:src="@drawable/icon_questionmark"
                     android:layout_margin="8dp" />
 
                 <ImageView
                     android:id="@+id/habilidad3"
                     android:layout_width="64dp"
                     android:layout_height="64dp"
-                    android:src="@drawable/tuerca"
+                    android:src="@drawable/icon_questionmark"
                     android:layout_margin="8dp" />
 
                 <ImageView
                     android:id="@+id/habilidad4"
                     android:layout_width="64dp"
                     android:layout_height="64dp"
-                    android:src="@drawable/tuerca"
+                    android:src="@drawable/icon_questionmark"
                     android:layout_margin="8dp" />
 
                 <ImageView
                     android:id="@+id/habilidad5"
                     android:layout_width="64dp"
                     android:layout_height="64dp"
-                    android:src="@drawable/tuerca"
+                    android:src="@drawable/icon_questionmark"
                     android:layout_margin="8dp" />
             </LinearLayout>
         </LinearLayout>

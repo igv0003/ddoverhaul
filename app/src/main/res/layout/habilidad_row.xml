@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="130dp"
     android:orientation="horizontal"
-    android:background="@drawable/items">
+    android:background="@drawable/backgound_items">
 
     <ImageView
         android:id="@+id/imageView_skill"
@@ -15,7 +15,7 @@
         android:layout_marginLeft="45dp"
         android:layout_marginRight="15dp"
         android:scaleType="fitXY"
-        android:src="@drawable/questionmark" />
+        android:src="@drawable/icon_questionmark" />
 
     <LinearLayout
         android:layout_width="match_parent"

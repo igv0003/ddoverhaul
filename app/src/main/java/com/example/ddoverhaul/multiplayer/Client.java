@@ -21,7 +21,7 @@ public class Client extends BaseActivity {
         setContentView(R.layout.activity_client);
 
         imageView = findViewById(R.id.engranajeImg);
-        Drawable drawable = getResources().getDrawable(R.drawable.engraneje);
+        Drawable drawable = getResources().getDrawable(R.drawable.icon_gif_engranaje);
         if (drawable instanceof AnimatedImageDrawable) {
             animatedImageDrawable = (AnimatedImageDrawable) drawable;
             imageView.setImageDrawable(animatedImageDrawable);

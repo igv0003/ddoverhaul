@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="130dp"
     android:orientation="horizontal"
-    android:background="@drawable/items">
+    android:background="@drawable/backgound_items">
 
     <ImageView
         android:id="@+id/imageView_pj"

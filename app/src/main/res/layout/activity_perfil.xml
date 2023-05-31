@@ -25,7 +25,7 @@
                 android:adjustViewBounds="true"
                 android:contentDescription="Descripción del contenido de la imagen"
                 android:scaleType="fitXY"
-                android:src="@drawable/username" />
+                android:src="@drawable/icon_username" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -53,7 +53,7 @@
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:layout_marginTop="75dp"
-                        android:background="@drawable/editaricon">
+                        android:background="@drawable/icon_edit">
 
                     </ImageButton>
                 </LinearLayout>

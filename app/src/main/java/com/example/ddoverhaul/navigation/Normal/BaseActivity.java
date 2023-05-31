@@ -32,7 +32,6 @@ import com.example.ddoverhaul.personajeList.PersonajeListFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class BaseActivity extends AppCompatActivity {
-    ImageButton bajustes;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,13 +43,6 @@ public class BaseActivity extends AppCompatActivity {
         FrameLayout activityContainer = fullLayout.findViewById(R.id.activity_content);
         getLayoutInflater().inflate(layoutResID, activityContainer, true);
         super.setContentView(fullLayout);
-        bajustes = findViewById(R.id.ajustesBoton);
-        bajustes.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                opciones();
-            }
-        });
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.footerNavegation);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -82,14 +74,6 @@ public class BaseActivity extends AppCompatActivity {
         });
 
 
-
-        bajustes.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                opciones();
-            }
-        });
-
     }
 
     private void showPopupMenu2(View view) {
@@ -114,19 +98,6 @@ public class BaseActivity extends AppCompatActivity {
         popupMenu2.show();
     }
 
-
-    private void opciones() {
-        setContentView(R.layout.activity_ajustes);
-
-        Button logoutButton = findViewById(R.id.logout_button);
-
-        logoutButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                logout();
-            }
-        });
-    }
 
     private void logout(){
         startActivity(new Intent(BaseActivity.this, Login.class));
