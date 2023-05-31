@@ -14,6 +14,7 @@ public class Personaje implements Serializable {
     private int mana_Mx;
     private String raza;
     private String Clase;
+
     /*Estadisticas*/
     private int fuerza;
     private int destreza;

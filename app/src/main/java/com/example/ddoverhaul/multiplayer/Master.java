@@ -6,7 +6,6 @@ import androidx.annotation.RequiresApi;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -20,7 +19,6 @@ import com.example.ddoverhaul.BaseActivity_Multi;
 import com.example.ddoverhaul.Consumibles;
 import com.example.ddoverhaul.Equipo;
 import com.example.ddoverhaul.Evento;
-import com.example.ddoverhaul.MainActivity;
 import com.example.ddoverhaul.Objeto;
 import com.example.ddoverhaul.Personaje;
 import com.example.ddoverhaul.R;
@@ -31,11 +29,8 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
-import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import android.graphics.drawable.AnimatedImageDrawable;
-import android.os.Bundle;
-import android.widget.ImageView;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -57,7 +52,7 @@ public class Master extends BaseActivity_Multi {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_master);
         imageView = findViewById(R.id.engranajeImg);
-        Drawable drawable = getResources().getDrawable(R.drawable.engraneje);
+        Drawable drawable = getResources().getDrawable(R.drawable.icon_gif_engranaje);
         if (drawable instanceof AnimatedImageDrawable) {
             animatedImageDrawable = (AnimatedImageDrawable) drawable;
             imageView.setImageDrawable(animatedImageDrawable);

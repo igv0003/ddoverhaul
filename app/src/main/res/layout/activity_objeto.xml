@@ -27,7 +27,7 @@
                 android:id="@+id/ImageObj"
                 android:layout_width="90dp"
                 android:layout_height="81dp"
-                android:src="@drawable/tuer" />
+                />
 
             <TextView
                 android:id="@+id/TV_nombre_obj"

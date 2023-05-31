@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 
@@ -26,12 +27,15 @@ import com.example.ddoverhaul.multiplayer.MultiSelector;
 import com.example.ddoverhaul.multiplayer.MultiSelectorFragment;
 import com.example.ddoverhaul.objetoList.CreateobjetoFragment;
 import com.example.ddoverhaul.objetoList.ListaObjetosFragment;
+import com.example.ddoverhaul.personajeList.CreatePersonajeFrangment;
 import com.example.ddoverhaul.personajeList.PersonajeListFragment;
 import com.example.ddoverhaul.personajeList.PersonajeListFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class BaseActivity extends AppCompatActivity {
-    ImageButton bajustes;
+
+
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,35 +47,34 @@ public class BaseActivity extends AppCompatActivity {
         FrameLayout activityContainer = fullLayout.findViewById(R.id.activity_content);
         getLayoutInflater().inflate(layoutResID, activityContainer, true);
         super.setContentView(fullLayout);
-        bajustes = findViewById(R.id.ajustesBoton);
-        bajustes.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                opciones();
-            }
-        });
 
+        ImageView cartel = findViewById(R.id.cartelBienvenido);
         BottomNavigationView bottomNavigationView = findViewById(R.id.footerNavegation);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.personajes:
+                        cartel.setVisibility(View.GONE);
                         FragmentTransaction transaction1 = getSupportFragmentManager().beginTransaction();
                         transaction1.replace(R.id.activity_content, new PersonajeListFragment());
                         transaction1.commit();
                         return true;
                     case R.id.equipamieto:
+                        cartel.setVisibility(View.GONE);
                         showPopupMenu2(bottomNavigationView);
                         return true;
                     case R.id.crear:
+                        cartel.setVisibility(View.GONE);
                         showPopupMenu(bottomNavigationView );
                         return true;
                     case R.id.multijugador:
-                         gomulti();
+                        cartel.setVisibility(View.GONE);
+                        gomulti();
                         //startActivity(new Intent(BaseActivity.this, MultiSelector.class));
                         return true;
                     case R.id.perfil:
+                        cartel.setVisibility(View.GONE);
                         goprofile();
                         return true;
                     default:
@@ -80,14 +83,6 @@ public class BaseActivity extends AppCompatActivity {
             }
         });
 
-
-
-        bajustes.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                opciones();
-            }
-        });
 
     }
 
@@ -100,9 +95,11 @@ public class BaseActivity extends AppCompatActivity {
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.lista_hab:
+
                         gohablist();
                         return true;
                     case R.id.lista_obj:
+
                         goobjlist();
                         return true;
                     default:
@@ -114,19 +111,6 @@ public class BaseActivity extends AppCompatActivity {
     }
 
 
-    private void opciones() {
-        setContentView(R.layout.activity_ajustes);
-
-        Button logoutButton = findViewById(R.id.logout_button);
-
-        logoutButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                logout();
-            }
-        });
-    }
-
     private void logout(){
         startActivity(new Intent(BaseActivity.this, Login.class));
     }
@@ -137,6 +121,7 @@ public class BaseActivity extends AppCompatActivity {
 
 
     private void showPopupMenu (View view){
+
         PopupMenu popupMenu = new PopupMenu(this, view);
         popupMenu.inflate(R.menu.floating_menu);
 
@@ -145,12 +130,15 @@ public class BaseActivity extends AppCompatActivity {
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.crearPERS:
+
                         gocreateperso();
                         return true ;
                     case R.id.crearOBJ:
+
                         gocreateobjec();
                         return true ;
                     case R.id.crearHAB:
+
                         gocreateskill();
                         return true ;
                     default:
@@ -178,7 +166,9 @@ public class BaseActivity extends AppCompatActivity {
     }
 
     public void gocreateperso(){
-        //startActivity(new Intent(BaseActivity.this, .class));
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.activity_content, new CreatePersonajeFrangment());
+        transaction.commit();
     }
     public void gocreateobjec(){
         FragmentTransaction transaction123 = getSupportFragmentManager().beginTransaction();

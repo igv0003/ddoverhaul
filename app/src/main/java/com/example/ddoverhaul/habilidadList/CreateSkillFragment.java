@@ -2,8 +2,6 @@ package com.example.ddoverhaul.habilidadList;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
-import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -54,6 +52,7 @@ public class CreateSkillFragment extends Fragment implements IconsAdapter.OnIcon
         editDescription = view.findViewById(R.id.edit_comment_skill);
         iconView = view.findViewById(R.id.icon_skill);
         helper = new JSONHelper(getContext());
+
         view.findViewById(R.id.botoncancelar).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -100,7 +99,7 @@ public class CreateSkillFragment extends Fragment implements IconsAdapter.OnIcon
         } else {
             skill = new Habilidades();
             editIcon = "questionmark";
-            iconView.setImageResource(R.drawable.questionmark);
+            iconView.setImageResource(R.drawable.icon_questionmark);
             skill.setId(-1);
         }
 
@@ -116,7 +115,7 @@ public class CreateSkillFragment extends Fragment implements IconsAdapter.OnIcon
         builder.setTitle("Selecciona un icono");
 
         // Guarda los iconos a mostrar
-        final int[] iconos = {R.drawable.basic, R.drawable.earth, R.drawable.electric, R.drawable.fire,R.drawable.heal, R.drawable.ice, R.drawable.poison, R.drawable.water};
+        final int[] iconos = {R.drawable.image_basic_hit, R.drawable.image_earth, R.drawable.image_electric, R.drawable.image_fire,R.drawable.image_heal, R.drawable.image_ice, R.drawable.image_poison, R.drawable.image_water};
 
         // Adaptador personalizado para el RecyclerView
         adapter = new IconsAdapter(iconos,this);

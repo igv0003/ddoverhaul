@@ -10,22 +10,8 @@
         android:layout_height="166dp"
         android:layout_margin="0dp"
         android:scaleType="fitXY"
-        android:src="@drawable/cabecera"
+        android:src="@drawable/image_header"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
-
-    <ImageButton
-        android:id="@+id/ajustesBoton"
-        android:src="@drawable/tuerca"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:adjustViewBounds="true"
-        android:padding="8dp"
-        android:scaleType="fitCenter"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cabeceraFoto"
-        android:layout_marginTop="-25dp"
-        android:background="?android:attr/selectableItemBackgroundBorderless"
-        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

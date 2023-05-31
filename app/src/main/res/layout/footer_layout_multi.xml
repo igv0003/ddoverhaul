@@ -9,7 +9,7 @@
         android:id="@+id/footer_multiL"
         android:layout_width="match_parent"
         android:layout_height="70dp"
-        android:background="@drawable/fondo"
+        android:background="@drawable/background_footer"
         app:itemIconSize="45dp"
         app:itemIconTint="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -18,6 +18,7 @@ import com.example.ddoverhaul.JSONHelper;
 import com.example.ddoverhaul.Objeto;
 import com.example.ddoverhaul.Personaje;
 import com.example.ddoverhaul.R;
+import com.example.ddoverhaul.habilidadList.CreateSkillFragment;
 import com.example.ddoverhaul.habilidadList.HabilidadListFragment;
 
 import java.util.ArrayList;
@@ -50,19 +51,19 @@ public class ViewPersonajeFragment extends Fragment {
         View view = inflater.inflate(R.layout.activity_personaje, container, false);
 
         fotopersonaje = view.findViewById(R.id.imagenPersonaje);
-        nombre = view.findViewById(R.id.NombreTV);
+        nombre = view.findViewById(R.id.NombreText);
         raza = view.findViewById(R.id.RazaTV);
-        clase = view.findViewById(R.id.ClaseTV);
-        nivel = view.findViewById(R.id.nivelTV);
-        vida = view.findViewById(R.id.vidaTV);
+        clase = view.findViewById(R.id.ClaseText);
+        nivel = view.findViewById(R.id.NivelTV);
+        vida = view.findViewById(R.id.VidaTV);
         mana = view.findViewById(R.id.ManaTV);
         fuerza = view.findViewById(R.id.FuerzaTV);
         destreza = view.findViewById(R.id.DestrzaTV);
         constitucion = view.findViewById(R.id.ConstTV);
         inteligencia = view.findViewById(R.id.IntelTV);
-        sabiduria = view.findViewById(R.id.SabTV);
-        carisma = view.findViewById(R.id.CarisTV);
-        velocidad = view.findViewById(R.id.velTV);
+        sabiduria = view.findViewById(R.id.SabiduriaTV);
+        carisma = view.findViewById(R.id.CarismaTV);
+        velocidad = view.findViewById(R.id.VelocidadTV);
 
         helper = new JSONHelper(getContext());
 
@@ -105,6 +106,19 @@ public class ViewPersonajeFragment extends Fragment {
         prepareInventory(view);
         prepareSkills(view);
 
+        view.findViewById(R.id.edit_personaje).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                editPersonaje(personajeP.getId());
+            }
+        });
+
+        view.findViewById(R.id.delete_pesonaje).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                deletePersonaje(personajeP.getId());
+            }
+        });
         return view;
     }
 
@@ -134,10 +148,10 @@ public class ViewPersonajeFragment extends Fragment {
                 }
             } else {
                 personajeP.setCabeza(null);
-                viewHelmet.setImageResource(R.drawable.questionmark);
+                viewHelmet.setImageResource(R.drawable.icon_questionmark);
             }
         } else {
-            viewHelmet.setImageResource(R.drawable.questionmark);
+            viewHelmet.setImageResource(R.drawable.icon_questionmark);
         }
 
         // Prepara la armadura
@@ -156,10 +170,10 @@ public class ViewPersonajeFragment extends Fragment {
                 }
             } else {
                 personajeP.setPerchera(null);
-                viewArmor.setImageResource(R.drawable.questionmark);
+                viewArmor.setImageResource(R.drawable.icon_questionmark);
             }
         } else {
-            viewArmor.setImageResource(R.drawable.questionmark);
+            viewArmor.setImageResource(R.drawable.icon_questionmark);
         }
 
         // Prepara los pantalones
@@ -178,10 +192,10 @@ public class ViewPersonajeFragment extends Fragment {
                 }
             } else {
                 personajeP.setPantalones(null);
-                viewPants.setImageResource(R.drawable.questionmark);
+                viewPants.setImageResource(R.drawable.icon_questionmark);
             }
         } else {
-            viewPants.setImageResource(R.drawable.questionmark);
+            viewPants.setImageResource(R.drawable.icon_questionmark);
         }
 
         // Prepara los pies
@@ -200,10 +214,10 @@ public class ViewPersonajeFragment extends Fragment {
                 }
             } else {
                 personajeP.setPies(null);
-                viewFoots.setImageResource(R.drawable.questionmark);
+                viewFoots.setImageResource(R.drawable.icon_questionmark);
             }
         } else {
-            viewFoots.setImageResource(R.drawable.questionmark);
+            viewFoots.setImageResource(R.drawable.icon_questionmark);
         }
 
         // Prepara los guantes
@@ -222,10 +236,10 @@ public class ViewPersonajeFragment extends Fragment {
                 }
             } else {
                 personajeP.setGuantes(null);
-                viewGloves.setImageResource(R.drawable.questionmark);
+                viewGloves.setImageResource(R.drawable.icon_questionmark);
             }
         } else {
-            viewGloves.setImageResource(R.drawable.questionmark);
+            viewGloves.setImageResource(R.drawable.icon_questionmark);
         }
 
         // Prepara la arma principal
@@ -244,10 +258,10 @@ public class ViewPersonajeFragment extends Fragment {
                 }
             } else {
                 personajeP.setArma(null);
-                viewPrimaryWeapon.setImageResource(R.drawable.questionmark);
+                viewPrimaryWeapon.setImageResource(R.drawable.icon_questionmark);
             }
         } else {
-            viewPrimaryWeapon.setImageResource(R.drawable.questionmark);
+            viewPrimaryWeapon.setImageResource(R.drawable.icon_questionmark);
         }
 
         // Prepara la arma secundaria
@@ -266,10 +280,10 @@ public class ViewPersonajeFragment extends Fragment {
                 }
             } else {
                 personajeP.setArma_sec(null);
-                viewSecondaryWeapon.setImageResource(R.drawable.questionmark);
+                viewSecondaryWeapon.setImageResource(R.drawable.icon_questionmark);
             }
         } else {
-            viewSecondaryWeapon.setImageResource(R.drawable.questionmark);
+            viewSecondaryWeapon.setImageResource(R.drawable.icon_questionmark);
         }
 
         helper.updateCharacter(personajeP);
@@ -305,11 +319,11 @@ public class ViewPersonajeFragment extends Fragment {
                         prepareOnClick(accesoriesImg.get(i), accjson.getNombre(), accjson.getDescripcion());
                     }
                 } else {
-                    accesoriesImg.get(i).setImageResource(R.drawable.questionmark);
+                    accesoriesImg.get(i).setImageResource(R.drawable.icon_questionmark);
                 }
                 left--;
             } else {
-                accesoriesImg.get(i).setImageResource(R.drawable.questionmark);
+                accesoriesImg.get(i).setImageResource(R.drawable.icon_questionmark);
             }
         }
 
@@ -354,11 +368,11 @@ public class ViewPersonajeFragment extends Fragment {
                         prepareOnClick(inventoryImg.get(i), objjson.getNombre(), objjson.getDescripcion());
                     }
                 } else {
-                    inventoryImg.get(i).setImageResource(R.drawable.questionmark);
+                    inventoryImg.get(i).setImageResource(R.drawable.icon_questionmark);
                 }
                 left--;
             } else {
-                inventoryImg.get(i).setImageResource(R.drawable.questionmark);
+                inventoryImg.get(i).setImageResource(R.drawable.icon_questionmark);
             }
         }
 
@@ -402,11 +416,11 @@ public class ViewPersonajeFragment extends Fragment {
                         prepareOnClick(skillsImg.get(i), skilljson.getNombre(), "Coste: "+skilljson.getCoste()+", Daño: "+skilljson.getDanio());
                     }
                 } else {
-                    skillsImg.get(i).setImageResource(R.drawable.questionmark);
+                    skillsImg.get(i).setImageResource(R.drawable.icon_questionmark);
                 }
                 left--;
             } else {
-                skillsImg.get(i).setImageResource(R.drawable.questionmark);
+                skillsImg.get(i).setImageResource(R.drawable.icon_questionmark);
             }
         }
 
@@ -437,6 +451,46 @@ public class ViewPersonajeFragment extends Fragment {
                 }).show();
     }
 
+    // Editar Personaje
+    public void editPersonaje(int id) {
+        CreatePersonajeFrangment fragment = new CreatePersonajeFrangment();
+        Bundle bundle = new Bundle();
+        bundle.putInt("personaje", id);
+        fragment.setArguments(bundle);
+
+        getFragmentManager()
+                .beginTransaction()
+                .replace(R.id.activity_content, fragment)
+                .addToBackStack(null)
+                .commit();
+    }
+
+    // Eliminar Personaje
+    private void deletePersonaje(int id) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle("Eliminar personaje");
+        builder.setMessage("¿Está seguro de que desea eliminar este personaje?")
+                .setPositiveButton("Sí", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        helper.deleteSkill(id);
+                        Toast.makeText(getContext(), "Se eliminó el personaje",Toast.LENGTH_SHORT).show();
+                        PersonajeListFragment fragment = new PersonajeListFragment();
+                        getFragmentManager()
+                                .beginTransaction()
+                                .replace(R.id.activity_content, fragment)
+                                .addToBackStack(null)
+                                .commit();
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(getContext(), "Se canceló el borrado",Toast.LENGTH_SHORT).show();
+                        dialog.dismiss();
+                    }
+                }).show();
+    }
 
 
 

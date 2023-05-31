@@ -2,7 +2,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context="personajeList.CreatePersonajeFrangment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -27,8 +28,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:layout_marginLeft="10dp"
-                android:layout_gravity="center_vertical">
+                android:layout_marginLeft="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
 
                     <TextView
                         android:id="@+id/NombreText"
@@ -37,16 +42,37 @@
                         android:text="Nombre"
                         android:textAppearance="?android:attr/textAppearanceLarge"/>
 
+                    <EditText
+                        android:id="@+id/NombreEdit"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:maxLength="20"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp">
+
                     <TextView
-                        android:id="@+id/RazaTV"
+                        android:id="@+id/RazaText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Raza"
+                        android:textAppearance="?android:attr/textAppearanceLarge"/>
+
+                    <EditText
+                        android:id="@+id/RazaEdit"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
                         android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:layout_marginTop="22dp"/>
+                        android:maxLength="20"/>
+                </LinearLayout>
             </LinearLayout>
-
-
         </LinearLayout>
 
         <LinearLayout
@@ -65,12 +91,12 @@
                     android:id="@+id/NivelText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Lv. "
+                    android:text="Lv."
                     android:textAppearance="?android:attr/textAppearanceLarge" />
 
-                <TextView
-                    android:id="@+id/NivelTV"
-                    android:layout_width="wrap_content"
+                <EditText
+                    android:id="@+id/NivelEdit"
+                    android:layout_width="65dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:inputType="number"
@@ -86,8 +112,16 @@
                     android:id="@+id/ClaseText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Clase "
+                    android:text="Clase"
                     android:textAppearance="?android:attr/textAppearanceLarge" />
+
+                <EditText
+                    android:id="@+id/ClaseEdit"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:maxLength="20"/>
             </LinearLayout>
         </LinearLayout>
         <View
@@ -101,42 +135,41 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:gravity="center"
-            >
+            android:gravity="center">
 
 
-            <TextView
-                android:id="@+id/VidaText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Vida: "
-                android:textAppearance="?android:attr/textAppearanceLarge" />
+                <TextView
+                    android:id="@+id/VidaText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Vida"
+                    android:textAppearance="?android:attr/textAppearanceLarge" />
 
-            <TextView
-                android:id="@+id/VidaTV"
-                android:layout_width="70dp"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:maxLength="4"
-                android:inputType="number"
-                android:layout_marginStart="5dp"/>
+                <EditText
+                    android:id="@+id/VidaEdit"
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:maxLength="4"
+                    android:inputType="number"
+                    android:layout_marginStart="5dp"/>
 
-            <TextView
-                android:id="@+id/ManaText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Mana: "
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:layout_marginLeft="20dp"/>
+                <TextView
+                    android:id="@+id/ManaText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Mana"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:layout_marginLeft="20dp"/>
 
-            <TextView
-                android:id="@+id/ManaTV"
-                android:layout_width="70dp"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:maxLength="4"
-                android:inputType="number"
-                android:layout_marginStart="5dp"/>
+                <EditText
+                    android:id="@+id/ManaEdit"
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:maxLength="4"
+                    android:inputType="number"
+                    android:layout_marginStart="5dp"/>
 
         </LinearLayout>
         <View
@@ -149,7 +182,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            >
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -157,6 +191,7 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/FuerzaText"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -165,6 +200,7 @@
                     android:textAppearance="?android:attr/textAppearanceLarge"/>
 
                 <TextView
+                    android:id="@+id/DestrezaText"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -173,6 +209,7 @@
                     android:textAppearance="?android:attr/textAppearanceLarge"/>
 
                 <TextView
+                    android:id="@+id/ConstText"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -181,6 +218,7 @@
                     android:textAppearance="?android:attr/textAppearanceLarge"/>
 
                 <TextView
+                    android:id="@+id/IntelText"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -194,41 +232,49 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/FuerzaTV"
+                <EditText
+                    android:id="@+id/FuerzaEdit"
                     android:layout_marginBottom="10dp"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:textAppearance="?android:attr/textAppearanceLarge" />
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:maxLength="3"
+                    android:inputType="number"/>
 
-                <TextView
-                    android:id="@+id/DestrzaTV"
+                <EditText
+                    android:id="@+id/DestrzaEdit"
                     android:layout_marginBottom="10dp"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:textAppearance="?android:attr/textAppearanceLarge"/>
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:maxLength="3"
+                    android:inputType="number"/>
 
-                <TextView
-                    android:id="@+id/ConstTV"
+                <EditText
+                    android:id="@+id/ConstEdit"
                     android:layout_marginBottom="10dp"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:textAppearance="?android:attr/textAppearanceLarge"/>
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:maxLength="3"
+                    android:inputType="number"/>
 
-                <TextView
-                    android:id="@+id/IntelTV"
+                <EditText
+                    android:id="@+id/IntelEdit"
                     android:layout_marginBottom="10dp"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:textAppearance="?android:attr/textAppearanceLarge"/>
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:maxLength="3"
+                    android:inputType="number"/>
             </LinearLayout>
 
             <LinearLayout
@@ -237,6 +283,7 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/SabiduriaText"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -245,6 +292,7 @@
                     android:textAppearance="?android:attr/textAppearanceLarge"/>
 
                 <TextView
+                    android:id="@+id/CarismaText"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -253,11 +301,12 @@
                     android:textAppearance="?android:attr/textAppearanceLarge"/>
 
                 <TextView
+                    android:id="@+id/VelocidadText"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:gravity="center"
                     android:text="Velocidad"
+                    android:gravity="center"
                     android:textAppearance="?android:attr/textAppearanceLarge"/>
             </LinearLayout>
 
@@ -266,35 +315,41 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/SabiduriaTV"
+                <EditText
+                    android:id="@+id/SabiduriaEdit"
                     android:layout_marginBottom="10dp"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:textAppearance="?android:attr/textAppearanceLarge"/>
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:maxLength="3"
+                    android:inputType="number"/>
 
-                <TextView
-                    android:id="@+id/CarismaTV"
+                <EditText
+                    android:id="@+id/CarisEdit"
                     android:layout_marginBottom="10dp"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:textAppearance="?android:attr/textAppearanceLarge"/>
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:maxLength="3"
+                    android:inputType="number"/>
 
-                <TextView
-                    android:id="@+id/VelocidadTV"
+                <EditText
+                    android:id="@+id/VelocidadEdit"
                     android:layout_marginBottom="10dp"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:textAppearance="?android:attr/textAppearanceLarge"/>
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:maxLength="3"
+                    android:inputType="number"/>
             </LinearLayout>
-
         </LinearLayout>
+
         <View
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
@@ -321,28 +376,28 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:id="@+id/view_Helmet"
+                    android:id="@+id/Equipo1"
                     android:layout_width="64dp"
                     android:layout_height="64dp"
                     android:layout_margin="8dp"
-                        android:src="@drawable/icon_questionmark" />
+                    android:src="@drawable/icon_questionmark" />
 
                 <ImageView
-                    android:id="@+id/view_Armor"
+                    android:id="@+id/Equipo2"
                     android:layout_width="64dp"
                     android:layout_height="64dp"
                     android:src="@drawable/icon_questionmark"
                     android:layout_margin="8dp" />
 
                 <ImageView
-                    android:id="@+id/view_Pants"
+                    android:id="@+id/Equipo3"
                     android:layout_width="64dp"
                     android:layout_height="64dp"
                     android:src="@drawable/icon_questionmark"
                     android:layout_margin="8dp" />
 
                 <ImageView
-                    android:id="@+id/view_Foots"
+                    android:id="@+id/Equipo4"
                     android:layout_width="64dp"
                     android:layout_height="64dp"
                     android:src="@drawable/icon_questionmark"
@@ -356,27 +411,25 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:id="@+id/view_PrimaryWeapon"
+                    android:id="@+id/Equipo5"
                     android:layout_width="64dp"
                     android:layout_height="64dp"
                     android:src="@drawable/icon_questionmark"
                     android:layout_margin="8dp" />
 
                 <ImageView
-                    android:id="@+id/view_Gloves"
+                    android:id="@+id/Equipo6"
                     android:layout_width="64dp"
                     android:layout_height="64dp"
                     android:src="@drawable/icon_questionmark"
                     android:layout_margin="8dp" />
 
                 <ImageView
-                    android:id="@+id/view_SecondaryWeapon"
+                    android:id="@+id/Equipo7"
                     android:layout_width="64dp"
                     android:layout_height="64dp"
                     android:src="@drawable/icon_questionmark"
                     android:layout_margin="8dp" />
-
-
             </LinearLayout>
         </LinearLayout>
 
@@ -386,6 +439,7 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="#000000"/>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -410,14 +464,14 @@
                 android:gravity="center">
 
                 <ImageView
-                    android:id="@+id/view_Accesory1"
+                    android:id="@+id/Accesorios1"
                     android:layout_width="64dp"
                     android:layout_height="64dp"
                     android:layout_marginRight="75dp"
                     android:src="@drawable/icon_questionmark" />
 
                 <ImageView
-                    android:id="@+id/view_Accesory2"
+                    android:id="@+id/Accesorios2"
                     android:layout_width="64dp"
                     android:layout_height="64dp"
                     android:layout_margin="8dp"
@@ -449,52 +503,52 @@
                     android:textAppearance="?android:attr/textAppearanceLarge" />
             </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="horizontal" >
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal" >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal">
 
-            <ImageView
-                android:id="@+id/view_Inventory1"
-                android:layout_width="64dp"
-                android:layout_height="64dp"
-                android:layout_margin="8dp"
-                android:src="@drawable/icon_questionmark" />
-            <ImageView
-                android:id="@+id/view_Inventory2"
-                android:layout_width="64dp"
-                android:layout_height="64dp"
-                android:layout_margin="8dp"
-                android:src="@drawable/icon_questionmark" />
+                    <ImageView
+                        android:id="@+id/inventario1"
+                        android:layout_width="64dp"
+                        android:layout_height="64dp"
+                        android:layout_margin="8dp"
+                        android:src="@drawable/icon_questionmark" />
+                    <ImageView
+                        android:id="@+id/inventario2"
+                        android:layout_width="64dp"
+                        android:layout_height="64dp"
+                        android:layout_margin="8dp"
+                        android:src="@drawable/icon_questionmark" />
 
-            <ImageView
-                android:id="@+id/view_Inventory3"
-                android:layout_width="64dp"
-                android:layout_height="64dp"
-                android:src="@drawable/icon_questionmark"
-                android:layout_margin="8dp" />
+                    <ImageView
+                        android:id="@+id/inventario3"
+                        android:layout_width="64dp"
+                        android:layout_height="64dp"
+                        android:src="@drawable/icon_questionmark"
+                        android:layout_margin="8dp" />
 
-            <ImageView
-                android:id="@+id/view_Inventory4"
-                android:layout_width="64dp"
-                android:layout_height="64dp"
-                android:src="@drawable/icon_questionmark"
-                android:layout_margin="8dp" />
+                    <ImageView
+                        android:id="@+id/inventario4"
+                        android:layout_width="64dp"
+                        android:layout_height="64dp"
+                        android:src="@drawable/icon_questionmark"
+                        android:layout_margin="8dp" />
 
-            <ImageView
-                android:id="@+id/view_Inventory5"
-                android:layout_width="64dp"
-                android:layout_height="64dp"
-                android:src="@drawable/icon_questionmark"
-                android:layout_margin="8dp" />
-        </LinearLayout>
-    </LinearLayout>
+                    <ImageView
+                        android:id="@+id/inventario5"
+                        android:layout_width="64dp"
+                        android:layout_height="64dp"
+                        android:src="@drawable/icon_questionmark"
+                        android:layout_margin="8dp" />
+                </LinearLayout>
+            </LinearLayout>
         </LinearLayout>
         <View
             android:layout_marginTop="10dp"
@@ -511,11 +565,11 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="habilidades"
-                android:textAppearance="?android:attr/textAppearanceLarge" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="habilidades"
+                    android:textAppearance="?android:attr/textAppearanceLarge" />
             </LinearLayout>
 
             <LinearLayout
@@ -525,35 +579,35 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:id="@+id/view_Skill1"
+                    android:id="@+id/habilidad1"
                     android:layout_width="64dp"
                     android:layout_height="64dp"
                     android:layout_margin="8dp"
                     android:src="@drawable/icon_questionmark" />
 
                 <ImageView
-                    android:id="@+id/view_Skill2"
+                    android:id="@+id/habilidad2"
                     android:layout_width="64dp"
                     android:layout_height="64dp"
                     android:src="@drawable/icon_questionmark"
                     android:layout_margin="8dp" />
 
                 <ImageView
-                    android:id="@+id/view_Skill3"
+                    android:id="@+id/habilidad3"
                     android:layout_width="64dp"
                     android:layout_height="64dp"
                     android:src="@drawable/icon_questionmark"
                     android:layout_margin="8dp" />
 
                 <ImageView
-                    android:id="@+id/view_Skill4"
+                    android:id="@+id/habilidad4"
                     android:layout_width="64dp"
                     android:layout_height="64dp"
                     android:src="@drawable/icon_questionmark"
                     android:layout_margin="8dp" />
 
                 <ImageView
-                    android:id="@+id/view_Skill5"
+                    android:id="@+id/habilidad5"
                     android:layout_width="64dp"
                     android:layout_height="64dp"
                     android:src="@drawable/icon_questionmark"
@@ -568,26 +622,24 @@
             android:background="#000000"/>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center_horizontal"
-            android:padding="30dp"
-            >
-            <ImageButton
-                android:id="@+id/edit_personaje"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal">
+
+            <Button
+                android:id="@+id/botonguardar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="2dp"
-                android:background="@drawable/icon_editpencil"/>
-            <ImageButton
-                android:id="@+id/delete_pesonaje"
+                android:layout_marginRight="30dp"
+                android:onClick="Save"
+                android:text="Guardar" />
+
+            <Button
+                android:id="@+id/botoncancelar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="2dp"
-                android:background="@drawable/icon_delete"
-                android:layout_marginStart="40dp"/>
+                android:onClick="Cancel"
+                android:text="Cancelar" />
         </LinearLayout>
-
-
     </LinearLayout>
 
 

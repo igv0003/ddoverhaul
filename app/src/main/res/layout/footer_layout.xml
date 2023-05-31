@@ -11,7 +11,7 @@
         android:layout_height="70dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:background="@drawable/fondo"
+        android:background="@drawable/background_footer"
         app:menu="@menu/option_footer"
         app:itemIconSize="45dp"
         app:itemIconTint="@color/white"
