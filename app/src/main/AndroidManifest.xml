@@ -26,6 +26,7 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+
         <activity
             android:name=".Login"
             android:exported="true">
@@ -39,6 +40,7 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+
         <activity
             android:name=".navigation.Normal.BaseActivity"
             android:exported="true" />
@@ -55,8 +57,7 @@
         <activity android:name=".multiplayer.MultiSelector" />
         <activity android:name=".multiplayer.Client" />
         <activity android:name=".multiplayer.Master" />
-        <activity android:name=".BaseActivity_Multi"/>
-
+        <activity android:name=".BaseActivity_Multi" />
 
         <service
             android:name=".multiplayer.MyFirebaseMessagingService"

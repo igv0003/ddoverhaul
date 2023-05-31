@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 
@@ -32,6 +33,9 @@ import com.example.ddoverhaul.personajeList.PersonajeListFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class BaseActivity extends AppCompatActivity {
+
+
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,27 +48,33 @@ public class BaseActivity extends AppCompatActivity {
         getLayoutInflater().inflate(layoutResID, activityContainer, true);
         super.setContentView(fullLayout);
 
+        ImageView cartel = findViewById(R.id.cartelBienvenido);
         BottomNavigationView bottomNavigationView = findViewById(R.id.footerNavegation);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.personajes:
+                        cartel.setVisibility(View.GONE);
                         FragmentTransaction transaction1 = getSupportFragmentManager().beginTransaction();
                         transaction1.replace(R.id.activity_content, new PersonajeListFragment());
                         transaction1.commit();
                         return true;
                     case R.id.equipamieto:
+                        cartel.setVisibility(View.GONE);
                         showPopupMenu2(bottomNavigationView);
                         return true;
                     case R.id.crear:
+                        cartel.setVisibility(View.GONE);
                         showPopupMenu(bottomNavigationView );
                         return true;
                     case R.id.multijugador:
-                         gomulti();
+                        cartel.setVisibility(View.GONE);
+                        gomulti();
                         //startActivity(new Intent(BaseActivity.this, MultiSelector.class));
                         return true;
                     case R.id.perfil:
+                        cartel.setVisibility(View.GONE);
                         goprofile();
                         return true;
                     default:
@@ -85,9 +95,11 @@ public class BaseActivity extends AppCompatActivity {
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.lista_hab:
+
                         gohablist();
                         return true;
                     case R.id.lista_obj:
+
                         goobjlist();
                         return true;
                     default:
@@ -109,6 +121,7 @@ public class BaseActivity extends AppCompatActivity {
 
 
     private void showPopupMenu (View view){
+
         PopupMenu popupMenu = new PopupMenu(this, view);
         popupMenu.inflate(R.menu.floating_menu);
 
@@ -117,12 +130,15 @@ public class BaseActivity extends AppCompatActivity {
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.crearPERS:
+
                         gocreateperso();
                         return true ;
                     case R.id.crearOBJ:
+
                         gocreateobjec();
                         return true ;
                     case R.id.crearHAB:
+
                         gocreateskill();
                         return true ;
                     default:

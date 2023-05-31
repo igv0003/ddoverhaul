@@ -16,7 +16,16 @@
         android:id="@+id/activity_content"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"/>
+        android:layout_weight="1">
+
+        <ImageView
+            android:id="@+id/cartelBienvenido"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/image_welcome">
+
+        </ImageView>
+    </FrameLayout>
 
     <com.google.android.material.divider.MaterialDivider
         android:id="@+id/divider"
