@@ -4,7 +4,7 @@
     "operacion": "+",
     "valor": 0,
     "descripcion": "Te cura",
-    "icono": "pocion1",
+    "icono": "icon_pocion1",
     "id": 0,
     "nombre": "Poción de Salud",
     "tipo": "Consumible"
@@ -14,7 +14,7 @@
     "operacion": "+",
     "valor": 0,
     "descripcion": "Revive a un compañero",
-    "icono": "feather",
+    "icono": "icon_feather",
     "id": 1,
     "nombre": "Pluma de Fénix ",
     "tipo": "Consumible"

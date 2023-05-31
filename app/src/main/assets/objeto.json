@@ -1,21 +1,21 @@
 [
   {
     "descripcion": "Un libro que posee gran conocimiento",
-    "icono": "book",
+    "icono": "icon_book",
     "id": 0,
     "nombre": "Libro antiguo",
     "tipo": "Otro"
   },
   {
     "descripcion": "Alberga un gran tesoro",
-    "icono": "chest",
+    "icono": "icon_chest",
     "id": 2,
     "nombre": "Cofre de Davey Jones",
     "tipo": "Otro"
   },
   {
     "descripcion": "Una contraseña de la mazmorra",
-    "icono": "key",
+    "icono": "icon_key",
     "id": 3,
     "nombre": "Contraseña",
     "tipo": "Otro"

@@ -4,7 +4,7 @@
     "danio": 200,
     "posicion": 5,
     "descripcion": "Forjada por antiguos enanos",
-    "icono": "weapon1",
+    "icono": "icon_weapon1",
     "id": 0,
     "nombre": "Espada de la Guerra",
     "tipo": "Equipo"
@@ -12,9 +12,9 @@
   {
     "armadura": 25,
     "danio": 0,
-    "posicion": 3,
+    "posicion": 2,
     "descripcion": "Pantalones de buena calidad",
-    "icono": "pants1",
+    "icono": "icon_pants1",
     "id": 1,
     "nombre": "Pantalones Recios",
     "tipo": "Equipo"
@@ -22,9 +22,9 @@
   {
     "armadura": 30,
     "danio": 0,
-    "posicion": 4,
+    "posicion": 3,
     "descripcion": "Botas que cuentan con una protección",
-    "icono": "foot2",
+    "icono": "icon_foot2",
     "id": 2,
     "nombre": "Botas Primigenias",
     "tipo": "Equipo"
