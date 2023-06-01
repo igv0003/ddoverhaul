@@ -16,7 +16,9 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.ddoverhaul.Consumibles;
 import com.example.ddoverhaul.Equipo;
+import com.example.ddoverhaul.Habilidades;
 import com.example.ddoverhaul.IconsAdapter;
 import com.example.ddoverhaul.Objeto;
 import com.example.ddoverhaul.Personaje;
@@ -33,7 +35,9 @@ public class CreatePersonajeFrangment extends Fragment {
     private Personaje personaje;
     private JSONHelper helper;
     private CreateAdapter objAdapter;
+    private CreateAdapter skillAdapter;
     private AlertDialog alert;
+    private View view;
     // Variables EditText
     private EditText editName;
     private EditText editNivel;
@@ -52,13 +56,19 @@ public class CreatePersonajeFrangment extends Fragment {
 
     private ImageView viewHelmet, viewArmor, viewPants,viewFoots,viewPrimaryWeapon,viewGloves,viewSecondaryWeapon;
     Equipo[] finalHelmets, finalArmors, finalPants, finalFoots, finalGloves, finalWeps1, finalWeps2;
-    private ArrayList<ImageView> accesoriesImg;
-    private ArrayList<ImageView> inventoryImg;
-    private ArrayList<ImageView> skillsImg;
+    private ImageView[] accesoriesImg;
+    private Objeto finalAccesories[];
+    private ArrayList<Objeto> currentAccesories;
+    private ImageView[] inventoryImg;
+    private Objeto finalConsumibles[];
+    private ArrayList<Consumibles> currentCons;
+    private ImageView[] skillsImg;
+    private Habilidades finalSkills[];
+    private ArrayList<Habilidades> currentSkills;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.activity_create_personaje, container, false);
+        view = inflater.inflate(R.layout.activity_create_personaje, container, false);
 
         // Inicializando variables
         editName = view.findViewById(R.id.NombreEdit);
@@ -124,11 +134,13 @@ public class CreatePersonajeFrangment extends Fragment {
         }
 
         prepareEquipment(view);
+        prepareAccesories(view);
+        prepareInventory(view);
+        prepareSkills(view);
 
         return view;
     }
 
-    // TODO añadir onclick para eliminar objeto
     // Método que prepara y muestra el equipamiento del personaje
     public void prepareEquipment(View v) {
         viewHelmet = v.findViewById(R.id.Equipo1);
@@ -138,161 +150,255 @@ public class CreatePersonajeFrangment extends Fragment {
         viewGloves = v.findViewById(R.id.Equipo6);
         viewPrimaryWeapon = v.findViewById(R.id.Equipo5);
         viewSecondaryWeapon = v.findViewById(R.id.Equipo7);
+        Equipo[] equips = helper.getEquips();
 
         // Prepara la cabeza
+        Equipo[] helmets = new Equipo[equips.length];
+        int counter = 0;
+        for (Equipo e: equips) {
+            if (e.getPosicion() == 0) {
+                helmets[counter] = e;
+                counter++;
+            }
+        }
+        finalHelmets = Arrays.copyOf(helmets, counter);
+
         if (personaje.getCabeza() != null) {
-            int idIcon = getResources().getIdentifier(personaje.getCabeza().getIcono(), "drawable",getActivity().getPackageName());
+            Equipo helmet = helper.getEquip(personaje.getCabeza().getId());
+            int idIcon = getResources().getIdentifier(helmet.getIcono(), "drawable",getActivity().getPackageName());
             viewHelmet.setImageResource(idIcon);
-            removeEquipment(viewHelmet,personaje.getCabeza().getNombre(),"Daño: "+personaje.getCabeza().getDanio()+", Armadura: "+personaje.getCabeza().getArmadura(), personaje.getCabeza().getId()+"", personaje.getCabeza().getTipo());
+            removeEquipment(viewHelmet,helmet.getNombre(),"Daño: "+helmet.getDanio()+", Armadura: "+helmet.getArmadura(), helmet.getTipo(), helmet.getId()+"");
         } else {
             // Si no tiene , prepara un array de equipo solamente de eso
             viewHelmet.setImageResource(R.drawable.icon_questionmark);
-            Equipo[] equips = helper.getEquips();
-            Equipo[] helmets = new Equipo[equips.length];
-
-            int counter = 0;
-            for (Equipo e: equips) {
-                if (e.getPosicion() == 0) {
-                    helmets[counter] = e;
-                    counter++;
-                }
-            }
-            finalHelmets = Arrays.copyOf(helmets, counter);
             if (finalHelmets.length > 0) prepareShowOnClick(viewHelmet, finalHelmets);
         }
 
         // Prepara la armadura
+        Equipo[] armors = new Equipo[equips.length];
+
+        counter = 0;
+        for (Equipo e: equips) {
+            if (e.getPosicion() == 1) {
+                armors[counter] = e;
+                counter++;
+            }
+        }
+        finalArmors = Arrays.copyOf(armors, counter);
         if (personaje.getPerchera() != null) {
-            int idIcon = getResources().getIdentifier(personaje.getPerchera().getIcono(), "drawable",getActivity().getPackageName());
+            Equipo armor = helper.getEquip(personaje.getPerchera().getId());
+            int idIcon = getResources().getIdentifier(armor.getIcono(), "drawable",getActivity().getPackageName());
             viewArmor.setImageResource(idIcon);
-            //removeEquipment(viewHelmet,helmet.getNombre(),"Daño: "+helmet.getDanio()+", Armadura: "+helmet.getArmadura());
+            removeEquipment(viewArmor,armor.getNombre(),"Daño: "+armor.getDanio()+", Armadura: "+armor.getArmadura(), armor.getTipo(), armor.getId()+"");
         } else {
             // Si no tiene , prepara un array de equipo solamente de eso
             viewArmor.setImageResource(R.drawable.icon_questionmark);
-            Equipo[] equips = helper.getEquips();
-            Equipo[] armors = new Equipo[equips.length];
-
-            int counter = 0;
-            for (Equipo e: equips) {
-                if (e.getPosicion() == 1) {
-                    armors[counter] = e;
-                    counter++;
-                }
-            }
-            finalArmors = Arrays.copyOf(armors, counter);
             if (finalArmors.length > 0) prepareShowOnClick(viewArmor, finalArmors);
         }
 
         // Prepara los pantalones
+        Equipo[] pants = new Equipo[equips.length];
+
+        counter = 0;
+        for (Equipo e: equips) {
+            if (e.getPosicion() == 2) {
+                pants[counter] = e;
+                counter++;
+            }
+        }
+        finalPants = Arrays.copyOf(pants, counter);
         if (personaje.getPantalones() != null) {
-            int idIcon = getResources().getIdentifier(personaje.getPantalones().getIcono(), "drawable",getActivity().getPackageName());
+            Equipo pant = helper.getEquip(personaje.getPantalones().getId());
+            int idIcon = getResources().getIdentifier(pant.getIcono(), "drawable",getActivity().getPackageName());
             viewPants.setImageResource(idIcon);
-            //prepareOnClick(viewHelmet,helmet.getNombre(),"Daño: "+helmet.getDanio()+", Armadura: "+helmet.getArmadura());
+            removeEquipment(viewPants,pant.getNombre(),"Daño: "+pant.getDanio()+", Armadura: "+pant.getArmadura(), pant.getTipo(), pant.getId()+"");
         } else {
             // Si no tiene , prepara un array de equipo solamente de eso
             viewPants.setImageResource(R.drawable.icon_questionmark);
-            Equipo[] equips = helper.getEquips();
-            Equipo[] pants = new Equipo[equips.length];
-
-            int counter = 0;
-            for (Equipo e: equips) {
-                if (e.getPosicion() == 2) {
-                    pants[counter] = e;
-                    counter++;
-                }
-            }
-            finalPants = Arrays.copyOf(pants, counter);
             if (finalPants.length > 0) prepareShowOnClick(viewPants, finalPants);
         }
 
         // Prepara los pies
+        Equipo[] foots = new Equipo[equips.length];
+
+        counter = 0;
+        for (Equipo e: equips) {
+            if (e.getPosicion() == 3) {
+                foots[counter] = e;
+                counter++;
+            }
+        }
+        finalFoots = Arrays.copyOf(foots, counter);
+
         if (personaje.getPies() != null) {
-            int idIcon = getResources().getIdentifier(personaje.getPies().getIcono(), "drawable",getActivity().getPackageName());
+            Equipo foot = helper.getEquip(personaje.getPies().getId());
+            int idIcon = getResources().getIdentifier(foot.getIcono(), "drawable",getActivity().getPackageName());
             viewFoots.setImageResource(idIcon);
-            //prepareOnClick(viewHelmet,helmet.getNombre(),"Daño: "+helmet.getDanio()+", Armadura: "+helmet.getArmadura());
+            removeEquipment(viewFoots,foot.getNombre(),"Daño: "+foot.getDanio()+", Armadura: "+foot.getArmadura(), foot.getTipo(), foot.getId()+"");
         } else {
             // Si no tiene , prepara un array de equipo solamente de eso
             viewFoots.setImageResource(R.drawable.icon_questionmark);
-            Equipo[] equips = helper.getEquips();
-            Equipo[] foots = new Equipo[equips.length];
-
-            int counter = 0;
-            for (Equipo e: equips) {
-                if (e.getPosicion() == 3) {
-                    foots[counter] = e;
-                    counter++;
-                }
-            }
-            finalFoots = Arrays.copyOf(foots, counter);
             if (finalFoots.length > 0) prepareShowOnClick(viewFoots, finalFoots);
         }
 
         // Prepara los guantes
+        Equipo[] gloves = new Equipo[equips.length];
+
+        counter = 0;
+        for (Equipo e: equips) {
+            if (e.getPosicion() == 4) {
+                gloves[counter] = e;
+                counter++;
+            }
+        }
+        finalGloves = Arrays.copyOf(gloves, counter);
+
         if (personaje.getGuantes() != null) {
-            int idIcon = getResources().getIdentifier(personaje.getGuantes().getIcono(), "drawable",getActivity().getPackageName());
+            Equipo glove = helper.getEquip(personaje.getGuantes().getId());
+            int idIcon = getResources().getIdentifier(glove.getIcono(), "drawable",getActivity().getPackageName());
             viewGloves.setImageResource(idIcon);
-            //prepareOnClick(viewHelmet,helmet.getNombre(),"Daño: "+helmet.getDanio()+", Armadura: "+helmet.getArmadura());
+            removeEquipment(viewGloves,glove.getNombre(),"Daño: "+glove.getDanio()+", Armadura: "+glove.getArmadura(), glove.getTipo(), glove.getId()+"");
         } else {
             // Si no tiene , prepara un array de equipo solamente de eso
             viewGloves.setImageResource(R.drawable.icon_questionmark);
-            Equipo[] equips = helper.getEquips();
-            Equipo[] gloves = new Equipo[equips.length];
-
-            int counter = 0;
-            for (Equipo e: equips) {
-                if (e.getPosicion() == 4) {
-                    gloves[counter] = e;
-                    counter++;
-                }
-            }
-            finalGloves = Arrays.copyOf(gloves, counter);
             if (finalGloves.length > 0) prepareShowOnClick(viewGloves, finalGloves);
         }
 
         // Prepara la arma principal
+        Equipo[] weapons1 = new Equipo[equips.length];
+
+        counter = 0;
+        for (Equipo e: equips) {
+            if (e.getPosicion() == 5) {
+                weapons1[counter] = e;
+                counter++;
+            }
+        }
+        finalWeps1 = Arrays.copyOf(weapons1, counter);
+
         if (personaje.getArma() != null) {
-            int idIcon = getResources().getIdentifier(personaje.getArma().getIcono(), "drawable",getActivity().getPackageName());
+            Equipo weapon = helper.getEquip(personaje.getArma().getId());
+            int idIcon = getResources().getIdentifier(weapon.getIcono(), "drawable",getActivity().getPackageName());
             viewPrimaryWeapon.setImageResource(idIcon);
-            //prepareOnClick(viewHelmet,helmet.getNombre(),"Daño: "+helmet.getDanio()+", Armadura: "+helmet.getArmadura());
+            removeEquipment(viewPrimaryWeapon,weapon.getNombre(),"Daño: "+weapon.getDanio()+", Armadura: "+weapon.getArmadura(), weapon.getTipo(), weapon.getId()+"");
         } else {
             // Si no tiene , prepara un array de equipo solamente de eso
             viewPrimaryWeapon.setImageResource(R.drawable.icon_questionmark);
-            Equipo[] equips = helper.getEquips();
-            Equipo[] weapons1 = new Equipo[equips.length];
-
-            int counter = 0;
-            for (Equipo e: equips) {
-                if (e.getPosicion() == 5) {
-                    weapons1[counter] = e;
-                    counter++;
-                }
-            }
-            finalWeps1 = Arrays.copyOf(weapons1, counter);
             if (finalWeps1.length > 0) prepareShowOnClick(viewPrimaryWeapon, finalWeps1);
         }
 
         // Prepara la arma secundaria
+        Equipo[] weapons2 = new Equipo[equips.length];
+
+        counter = 0;
+        for (Equipo e: equips) {
+            if (e.getPosicion() == 6) {
+                weapons2[counter] = e;
+                counter++;
+            }
+        }
+        finalWeps2 = Arrays.copyOf(weapons2, counter);
+
         if (personaje.getArma_sec() != null) {
-            int idIcon = getResources().getIdentifier(personaje.getArma_sec().getIcono(), "drawable",getActivity().getPackageName());
+            Equipo weapon = helper.getEquip(personaje.getArma_sec().getId());
+            int idIcon = getResources().getIdentifier(weapon.getIcono(), "drawable",getActivity().getPackageName());
             viewSecondaryWeapon.setImageResource(idIcon);
-            //prepareOnClick(viewHelmet,helmet.getNombre(),"Daño: "+helmet.getDanio()+", Armadura: "+helmet.getArmadura());
+            removeEquipment(viewSecondaryWeapon,weapon.getNombre(),"Daño: "+weapon.getDanio()+", Armadura: "+weapon.getArmadura(), weapon.getTipo(), weapon.getId()+"");
         } else {
             // Si no tiene , prepara un array de equipo solamente de eso
             viewSecondaryWeapon.setImageResource(R.drawable.icon_questionmark);
-            Equipo[] equips = helper.getEquips();
-            Equipo[] weapons2 = new Equipo[equips.length];
-
-            int counter = 0;
-            for (Equipo e: equips) {
-                if (e.getPosicion() == 6) {
-                    weapons2[counter] = e;
-                    counter++;
-                }
-            }
-            finalWeps2 = Arrays.copyOf(weapons2, counter);
             if (finalWeps2.length > 0) prepareShowOnClick(viewSecondaryWeapon, finalWeps2);
         }
 
+    }
+
+    // Método que prepara y muestra los accesorios del personaje
+    public void prepareAccesories(View v) {
+        accesoriesImg = new ImageView[2];
+        accesoriesImg[0] = v.findViewById(R.id.Accesorios1);
+        accesoriesImg[1] = v.findViewById(R.id.Accesorios2);
+
+        finalAccesories = helper.getObjects();
+
+        if (currentAccesories == null) currentAccesories = personaje.getAccesorios();
+
+        int left = currentAccesories.size();
+        for (int i = 0; i < accesoriesImg.length; i++) {
+            if (left > 0) {
+                Objeto acc = currentAccesories.get(i);
+                int idIcon = getResources().getIdentifier(acc.getIcono(),"drawable", getContext().getPackageName());
+                accesoriesImg[i].setImageResource(idIcon);
+                removeEquipment(accesoriesImg[i],acc.getNombre(), acc.getDescripcion(), acc.getTipo(), acc.getId()+"");
+                left--;
+            } else {
+                accesoriesImg[i].setImageResource(R.drawable.icon_questionmark);
+                if (finalAccesories.length > 0) prepareShowOnClick(accesoriesImg[i], finalAccesories);
+            }
+        }
+    }
+
+    // Método que prepara y muestra el inventario del personaje
+    public void prepareInventory(View v) {
+        inventoryImg = new ImageView[5];
+        inventoryImg[0] = v.findViewById(R.id.inventario1);
+        inventoryImg[1] = v.findViewById(R.id.inventario2);
+        inventoryImg[2] = v.findViewById(R.id.inventario3);
+        inventoryImg[3] = v.findViewById(R.id.inventario4);
+        inventoryImg[4] = v.findViewById(R.id.inventario5);
+
+        finalConsumibles = helper.getAllCons();
+
+        if (currentCons == null) {
+            currentCons = new ArrayList<>();
+            ArrayList<Objeto> objs = personaje.getInventario();
+
+            for (Objeto o: objs ) {
+                if (o.getTipo().equals("Consumible")) currentCons.add((Consumibles)o);
+            }
+
+        }
+
+        int left = currentCons.size();
+        for (int i = 0; i < inventoryImg.length; i++) {
+            if (left > 0) {
+                Consumibles cons = currentCons.get(i);
+                int idIcon = getResources().getIdentifier(cons.getIcono(),"drawable", getContext().getPackageName());
+                inventoryImg[i].setImageResource(idIcon);
+                removeEquipment(inventoryImg[i],cons.getNombre(), cons.getDescripcion(), cons.getTipo(), cons.getId()+"");
+                left--;
+            } else {
+                inventoryImg[i].setImageResource(R.drawable.icon_questionmark);
+                if (finalConsumibles.length > 0) prepareShowOnClick(inventoryImg[i], finalConsumibles);
+            }
+        }
+    }
+
+    // Método que prepara y muestra las habilidades del personaje
+    public void prepareSkills(View v) {
+        skillsImg = new ImageView[5];
+        skillsImg[0] = v.findViewById(R.id.habilidad1);
+        skillsImg[1] = v.findViewById(R.id.habilidad2);
+        skillsImg[2] = v.findViewById(R.id.habilidad3);
+        skillsImg[3] = v.findViewById(R.id.habilidad4);
+        skillsImg[4] = v.findViewById(R.id.habilidad5);
+
+        finalSkills = helper.getAllSkills();
+
+        if (currentSkills == null) currentSkills = personaje.getHabilidades();
+
+        int left = currentSkills.size();
+        for (int i = 0; i < skillsImg.length; i++) {
+            if (left > 0) {
+                Habilidades skill = currentSkills.get(i);
+                int idIcon = getResources().getIdentifier(skill.getIcono(),"drawable", getContext().getPackageName());
+                skillsImg[i].setImageResource(idIcon);
+                removeSkill(skillsImg[i],skill.getNombre(), "Coste: "+skill.getDanio()+", Daño: "+skill.getCoste(), skill.getId()+"");
+                left--;
+            } else {
+                skillsImg[i].setImageResource(R.drawable.icon_questionmark);
+                if (finalSkills.length > 0) prepareSkillOnClick(skillsImg[i], finalSkills);
+            }
+        }
     }
 
     // Método que prepara el onclick listener de los imagenview
@@ -313,7 +419,7 @@ public class CreatePersonajeFrangment extends Fragment {
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                 builder.setTitle(title);
                 builder.setMessage(info)
-                        .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                        .setPositiveButton("Cerrar", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 dialog.dismiss();
@@ -365,10 +471,21 @@ public class CreatePersonajeFrangment extends Fragment {
                                                 break;
                                         }
                                         break;
+                                    case "Otro":
+                                        Object acc = helper.getObject(Integer.parseInt(id));
+
+                                        if (currentAccesories.contains(acc)) currentAccesories.remove(acc);
+                                        prepareAccesories(view);
+
+                                        break;
+                                    case "Consumible":
+                                        Consumibles cons = helper.getCons(Integer.parseInt(id));
+
+                                        if (currentCons.contains(cons)) currentCons.remove(cons);
+                                        prepareInventory(view);
                                     default:
                                         break;
                                 }
-                                alert.dismiss();
                             }
                         }).show();
             }
@@ -376,8 +493,7 @@ public class CreatePersonajeFrangment extends Fragment {
     }
 
 
-    // TODO añadir onclick para eliminar objeto
-    public void showObject(Objeto[] objs, View view) {
+    public void showObject(Objeto[] objs, View v) {
         AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
         builder.setTitle("Objeto a equipar")
                 .setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -404,35 +520,54 @@ public class CreatePersonajeFrangment extends Fragment {
                             case 0:
                                 personaje.setCabeza(e);
                                 viewHelmet.setImageResource(iconID);
+                                removeEquipment(viewHelmet,e.getNombre(),"Daño: "+e.getDanio()+", Armadura: "+e.getArmadura(), e.getTipo(), e.getId()+"");
                                 break;
                             case 1:
                                 personaje.setPerchera(e);
                                 viewArmor.setImageResource(iconID);
+                                removeEquipment(viewArmor,e.getNombre(),"Daño: "+e.getDanio()+", Armadura: "+e.getArmadura(), e.getTipo(), e.getId()+"");
                                 break;
                             case 2:
                                 personaje.setPantalones(e);
                                 viewPants.setImageResource(iconID);
+                                removeEquipment(viewPants,e.getNombre(),"Daño: "+e.getDanio()+", Armadura: "+e.getArmadura(), e.getTipo(), e.getId()+"");
                                 break;
                             case 3:
                                 personaje.setPies(e);
                                 viewFoots.setImageResource(iconID);
+                                removeEquipment(viewFoots,e.getNombre(),"Daño: "+e.getDanio()+", Armadura: "+e.getArmadura(), e.getTipo(), e.getId()+"");
                                 break;
                             case 4:
                                 personaje.setGuantes(e);
                                 viewGloves.setImageResource(iconID);
+                                removeEquipment(viewGloves,e.getNombre(),"Daño: "+e.getDanio()+", Armadura: "+e.getArmadura(), e.getTipo(), e.getId()+"");
                                 break;
                             case 5:
                                 personaje.setArma(e);
                                 viewPrimaryWeapon.setImageResource(iconID);
+                                removeEquipment(viewPrimaryWeapon,e.getNombre(),"Daño: "+e.getDanio()+", Armadura: "+e.getArmadura(), e.getTipo(), e.getId()+"");
                                 break;
                             case 6:
                                 personaje.setArma_sec(e);
                                 viewSecondaryWeapon.setImageResource(iconID);
+                                removeEquipment(viewSecondaryWeapon,e.getNombre(),"Daño: "+e.getDanio()+", Armadura: "+e.getArmadura(), e.getTipo(), e.getId()+"");
                                 break;
                             default:
                                 break;
                         }
                         break;
+                    case "Otro":
+                        Objeto acc = helper.getObject(Integer.parseInt(id));
+
+                        if (!currentAccesories.contains(acc)) currentAccesories.add(acc);
+                        prepareAccesories(view);
+
+                        break;
+                    case "Consumible":
+                        Consumibles cons = helper.getCons(Integer.parseInt(id));
+
+                        if (!currentCons.contains(cons)) currentCons.add(cons);
+                        prepareInventory(view);
                     default:
                         break;
                 }
@@ -448,10 +583,83 @@ public class CreatePersonajeFrangment extends Fragment {
 
     }
 
+    // Método que prepara el onclick listener de los imagenview
+    public void prepareSkillOnClick(ImageView img, Habilidades[] skill) {
+        img.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showSkill(skill, v);
+            }
+        });
+    }
 
+    public void showSkill(Habilidades[] skills, View v) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
+        builder.setTitle("Habilidad a equipar")
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
 
+        skillAdapter = new CreateAdapter(skills,getContext(), false);
 
+        RecyclerView recyclerView = new RecyclerView(requireContext());
+        recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
+        recyclerView.addItemDecoration(new SpacingItemDecoration(15));
+        recyclerView.setAdapter(skillAdapter);
+        skillAdapter.setOnSkillClickListener(new CreateAdapter.OnSkillClickListener() {
+            @Override
+            public void onClick(int position, String id) {
+                Habilidades skill = helper.getSkill(Integer.parseInt(id));
 
+                if (!currentSkills.contains(skill)) currentSkills.add(skill);
+                prepareSkills(view);
+                alert.dismiss();
+            }
+        });
+
+        // Configura el diálogo para mostrar el RecyclerView
+        builder.setView(recyclerView);
+
+        // Muestra el diálogo
+        alert = builder.show();
+
+    }
+
+    public void removeSkill(ImageView img, String title, String info, String id) {
+        img.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setTitle(title);
+                builder.setMessage(info)
+                        .setPositiveButton("Cerrar", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        })
+                        .setNegativeButton("Quitar", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                                Habilidades skill = helper.getSkill(Integer.parseInt(id));
+
+                                for (int i = 0; i < currentSkills.size(); i++) {
+                                    if (skill.getId() == currentSkills.get(i).getId()) {
+                                        currentSkills.remove(i);
+                                        prepareSkills(view);
+                                        i = currentSkills.size();
+                                    }
+                                }
+
+                            }
+                        }).show();
+            }
+        });
+    }
 
 
     // Método que recoge los valores introducidos y guarda la habilidad en el JSON
@@ -525,6 +733,15 @@ public class CreatePersonajeFrangment extends Fragment {
         personaje.setSabiduria(Integer.parseInt(sabiduria));
         personaje.setCarisma(Integer.parseInt(carisma));
         personaje.setVelocidad(Integer.parseInt(velocidad));
+        personaje.addNewAccesories(currentAccesories);
+        personaje.addNewHabilidades(currentSkills);
+
+        ArrayList<Objeto> finalCons = new ArrayList<>();
+        for (Consumibles cons: currentCons) {
+            finalCons.add(cons);
+        }
+
+        personaje.addNewInventario(finalCons);
 
         if (personaje.getId() != -1) {
             helper.updateCharacter(personaje);

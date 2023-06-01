@@ -1,5 +1,7 @@
 package com.example.ddoverhaul;
 
+import java.util.Objects;
+
 public class Consumibles extends Objeto {
     private int valor;
     private int cantidad;
@@ -47,6 +49,13 @@ public class Consumibles extends Objeto {
         this.operacion = operacion;
     }
 
-
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        Consumibles that = (Consumibles) o;
+        return valor == that.valor && cantidad == that.cantidad && operacion == that.operacion;
+    }
 
 }

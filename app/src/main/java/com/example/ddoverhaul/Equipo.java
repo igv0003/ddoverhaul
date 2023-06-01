@@ -1,5 +1,7 @@
 package com.example.ddoverhaul;
 
+import java.util.Objects;
+
 public class Equipo extends Objeto{
     private int danio;
     private int armadura;
@@ -47,9 +49,13 @@ public class Equipo extends Objeto{
     }
     public Equipo(){}
 
-    public boolean equals(Equipo E) {
-
-
-        return false;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        Equipo equipo = (Equipo) o;
+        return danio == equipo.danio && armadura == equipo.armadura && posicion == equipo.posicion;
     }
+
 }

@@ -1,5 +1,7 @@
 package com.example.ddoverhaul;
 
+import java.util.Objects;
+
 public class Objeto {
     private int id;
     private String nombre;
@@ -61,4 +63,14 @@ public class Objeto {
         this.descripcion = descripcion;
     }
     public Objeto(){}
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Objeto objeto = (Objeto) o;
+        return id == objeto.id && Objects.equals(nombre, objeto.nombre) && Objects.equals(tipo, objeto.tipo) && Objects.equals(descripcion, objeto.descripcion) && Objects.equals(icono, objeto.icono);
+    }
+
+
 }
