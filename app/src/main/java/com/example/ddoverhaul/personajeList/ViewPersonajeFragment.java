@@ -10,7 +10,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.ddoverhaul.Consumibles;
 import com.example.ddoverhaul.Equipo;
@@ -21,6 +24,7 @@ import com.example.ddoverhaul.Personaje;
 import com.example.ddoverhaul.R;
 import com.example.ddoverhaul.habilidadList.CreateSkillFragment;
 import com.example.ddoverhaul.habilidadList.HabilidadListFragment;
+import com.example.ddoverhaul.multiplayer.MASTER.PersonajeListFragmentMaster;
 
 import java.util.ArrayList;
 
@@ -80,6 +84,16 @@ public class ViewPersonajeFragment extends Fragment {
             e.printStackTrace();
         }
 
+        getActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                PersonajeListFragment fragment = new PersonajeListFragment();
+                getFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.activity_content, fragment)
+                        .commit();
+            }
+        });
 
         personajeP = helper.getChar(personajeID);
 

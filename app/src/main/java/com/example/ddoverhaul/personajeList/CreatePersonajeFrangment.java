@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -91,6 +92,12 @@ public class CreatePersonajeFrangment extends Fragment implements IconsAdapter.O
         iconCharacter = view.findViewById(R.id.imagenPersonaje);
         icon = "icon_username";
 
+        getActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+
+            }
+        });
 
         helper = new JSONHelper(getContext());
 
@@ -808,4 +815,6 @@ public class CreatePersonajeFrangment extends Fragment implements IconsAdapter.O
                 .replace(R.id.activity_content, fragment)
                 .commit();
     }
+
+
 }
