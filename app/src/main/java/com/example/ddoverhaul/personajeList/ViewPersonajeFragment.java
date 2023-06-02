@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
+import com.example.ddoverhaul.Consumibles;
 import com.example.ddoverhaul.Equipo;
 import com.example.ddoverhaul.Habilidades;
 import com.example.ddoverhaul.JSONHelper;
@@ -346,16 +347,16 @@ public class ViewPersonajeFragment extends Fragment {
         inventoryImg.add(inv4);
         inventoryImg.add(inv5);
 
-        ArrayList<Objeto> inventory = personajeP.getInventario();
-        ArrayList<Objeto> newInventory =  new ArrayList<>();
+        ArrayList<Consumibles> inventory = personajeP.getInventario();
+        ArrayList<Consumibles> newInventory =  new ArrayList<>();
 
         int left = inventory.size();
         for (int i = 0; i < inventoryImg.size(); i++) {
             if (left > 0) {
-                Objeto obj = inventory.get(i);
-                Objeto objjson = helper.getObject(obj.getId());
+                Consumibles obj = inventory.get(i);
+                Consumibles objjson = helper.getCons(obj.getId());
                 if (objjson != null) {
-                    // Comprueba que el accesorio que tiene personaje es el mismo que existe en el json
+                    // Comprueba que el objeto que tiene personaje es el mismo que existe en el json
                     if (obj.equals(objjson)) {
                         newInventory.add(objjson);
                         int idIcon = getResources().getIdentifier(obj.getIcono(), "drawable", getActivity().getPackageName());

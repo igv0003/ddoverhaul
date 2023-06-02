@@ -249,7 +249,7 @@ public class Master extends BaseActivity_Multi {
         // Si es otro o consumible se guarda en inventario
         if (obj.getTipo().equals("Otro") || obj.getTipo().equals("Consumible")) {
             if (clientChars[player].getInventario().size() < 5) {
-                clientChars[player].addToInventory(obj);
+                clientChars[player].addToInventory((Consumibles) obj);
             }
         } else {
             // Si es un equipo, lo convierte a su clase y la añade donde debe con su posicion
@@ -290,7 +290,7 @@ public class Master extends BaseActivity_Multi {
         // Si es otro o consumible lo obtiene de inventario
         if (obj.getTipo().equals("Otro") || obj.getTipo().equals("Consumible")) {
             if (clientChars[player].getInventario().size() > 0) {
-                clientChars[player].removeFromInventory(obj);
+                clientChars[player].removeFromInventory((Consumibles)obj);
             }
         } else {
             // Si es un equipo, lo convierte a su clase y pone null la posición

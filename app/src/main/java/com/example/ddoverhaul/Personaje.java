@@ -36,7 +36,7 @@ public class Personaje implements Serializable {
     private Equipo pies;
 
     private ArrayList<Objeto> accesorios;
-    private ArrayList<Objeto> inventario; /*Inventario es un gran arrayList de Objetos(Objeto)*/
+    private ArrayList<Consumibles> inventario; /*Inventario es un gran arrayList de Objetos(Consumible)*/
     private ArrayList<Habilidades> habilidades; /*Habilidades es un arrayList de Habilidades(Objeto)*/
 
     /*Get Y Set*/
@@ -69,13 +69,13 @@ public class Personaje implements Serializable {
     public Equipo getGuantes() { return this.guantes; }
     public Equipo getPies() { return this.pies; }
 
-    public ArrayList<Objeto> getInventario() { return this.inventario; }
-    public void addToInventory(Objeto obj) { this.inventario.add(obj); }
-    public void removeFromInventory(Objeto obj) { this.inventario.remove(obj); }
-    public void addNewInventario(ArrayList<Objeto> inv) {this.inventario = inv;}
+    public ArrayList<Consumibles> getInventario() { return this.inventario; }
+    public void addToInventory(Consumibles cons) { this.inventario.add(cons); }
+    public void removeFromInventory(Consumibles cons) { this.inventario.remove(cons); }
+    public void addNewInventario(ArrayList<Consumibles> inv) {this.inventario = inv;}
 
     public ArrayList<Objeto> getAccesorios() {return this.accesorios; }
-    public void addToAccesories (Objeto obj) { this.inventario.add(obj); }
+    public void addToAccesories (Objeto obj) { this.accesorios.add(obj); }
     public void removeFromAccesories (Objeto obj) { this.inventario.remove(obj); }
     public void addNewAccesories(ArrayList<Objeto> accs) {this.accesorios = accs; }
 

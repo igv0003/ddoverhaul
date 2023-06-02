@@ -366,15 +366,7 @@ public class CreatePersonajeFrangment extends Fragment implements IconsAdapter.O
 
         finalConsumibles = helper.getAllCons();
 
-        if (currentCons == null) {
-            currentCons = new ArrayList<>();
-            ArrayList<Objeto> objs = personaje.getInventario();
-
-            for (Objeto o: objs ) {
-                if (o.getTipo().equals("Consumible")) currentCons.add((Consumibles)o);
-            }
-
-        }
+        if (currentCons == null) {currentCons = personaje.getInventario();}
 
         int left = currentCons.size();
         for (int i = 0; i < inventoryImg.length; i++) {
@@ -786,7 +778,7 @@ public class CreatePersonajeFrangment extends Fragment implements IconsAdapter.O
         personaje.addNewAccesories(currentAccesories);
         personaje.addNewHabilidades(currentSkills);
 
-        ArrayList<Objeto> finalCons = new ArrayList<>();
+        ArrayList<Consumibles> finalCons = new ArrayList<>();
         for (Consumibles cons: currentCons) {
             finalCons.add(cons);
         }
