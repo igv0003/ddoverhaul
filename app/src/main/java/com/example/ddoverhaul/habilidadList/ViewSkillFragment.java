@@ -11,11 +11,14 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.fragment.app.Fragment;
 
 import com.example.ddoverhaul.Habilidades;
 import com.example.ddoverhaul.JSONHelper;
 import com.example.ddoverhaul.R;
+import com.example.ddoverhaul.objetoList.ListaObjetosFragment;
+import com.example.ddoverhaul.personajeList.PersonajeListFragment;
 
 public class ViewSkillFragment extends Fragment {
 
@@ -47,6 +50,16 @@ public class ViewSkillFragment extends Fragment {
         imageIcon = view.findViewById(R.id.icon_skill);
         helper = new JSONHelper(getContext());
 
+        getActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                HabilidadListFragment fragment = new HabilidadListFragment();
+                getFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.activity_content, fragment)
+                        .commit();
+            }
+        });
 
         String skillString = getArguments().getString("habilidad");
         int skillId = -1;

@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -41,6 +42,14 @@ public class ListaObjetosFragment extends Fragment {
         objects = helper.getAllObjects();
         adapter = new ObjetoAdapter(objects, getContext());
         recyclerView.setAdapter(adapter);
+
+        getActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+
+            }
+        });
+
         adapter.setOnClickListener(new ObjetoAdapter.OnClickListener() {
             @Override
             public void onClick(int position, String id, String type) {

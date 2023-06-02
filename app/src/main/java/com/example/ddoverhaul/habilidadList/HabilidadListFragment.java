@@ -1,5 +1,6 @@
 package com.example.ddoverhaul.habilidadList;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -40,6 +41,13 @@ public class HabilidadListFragment extends Fragment {
         adapter = new HabilidadAdapter(skills, getContext());
         // Se vincula el recyclerView con el adaptador
         recyclerView.setAdapter(adapter);
+
+        getActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+
+            }
+        });
 
         // Se añade el evento OnClick, para poder ver un item en concreto. Se le pasa la id para el siguiente Activity
         adapter.setOnClickListener(new HabilidadAdapter.OnClickListener() {

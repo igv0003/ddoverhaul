@@ -28,7 +28,6 @@ import java.util.ArrayList;
 public class MultiSelector extends BaseActivity {
 
 
-
     private String mainToken; // Token del dispositivo, sea cliente o master
     private String hostToken; // Token del máster en caso de ser cliente
     private String[] clientTokens; // Tokens de los clientes en caso de ser master

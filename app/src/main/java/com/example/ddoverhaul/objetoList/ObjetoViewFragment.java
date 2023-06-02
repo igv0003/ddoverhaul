@@ -16,6 +16,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -26,6 +27,7 @@ import com.example.ddoverhaul.JSONHelper;
 import com.example.ddoverhaul.Objeto;
 import com.example.ddoverhaul.R;
 import com.example.ddoverhaul.habilidadList.HabilidadListFragment;
+import com.example.ddoverhaul.personajeList.PersonajeListFragment;
 
 public class ObjetoViewFragment extends Fragment {
     private JSONHelper helper;
@@ -167,6 +169,17 @@ public class ObjetoViewFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 deleteObj(Integer.parseInt(idString), type);
+            }
+        });
+
+        getActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                ListaObjetosFragment fragment = new ListaObjetosFragment();
+                getFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.activity_content, fragment)
+                        .commit();
             }
         });
 

@@ -1,5 +1,6 @@
 package com.example.ddoverhaul.multiplayer;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.fragment.app.Fragment;
 
@@ -24,6 +25,7 @@ import android.widget.Toast;
 import com.example.ddoverhaul.JSONHelper;
 import com.example.ddoverhaul.Personaje;
 import com.example.ddoverhaul.R;
+import com.example.ddoverhaul.personajeList.PersonajeListFragment;
 import com.google.firebase.firestore.CollectionReference;
 
 import java.util.ArrayList;
@@ -84,6 +86,13 @@ public class MultiSelectorFragment extends Fragment {
         // layoutMultiplayer
         this.master = view.findViewById(R.id.master_button);
         this.client = view.findViewById(R.id.client_button);
+
+        getActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+
+            }
+        });
 
         this.master.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -255,6 +264,8 @@ public class MultiSelectorFragment extends Fragment {
                 config = null;
                 waitingMaster.setVisibility(View.GONE);
                 layoutMultiplayer.setVisibility(View.VISIBLE);
+                client.setVisibility(View.VISIBLE);
+                master.setVisibility(View.VISIBLE);
                 selectMaster.setVisibility(View.GONE);
             }
         });
@@ -316,6 +327,8 @@ public class MultiSelectorFragment extends Fragment {
                 waitingClient.setVisibility(View.GONE);
                 selectClient.setVisibility(View.GONE);
                 layoutMultiplayer.setVisibility(View.VISIBLE);
+                master.setVisibility(View.VISIBLE);
+                client.setVisibility(View.VISIBLE);
             }
         });
     }

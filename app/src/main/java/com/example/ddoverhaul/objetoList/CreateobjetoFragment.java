@@ -14,6 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -135,6 +136,13 @@ public class CreateobjetoFragment extends Fragment implements IconsAdapter.OnIco
 
         helper = new JSONHelper(requireContext());
 
+
+        getActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+
+            }
+        });
 
         ImagenObj.setOnClickListener(new View.OnClickListener() {
             @Override

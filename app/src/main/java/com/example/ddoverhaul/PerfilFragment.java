@@ -18,6 +18,7 @@ import android.view.View.OnClickListener;
 import android.widget.Toast;
 
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -68,6 +69,14 @@ public class PerfilFragment extends Fragment implements IconsAdapter.OnIconClick
         db = FirebaseFirestore.getInstance();
         nombre.setText(ponernombre());
         correo.setText(ponercorreo());
+
+        getActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+
+            }
+        });
+
         cambiarcontr.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
