@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -29,7 +30,7 @@ import com.example.ddoverhaul.habilidadList.HabilidadListFragment;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class CreatePersonajeFrangment extends Fragment {
+public class CreatePersonajeFrangment extends Fragment implements IconsAdapter.OnIconClickListener{
 
     // Variables para la creación de personaje
     private Personaje personaje;
@@ -38,6 +39,9 @@ public class CreatePersonajeFrangment extends Fragment {
     private CreateAdapter skillAdapter;
     private AlertDialog alert;
     private View view;
+    private ImageView iconCharacter;
+    private String icon;
+    private IconsAdapter adapter;
     // Variables EditText
     private EditText editName;
     private EditText editNivel;
@@ -84,6 +88,9 @@ public class CreatePersonajeFrangment extends Fragment {
         editSabiduria = view.findViewById(R.id.SabiduriaEdit);
         editCarisma = view.findViewById(R.id.CarisEdit);
         editVelocidad = view.findViewById(R.id.VelocidadEdit);
+        iconCharacter = view.findViewById(R.id.imagenPersonaje);
+        icon = "icon_username";
+
 
         helper = new JSONHelper(getContext());
 
@@ -97,6 +104,13 @@ public class CreatePersonajeFrangment extends Fragment {
             @Override
             public void onClick(View view) {
                 Save(view);
+            }
+        });
+
+        iconCharacter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showIcons(view);
             }
         });
 
@@ -127,10 +141,14 @@ public class CreatePersonajeFrangment extends Fragment {
             editCarisma.setText(personaje.getCarisma() + "");
             editVelocidad.setText(personaje.getVelocidad() + "");
 
+            int iconID = getResources().getIdentifier(personaje.getImagen(), "drawable", getContext().getPackageName());
+            icon = personaje.getImagen();
+            iconCharacter.setImageResource(iconID);
 
         } else {
             personaje = new Personaje();
             personaje.setId(-1);
+            iconCharacter.setImageResource(R.drawable.icon_username);
         }
 
         prepareEquipment(view);
@@ -661,6 +679,37 @@ public class CreatePersonajeFrangment extends Fragment {
         });
     }
 
+    public void showIcons(View view) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
+        builder.setTitle("Selecciona un icono");
+
+        // Guarda los iconos a mostrar
+        final int[] iconos = {R.drawable.icon_alien, R.drawable.icon_elf, R.drawable.icon_furry, R.drawable.icon_goblin,R.drawable.icon_knight, R.drawable.icon_mummy, R.drawable.icon_profile_elf, R.drawable.icon_profile_vikyngo};
+
+        // Adaptador personalizado para el RecyclerView
+        adapter = new IconsAdapter(iconos,this);
+
+        // Configura el RecyclerView
+        RecyclerView recyclerView = new RecyclerView(requireContext());
+        recyclerView.setLayoutManager(new GridLayoutManager(requireContext(), 4)); // 3 es el número de columnas que deseas
+        recyclerView.setAdapter(adapter);
+
+        // Configura el diálogo para mostrar el RecyclerView
+        builder.setView(recyclerView);
+
+        // Muestra el diálogo
+        alert = builder.show();
+    }
+
+    @Override
+    public void onIconClick(int iconID) {
+        iconCharacter.setImageResource(iconID);
+        icon = getResources().getResourceEntryName(iconID);
+        if (alert != null) {
+            alert.dismiss();
+        }
+
+    }
 
     // Método que recoge los valores introducidos y guarda la habilidad en el JSON
     public void Save(View v) {
@@ -719,6 +768,7 @@ public class CreatePersonajeFrangment extends Fragment {
             velocidad = "0";
         }
         personaje.setNombre(name);
+        personaje.setImagen(icon);
         personaje.setVida(Integer.parseInt(vida));
         personaje.setVida_Mx(Integer.parseInt(vida));
         personaje.setNivel(Integer.parseInt(nivel));

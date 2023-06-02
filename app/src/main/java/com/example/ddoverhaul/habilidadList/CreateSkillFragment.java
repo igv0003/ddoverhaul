@@ -109,7 +109,6 @@ public class CreateSkillFragment extends Fragment implements IconsAdapter.OnIcon
         return view;
     }
 
-    //
     public void showIcons(View view) {
         AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
         builder.setTitle("Selecciona un icono");
